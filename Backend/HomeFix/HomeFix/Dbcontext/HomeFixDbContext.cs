@@ -21,4 +21,7 @@ public class HomeFixDbContext : DbContext
 
     }
     public DbSet<Rol> Roles { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Marca> Marcas { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
 }
