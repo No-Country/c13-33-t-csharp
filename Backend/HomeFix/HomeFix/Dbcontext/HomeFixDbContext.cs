@@ -22,8 +22,8 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
         
         modelBuilder.Entity<Rol>()
             .HasData(
-                new Rol {Id = 1, Name = "Member", NormalizedName = "MEMBER"},
-                new Rol {Id = 2, Name = "Admin", NormalizedName = "ADMIN"}
+                new Rol {Id = 1, Name = "Member", NormalizedName = "MEMBER", Descripcion = "Miembro"},
+                new Rol {Id = 2, Name = "Admin", NormalizedName = "ADMIN", Descripcion = "Admin"}
             );
 
     }

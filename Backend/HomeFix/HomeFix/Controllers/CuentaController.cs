@@ -44,11 +44,12 @@ public class CuentaController : ControllerBase
 
         return Unauthorized();
     }
-
-    [AllowAnonymous]
+    
+    [Authorize(Roles = "Admin")]
     [HttpPost("registro")]
-    public async Task<ActionResult<UsuarioDto>> Registro(RegistroDto registroDto)
+    public async Task<IActionResult> Registro(RegistroDto registroDto)
     {
+        
         if (await _userManager.Users.AnyAsync(usuario => usuario.UserName == registroDto.UserName))
         {
             return BadRequest("Nombre de usuario en uso");
@@ -59,6 +60,38 @@ public class CuentaController : ControllerBase
             return BadRequest("Email en uso");
         }
 
+        var usuario = new Usuario
+        {
+            UserName = registroDto.UserName,
+            Nombre = registroDto.Nombre,
+            Apellido = registroDto.Apellido,
+            Email = registroDto.Email
+        };
+        var result = await _userManager.CreateAsync(usuario, registroDto.Password);
+        
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(usuario, "Member");
+            return Ok();
+        }
+        return BadRequest("Problema en el registro");
+    }
+
+    //El siguiente metodo es de desarrollo solamente para poder crear usuarios sin necesidad de ser un administrador.
+    [AllowAnonymous]
+    [HttpPost("signup")]
+    public async Task<ActionResult<UsuarioDto>> SignUp(RegistroDto registroDto)
+    {
+        if (await _userManager.Users.AnyAsync(usuario => usuario.UserName == registroDto.UserName))
+        {
+            return BadRequest("Nombre de usuario en uso");
+        }
+        
+        if (await _userManager.Users.AnyAsync(usuario => usuario.Email == registroDto.Email))
+        {
+            return BadRequest("Email en uso");
+        }
+    
         var usuario = new Usuario
         {
             UserName = registroDto.UserName,
