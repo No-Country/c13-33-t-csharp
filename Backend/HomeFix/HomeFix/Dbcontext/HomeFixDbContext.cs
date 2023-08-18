@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System.CodeDom;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HomeFix.Dbcontext;
 
-public class HomeFixDbContext : DbContext
+public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
 {
     public HomeFixDbContext(DbContextOptions options) : base(options)
     {
@@ -18,10 +19,15 @@ public class HomeFixDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
+        modelBuilder.Entity<Rol>()
+            .HasData(
+                new Rol {Id = 1, Name = "Member", NormalizedName = "MEMBER"},
+                new Rol {Id = 2, Name = "Admin", NormalizedName = "ADMIN"}
+            );
 
     }
-    public DbSet<Rol> Roles { get; set; }
-    public DbSet<Usuario> Usuarios { get; set; }
+
     public DbSet<Marca> Marcas { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
     // public DbSet<Movimiento> Movimientos { get; set;}

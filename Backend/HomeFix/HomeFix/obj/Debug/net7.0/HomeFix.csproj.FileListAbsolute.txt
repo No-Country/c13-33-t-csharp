@@ -150,3 +150,10 @@ D:/Cursos/NoCountry/13/Backend/HomeFix/HomeFix/obj/Debug/net7.0/ref/HomeFix.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/HomeFix.pdb
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/HomeFix.genruntimeconfig.cache
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/ref/HomeFix.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Options.dll

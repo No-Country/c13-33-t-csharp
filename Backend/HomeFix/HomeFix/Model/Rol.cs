@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace HomeFix.Model
 {
-    public class Rol
+    public class Rol: IdentityRole<int>
     {
         
-        public int Id { get; set; }
-        [MaxLength(50)]
-        [Required]
-        public string Nombre { get; set; }
         [MaxLength(150)]
         public string Descripcion { get; set; }
     }
