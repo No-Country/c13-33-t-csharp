@@ -1,0 +1,19 @@
+.login_logoContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . login_logoPosition"
+    ". . .";
+  grid-area: login_logoContainer;
+}
+
+.login_logoPosition {
+  grid-area: login_logoPosition;
+}
+
+.login_logoContainer img {
+  width: 80px;
+}
