@@ -1,10 +1,10 @@
-import React from "react";
-import Layout from "./layout/Layout";
+import React from 'react'
+import Layout from './layout/Layout'
 
 export default function LoginForm() {
-  return (
-    <div>
-      <Layout />
-    </div>
-  );
+	return (
+		<div>
+			<Layout />
+		</div>
+	)
 }
