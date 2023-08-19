@@ -157,3 +157,11 @@ D:/Cursos/NoCountry/13/Backend/HomeFix/HomeFix/obj/Debug/net7.0/ref/HomeFix.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/MailKit.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/MimeKit.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/NETCore.MailKit.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/BouncyCastle.Crypto.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll

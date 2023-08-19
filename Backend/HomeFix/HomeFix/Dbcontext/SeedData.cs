@@ -26,7 +26,7 @@ public class SeedData
                 Apellido = "Apellido"
             };
             await userManager.CreateAsync(usuario, "Pa$$w0rd123");
-            await userManager.AddToRoleAsync(usuario, "Admin");
+            await userManager.AddToRoleAsync(usuario, "Member");
         }
 
         context.SaveChanges();

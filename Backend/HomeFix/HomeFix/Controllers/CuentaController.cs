@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using Azure;
 using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
@@ -16,12 +18,14 @@ public class CuentaController : ControllerBase
 {
     private readonly UserManager<Usuario> _userManager;
     private readonly TokenService _tokenService;
-    
+    private readonly IEmailService _emailService;
 
-    public CuentaController(UserManager<Usuario> userManager, TokenService tokenService)
+
+    public CuentaController(UserManager<Usuario> userManager, TokenService tokenService, IEmailService emailService)
     {
         _userManager = userManager;
         _tokenService = tokenService;
+        _emailService = emailService;
     }
 
     [AllowAnonymous]
@@ -123,6 +127,72 @@ public class CuentaController : ControllerBase
             UserName = usuario.UserName,
             Token =  await _tokenService.GenerateToken(usuario),
         };
+    }
+
+    [HttpGet("test")]
+    public  IActionResult TestEmail()
+    {
+        var message = new Message(new[] {"matias.lioneldamico@gmail.com"}, "Test", "<h1>Testing</h1>");
+        
+        
+        _emailService.SendEmail(message);
+        return StatusCode(StatusCodes.Status200OK, "Email sent successfully");
+    }
+
+    
+    [AllowAnonymous]
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
+    {
+        Console.WriteLine(forgotPasswordDto.Email);
+        var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+        if (user != null)
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var link = Url.Action(nameof(ResetPassword), "Cuenta", new {token, email = user.Email}, Request.Scheme);
+            var message = new Message(new[] {"matias.lioneldamico@gmail.com"}, "Recuperar contraseña", link);
+        
+        
+            _emailService.SendEmail(message);
+            return StatusCode(StatusCodes.Status200OK, "Envio de email para recuperar contraseña enviado. Por favor verifique su direccion de email.");
+        }
+
+        return StatusCode(StatusCodes.Status400BadRequest);
+    }
+
+    [HttpGet("reset-password")]
+    public async Task<IActionResult> ResetPassword(string token, string email)
+    {
+        var user = new ResetPassword {Token = token, Email = email};
+
+        return Ok(new
+        {
+            user
+        });
+    }
+    
+    
+    [AllowAnonymous]
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
+    {
+        var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+        if (user != null)
+        {
+            var resetPasswordResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+            if (!resetPasswordResult.Succeeded)
+            {
+                foreach (var error in resetPasswordResult.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return Ok(ModelState);
+            }
+            return StatusCode(StatusCodes.Status200OK, "La contraseña se ha modificado correctamente");
+        }
+
+        return StatusCode(StatusCodes.Status400BadRequest);
     }
 
 }
