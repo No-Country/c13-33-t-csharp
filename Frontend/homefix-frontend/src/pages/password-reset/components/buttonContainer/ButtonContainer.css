@@ -1,0 +1,5 @@
+.passwordReset_buttonContainer {
+  grid-area: passwordReset_buttonContainer;
+  display: flex;
+  flex-direction: column;
+}
