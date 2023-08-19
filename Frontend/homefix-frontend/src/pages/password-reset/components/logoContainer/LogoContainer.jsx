@@ -4,10 +4,8 @@ import loginLogo from "../../../../assets/image/LOGO-HomeFix.png";
 
 export default function LogoContainer() {
   return (
-    <div className="login_logoContainer">
-      <div className="login_logoPosition">
-        <img className="logoImage" src={loginLogo} alt="Home Fix Logo" />
-      </div>
+    <div className="passwordReset_logoContainer">
+      <img className="logoImage" src={loginLogo} alt="Home Fix Logo" />
     </div>
   );
 }

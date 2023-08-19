@@ -1,5 +1,7 @@
 import React from "react";
 import "./FormContainer.css";
+import { Link } from "react-router-dom";
+import PaswordReset from "../../../password-reset/PaswordReset";
 
 export default function FormContainer() {
   return (
@@ -27,7 +29,13 @@ export default function FormContainer() {
             placeholder="Another input placeholder"
           />
         </div>
-        <p>¿Olvidaste tu contaseña?</p>
+        <Link
+          to={{
+            pathname: "/password-reset",
+          }}
+        >
+          ¿Olvidaste tu contaseña?
+        </Link>
       </form>
     </div>
   );
