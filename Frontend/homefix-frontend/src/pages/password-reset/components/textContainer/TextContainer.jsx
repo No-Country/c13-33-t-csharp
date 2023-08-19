@@ -1,15 +1,13 @@
-import React from "react";
-import "./TextContainer.css";
+import React from 'react'
+import './TextContainer.css'
 
 export default function TextContainer() {
-  return (
-    <div className="passwordReset_textContainer">
-      <p className="passwordReset_text">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur amet
-        porro id temporibus maxime, cumque, ea molestiae harum ad delectus,
-        facere nam! Aspernatur quod ab praesentium sit necessitatibus tempore
-        cumque.
-      </p>
-    </div>
-  );
+	return (
+		<div className="passwordReset_textContainer">
+			<p className="passwordReset_text">
+				Ingresa el correo electrónico asociado a tu cuenta. Te enviaremos las
+				instrucciones a seguir para restablecer tu contraseña:
+			</p>
+		</div>
+	)
 }

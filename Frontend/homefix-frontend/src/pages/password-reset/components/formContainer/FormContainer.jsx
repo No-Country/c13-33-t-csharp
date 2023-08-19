@@ -7,13 +7,13 @@ export default function FormContainer() {
 			<form>
 				<div className="mb-3">
 					<label htmlFor="formGroupExampleInput" className="form-label">
-						Example label
+						Correo electrónico
 					</label>
 					<input
 						type="text"
 						className="form-control"
-						id="formGroupExampleInput"
-						placeholder="Example input placeholder"
+						id="emailRecovery"
+						placeholder="Ingresa tu correo electrónico"
 					/>
 				</div>
 			</form>
