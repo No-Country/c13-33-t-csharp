@@ -150,7 +150,7 @@ public class CuentaController : ControllerBase
         {
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var link = Url.Action(nameof(ResetPassword), "Cuenta", new {token, email = user.Email}, Request.Scheme);
-            var message = new Message(new[] {"matias.lioneldamico@gmail.com"}, "Recuperar contraseña", link);
+            var message = new Message(new[] {user.Email}, "Recuperar contraseña", link);
         
         
             _emailService.SendEmail(message);
