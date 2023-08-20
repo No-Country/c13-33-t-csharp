@@ -5,6 +5,7 @@ using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
 using HomeFix.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,7 @@ public class CuentaController : ControllerBase
             return new UsuarioDto
             {
                 UserName = usuario.UserName,
+                ImagenPerfil = usuario.ImagenPerfil,
                 Token =  await _tokenService.GenerateToken(usuario),
             };
         }
@@ -50,7 +52,7 @@ public class CuentaController : ControllerBase
     }
     
     [Authorize(Roles = "Admin")]
-    [HttpPost("registro")]
+    [HttpPost("register")]
     public async Task<IActionResult> Registro(RegistroDto registroDto)
     {
         
@@ -69,16 +71,25 @@ public class CuentaController : ControllerBase
             UserName = registroDto.UserName,
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
-            Email = registroDto.Email
+            Email = registroDto.Email,
+            ImagenPerfil = registroDto.ImagenPerfil
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
-        if (result.Succeeded)
+        if (!result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(usuario, "Member");
-            return Ok();
+            return BadRequest("Problema en el registro");
         }
-        return BadRequest("Problema en el registro");
+
+        var roleResult = await _userManager.AddToRoleAsync(usuario, "Member");
+
+        if (!roleResult.Succeeded)
+        {
+            return BadRequest(roleResult.Errors);
+        }
+
+        return Ok("Usuario creado correctamente");
+
     }
 
     //El siguiente metodo es de desarrollo solamente para poder crear usuarios sin necesidad de ser un administrador.
@@ -101,16 +112,19 @@ public class CuentaController : ControllerBase
             UserName = registroDto.UserName,
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
-            Email = registroDto.Email
+            Email = registroDto.Email,
+            ImagenPerfil = registroDto.ImagenPerfil
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
         if (result.Succeeded)
         {
+            await _userManager.AddClaimAsync(usuario, new Claim(ClaimTypes.Role, "Member"));
             return new UsuarioDto
             {
                 UserName = usuario.UserName,
                 Token =  await _tokenService.GenerateToken(usuario),
+                ImagenPerfil = usuario.ImagenPerfil,
             };
         }
         return BadRequest("Problema en el registro");
@@ -125,6 +139,7 @@ public class CuentaController : ControllerBase
         return new UsuarioDto
         {
             UserName = usuario.UserName,
+            ImagenPerfil = usuario.ImagenPerfil,
             Token =  await _tokenService.GenerateToken(usuario),
         };
     }
@@ -193,6 +208,45 @@ public class CuentaController : ControllerBase
         }
 
         return StatusCode(StatusCodes.Status400BadRequest);
+    }
+    
+    [HttpPost("set-role")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+    public async Task<ActionResult> AsignRole(RolUpdateDto editRoleDto)
+    {
+        
+        var user = await _userManager.FindByNameAsync(editRoleDto.UserName);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+        await _userManager.RemoveFromRolesAsync(user, userRoles);
+        
+        var roleResult = await _userManager.AddToRoleAsync(user, editRoleDto.Rol);
+
+        if (!roleResult.Succeeded)
+        {
+            return BadRequest("Error asignando el rol");
+        }
+        
+        return Ok("Rol cambiado correctamente");
+    }
+    
+    [HttpPost("remove-roles")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+    public async Task<ActionResult> RemoveRole(RolUpdateDto editRoleDto)
+    {
+        var user = await _userManager.FindByNameAsync(editRoleDto.UserName);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+        await _userManager.RemoveFromRolesAsync(user, userRoles);
+        return Ok("Roles removidos con exito");
     }
 
 }

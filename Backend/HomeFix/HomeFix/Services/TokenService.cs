@@ -24,14 +24,12 @@ public class TokenService
         {
             new Claim(ClaimTypes.Email, usuario.Email),
             new Claim(ClaimTypes.Name, usuario.UserName),
-            new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString())
+            new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
         };
 
         var roles = await _userManager.GetRolesAsync(usuario);
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
-        }
+        
+        claims.AddRange(roles.Select(rol => new Claim(ClaimTypes.Role,rol)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["TokenKey"]));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

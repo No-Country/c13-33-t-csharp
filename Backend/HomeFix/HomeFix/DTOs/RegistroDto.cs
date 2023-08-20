@@ -6,4 +6,5 @@ public class RegistroDto : LoginDto
     public string Nombre { get; set; }
     public string Apellido { get; set; }
     
+    public string ImagenPerfil { get; set; }
 }

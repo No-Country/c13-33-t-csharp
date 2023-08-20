@@ -36,6 +36,7 @@ namespace HomeFix.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    ImagenPerfil = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     Apellido = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -83,6 +84,22 @@ namespace HomeFix.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Marcas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Movimientos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    FechaYHora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrecioTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movimientos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +225,26 @@ namespace HomeFix.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Subcategorias",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCategoria = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subcategorias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Subcategorias_Categorias_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categorias",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Articulo",
                 columns: table => new
                 {
@@ -215,9 +252,13 @@ namespace HomeFix.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
+                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Alto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Ancho = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubcategoriaId = table.Column<int>(type: "int", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     MarcaId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -236,6 +277,32 @@ namespace HomeFix.Migrations
                         principalTable: "Marcas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articulo_Subcategorias_SubcategoriaId",
+                        column: x => x.SubcategoriaId,
+                        principalTable: "Subcategorias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Imagenes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdArticulo = table.Column<int>(type: "int", nullable: false),
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArticuloId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Imagenes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Imagenes_Articulo_ArticuloId",
+                        column: x => x.ArticuloId,
+                        principalTable: "Articulo",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -243,8 +310,8 @@ namespace HomeFix.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Descripcion", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, null, "Member", "MEMBER" },
-                    { 2, null, null, "Admin", "ADMIN" }
+                    { 1, null, "Miembro", "Member", "MEMBER" },
+                    { 2, null, "Admin", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -256,6 +323,11 @@ namespace HomeFix.Migrations
                 name: "IX_Articulo_MarcaId",
                 table: "Articulo",
                 column: "MarcaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articulo_SubcategoriaId",
+                table: "Articulo",
+                column: "SubcategoriaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -295,14 +367,21 @@ namespace HomeFix.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Imagenes_ArticuloId",
+                table: "Imagenes",
+                column: "ArticuloId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subcategorias_CategoriaId",
+                table: "Subcategorias",
+                column: "CategoriaId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Articulo");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -319,19 +398,31 @@ namespace HomeFix.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Imagenes");
+
+            migrationBuilder.DropTable(
+                name: "Movimientos");
+
+            migrationBuilder.DropTable(
                 name: "MovimientosDetalle");
-
-            migrationBuilder.DropTable(
-                name: "Categorias");
-
-            migrationBuilder.DropTable(
-                name: "Marcas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Articulo");
+
+            migrationBuilder.DropTable(
+                name: "Marcas");
+
+            migrationBuilder.DropTable(
+                name: "Subcategorias");
+
+            migrationBuilder.DropTable(
+                name: "Categorias");
         }
     }
 }

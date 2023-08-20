@@ -11,18 +11,35 @@ namespace HomeFix.Model
         public string Nombre { get; set; }
         [Required] [MaxLength(500)] 
         public string Descripcion { get; set; }
-        [MaxLength(500)]
-        public string Imagen { get; set; }
+        public List<Imagen> Imagenes { get; set; } = new List<Imagen>();
+
         [Required]
         public int Cantidad { get; set; }
+
+        [Required]
+        public int CantidadMinima { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Peso { get; set; }
+        
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Alto { get; set; }
+        
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Ancho { get; set; }
+
+
+
+        public int SubcategoriaId { get; set; }
+        public Subcategoria Subcategoria { get; set; }
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
         public int MarcaId { get; set; }
         public Marca Marca { get; set; }
+        
     }
 }

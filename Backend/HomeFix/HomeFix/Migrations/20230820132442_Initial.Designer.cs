@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    [Migration("20230818204236_Initial")]
+    [Migration("20230820132442_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,7 +33,16 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("Alto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Ancho")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CantidadMinima")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoriaId")
@@ -41,10 +50,6 @@ namespace HomeFix.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Imagen")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -56,14 +61,22 @@ namespace HomeFix.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("Peso")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SubcategoriaId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("MarcaId");
+
+                    b.HasIndex("SubcategoriaId");
 
                     b.ToTable("Articulo");
                 });
@@ -90,6 +103,31 @@ namespace HomeFix.Migrations
                     b.ToTable("Categorias");
                 });
 
+            modelBuilder.Entity("HomeFix.Model.Imagen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ArticuloId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdArticulo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ubicacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticuloId");
+
+                    b.ToTable("Imagenes");
+                });
+
             modelBuilder.Entity("HomeFix.Model.Marca", b =>
                 {
                     b.Property<int>("Id")
@@ -110,6 +148,31 @@ namespace HomeFix.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Marcas");
+                });
+
+            modelBuilder.Entity("HomeFix.Model.Movimiento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaYHora")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecioTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Movimientos");
                 });
 
             modelBuilder.Entity("HomeFix.Model.MovimientoDetalle", b =>
@@ -174,15 +237,42 @@ namespace HomeFix.Migrations
                         new
                         {
                             Id = 1,
+                            Descripcion = "Miembro",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
+                            Descripcion = "Admin",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
+                });
+
+            modelBuilder.Entity("HomeFix.Model.Subcategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCategoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Subcategorias");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Usuario", b =>
@@ -210,6 +300,10 @@ namespace HomeFix.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ImagenPerfil")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -378,9 +472,31 @@ namespace HomeFix.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HomeFix.Model.Subcategoria", "Subcategoria")
+                        .WithMany()
+                        .HasForeignKey("SubcategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Categoria");
 
                     b.Navigation("Marca");
+
+                    b.Navigation("Subcategoria");
+                });
+
+            modelBuilder.Entity("HomeFix.Model.Imagen", b =>
+                {
+                    b.HasOne("HomeFix.Model.Articulo", null)
+                        .WithMany("Imagenes")
+                        .HasForeignKey("ArticuloId");
+                });
+
+            modelBuilder.Entity("HomeFix.Model.Subcategoria", b =>
+                {
+                    b.HasOne("HomeFix.Model.Categoria", null)
+                        .WithMany("Subcategorias")
+                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -434,9 +550,16 @@ namespace HomeFix.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HomeFix.Model.Articulo", b =>
+                {
+                    b.Navigation("Imagenes");
+                });
+
             modelBuilder.Entity("HomeFix.Model.Categoria", b =>
                 {
                     b.Navigation("Articulos");
+
+                    b.Navigation("Subcategorias");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Marca", b =>
