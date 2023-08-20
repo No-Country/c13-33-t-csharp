@@ -9,7 +9,6 @@
 	grid-template-areas:
 		"login_imageContainer login_logoContainer"
 		"login_imageContainer login_titleContainer"
-		"login_imageContainer login_errorMessageContainer"
 		"login_imageContainer login_formContainer";
 	overflow-y: hidden;
 }

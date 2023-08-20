@@ -9,7 +9,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
-import errorMessageReducer from './reducers/errorMessageReducer'
+import recoveryCodeReducer from './reducers/recoveryCodeReducer'
+import messageReducer from './reducers/messageReducer'
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,8 @@ const store = configureStore({
 	reducer: {
 		user: userReducer,
 		token: tokenReducer,
-		errorMessage: errorMessageReducer,
+		message: messageReducer,
+		recoveryCode: recoveryCodeReducer,
 	},
 })
 

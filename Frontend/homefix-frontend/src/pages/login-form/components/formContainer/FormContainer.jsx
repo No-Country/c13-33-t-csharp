@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './FormContainer.css'
 import { Link } from 'react-router-dom'
 import loginService from '../../../../services/login'
 import { useDispatch } from 'react-redux'
 import { setToken } from '../../../../reducers/tokenReducer'
 import { setUser } from '../../../../reducers/userReducer'
-import { setErrorMessage } from '../../../../reducers/errorMessageReducer'
+import { setMessage } from '../../../../reducers/messageReducer'
 
 export default function FormContainer() {
 	const [email, setEmail] = useState('')
@@ -13,12 +13,17 @@ export default function FormContainer() {
 
 	const dispatch = useDispatch()
 
+	useEffect(() => {
+		dispatch(setMessage(null))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	const handleSubmit = event => {
 		event.preventDefault()
 		if (!(email && password)) {
-			dispatch(setErrorMessage('Rellena los campos faltantes'))
+			dispatch(setMessage('Rellena los campos faltantes'))
 		} else {
-			dispatch(setErrorMessage(null))
+			dispatch(setMessage(null))
 			setEmail('')
 			setPassword('')
 			handleLogin(email, password)
@@ -33,7 +38,7 @@ export default function FormContainer() {
 			dispatch(setUser(user))
 		} catch (error) {
 			dispatch(
-				setErrorMessage('El correo electrónico y/o contraseña no son correctas')
+				setMessage('El correo electrónico y/o contraseña no son correctas')
 			)
 		}
 	}
@@ -45,7 +50,7 @@ export default function FormContainer() {
 						Correo electrónico
 					</label>
 					<input
-						type="text"
+						type="email"
 						className="form-control"
 						id="email"
 						placeholder="Ingresa tu correo electrónico"
