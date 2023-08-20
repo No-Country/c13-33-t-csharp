@@ -12,6 +12,8 @@ export default function FormContainer() {
 
 	const dispatch = useDispatch()
 
+	const recoveryCode = useSelector(state => state.recoveryCode)
+
 	useEffect(() => {
 		dispatch(setMessage(null))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,6 +23,7 @@ export default function FormContainer() {
 		event.preventDefault()
 		if (email) {
 			const recoveryCode = Math.floor(Math.random() * 9000 + 1000)
+			console.log(recoveryCode) //solo para pruebas sin server
 			dispatch(setRecoveryCode(recoveryCode))
 			sendRecoveryData(recoveryCode, email)
 			return
@@ -37,11 +40,9 @@ export default function FormContainer() {
 		}
 	}
 
-	const recoveryCode = useSelector(state => state.recoveryCode)
-
 	const verifyCode = () => {
-		if (receivedCode === recoveryCode) {
-			console.log('IR A PÁGINA DE CAMBIO DE CONTRASEÑA')
+		if (parseInt(receivedCode) === recoveryCode) {
+			console.log('IR A PÁGINA DE CAMBIO DE CONTRASEÑA') //reemplazar
 		} else {
 			dispatch(setMessage('El código que has introducido no es correcto'))
 		}
