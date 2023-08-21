@@ -59,11 +59,12 @@ export default function FormContainer() {
 						<input
 							type="email"
 							className="form-control"
-							id="emailRecovery"
+							id="email"
 							placeholder="Ingresa tu correo electrónico"
 							name="email"
 							value={email}
 							onChange={({ target }) => setEmail(target.value)}
+							autoComplete="off"
 						/>
 					</div>
 					<div className="passwordReset_buttonContainer">

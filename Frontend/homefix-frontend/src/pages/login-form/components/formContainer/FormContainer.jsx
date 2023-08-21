@@ -46,7 +46,7 @@ export default function FormContainer() {
 		<div className="login_formContainer">
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
-					<label htmlFor="formGroupExampleInput" className="form-label">
+					<label htmlFor="email" className="form-label">
 						Correo electrónico
 					</label>
 					<input
@@ -57,10 +57,11 @@ export default function FormContainer() {
 						name="email"
 						value={email}
 						onChange={({ target }) => setEmail(target.value)}
+						autoComplete="on"
 					/>
 				</div>
 				<div className="mb-3">
-					<label htmlFor="formGroupExampleInput2" className="form-label">
+					<label htmlFor="password" className="form-label">
 						Contraseña
 					</label>
 					<input
