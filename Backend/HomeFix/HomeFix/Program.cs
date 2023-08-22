@@ -41,8 +41,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
-var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<Email>();
-builder.Services.AddSingleton(emailConfig);
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddAuthorization();

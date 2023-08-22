@@ -40,10 +40,8 @@
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/MimeKit.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Mono.TextTemplating.dll
-/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/NETCore.MailKit.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
-/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/BouncyCastle.Crypto.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -89,3 +87,6 @@
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/HomeFix.pdb
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/HomeFix.genruntimeconfig.cache
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/obj/Debug/net7.0/ref/HomeFix.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll

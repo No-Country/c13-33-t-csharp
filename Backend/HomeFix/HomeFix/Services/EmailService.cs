@@ -1,56 +1,32 @@
 
+using HomeFix.DTOs;
 using HomeFix.Model;
 using MailKit.Net.Smtp;
 using MimeKit;
+using MimeKit.Text;
 
 namespace HomeFix.Services;
 
 
 public class EmailService:IEmailService
 {
-    private readonly Email _emailConfig;
+    private readonly IConfiguration _configuration;
 
-    public EmailService(Email emailConfig)
+    public EmailService(IConfiguration configuration)
     {
-        _emailConfig = emailConfig;
+        _configuration = configuration;
     }
-    
-    public void SendEmail(Message message)
+    public void SendEmail(EmailDto request)
     {
-        var emailMessage = CreateEmailMessage(message);
-        Send(emailMessage);
-    }
-
-    private MimeMessage CreateEmailMessage(Message message)
-    {
-        var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("email", _emailConfig.From));
-        emailMessage.To.AddRange(message.To);
-        emailMessage.Subject = message.Subject;
-        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) {Text = message.Content};
-
-        return emailMessage;
-    }
-
-    private void Send(MimeMessage message)
-    {
-        using var client = new SmtpClient();
-        try
-        {
-            client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
-            client.AuthenticationMechanisms.Remove("XOAUTH2");
-            client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
-            client.Send(message);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        finally
-        {
-            client.Disconnect(true);
-            client.Dispose(); 
-        }
+        var email = new MimeMessage();
+        email.From.Add(MailboxAddress.Parse(_configuration.GetSection("EmailUsername").Value));
+        email.To.Add(MailboxAddress.Parse(request.To));
+        email.Subject = request.Subject;
+        email.Body = new TextPart(TextFormat.Html) {Text = request.Body};
+        using var smtp = new SmtpClient();
+        smtp.Connect(_configuration.GetSection("EmailHost").Value,587,false);
+        smtp.Authenticate(_configuration.GetSection("EmailUsername").Value,_configuration.GetSection("EmailPassword").Value);
+        smtp.Send(email);
+        smtp.Disconnect(true);
     }
 }

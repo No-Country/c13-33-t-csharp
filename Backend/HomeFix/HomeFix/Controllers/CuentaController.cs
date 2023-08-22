@@ -1,15 +1,16 @@
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using Azure;
-using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
 using HomeFix.Services;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using MimeKit.Text;
 
 namespace HomeFix.Controllers;
 
@@ -20,13 +21,15 @@ public class CuentaController : ControllerBase
     private readonly UserManager<Usuario> _userManager;
     private readonly TokenService _tokenService;
     private readonly IEmailService _emailService;
+    private readonly IConfiguration _config;
 
 
-    public CuentaController(UserManager<Usuario> userManager, TokenService tokenService, IEmailService emailService)
+    public CuentaController(UserManager<Usuario> userManager, TokenService tokenService, IEmailService emailService, IConfiguration config)
     {
         _userManager = userManager;
         _tokenService = tokenService;
         _emailService = emailService;
+        _config = config;
     }
 
     [AllowAnonymous]
@@ -144,15 +147,7 @@ public class CuentaController : ControllerBase
         };
     }
 
-    [HttpGet("test")]
-    public  IActionResult TestEmail()
-    {
-        var message = new Message(new[] {"matias.lioneldamico@gmail.com"}, "Test", "<h1>Testing</h1>");
-        
-        
-        _emailService.SendEmail(message);
-        return StatusCode(StatusCodes.Status200OK, "Email sent successfully");
-    }
+  
 
     
     [AllowAnonymous]
@@ -161,14 +156,23 @@ public class CuentaController : ControllerBase
     {
         Console.WriteLine(forgotPasswordDto.Email);
         var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+        
+
         if (user != null)
         {
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var link = Url.Action(nameof(ResetPassword), "Cuenta", new {token, email = user.Email}, Request.Scheme);
-            var message = new Message(new[] {user.Email}, "Recuperar contraseña", link);
-        
-        
-            _emailService.SendEmail(message);
+            var baseUrl = _config.GetSection("ClientUrl").Value;
+            var url = $"{baseUrl}/reset?email={user.Email}&token={token}";
+            
+            var request = new EmailDto
+            {
+                To = user.Email,
+                Subject = "Recuperar contraseña",
+                Body = $"Por favor ingrese al siguiente link para recuperar la contraseña. <a href={url}>Click aqui</a>"
+            };
+            
+            _emailService.SendEmail(request);
+         
             return StatusCode(StatusCodes.Status200OK, "Envio de email para recuperar contraseña enviado. Por favor verifique su direccion de email.");
         }
 
@@ -249,4 +253,11 @@ public class CuentaController : ControllerBase
         return Ok("Roles removidos con exito");
     }
 
+    
+    [HttpPost("test")]
+    public  IActionResult TestEmail(EmailDto request)
+    {
+        _emailService.SendEmail(request);
+        return Ok();
+    }
 }
