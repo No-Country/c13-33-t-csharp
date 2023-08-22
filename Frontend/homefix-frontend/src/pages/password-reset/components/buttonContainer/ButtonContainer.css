@@ -1,5 +1,21 @@
 .passwordReset_buttonContainer {
+  width: 100%;
+  margin-top: 150px;
   grid-area: passwordReset_buttonContainer;
   display: flex;
   flex-direction: column;
+  align-self: center;
 }
+
+.passwordReset-position {
+  width: 580px;
+  margin-top: -120px;
+  border-radius: 15px;
+  
+}
+
+.submitButton {
+  border-radius: 15px;
+  height: 50px;
+}
+

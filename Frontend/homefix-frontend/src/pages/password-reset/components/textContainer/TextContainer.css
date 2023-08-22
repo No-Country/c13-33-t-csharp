@@ -13,6 +13,13 @@
   }
 
   .passwordReset_text{
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    width: 580px;
     grid-area: passwordReset_text;
+    font-size: 16px;
   }
   

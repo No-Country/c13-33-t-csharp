@@ -60,7 +60,7 @@ export default function FormContainer() {
           </label>
           <input
             type="email"
-            className="form-control formInput pt-3"
+            className="form-control formInput"
             id="email"
             placeholder="Ingresa tu correo electrónico"
             name="email"
@@ -76,7 +76,7 @@ export default function FormContainer() {
           <div className="input-group">
             <input
               type={showPassword ? "text" : "password"}
-              className="form-control formInput formInputPassword pt-3"
+              className="form-control formInput formInputPassword"
               id="password"
               placeholder="Ingresa tu contraseña"
               name="password"

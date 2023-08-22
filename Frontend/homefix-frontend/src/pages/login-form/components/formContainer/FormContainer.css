@@ -13,14 +13,13 @@
 
 .showPasswordImage {
   width: 25px;
-  background-color: #fbae43;
+  background-color: transparent;
 }
 
 .showPasswordImage-button {
   outline: none !important;
-  background-color: #fbae43;
-  border-radius: 10px;
-  opacity: 60%;
+  background-color: rgba(251, 174, 67, 0.6);
+  border-radius: 15px;
   border: 0px;
 }
 
@@ -38,8 +37,9 @@
 }
 
 .formInput {
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #fbae43;
+  height: 50px;
   opacity: 60%;
 }
 
@@ -75,14 +75,10 @@
 .login_buttonPosition button{
 	margin-top: 50px;
 	width: 100%;
-	border-radius: 10px;
+	border-radius: 15px;
 }
 
 .button-login{
 	height: 60% !important;
 }
 
-
-.formInputPassword{
-	border-right: none;
-}
