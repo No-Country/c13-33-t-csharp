@@ -4,8 +4,8 @@
   grid-auto-columns: 1fr;
   grid-auto-rows: 1fr;
   grid-template-columns: 0.9fr 1.5fr;
-  grid-template-rows: 1fr 0.5fr 2fr 1fr;
-  gap: 0px 120px;
+  grid-template-rows: 1fr 0.5fr 1fr 1fr;
+  gap: 0px 50px;
   grid-template-areas:
     "login_imageContainer passwordReset_titleLogoContainer"
     "login_imageContainer passwordReset_textContainer"

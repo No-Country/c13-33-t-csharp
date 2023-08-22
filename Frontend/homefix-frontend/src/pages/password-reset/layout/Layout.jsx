@@ -4,7 +4,6 @@ import ImageContainer from '../../login-form/components/imageContainer/ImageCont
 import TitleLogoContainer from '../components/titleLogoContainer/TitleLogoContainer';
 import TextContainer from '../components/textContainer/TextContainer';
 import FormContainer from '../components/formContainer/FormContainer';
-import ButtonContainer from '../components/buttonContainer/ButtonContainer';
 
 export default function Layout() {
   return (
@@ -13,7 +12,6 @@ export default function Layout() {
         <TitleLogoContainer/>
         <TextContainer/>
         <FormContainer/>
-        <ButtonContainer/>
     </div>
   )
 }

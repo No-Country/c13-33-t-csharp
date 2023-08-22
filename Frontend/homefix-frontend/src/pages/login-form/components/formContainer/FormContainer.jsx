@@ -85,7 +85,7 @@ export default function FormContainer() {
 							onChange={({ target }) => setPassword(target.value)}
 						/>
 						<button
-							className="showPasswordImage-button border border-opacity-50 px-2"
+							class="showPasswordImage-button border border-opacity-50 px-2"
 							type="button"
 							id="button-addon2"
 							onClick={passwordHandler}

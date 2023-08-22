@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import './FormContainer.css'
-import { useDispatch } from 'react-redux'
-import recoveryService from '../../../../services/recovery'
-import { setMessage } from '../../../../reducers/messageReducer'
+import React, { useEffect, useState } from 'react';
+import './FormContainer.css';
+import { useDispatch } from 'react-redux';
+import { setRecoveryCode } from '../../../../reducers/recoveryCodeReducer';
+import recoveryService from '../../../../services/recovery';
+import { setMessage } from '../../../../reducers/messageReducer';
+import ButtonContainer from '../buttonContainer/ButtonContainer';
 
 export default function FormContainer() {
 	const [email, setEmail] = useState('')
@@ -14,10 +16,13 @@ export default function FormContainer() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	const handleSubmit = event => {
+	const handlePasswordReset = event => {
 		event.preventDefault()
 		if (email) {
-			sendRecoveryData(email)
+			const recoveryCode = Math.floor(Math.random() * 9000 + 1000)
+			console.log(recoveryCode) //solo para pruebas sin server
+			dispatch(setRecoveryCode(recoveryCode))
+			sendRecoveryData(recoveryCode, email)
 			return
 		}
 		return dispatch(setMessage('Por favor ingresa tu correo electrónico'))
@@ -32,17 +37,18 @@ export default function FormContainer() {
 		}
 	}
 
+
 	return (
 		<>
 			<div className="passwordReset_formContainer">
-				<form onSubmit={handleSubmit}>
+				<form className='password_form' onSubmit={handlePasswordReset}>
 					<div className="mb-3">
 						<label htmlFor="email" className="form-label">
 							Correo electrónico
 						</label>
 						<input
 							type="email"
-							className="form-control"
+							className="form-control formInput"
 							id="email"
 							placeholder="Ingresa tu correo electrónico"
 							name="email"
@@ -52,12 +58,12 @@ export default function FormContainer() {
 						/>
 					</div>
 					<div className="passwordReset_buttonContainer">
-						<button type="submit" className="btn btn-dark">
+						<button type="submit" className="btn btn-dark submitButton">
 							Enviar
 						</button>
+						<ButtonContainer/>
 					</div>
 				</form>
-				<br />
 			</div>
 		</>
 	)
