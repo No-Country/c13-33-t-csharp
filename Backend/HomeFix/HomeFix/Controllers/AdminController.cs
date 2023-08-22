@@ -13,13 +13,10 @@ namespace HomeFix.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly UserManager<Usuario> _userManager;
-    private readonly TokenService _tokenService;
 
-
-    public AdminController(UserManager<Usuario> userManager, TokenService tokenService)
+    public AdminController(UserManager<Usuario> userManager)
     {
         _userManager = userManager;
-        _tokenService = tokenService;
     }
     
     [Authorize(Roles = "Admin")]
