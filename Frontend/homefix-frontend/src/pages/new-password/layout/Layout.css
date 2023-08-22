@@ -1,0 +1,13 @@
+.newPassword_layout {
+  height: 100vh;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: 1fr 0.5fr 2.3fr;
+  gap: 0px 50px;
+  grid-template-areas:
+    "login_imageContainer newPassword_logoContainer"
+    "login_imageContainer newPassword_titleContainer"
+    "login_imageContainer newPassword_formContainer";
+}
