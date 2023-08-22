@@ -23,10 +23,10 @@ export default function FormContainer() {
 		return dispatch(setMessage('Por favor ingresa tu correo electrónico'))
 	}
 
-	const sendRecoveryData = async (recoveryCode, email) => {
+	const sendRecoveryData = async email => {
 		try {
-			await recoveryService.recovery({ recoveryCode, email })
-			dispatch(setMessage('Te hemos enviado un código por e-mail'))
+			await recoveryService.recovery({ email })
+			dispatch(setMessage('Te hemos enviado enlace de recuperación por e-mail'))
 		} catch (error) {
 			dispatch(setMessage('Dirección de correo electrónico no registrada'))
 		}

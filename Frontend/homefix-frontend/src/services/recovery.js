@@ -1,8 +1,8 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3333/recovery' //url de desarrollo para pruebas
+const baseUrl = 'https://homefix.fly.dev/api/cuenta/forgot-password'
 
-const recovery = async recoveryData => {
-	const response = await axios.post(baseUrl, recoveryData)
+const recovery = async email => {
+	const response = await axios.post(baseUrl, email)
 	return response.data
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3333/login' //url de desarrollo para pruebas
+const baseUrl = 'https://homefix.fly.dev/api/Cuenta/login'
 
 const login = async credentials => {
 	const response = await axios.post(baseUrl, credentials)
