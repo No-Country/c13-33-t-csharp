@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './FormContainer.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setRecoveryCode } from '../../../../reducers/recoveryCodeReducer';
 import recoveryService from '../../../../services/recovery';
 import { setMessage } from '../../../../reducers/messageReducer';
