@@ -60,28 +60,31 @@ public class AdminController : ControllerBase
 
     }
     
-    [HttpPost("set-role")]
+    [HttpPost("set-role/{username}")]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult> AsignRole(RolUpdateDto editRoleDto)
+    public async Task<ActionResult> AsignRoles(string username, [FromQuery] string roles)
     {
+        if (string.IsNullOrEmpty(roles))
+            return BadRequest("Debe haber por lo menos un rol");
         
-        var user = await _userManager.FindByNameAsync(editRoleDto.UserName);
+        var selectedRoles = roles.Split(",").ToArray();
+
+        var user = await _userManager.FindByNameAsync(username);
         if (user == null)
         {
             return NotFound();
         }
 
         var userRoles = await _userManager.GetRolesAsync(user);
-        await _userManager.RemoveFromRolesAsync(user, userRoles);
         
-        var roleResult = await _userManager.AddToRoleAsync(user, editRoleDto.Rol);
+        var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
-        if (!roleResult.Succeeded)
+        if (!result.Succeeded)
         {
             return BadRequest("Error asignando el rol");
         }
         
-        return Ok("Rol cambiado correctamente");
+        return Ok(await _userManager.GetRolesAsync(user));
     }
     
     [HttpPost("remove-roles")]

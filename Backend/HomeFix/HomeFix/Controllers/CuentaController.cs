@@ -119,17 +119,17 @@ public class CuentaController : ControllerBase
 
         return StatusCode(StatusCodes.Status400BadRequest);
     }
-    
-    [HttpGet("reset-password")]
-    public async Task<IActionResult> ResetPassword(string token, string email)
-    {
-        var user = new ResetPassword {Token = token, Email = email};
-
-        return Ok(new
-        {
-            user
-        });
-    }
+    //
+    // [HttpGet("reset-password")]
+    // public async Task<IActionResult> ResetPassword(string token, string email)
+    // {
+    //     var user = new ResetPassword {Token = token, Email = email};
+    //
+    //     return Ok(new
+    //     {
+    //         user
+    //     });
+    // }
     
     
     
