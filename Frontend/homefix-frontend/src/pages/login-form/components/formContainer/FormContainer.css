@@ -38,13 +38,13 @@
 
 .formInput {
   border-radius: 15px;
-  background-color: #fbae43;
+  background-color: #fbae43 !important;
   height: 50px;
   opacity: 60%;
 }
 
 /* Anula los estilos de fondo de Bootstrap */
-.form-control.formInput {
+.form-control .formInput {
   background-color: #fbae43;
 }
 
