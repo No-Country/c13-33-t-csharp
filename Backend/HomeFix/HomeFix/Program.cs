@@ -17,9 +17,31 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string connString;
+if (builder.Environment.IsDevelopment())
+    connString = builder.Configuration.GetConnectionString("DefaultConnection");
+else
+{
+    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    
+    connUrl = connUrl.Replace("postgres://", string.Empty);
+    var pgUserPass = connUrl.Split("@")[0];
+    var pgHostPortDb = connUrl.Split("@")[1];
+    var pgHostPort = pgHostPortDb.Split("/")[0];
+    var pgDbExtra = pgHostPortDb.Split("/")[1];
+    var pgDb = pgDbExtra.Split("?")[0];
+    var pgUser = pgUserPass.Split(":")[0];
+    var pgPass = pgUserPass.Split(":")[1];
+    var pgHost = pgHostPort.Split(":")[0];
+    var pgPort = pgHostPort.Split(":")[1];//postgres://postgres:hyjq7MAfPGBr51v@homefix-db.flycast:5432
+    var updatedHost = pgHost.Replace("flycast", "internal");
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<HomeFixDbContext>(options => options.UseSqlServer(connectionString));
+    connString = $"Server={updatedHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+}
+builder.Services.AddDbContext<HomeFixDbContext>(opt =>
+{
+    opt.UseNpgsql(connString);
+});
 builder.Services.AddCors();
 builder.Services.AddIdentityCore<Usuario>(opt =>
     {
@@ -69,6 +91,7 @@ var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Usuario>>
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 try
 {
+    await context.Database.MigrateAsync();
     await SeedData.Initialize(context, userManager);
 }
 catch (Exception e)
