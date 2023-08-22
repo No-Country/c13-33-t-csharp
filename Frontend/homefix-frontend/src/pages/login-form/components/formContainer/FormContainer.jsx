@@ -11,7 +11,6 @@ import hidePasswordIcon from '../../../../assets/image/contraseña_ocultar.png'
 
 export default function FormContainer() {
 	const [showPassword, setShowPassword] = useState(false)
-	const [inputType, setInputType] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
