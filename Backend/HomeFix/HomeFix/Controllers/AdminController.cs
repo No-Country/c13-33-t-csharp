@@ -60,7 +60,26 @@ public class AdminController : ControllerBase
 
     }
     
-    [HttpPost("set-role/{username}")]
+    //Devuelve los roles del usuario que es pasado por query.
+    [Authorize(Roles = "Admin")]
+    [HttpGet("user-roles/{username}")]
+    public async Task<ActionResult> GetUserRoles(string username)
+    {
+        var user = await _userManager.FindByNameAsync(username);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+           
+
+        return Ok(userRoles);
+    }
+    
+    
+    //Setea diversos roles. Ej de la url: /set-role/Usuario?roles=Member,Admin Para agregar esos dos roles al usuario
+    [HttpPost("set-roles/{username}")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> AsignRoles(string username, [FromQuery] string roles)
     {
@@ -87,6 +106,7 @@ public class AdminController : ControllerBase
         return Ok(await _userManager.GetRolesAsync(user));
     }
     
+    //Quita todos los roles al usuario.
     [HttpPost("remove-roles")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> RemoveRole(RolUpdateDto editRoleDto)
