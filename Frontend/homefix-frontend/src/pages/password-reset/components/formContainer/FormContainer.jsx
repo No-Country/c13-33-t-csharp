@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './FormContainer.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { setRecoveryCode } from '../../../../reducers/recoveryCodeReducer'
+import { useDispatch } from 'react-redux'
 import recoveryService from '../../../../services/recovery'
 import { setMessage } from '../../../../reducers/messageReducer'
-import RecoveryContainer from '../recoveryContainer/RecoveryContainer'
 
 export default function FormContainer() {
 	const [email, setEmail] = useState('')
-	const [receivedCode, setReceivedCode] = useState('')
 
 	const dispatch = useDispatch()
-
-	const recoveryCode = useSelector(state => state.recoveryCode)
 
 	useEffect(() => {
 		dispatch(setMessage(null))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	const handlePasswordReset = event => {
+	const handleSubmit = event => {
 		event.preventDefault()
 		if (email) {
-			const recoveryCode = Math.floor(Math.random() * 9000 + 1000)
-			console.log(recoveryCode) //solo para pruebas sin server
-			dispatch(setRecoveryCode(recoveryCode))
-			sendRecoveryData(recoveryCode, email)
+			sendRecoveryData(email)
 			return
 		}
 		return dispatch(setMessage('Por favor ingresa tu correo electrónico'))
@@ -40,18 +32,10 @@ export default function FormContainer() {
 		}
 	}
 
-	const verifyCode = () => {
-		if (parseInt(receivedCode) === recoveryCode) {
-			console.log('IR A PÁGINA DE CAMBIO DE CONTRASEÑA') //reemplazar
-		} else {
-			dispatch(setMessage('El código que has introducido no es correcto'))
-		}
-	}
-
 	return (
 		<>
 			<div className="passwordReset_formContainer">
-				<form onSubmit={handlePasswordReset}>
+				<form onSubmit={handleSubmit}>
 					<div className="mb-3">
 						<label htmlFor="email" className="form-label">
 							Correo electrónico
@@ -74,11 +58,6 @@ export default function FormContainer() {
 					</div>
 				</form>
 				<br />
-				<RecoveryContainer
-					receivedCode={receivedCode}
-					setReceivedCode={setReceivedCode}
-					verifyCode={verifyCode}
-				/>
 			</div>
 		</>
 	)
