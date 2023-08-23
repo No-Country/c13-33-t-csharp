@@ -8,7 +8,7 @@ export default function ButtonContainer() {
         <Link
           to={{ pathname: "/login-form" }}
           type="button"
-          className="btn btn-outline-dark passwordReset-position submitButton pt-3"
+          className="btn btn-outline-dark passwordReset-position submitButton"
         >
           Volver a iniciar sesión
         </Link>

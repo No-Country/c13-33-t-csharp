@@ -1,3 +1,10 @@
 .newPassword_titleContainer {
+  display: flex;
+  justify-content: center;
   grid-area: newPassword_titleContainer;
+}
+
+.newPassword_titleContainer h2 {
+  font-weight: 400;
+  font-size: 26px;
 }

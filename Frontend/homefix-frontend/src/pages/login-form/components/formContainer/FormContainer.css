@@ -25,9 +25,9 @@
 
 .linkToPassReset {
 	display: flex;
-	justify-content: x-end;
+	justify-content: end;
 	text-decoration: none;
-	color: black;
+	color: #222222;
 	opacity: 60%;
 }
 
@@ -38,20 +38,18 @@
 
 .formInput {
 	border-radius: 15px;
-	background-color: #fbae43;
+	background-color: rgba(251, 174, 67, 0.6) !important;
 	height: 50px;
-	opacity: 60%;
 }
 
 /* Anula los estilos de fondo de Bootstrap */
-.form-control.formInput {
+.form-control .formInput {
 	background-color: #fbae43;
 }
 
 .formInput:focus {
 	border-color: black !important;
 	outline: none;
-	border-color: black;
 	box-shadow: none;
 }
 
