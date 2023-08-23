@@ -80,7 +80,7 @@ export default function FormContainer() {
 							onChange={({ target }) => setPassword(target.value)}
 						/>
 						<button
-							class="showPasswordImage-button border border-opacity-50 px-2"
+							className="showPasswordImage-button border border-opacity-50 px-2"
 							type="button"
 							id="button-addon2"
 							onClick={passwordHandler}
@@ -108,7 +108,7 @@ export default function FormContainer() {
 							onChange={({ target }) => setPassword(target.value)}
 						/>
 						<button
-							class="showPasswordImage-button border border-opacity-50 px-2"
+							className="showPasswordImage-button border border-opacity-50 px-2"
 							type="button"
 							id="button-addon2"
 							onClick={passwordHandler}
