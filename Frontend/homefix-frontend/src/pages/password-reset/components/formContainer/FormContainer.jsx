@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import './FormContainer.css';
-import { useDispatch } from 'react-redux';
-import { setRecoveryCode } from '../../../../reducers/recoveryCodeReducer';
-import recoveryService from '../../../../services/recovery';
-import { setMessage } from '../../../../reducers/messageReducer';
-import ButtonContainer from '../buttonContainer/ButtonContainer';
+import React, { useEffect, useState } from 'react'
+import './FormContainer.css'
+import { useDispatch } from 'react-redux'
+import recoveryService from '../../../../services/recovery'
+import { setMessage } from '../../../../reducers/messageReducer'
+import ButtonContainer from '../buttonContainer/ButtonContainer'
 
 export default function FormContainer() {
 	const [email, setEmail] = useState('')
@@ -19,29 +18,27 @@ export default function FormContainer() {
 	const handlePasswordReset = event => {
 		event.preventDefault()
 		if (email) {
-			const recoveryCode = Math.floor(Math.random() * 9000 + 1000)
-			console.log(recoveryCode) //solo para pruebas sin server
-			dispatch(setRecoveryCode(recoveryCode))
-			sendRecoveryData(recoveryCode, email)
+			sendRecoveryMail(email)
 			return
 		}
 		return dispatch(setMessage('Por favor ingresa tu correo electrónico'))
 	}
 
-	const sendRecoveryData = async email => {
+	const sendRecoveryMail = async email => {
 		try {
 			await recoveryService.recovery({ email })
-			dispatch(setMessage('Te hemos enviado enlace de recuperación por e-mail'))
+			dispatch(
+				setMessage('Te hemos enviado el enlace de recuperación por e-mail')
+			)
 		} catch (error) {
 			dispatch(setMessage('Dirección de correo electrónico no registrada'))
 		}
 	}
 
-
 	return (
 		<>
 			<div className="passwordReset_formContainer">
-				<form className='password_form' onSubmit={handlePasswordReset}>
+				<form className="password_form" onSubmit={handlePasswordReset}>
 					<div className="mb-3">
 						<label htmlFor="email" className="form-label">
 							Correo electrónico
@@ -61,7 +58,7 @@ export default function FormContainer() {
 						<button type="submit" className="btn btn-dark submitButton">
 							Enviar
 						</button>
-						<ButtonContainer/>
+						<ButtonContainer />
 					</div>
 				</form>
 			</div>
