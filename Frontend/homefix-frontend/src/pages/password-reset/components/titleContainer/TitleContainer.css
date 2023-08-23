@@ -1,7 +1,8 @@
 .passwordReset_titleContainer {
   width: 100%;
-  grid-area: passwordReset_titleContainer;
   display: flex;
+  flex-direction: column;
+  grid-area: passwordReset_titleContainer;
 }
 
 .passwordReset_titleContainer h2 {
@@ -11,4 +12,11 @@
   align-self: center;
   font-weight: 400;
   font-size: 24px;
+}
+
+.error-message{
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
 }

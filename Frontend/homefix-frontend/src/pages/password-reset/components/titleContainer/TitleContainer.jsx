@@ -8,7 +8,7 @@ export default function TitleContainer() {
 	return (
 		<div className="passwordReset_titleContainer">
 			<h2>¿Olvidaste tu contraseña?</h2>
-			{message ? <p style={{ color: 'red' }}>{message}</p> : null}
+			{message ? <p className='error-message' style={{ color: 'red' }}>{message}</p> : null}
 		</div>
 	)
 }
