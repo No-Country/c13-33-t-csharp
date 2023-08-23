@@ -1,0 +1,13 @@
+.passwordReset_formContainer {
+  width: 100%;
+  height: 100%;
+  grid-area: passwordReset_formContainer;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+}
+
+
+.password_form{
+  width: 580px;
+}
