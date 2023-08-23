@@ -14,7 +14,8 @@ export default function FormContainer() {
 	const [searchParams] = useSearchParams()
 
 	const email = searchParams.get('email')
-	const token = `bearer ${searchParams.get('token')}`
+	const tokenFromUrl = searchParams.get('token')
+	const token = tokenFromUrl.replace(/ /g, '+')
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -82,7 +83,7 @@ export default function FormContainer() {
 						<button
 							className="showPasswordImage-button border border-opacity-50 px-2"
 							type="button"
-							id="button-addon2"
+							id="button-addon1"
 							onClick={passwordHandler}
 						>
 							<img
@@ -101,11 +102,11 @@ export default function FormContainer() {
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword pt-3"
-							id="password"
+							id="newPassword"
 							placeholder="Ingresa tu contraseña"
-							name="password"
-							value={password}
-							onChange={({ target }) => setPassword(target.value)}
+							name="newPassword"
+							value={newPassword}
+							onChange={({ target }) => setNewPassword(target.value)}
 						/>
 						<button
 							className="showPasswordImage-button border border-opacity-50 px-2"
