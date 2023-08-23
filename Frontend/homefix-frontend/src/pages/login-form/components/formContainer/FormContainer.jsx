@@ -36,7 +36,6 @@ export default function FormContainer() {
 	const handleLogin = async (email, password) => {
 		try {
 			const user = await loginService.login({ email, password })
-			console.log(user)
 			dispatch(setToken(`bearer ${user.token}`))
 			window.localStorage.setItem('loggedHomefixUser', JSON.stringify(user))
 			dispatch(setUser(user))
