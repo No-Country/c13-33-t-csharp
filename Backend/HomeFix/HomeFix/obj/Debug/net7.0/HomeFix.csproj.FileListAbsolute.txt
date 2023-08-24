@@ -90,6 +90,7 @@
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
 /Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll
+<<<<<<< HEAD
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\bin\Debug\net7.0\appsettings.Development.json
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\bin\Debug\net7.0\appsettings.json
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\bin\Debug\net7.0\HomeFix.exe
@@ -183,3 +184,7 @@ D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\obj\Debug\net7.0\HomeFix.pdb
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\obj\Debug\net7.0\HomeFix.genruntimeconfig.cache
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\obj\Debug\net7.0\ref\HomeFix.dll
 D:\Cursos\NoCountry\13\Backend\HomeFix\HomeFix\bin\Debug\net7.0\HomeFix.staticwebassets.runtime.json
+=======
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Npgsql.dll
+/Users/sebastiandamico/nocode/c13-33-t-csharp/Backend/HomeFix/HomeFix/bin/Debug/net7.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+>>>>>>> 04c1f142fd9e8fa592b4fafba1744f5afbbc7a94

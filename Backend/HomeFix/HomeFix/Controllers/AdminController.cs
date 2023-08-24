@@ -77,7 +77,7 @@ public class AdminController : ControllerBase
         return Ok(userRoles);
     }
     
-    
+    //No tener en cuenta, proximo eliminacion/cambiar
     //Setea diversos roles. Ej de la url: /set-role/Usuario?roles=Member,Admin Para agregar esos dos roles al usuario
     [HttpPost("set-roles/{username}")]
     [Authorize(Roles = "Admin")]
