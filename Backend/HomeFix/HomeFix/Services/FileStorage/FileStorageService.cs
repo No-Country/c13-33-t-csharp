@@ -11,7 +11,7 @@ public interface IFileStorageService
 public class FileStorageService : IFileStorageService
 {
     private readonly HelperUploadFiles helperUploadFiles;
-
+    
 
     public FileStorageService(HelperUploadFiles helperUploadFiles)
     {
