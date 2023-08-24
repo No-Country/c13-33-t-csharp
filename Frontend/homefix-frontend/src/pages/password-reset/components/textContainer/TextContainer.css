@@ -1,0 +1,25 @@
+.passwordReset_textContainer {
+    width: 100%;
+    height: 100%;
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      ". . ."
+      "passwordReset_text passwordReset_text passwordReset_text"
+      ". . ."; 
+    grid-area: passwordReset_textContainer; 
+  }
+
+  .passwordReset_text{
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    width: 580px;
+    grid-area: passwordReset_text;
+    font-size: 16px;
+  }
+  

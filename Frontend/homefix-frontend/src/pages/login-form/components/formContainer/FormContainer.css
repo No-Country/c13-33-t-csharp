@@ -1,0 +1,81 @@
+.login_formContainer {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	grid-area: login_formContainer;
+	display: flex;
+	justify-content: center;
+}
+
+.login_form {
+	width: 500px;
+}
+
+.showPasswordImage {
+	width: 25px;
+	background-color: transparent;
+}
+
+.showPasswordImage-button {
+	outline: none !important;
+	background-color: rgba(251, 174, 67, 0.6);
+	border-radius: 15px;
+	border: 0px;
+}
+
+.linkToPassReset {
+	display: flex;
+	justify-content: flex-end;
+	text-decoration: none;
+	color: #222222;
+	opacity: 60%;
+}
+
+.linkToPassReset:hover {
+	text-decoration: bold;
+	color: black;
+}
+
+.formInput {
+	border-radius: 15px;
+	background-color: rgba(251, 174, 67, 0.6) !important;
+	height: 50px;
+}
+
+/* Anula los estilos de fondo de Bootstrap */
+.form-control .formInput {
+	background-color: #fbae43;
+}
+
+.formInput:focus {
+	border-color: black !important;
+	outline: none;
+	box-shadow: none;
+}
+
+.login_buttonContainer {
+	display: flex;
+	justify-self: center;
+	justify-content: center;
+	justify-items: center;
+	width: 100%;
+}
+
+
+.login_buttonPosition {
+	width: 100%;
+	display: flex;
+	justify-self: center;
+	justify-content: center;
+	justify-items: center;
+}
+
+.login_buttonPosition button {
+	margin-top: 50px;
+	width: 100%;
+	border-radius: 15px;
+}
+
+.button-login {
+	height: 60% !important;
+}

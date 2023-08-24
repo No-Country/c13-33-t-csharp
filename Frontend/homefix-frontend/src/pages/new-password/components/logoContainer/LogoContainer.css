@@ -1,0 +1,15 @@
+.newPassword_logoContainer {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      ". . ."
+      ". . newPassword_logoPosition"
+      ". . ."; 
+    grid-area: newPassword_logoContainer; 
+  }
+
+.newPassword_logoPosition {
+  grid-area: newPassword_logoPosition;
+}
