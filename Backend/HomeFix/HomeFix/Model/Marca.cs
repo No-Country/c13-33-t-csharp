@@ -8,8 +8,8 @@ namespace HomeFix.Model
         [Required]
         [MaxLength(50)]
         public string Nombre { get; set; }
-        [MaxLength(500)]
-        public string Icono { get; set; }
+        // [MaxLength(500)]
+        // public string Icono { get; set; }
 
         public List<Articulo> Articulos { get; set; }
     }

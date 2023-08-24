@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomeFix.Controllers;
 
 
-[ApiController]
-[Route("api/[controller]")]
-public class FileStorageController : ControllerBase
+
+public class FileStorageController : BaseController
 {
     private readonly HelperUploadFiles helperUploadFiles;
     private readonly IConfiguration configuration;

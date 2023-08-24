@@ -2,9 +2,8 @@
 
 namespace HomeFix.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ResumenController : ControllerBase
+  
+    public class ResumenController : BaseController
     {
 
     }

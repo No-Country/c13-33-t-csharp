@@ -10,9 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] // ruta para llegar al controller: api/cuenta
-public class CuentaController : ControllerBase
+public class CuentaController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
     private readonly TokenService _tokenService;
@@ -154,13 +152,13 @@ public class CuentaController : ControllerBase
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
             Email = registroDto.Email,
-            ImagenPerfil = registroDto.ImagenPerfil
+           
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
         if (result.Succeeded)
         {
-            await _userManager.AddClaimAsync(usuario, new Claim(ClaimTypes.Role, "Member"));
+            await _userManager.AddClaimAsync(usuario, new Claim(ClaimTypes.Role, registroDto.Rol));
             return new UsuarioDto
             {
                 UserName = usuario.UserName,

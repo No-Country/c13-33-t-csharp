@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeFix.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] 
-public class AdminController : ControllerBase
+
+public class AdminController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
 
@@ -40,7 +39,7 @@ public class AdminController : ControllerBase
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
             Email = registroDto.Email,
-            ImagenPerfil = registroDto.ImagenPerfil
+            
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
@@ -49,7 +48,7 @@ public class AdminController : ControllerBase
             return BadRequest("Problema en el registro");
         }
 
-        var roleResult = await _userManager.AddToRoleAsync(usuario, "Member");
+        var roleResult = await _userManager.AddToRoleAsync(usuario,  registroDto.Rol);
 
         if (!roleResult.Succeeded)
         {

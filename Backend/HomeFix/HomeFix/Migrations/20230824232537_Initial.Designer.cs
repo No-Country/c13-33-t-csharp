@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    [Migration("20230822212136_Initial")]
+    [Migration("20230824232537_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,8 +45,11 @@ namespace HomeFix.Migrations
                     b.Property<int>("CantidadMinima")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoriaId")
                         .HasColumnType("integer");
+
+                    b.Property<decimal>("Costo")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -67,16 +70,11 @@ namespace HomeFix.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SubcategoriaId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("MarcaId");
-
-                    b.HasIndex("SubcategoriaId");
 
                     b.ToTable("Articulo");
                 });
@@ -135,10 +133,6 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Icono")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -236,16 +230,16 @@ namespace HomeFix.Migrations
                         new
                         {
                             Id = 1,
-                            Descripcion = "Miembro",
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
+                            Descripcion = "Trabajador ",
+                            Name = "Trabajador",
+                            NormalizedName = "TRABAJADOR"
                         },
                         new
                         {
                             Id = 2,
-                            Descripcion = "Admin",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Descripcion = "Administrador",
+                            Name = "administrador",
+                            NormalizedName = "ADMINISTRADOR"
                         });
                 });
 
@@ -458,11 +452,9 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {
-                    b.HasOne("HomeFix.Model.Categoria", "Categoria")
+                    b.HasOne("HomeFix.Model.Categoria", null)
                         .WithMany("Articulos")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
 
                     b.HasOne("HomeFix.Model.Marca", "Marca")
                         .WithMany("Articulos")
@@ -470,17 +462,7 @@ namespace HomeFix.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HomeFix.Model.Subcategoria", "Subcategoria")
-                        .WithMany()
-                        .HasForeignKey("SubcategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
-
                     b.Navigation("Marca");
-
-                    b.Navigation("Subcategoria");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Imagen", b =>

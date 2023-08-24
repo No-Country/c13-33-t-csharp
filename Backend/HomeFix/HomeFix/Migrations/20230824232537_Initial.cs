@@ -79,8 +79,7 @@ namespace HomeFix.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Icono = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
+                    Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -255,13 +254,13 @@ namespace HomeFix.Migrations
                     Descripcion = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     Cantidad = table.Column<int>(type: "integer", nullable: false),
                     CantidadMinima = table.Column<int>(type: "integer", nullable: false),
+                    Costo = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Precio = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Peso = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Alto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Ancho = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    SubcategoriaId = table.Column<int>(type: "integer", nullable: false),
-                    CategoriaId = table.Column<int>(type: "integer", nullable: false),
-                    MarcaId = table.Column<int>(type: "integer", nullable: false)
+                    MarcaId = table.Column<int>(type: "integer", nullable: false),
+                    CategoriaId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -270,18 +269,11 @@ namespace HomeFix.Migrations
                         name: "FK_Articulo_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Articulo_Marcas_MarcaId",
                         column: x => x.MarcaId,
                         principalTable: "Marcas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Articulo_Subcategorias_SubcategoriaId",
-                        column: x => x.SubcategoriaId,
-                        principalTable: "Subcategorias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -311,8 +303,8 @@ namespace HomeFix.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Descripcion", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, "Miembro", "Member", "MEMBER" },
-                    { 2, null, "Admin", "Admin", "ADMIN" }
+                    { 1, null, "Trabajador ", "Trabajador", "TRABAJADOR" },
+                    { 2, null, "Administrador", "administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -324,11 +316,6 @@ namespace HomeFix.Migrations
                 name: "IX_Articulo_MarcaId",
                 table: "Articulo",
                 column: "MarcaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Articulo_SubcategoriaId",
-                table: "Articulo",
-                column: "SubcategoriaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -406,6 +393,9 @@ namespace HomeFix.Migrations
                 name: "MovimientosDetalle");
 
             migrationBuilder.DropTable(
+                name: "Subcategorias");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -415,13 +405,10 @@ namespace HomeFix.Migrations
                 name: "Articulo");
 
             migrationBuilder.DropTable(
-                name: "Marcas");
-
-            migrationBuilder.DropTable(
-                name: "Subcategorias");
-
-            migrationBuilder.DropTable(
                 name: "Categorias");
+
+            migrationBuilder.DropTable(
+                name: "Marcas");
         }
     }
 }

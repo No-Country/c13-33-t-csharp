@@ -17,7 +17,7 @@ public class SeedData
                 Apellido = "Apellido"
             };
             await userManager.CreateAsync(admin, "Pa$$w0rd123");
-            await userManager.AddToRoleAsync(admin, "Admin");
+            await userManager.AddToRoleAsync(admin, "Administrador");
             var usuario = new Usuario
             {
                 UserName = "UsuarioTest",
@@ -26,7 +26,7 @@ public class SeedData
                 Apellido = "Apellido"
             };
             await userManager.CreateAsync(usuario, "Pa$$w0rd123");
-            await userManager.AddToRoleAsync(usuario, "Member");
+            await userManager.AddToRoleAsync(usuario, "Trabajador");
         }
 
         context.SaveChanges();
