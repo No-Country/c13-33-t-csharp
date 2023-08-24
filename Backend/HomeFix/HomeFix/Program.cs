@@ -2,6 +2,7 @@ using System.Text;
 using HomeFix.Dbcontext;
 using HomeFix.Model;
 using HomeFix.Services;
+using HomeFix.Services.FileStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<PathProvider>();
+builder.Services.AddScoped<HelperUploadFiles>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<TokenService>();
