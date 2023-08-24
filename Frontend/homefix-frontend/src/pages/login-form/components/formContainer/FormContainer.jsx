@@ -7,12 +7,15 @@ import { setToken } from '../../../../reducers/tokenReducer'
 import { setUser } from '../../../../reducers/userReducer'
 import { setMessage } from '../../../../reducers/messageReducer'
 import showPasswordIcon from '../../../../assets/image/contraseña_mostrar.png'
-import hidePasswordIcon from '../../../../assets/image/contraseña_ocultar.png'
+import hidePasswordIcon from '../../../../assets/image/contraseña_ocultar.png';
+import { useNavigate } from 'react-router-dom'
 
 export default function FormContainer() {
-	const [showPassword, setShowPassword] = useState(false)
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [showPassword, setShowPassword] = useState(false);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const navigate = useNavigate();
 
 	const dispatch = useDispatch()
 
@@ -30,6 +33,7 @@ export default function FormContainer() {
 			setEmail('')
 			setPassword('')
 			handleLogin(email, password)
+			navigate('/dashboard-homepage')
 		}
 	}
 
