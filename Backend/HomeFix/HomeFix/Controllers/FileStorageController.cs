@@ -11,13 +11,13 @@ namespace HomeFix.Controllers;
 [Route("api/[controller]")]
 public class FileStorageController : ControllerBase
 {
-    private readonly HelperUploadFiles helperUploadFiles;
+    private readonly IFileStorageService _fileStorageService;
     private readonly IConfiguration configuration;
     private readonly UserManager<Usuario> _userManager;
 
-    public FileStorageController(HelperUploadFiles helperUploadFiles, IConfiguration configuration, UserManager<Usuario> userManager)
+    public FileStorageController(IFileStorageService fileStorageService, IConfiguration configuration, UserManager<Usuario> userManager)
     {
-        this.helperUploadFiles = helperUploadFiles;
+        _fileStorageService = fileStorageService;
         this.configuration = configuration;
         _userManager = userManager;
     }
@@ -26,36 +26,20 @@ public class FileStorageController : ControllerBase
     [AllowAnonymous]
     [HttpPost]
 
-    public async Task<string> Index(IFormFile imagen, int ubicacion)
+    public async Task<IActionResult> Index(IFormFile imagen, int ubicacion, string filenName)
     {
         if(imagen is null)
         {
-            BadRequest("No se ha seleccionado ninguna imagen");
-            return "No se ha seleccionado ninguna imagen";
+            return BadRequest("No se ha seleccionado ninguna imagen");
+            
         }
-        string nombreImagen = imagen.FileName;
+        var result = await _fileStorageService.UploadFile(imagen, ubicacion, filenName);
 
-        string path = "";
-
-        switch (ubicacion)
+        if (string.IsNullOrEmpty(result))
         {
-            case 0:
-                path = await this.helperUploadFiles.UploadFilesAsync(imagen, nombreImagen, Folders.Uploads);
-                break;
-            case 1:
-                path = await this.helperUploadFiles.UploadFilesAsync(imagen, nombreImagen, Folders.Images);
-                break;
-            case 2:
-                path = await this.helperUploadFiles.UploadFilesAsync(imagen, nombreImagen, Folders.Documents);
-                break;
-            case 3:
-                path = await this.helperUploadFiles.UploadFilesAsync(imagen, nombreImagen, Folders.Temp);
-                break;
+            return BadRequest("No se ha podido subir la imagen");
         }
-
-        var result = path;
-        return path;
-
+        return Ok(result);
     }
 
 
