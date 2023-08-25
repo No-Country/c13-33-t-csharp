@@ -1,0 +1,45 @@
+@media screen and (max-width: 920px) {
+  .passwordReset_layout {
+    width: 100%;
+    max-width: 920px;
+    display: inline-block;
+  }
+
+  
+  .passwordReset_titleContainer {
+    max-width: 100%;
+    bottom: 420px;
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    border-radius: 25px;
+    z-index: 2;
+  }
+
+  .passwordReset_logoContainer {
+    border-radius: 20px;
+    bottom: 220px;
+    z-index: 3;
+    position: relative;
+  }
+
+  .passwordReset_textContainer{
+    bottom: 920px;
+    z-index: 3;
+    position: relative;
+  }
+
+  .passwordReset_formContainer {
+    background-color: #ffffff;
+    position: absolute;
+    padding-top: 330px;
+    top: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 25px;
+    z-index: 1;
+  }
+
+
+}
