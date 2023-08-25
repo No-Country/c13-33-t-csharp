@@ -22,7 +22,6 @@ namespace HomeFix.Model
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Costo { get; set; }
-
         
         [Column(TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
