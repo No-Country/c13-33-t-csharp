@@ -6,13 +6,13 @@ namespace HomeFix.Model
     {
         public int Id { get; set; }
 
-        ///Debatir si hacer objeto anidado, o solo referencia por ID
+        
 
         [Required]
-        public int IdProducto { get; set; }
+        public int ProductoId { get; set; }
 
         [Required]
-        public int IdMovimiento { get; set; }
+        public int MovimientoId { get; set; }
 
         [Required]
         public int Cantidad { get; set; }
@@ -20,5 +20,7 @@ namespace HomeFix.Model
         [Required]
         public float PrecioUnitario { get; set; }
 
+        public Articulo Articulo { get; set; }
+        public Movimiento Movimiento { get; set; }
     }
 }
