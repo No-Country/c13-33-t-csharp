@@ -1,5 +1,6 @@
 using System.Text;
 using HomeFix.Dbcontext;
+using HomeFix.Helpers;
 using HomeFix.Model;
 using HomeFix.Services;
 using HomeFix.Services.FileStorage;
@@ -7,17 +8,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-;
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+// builder.Services.AddControllers().AddNewtonsoftJson(options=>
+//     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 string connString;
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -1,22 +1,24 @@
-using System.ComponentModel.DataAnnotations;
 using HomeFix.Model;
 
 namespace HomeFix.DTOs;
 
-public class CreateArticuloDto
+public class ArticuloDto
 {
+    public int Id { get; set; }
     public string Nombre { get; set; }
-    [Required] [MaxLength(500)]
+    
     public string Descripcion { get; set; }
     
-    [Required]
+
     public int Cantidad { get; set; }
 
-    [Required]
+ 
     public int CantidadMinima { get; set; }
 
-    [Required]
+
     public decimal Costo { get; set; }
+
+    public decimal Precio { get; set; }
     
 
     public decimal Peso { get; set; }
@@ -29,7 +31,5 @@ public class CreateArticuloDto
         
 
     public int MarcaId { get; set; }
-    
-    
-    
+    public string Marca { get; set; }
 }

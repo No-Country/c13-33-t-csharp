@@ -1,3 +1,4 @@
+using AutoMapper;
 using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
@@ -9,17 +10,20 @@ namespace HomeFix.Controllers;
 public class MarcasController : BaseController
 {
     private readonly HomeFixDbContext _context;
+    private readonly IMapper _mapper;
 
 
-    public MarcasController(HomeFixDbContext context)
+    public MarcasController(HomeFixDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<List<Marca>> GetMarcas()
+    public async Task<List<MarcaDto>> GetMarcas()
     {
-        return await _context.Marcas.ToListAsync();
+        var marcas = await _context.Marcas.ToListAsync();
+        return _mapper.Map<List<MarcaDto>>(marcas);
     }
 
     [HttpGet("{id}", Name = "GetMarca")]
@@ -31,25 +35,21 @@ public class MarcasController : BaseController
             return NotFound();
         }
 
-        return new MarcaDto {
-            Id = marca.Id,
-            Nombre = marca.Nombre
-        };
+        return _mapper.Map<MarcaDto>(marca);
     }
 
 
     [HttpPost]
     public async Task<ActionResult<Marca>> CreateMarca(CreateMarcaDto createMarcaDto)
     {
-        var marca = new Marca
-        {
-            Nombre = createMarcaDto.Nombre
-        };
+        var marca = _mapper.Map<Marca>(createMarcaDto);
 
         _context.Marcas.Add(marca);
         var result = await _context.SaveChangesAsync() > 0;
-
-        if (result) return CreatedAtRoute("GetMarca", new {Id = marca.Id}, marca);
+        
+        var marcaDto = _mapper.Map<MarcaDto>(marca);
+        
+        if (result) return CreatedAtRoute("GetMarca", new {Id = marcaDto.Id}, marcaDto);
         return BadRequest(new ProblemDetails { Title = "Problema creando la marca"});
     }
 }
