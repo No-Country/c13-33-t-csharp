@@ -76,11 +76,11 @@
 
       .passwordReset_titleContainer {
         max-width: 100%;
-        bottom: 280px;
+        bottom: 450px;
       }
 
       .passwordReset_logoContainer {
-        bottom: 120px;
+        bottom: 285px;
       }
 
   .passwordReset_formContainer {
@@ -88,16 +88,20 @@
     width: 767px;
     background-color: #ffffff;
     position: absolute;
-    top: 280px;
-    padding-top: 0px;
+    top: 110px;
+    padding-top: 100px;
     margin-left: 0px;
     z-index: 1;
     border-radius: 25px;
     max-height: 800px;
   }
 
+  .passwordReset_buttonContainer{
+    padding-bottom: 550px;
+  }
+
   .passwordReset_textContainer {
-    bottom: 700px;
+    bottom: 890px;
     max-width: 100%;
   }
 
@@ -106,7 +110,7 @@
   }
 
   .password_form {
-    padding-top: 300px;
+    padding-top: 200px;
     padding-left: 10px;
     padding-right: 20px;
     max-width: 380px;
@@ -116,6 +120,6 @@
     max-width: 250px;
   }
   .passwordReset-position {
-    max-width: 340px;
+    max-width: 350px;
   }
 }
