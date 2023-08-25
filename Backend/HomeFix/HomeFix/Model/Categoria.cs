@@ -11,6 +11,6 @@ namespace HomeFix.Model
         [MaxLength(500)]
         public string Icono { get; set; }
         public List<Subcategoria> Subcategorias { get; set; }
-        public List<Articulo> Articulos { get; set; }
+        
     }
 }

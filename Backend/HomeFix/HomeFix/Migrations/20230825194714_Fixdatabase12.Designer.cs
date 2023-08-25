@@ -4,6 +4,7 @@ using HomeFix.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    partial class HomeFixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230825194714_Fixdatabase12")]
+    partial class Fixdatabase12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace HomeFix.Migrations
                     b.Property<int>("CantidadMinima")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -65,6 +71,8 @@ namespace HomeFix.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("MarcaId");
 
@@ -103,7 +111,10 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticuloId")
+                    b.Property<int?>("ArticuloId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdArticulo")
                         .HasColumnType("int");
 
                     b.Property<string>("Ubicacion")
@@ -149,10 +160,13 @@ namespace HomeFix.Migrations
                     b.Property<DateTime>("FechaYHora")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("PrecioTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int?>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -176,14 +190,17 @@ namespace HomeFix.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("MovimientoId")
+                    b.Property<int>("IdMovimiento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MovimientoId")
                         .HasColumnType("int");
 
                     b.Property<float>("PrecioUnitario")
                         .HasColumnType("real");
-
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -252,7 +269,10 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -451,6 +471,10 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {
+                    b.HasOne("HomeFix.Model.Categoria", null)
+                        .WithMany("Articulos")
+                        .HasForeignKey("CategoriaId");
+
                     b.HasOne("HomeFix.Model.Marca", "Marca")
                         .WithMany("Articulos")
                         .HasForeignKey("MarcaId")
@@ -472,18 +496,14 @@ namespace HomeFix.Migrations
                 {
                     b.HasOne("HomeFix.Model.Articulo", null)
                         .WithMany("Imagenes")
-                        .HasForeignKey("ArticuloId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArticuloId");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Movimiento", b =>
                 {
                     b.HasOne("HomeFix.Model.Usuario", "Usuario")
                         .WithMany("Movimientos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Usuario");
                 });
@@ -496,9 +516,7 @@ namespace HomeFix.Migrations
 
                     b.HasOne("HomeFix.Model.Movimiento", "Movimiento")
                         .WithMany()
-                        .HasForeignKey("MovimientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovimientoId");
 
                     b.Navigation("Articulo");
 
@@ -509,9 +527,7 @@ namespace HomeFix.Migrations
                 {
                     b.HasOne("HomeFix.Model.Categoria", "Categoria")
                         .WithMany("Subcategorias")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
 
                     b.Navigation("Categoria");
                 });
@@ -574,6 +590,8 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Categoria", b =>
                 {
+                    b.Navigation("Articulos");
+
                     b.Navigation("Subcategorias");
                 });
 

@@ -4,6 +4,7 @@ using HomeFix.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    partial class HomeFixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230825194939_Fixdatabase123")]
+    partial class Fixdatabase123
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace HomeFix.Migrations
                     b.Property<int>("CantidadMinima")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -65,6 +71,8 @@ namespace HomeFix.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("MarcaId");
 
@@ -451,6 +459,10 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {
+                    b.HasOne("HomeFix.Model.Categoria", null)
+                        .WithMany("Articulos")
+                        .HasForeignKey("CategoriaId");
+
                     b.HasOne("HomeFix.Model.Marca", "Marca")
                         .WithMany("Articulos")
                         .HasForeignKey("MarcaId")
@@ -574,6 +586,8 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Categoria", b =>
                 {
+                    b.Navigation("Articulos");
+
                     b.Navigation("Subcategorias");
                 });
 

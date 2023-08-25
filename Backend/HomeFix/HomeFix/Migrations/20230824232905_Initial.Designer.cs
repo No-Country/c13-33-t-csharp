@@ -4,6 +4,7 @@ using HomeFix.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    partial class HomeFixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230824232905_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace HomeFix.Migrations
                     b.Property<int>("CantidadMinima")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -65,6 +71,8 @@ namespace HomeFix.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("MarcaId");
 
@@ -103,7 +111,10 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticuloId")
+                    b.Property<int?>("ArticuloId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdArticulo")
                         .HasColumnType("int");
 
                     b.Property<string>("Ubicacion")
@@ -124,6 +135,10 @@ namespace HomeFix.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Icono")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -149,15 +164,13 @@ namespace HomeFix.Migrations
                     b.Property<DateTime>("FechaYHora")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("PrecioTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Movimientos");
                 });
@@ -170,26 +183,19 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ArticuloId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("MovimientoId")
+                    b.Property<int>("IdMovimiento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProducto")
                         .HasColumnType("int");
 
                     b.Property<float>("PrecioUnitario")
                         .HasColumnType("real");
 
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ArticuloId");
-
-                    b.HasIndex("MovimientoId");
 
                     b.ToTable("MovimientosDetalle");
                 });
@@ -252,7 +258,10 @@ namespace HomeFix.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -451,6 +460,10 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {
+                    b.HasOne("HomeFix.Model.Categoria", null)
+                        .WithMany("Articulos")
+                        .HasForeignKey("CategoriaId");
+
                     b.HasOne("HomeFix.Model.Marca", "Marca")
                         .WithMany("Articulos")
                         .HasForeignKey("MarcaId")
@@ -458,7 +471,7 @@ namespace HomeFix.Migrations
                         .IsRequired();
 
                     b.HasOne("HomeFix.Model.Subcategoria", "Subcategoria")
-                        .WithMany("Articulos")
+                        .WithMany()
                         .HasForeignKey("SubcategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -472,48 +485,14 @@ namespace HomeFix.Migrations
                 {
                     b.HasOne("HomeFix.Model.Articulo", null)
                         .WithMany("Imagenes")
-                        .HasForeignKey("ArticuloId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HomeFix.Model.Movimiento", b =>
-                {
-                    b.HasOne("HomeFix.Model.Usuario", "Usuario")
-                        .WithMany("Movimientos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("HomeFix.Model.MovimientoDetalle", b =>
-                {
-                    b.HasOne("HomeFix.Model.Articulo", "Articulo")
-                        .WithMany()
                         .HasForeignKey("ArticuloId");
-
-                    b.HasOne("HomeFix.Model.Movimiento", "Movimiento")
-                        .WithMany()
-                        .HasForeignKey("MovimientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Articulo");
-
-                    b.Navigation("Movimiento");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Subcategoria", b =>
                 {
-                    b.HasOne("HomeFix.Model.Categoria", "Categoria")
+                    b.HasOne("HomeFix.Model.Categoria", null)
                         .WithMany("Subcategorias")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
+                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -574,22 +553,14 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Categoria", b =>
                 {
+                    b.Navigation("Articulos");
+
                     b.Navigation("Subcategorias");
                 });
 
             modelBuilder.Entity("HomeFix.Model.Marca", b =>
                 {
                     b.Navigation("Articulos");
-                });
-
-            modelBuilder.Entity("HomeFix.Model.Subcategoria", b =>
-                {
-                    b.Navigation("Articulos");
-                });
-
-            modelBuilder.Entity("HomeFix.Model.Usuario", b =>
-                {
-                    b.Navigation("Movimientos");
                 });
 #pragma warning restore 612, 618
         }

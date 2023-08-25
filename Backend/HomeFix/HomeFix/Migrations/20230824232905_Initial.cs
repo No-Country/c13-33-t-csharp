@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,12 +17,12 @@ namespace HomeFix.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Descripcion = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,25 +33,25 @@ namespace HomeFix.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
-                    ImagenPerfil = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
-                    Apellido = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    ImagenPerfil = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Apellido = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,10 +62,10 @@ namespace HomeFix.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Icono = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Icono = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,10 +76,10 @@ namespace HomeFix.Migrations
                 name: "Marcas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Icono = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Icono = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -91,12 +90,12 @@ namespace HomeFix.Migrations
                 name: "Movimientos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdUsuario = table.Column<int>(type: "integer", nullable: false),
-                    FechaYHora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Descripcion = table.Column<string>(type: "text", nullable: true),
-                    PrecioTotal = table.Column<decimal>(type: "numeric(18,2)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    FechaYHora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrecioTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,11 +106,11 @@ namespace HomeFix.Migrations
                 name: "MovimientosDetalle",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdProducto = table.Column<int>(type: "integer", nullable: false),
-                    IdMovimiento = table.Column<int>(type: "integer", nullable: false),
-                    Cantidad = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdProducto = table.Column<int>(type: "int", nullable: false),
+                    IdMovimiento = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
                     PrecioUnitario = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -123,11 +122,11 @@ namespace HomeFix.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<int>(type: "integer", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -144,11 +143,11 @@ namespace HomeFix.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,10 +164,10 @@ namespace HomeFix.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    ProviderKey = table.Column<string>(type: "text", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,8 +184,8 @@ namespace HomeFix.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    RoleId = table.Column<int>(type: "integer", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,10 +208,10 @@ namespace HomeFix.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    LoginProvider = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Value = table.Column<string>(type: "text", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -229,11 +228,11 @@ namespace HomeFix.Migrations
                 name: "Subcategorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
-                    Nombre = table.Column<string>(type: "text", nullable: false),
-                    CategoriaId = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCategoria = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -249,19 +248,19 @@ namespace HomeFix.Migrations
                 name: "Articulo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Descripcion = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    Cantidad = table.Column<int>(type: "integer", nullable: false),
-                    CantidadMinima = table.Column<int>(type: "integer", nullable: false),
-                    Precio = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    Peso = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    Alto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    Ancho = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    SubcategoriaId = table.Column<int>(type: "integer", nullable: false),
-                    CategoriaId = table.Column<int>(type: "integer", nullable: false),
-                    MarcaId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
+                    Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Alto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Ancho = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubcategoriaId = table.Column<int>(type: "int", nullable: false),
+                    MarcaId = table.Column<int>(type: "int", nullable: false),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -270,8 +269,7 @@ namespace HomeFix.Migrations
                         name: "FK_Articulo_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Articulo_Marcas_MarcaId",
                         column: x => x.MarcaId,
@@ -290,11 +288,11 @@ namespace HomeFix.Migrations
                 name: "Imagenes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdArticulo = table.Column<int>(type: "integer", nullable: false),
-                    Ubicacion = table.Column<string>(type: "text", nullable: false),
-                    ArticuloId = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdArticulo = table.Column<int>(type: "int", nullable: false),
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArticuloId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -339,7 +337,8 @@ namespace HomeFix.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -365,7 +364,8 @@ namespace HomeFix.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Imagenes_ArticuloId",
