@@ -4,7 +4,7 @@ export default function DashboardResume() {
 	return (
 		<div className="dashboard-resume-container">
 			<div className="dashboard-resume-title">
-				<h3 className="mt-4 dashboard-title">Visión General</h3>
+				<h3 className="dashboard-title">Visión General</h3>
 			</div>
 			<div className="total-sales">
 				<div className="box-title text-center text-white">
