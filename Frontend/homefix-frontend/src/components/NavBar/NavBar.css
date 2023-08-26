@@ -23,8 +23,9 @@
 	width: 149px;
 	background-color: white;
 	border: none;
-	padding: 13px 25px;
+	padding: 13px 0 13px 21px;
 	text-decoration: none;
+	text-align: start;
 	color: #000;
 	font-family: Roboto;
 	font-size: 16px;
@@ -33,6 +34,11 @@
 	line-height: normal;
 	border-radius: 16px;
 	margin: 6px 0
+}
+
+.button img {
+	margin-right: 9px;
+	width: 24px;
 }
 
 .button:hover {
