@@ -25,6 +25,15 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
                 new Rol {Id = 1, Name = "Member", NormalizedName = "MEMBER", Descripcion = "Miembro"},
                 new Rol {Id = 2, Name = "Admin", NormalizedName = "ADMIN", Descripcion = "Admin"}
             );
+        // modelBuilder.Entity<Subcategorias>(x=> x.HasKey(c=> new {c.CategoriaId, c.SubcategoriaId}));
+        // modelBuilder.Entity<Subcategorias>()
+        //     .HasMany(c => c.Categoria)
+        //     .WithOne(s => s.Subcategoria);
+        // modelBuilder.Entity<Subcategorias>()
+        //     .HasOne(c => c.Subcategoria)
+        //     .WithMany(s => s.);
+
+        
 
     }
 
@@ -36,5 +45,7 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
     public DbSet<Movimiento> Movimientos { get; set;}
     public DbSet<MovimientoDetalle> MovimientosDetalle { get; set; }
     public DbSet<Articulo> Articulo { get; set; }
+
+   
 
 }
