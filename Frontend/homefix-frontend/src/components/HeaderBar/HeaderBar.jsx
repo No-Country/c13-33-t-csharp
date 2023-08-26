@@ -1,29 +1,42 @@
 import React from 'react'
 import './HeaderBar.css'
 import HeaderNavLogo from '../../assets/image/HomeFix-navbar-logo.png'
+import { useSelector } from 'react-redux'
 
 export default function HeaderBar() {
+	const user = useSelector(state => state.user)
+
+	const placeHolderProfileImage =
+		'https://www.shareicon.net/data/2016/07/05/791224_man_512x512.png'
+
 	return (
 		<div className="headerBar-container">
 			<nav className="header-navbar">
-				<img className="mt-3 mx-5" src={HeaderNavLogo} alt="Home Fix Logo" />
-				<div className="dropdown mt-3 mx-5">
+				<a href="/">
+					<img className="header-logo" src={HeaderNavLogo} alt="HomeFix Logo" />
+				</a>
+				<div className="header-profile-button dropdown">
+					<img
+						className="profile-icon-image"
+						src={placeHolderProfileImage}
+						alt="profile icon"
+					/>
 					<button
-						className="btn "
+						className="username btn"
 						type="button"
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						Dropdown button
+						{user.userName}
 					</button>
 					<ul className="dropdown-menu">
 						<li>
-							<a className="dropdown-item" href="/#">
+							<a id="profile-link" className="dropdown-item" href="/#">
 								Mi Perfil
 							</a>
 						</li>
 						<li>
-							<a className="dropdown-item" href="/login-form">
+							<a id="close-link" className="dropdown-item" href="/login-form">
 								Cerrar Sesión
 							</a>
 						</li>
