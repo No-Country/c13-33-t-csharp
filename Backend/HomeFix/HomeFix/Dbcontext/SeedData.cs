@@ -58,15 +58,15 @@ public class SeedData
       
         if (context.Categorias.Any()) return;
 
-        var subcategoria = new List<Subcategoria>
-        {
-            new Subcategoria
-            {
-                Id = 1,
-                Nombre = "Herramientas Manuales",
+        //var subcategoria = new List<Subcategoria>
+        //{
+        //    new Subcategoria
+        //    {
+        //        Id = 1,
+        //        Nombre = "Herramientas Manuales",
                 
-            },
-        };
+        //    },
+        //};
         if (context.Categorias.Any()) return;
         
         var categoria = new List<Categoria>
@@ -75,7 +75,7 @@ public class SeedData
             {
                 Id = 1,
                 Nombre = "Herramientas",
-                SubcategoriaId = 1
+                
                 
             },
             new Categoria
@@ -203,7 +203,7 @@ public class SeedData
            
         };
         
-        context.Subcategorias.AddRange(subcategoria);
+        //context.Subcategorias.AddRange(subcategoria);
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);
         context.Articulo.AddRange(articulos);

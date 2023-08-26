@@ -9,8 +9,8 @@ namespace HomeFix.Model
         [MaxLength(50)]
         public string Nombre { get; set; }
   
-        public Subcategoria? Subcategoria { get; set; }
-        public int? SubcategoriaId { get; set; }
+        public int CategoriaId { get; set; }
+        public Categoria CategoriaPadre { get; set; }
         
     }
 }

@@ -23,4 +23,6 @@ public class CategoriaController : BaseController
         var categorias = await _context.Categorias.FindAsync();
         return _mapper.Map<List<CategoriaDto>>(categorias);
     }
+
+
 }
