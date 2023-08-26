@@ -8,16 +8,21 @@ import { setUser } from '../../../../reducers/userReducer'
 import { setMessage } from '../../../../reducers/messageReducer'
 import showPasswordIcon from '../../../../assets/image/contraseña_mostrar.png'
 import hidePasswordIcon from '../../../../assets/image/contraseña_ocultar.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function FormContainer() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	const navigate = useNavigate()
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(setMessage(null))
+		window.localStorage.clear()
+		dispatch(setUser(null))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -39,6 +44,7 @@ export default function FormContainer() {
 			dispatch(setToken(`bearer ${user.token}`))
 			window.localStorage.setItem('loggedHomefixUser', JSON.stringify(user))
 			dispatch(setUser(user))
+			navigate('/')
 		} catch (error) {
 			dispatch(
 				setMessage('El correo electrónico y/o contraseña no son correctas')

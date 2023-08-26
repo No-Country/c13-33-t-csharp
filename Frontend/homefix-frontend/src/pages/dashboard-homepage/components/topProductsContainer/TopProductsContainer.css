@@ -1,0 +1,48 @@
+.top-products-container {
+  width: 100%;
+  height: 100%;
+  background-color: #ffff;
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.5fr;
+  grid-template-rows: 0.5fr 0.2fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "top-products-title top-products-title top-products-title"
+    "table-tags table-tags table-tags"
+    "top-products-list top-products-list top-products-list";
+  grid-area: top-products-container;
+}
+
+.top-products-title {
+  grid-area: top-products-title;
+}
+
+.table-tags {
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "product-name product-id product-price";
+  grid-area: table-tags;
+}
+.product-name {
+  grid-area: product-name;
+}
+.product-id {
+  grid-area: product-id;
+}
+.product-price {
+  grid-area: product-price;
+}
+.top-products-list {
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.5fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+  grid-area: top-products-list;
+}

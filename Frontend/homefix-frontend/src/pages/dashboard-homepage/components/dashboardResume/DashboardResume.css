@@ -1,0 +1,123 @@
+.dashboard-resume-container { 
+    height: 100%;
+    width: 100%;
+    background-color: #ffff;
+    display: grid; 
+    grid-template-columns: repeat(4, 0.1fr 1fr) 0.1fr; 
+    grid-template-rows: 0.5fr 1fr 0.1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      ". dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title ."
+      ". total-sales . total-cost . ros . products-sales ."
+      ". . . . . . . . ."; 
+    grid-area: dashboard-resume-container; 
+    border-radius: 25px;
+}
+
+.dashboard-resume-title{
+    grid-area: dashboard-resume-title
+}
+
+.dashboard-title{
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.total-sales{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: black;
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.2fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "box-title"
+      "box-number"; 
+    grid-area: total-sales; 
+}
+
+.box-title{
+    width: 100%;
+    height: 70px;
+    grid-area: box-title; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-title h4{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.box-number h3{
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.box-number{
+    grid-area: box-number; 
+    justify-self: center;
+    align-self: center;
+}
+
+.box-title h4{
+margin-top: 20px;
+}
+
+.line{
+    width: 200px;
+    height: 1px;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: aliceblue;
+    justify-items: center;
+}
+
+.total-cost{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: black;
+    grid-area: total-cost;
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.2fr 0.8fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "box-title"
+      "box-number"; 
+}
+
+.ros{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: black;
+    grid-area: ros;
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.2fr 0.8fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "box-title"
+      "box-number"; 
+}
+
+.products-sales{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: black;
+    grid-area: products-sales;
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.2fr 0.8fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "box-title"
+      "box-number"; 
+}
+
