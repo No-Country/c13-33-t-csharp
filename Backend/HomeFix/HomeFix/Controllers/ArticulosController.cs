@@ -22,7 +22,8 @@ public class ArticulosController : BaseController
     [HttpGet]
     public async Task<List<ArticuloDto>> GetArticulos()
     {
-        var articulos = await _context.Articulo.Include(x => x.Marca).ToListAsync();
+        var articulos = await _context.Articulo.Include(x => x.Marca)
+            .Include(x => x.Categoria).ThenInclude(a => a.Subcategoria).ToListAsync();
         return _mapper.Map<List<ArticuloDto>>(articulos);
     }
 

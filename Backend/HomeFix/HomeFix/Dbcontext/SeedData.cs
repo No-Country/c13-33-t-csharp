@@ -86,7 +86,7 @@ public class SeedData
             new Categoria
             {
                 Id = 3,
-                Nombre = "Herramientas Manuales",
+                Nombre = "Hogar",
                 
             },
         };
@@ -97,32 +97,32 @@ public class SeedData
             new Articulo
             {
                 Id = 1,
-                Nombre = "Destornillador cruz",
+                Nombre = "Martillo Carpintero",
                 CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
+                Descripcion = "Martillo con Mango de Fibra de Vidrio",
                 Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
+                CantidadMinima = 5,
+                Costo = 2000,
+                Precio = 3600,
+                Peso = 0.042m,
+                Ancho = 3,
+                Alto = 10,
                 MarcaId = 1
             },
             new Articulo
             {
                 Id = 2,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
+                Nombre = "Puerta de pino",
+                CategoriaId = 3,
+                Descripcion = "Puerta reforzada de pino",
+                Cantidad = 9,
+                CantidadMinima = 2,
+                Costo = 10000,
+                Precio = 12000,
+                Peso = 20.230m,
+                Ancho = 3000,
+                Alto = 10000,
+                MarcaId = 3
             },
             new Articulo
             {
@@ -142,108 +142,64 @@ public class SeedData
             new Articulo
             {
                 Id = 4,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
+                Nombre = "Puerta PVC",
+                CategoriaId = 3,
+                Descripcion = "Puerta de PVC",
+                Cantidad = 12,
                 CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
+                Costo = 7000,
+                Precio = 9000,
+                Peso = 15.380m,
+                Ancho = 3000,
+                Alto = 10000,
+                MarcaId = 4
             },
             new Articulo
             {
                 Id = 5,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
+                Nombre = "Lampara Pie",
+                CategoriaId = 2,
+                Descripcion = "Potencia de 30W, diametro de 25 cm y con tipo de soquete E22.",
+                Cantidad = 15,
+                CantidadMinima = 4,
+                Costo = 3000,
+                Precio = 3800,
+                Peso = 0.90m,
+                Ancho = 30,
+                Alto = 40,
+                MarcaId = 2
             },
             new Articulo
             {
                 Id = 6,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
+                Nombre = "Lampara colgante",
+                CategoriaId = 2,
+                Descripcion = "Potencia de 40W, diametro de 20 cm y con tipo de soquete E27.",
                 Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
+                CantidadMinima = 4,
+                Costo = 32792,
+                Precio = 40990,
+                Peso = 3.5m,
+                Ancho = 40,
+                Alto = 29,
+                MarcaId = 2
             },
             new Articulo
             {
                 Id = 7,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
+                Nombre = "Puerta con ventana",
+                CategoriaId = 3,
+                Descripcion = "Puerta con ventana",
+                Cantidad = 5,
+                CantidadMinima = 1,
+                Costo = 20000,
+                Precio = 24000,
+                Peso = 25.820m,
+                Ancho = 3200,
+                Alto = 11000,
+                MarcaId = 3
             },
-            new Articulo
-            {
-                Id = 8,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
-            },
-            new Articulo
-            {
-                Id = 9,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
-            },
-            new Articulo
-            {
-                Id = 10,
-                Nombre = "Destornillador cruz",
-                CategoriaId = 1,
-                Descripcion = "Punta cruz imantada, que facilita el encaje de la punta en el tornillo",
-                Cantidad = 18,
-                CantidadMinima = 3,
-                Costo = 2952,
-                Precio = 3690,
-                Peso = 0.082m,
-                Ancho = 0,
-                Alto = 0,
-                MarcaId = 1
-            },
+            
            
         };
         
