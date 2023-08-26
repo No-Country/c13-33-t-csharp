@@ -14,7 +14,7 @@ public class MappingProfiles : Profile
         CreateMap<Articulo, ArticuloDto>()
             .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre))
             .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.Categoria.Nombre))
-            ;
+            .ForMember(x => x.Subcategoria, opt => opt.MapFrom(a => a.Categoria.CategoriaPadre.Nombre));
 
         CreateMap<CreateArticuloDto, Articulo>()
             .ForMember(x => x.MarcaId, opt => opt.MapFrom(a => a.MarcaId))
