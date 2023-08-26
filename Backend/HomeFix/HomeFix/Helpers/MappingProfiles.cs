@@ -23,7 +23,7 @@ public class MappingProfiles : Profile
 
 
         CreateMap<Categoria, CategoriaDto>()
-            .ForMember(x => x.CategoriaPadre, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
+            .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
         // .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre));
     }
 }

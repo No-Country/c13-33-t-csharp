@@ -94,7 +94,7 @@ public class SeedData
                 },
             };
         } 
-        if(context.Categorias.FirstOrDefault(x => x.CategoriaId.HasValue) is null)
+        if(context.Categorias.FirstOrDefault(x => x.CategoriaPadreId.HasValue) is null)
         {
             List<Categoria> categorias = new List<Categoria>()
             {
@@ -103,7 +103,7 @@ public class SeedData
             {
                 Id = 4,
                 Nombre = "Lamparas de exterior",
-                CategoriaId = 2
+                CategoriaPadreId = 2
 
 
             },
@@ -111,27 +111,27 @@ public class SeedData
                 {
                     Id = 5,
                     Nombre = "Lamparas interior",
-                    CategoriaId = 2
+                    CategoriaPadreId = 2
                 },
                 new Categoria
                 {
                     Id = 6,
                     Nombre = "Puerta",
-                    CategoriaId= 3
+                    CategoriaPadreId= 3
 
                 },
                 new Categoria
                 {
                     Id = 7,
                     Nombre = "Mesas",
-                    CategoriaId= 3
+                    CategoriaPadreId= 3
 
                 },
                 new Categoria
                 {
                     Id = 8,
                     Nombre = "Bajo mesada",
-                    CategoriaId= 3
+                       CategoriaPadreId= 3
 
                 },
             };
