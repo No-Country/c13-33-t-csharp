@@ -1,5 +1,6 @@
 using HomeFix.Model;
 using Microsoft.AspNetCore.Identity;
+using NpgsqlTypes;
 
 namespace HomeFix.Dbcontext;
 
@@ -28,34 +29,36 @@ public class SeedData
             await userManager.CreateAsync(usuario, "Pa$$w0rd123");
             await userManager.AddToRoleAsync(usuario, "Trabajador");
         }
-
-        if (context.Marcas.Any()) return;
-
-        var marcas = new List<Marca>()
+        List<Marca> marcas = new List<Marca>();
+        if (!context.Marcas.Any())
         {
-            new Marca
+
+            marcas = new List<Marca>()
             {
-                Id = 1,
-                Nombre = "Robust"
-            },
-            new Marca
-            {
-                Id = 2,
-                Nombre = "Abitare"
-            },
-            new Marca
-            {
-                Id = 3,
-                Nombre = "Vento"
-            },
-            new Marca
-            {
-                Id = 4,
-                Nombre = "Baldara"
-            }
-            
-        };
-      
+                new Marca
+                {
+                    Id = 1,
+                    Nombre = "Robust"
+                },
+                new Marca
+                {
+                    Id = 2,
+                    Nombre = "Abitare"
+                },
+                new Marca
+                {
+                    Id = 3,
+                    Nombre = "Vento"
+                },
+                new Marca
+                {
+                    Id = 4,
+                    Nombre = "Baldara"
+                }
+
+            };
+
+        }
         if (context.Categorias.Any()) return;
 
         //var subcategoria = new List<Subcategoria>
@@ -64,34 +67,78 @@ public class SeedData
         //    {
         //        Id = 1,
         //        Nombre = "Herramientas Manuales",
-                
+
         //    },
         //};
-        if (context.Categorias.Any()) return;
-        
-        var categoria = new List<Categoria>
+        List<Categoria> categoria = new List<Categoria>();
+        if (!context.Categorias.Any()) { 
+            categoria = new List<Categoria>
+            {
+                new Categoria
+                {
+                    Id = 1,
+                    Nombre = "Herramientas",
+
+
+                },
+                new Categoria
+                {
+                    Id = 2,
+                    Nombre = "Iluminacion"
+                },
+                new Categoria
+                {
+                    Id = 3,
+                    Nombre = "Hogar",
+
+                },
+            };
+        } 
+        if(context.Categorias.FirstOrDefault(x => x.CategoriaId.HasValue) is null)
         {
+            List<Categoria> categorias = new List<Categoria>()
+            {
+
             new Categoria
             {
-                Id = 1,
-                Nombre = "Herramientas",
-                
-                
+                Id = 4,
+                Nombre = "Lamparas de exterior",
+                CategoriaId = 2
+
+
             },
-            new Categoria
-            {
-                Id = 2,
-                Nombre = "Iluminacion"
-            },
-            new Categoria
-            {
-                Id = 3,
-                Nombre = "Hogar",
-                
-            },
-        };
-        
-        
+                new Categoria
+                {
+                    Id = 5,
+                    Nombre = "Lamparas interior",
+                    CategoriaId = 2
+                },
+                new Categoria
+                {
+                    Id = 6,
+                    Nombre = "Puerta",
+                    CategoriaId= 3
+
+                },
+                new Categoria
+                {
+                    Id = 7,
+                    Nombre = "Mesas",
+                    CategoriaId= 3
+
+                },
+                new Categoria
+                {
+                    Id = 8,
+                    Nombre = "Bajo mesada",
+                    CategoriaId= 3
+
+                },
+            };
+            categoria.AddRange(categorias);
+        }
+
+
         var articulos = new List<Articulo>
         {
             new Articulo
@@ -113,7 +160,7 @@ public class SeedData
             {
                 Id = 2,
                 Nombre = "Puerta de pino",
-                CategoriaId = 3,
+                CategoriaId = 6,
                 Descripcion = "Puerta reforzada de pino",
                 Cantidad = 9,
                 CantidadMinima = 2,
@@ -143,7 +190,7 @@ public class SeedData
             {
                 Id = 4,
                 Nombre = "Puerta PVC",
-                CategoriaId = 3,
+                CategoriaId = 6,
                 Descripcion = "Puerta de PVC",
                 Cantidad = 12,
                 CantidadMinima = 3,
@@ -158,7 +205,7 @@ public class SeedData
             {
                 Id = 5,
                 Nombre = "Lampara Pie",
-                CategoriaId = 2,
+                CategoriaId = 5,
                 Descripcion = "Potencia de 30W, diametro de 25 cm y con tipo de soquete E22.",
                 Cantidad = 15,
                 CantidadMinima = 4,
@@ -173,7 +220,7 @@ public class SeedData
             {
                 Id = 6,
                 Nombre = "Lampara colgante",
-                CategoriaId = 2,
+                CategoriaId = 5,
                 Descripcion = "Potencia de 40W, diametro de 20 cm y con tipo de soquete E27.",
                 Cantidad = 18,
                 CantidadMinima = 4,
@@ -188,7 +235,7 @@ public class SeedData
             {
                 Id = 7,
                 Nombre = "Puerta con ventana",
-                CategoriaId = 3,
+                CategoriaId = 6,
                 Descripcion = "Puerta con ventana",
                 Cantidad = 5,
                 CantidadMinima = 1,
@@ -199,10 +246,10 @@ public class SeedData
                 Alto = 11000,
                 MarcaId = 3
             },
-            
-           
+
+
         };
-        
+
         //context.Subcategorias.AddRange(subcategoria);
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);
