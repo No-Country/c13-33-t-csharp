@@ -6,10 +6,15 @@ namespace HomeFix.Model
     {
         public int Id { get; set; }
         
-        [Required]
-        public int IdCategoria { get; set; }
-
+     
+        public int CategoriaId { get; set; }
+        public List<Categoria> Categoria { get; set; }
+        
         [Required]
         public string Nombre { get; set; } 
+      
+        
+       
+        
     }
 }

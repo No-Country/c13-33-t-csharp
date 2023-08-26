@@ -14,5 +14,7 @@ namespace HomeFix.Model
         
         [MaxLength(150)]
         public string Apellido { get; set; }
+
+        public List<Movimiento> Movimientos { get; set;}
     }
 }

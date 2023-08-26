@@ -1,5 +1,6 @@
 import React from 'react'
-import './Layout.css'
+import './Layout.css';
+import "./LayoutResponsive.css";
 import ImageContainer from '../components/imageContainer/ImageContainer'
 import LogoContainer from '../components/logoContainer/LogoContainer'
 import TitleContainer from '../components/titleContainer/TitleContainer'
