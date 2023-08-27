@@ -10,7 +10,7 @@ export default function Layout() {
 	return (
 		<div className="dashboard-layout">
 			<HeaderBar />
-			<NavBar page="resume" />
+			<NavBar page="summary" />
 			<TitleContainer />
 			<DashboardResume />
 			<TopProductsContainer />

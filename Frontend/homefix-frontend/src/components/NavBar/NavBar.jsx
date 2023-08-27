@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react'
 import './NavBar.css'
 import summaryIcon from '../../assets/image/gg_loadbar-doc.svg'
 import usersIcon from '../../assets/image/ph_users-fill.svg'
@@ -8,13 +7,6 @@ import { useNavigate } from 'react-router-dom'
 
 export default function NavBar({ page }) {
 	const navigate = useNavigate()
-	const resumeFocus = useRef()
-
-	useEffect(() => {
-		if (page === 'resume') {
-			resumeFocus.current.focus()
-		}
-	}, [page])
 
 	return (
 		<div className="navBar-container">
@@ -24,7 +16,7 @@ export default function NavBar({ page }) {
 					type="button"
 					onClick={() => navigate('/')}
 					className="button button-reset"
-					ref={resumeFocus}
+					style={page === 'summary' && { backgroundColor: '#FBAE43' }}
 				>
 					<img src={summaryIcon} alt="summary icon" />
 					Resumen
@@ -33,6 +25,7 @@ export default function NavBar({ page }) {
 					type="button"
 					onClick={() => navigate('/')}
 					className="button button-reset"
+					style={page === 'users' && { backgroundColor: '#FBAE43' }}
 				>
 					<img src={usersIcon} alt="users icon" />
 					Usuarios
@@ -41,6 +34,7 @@ export default function NavBar({ page }) {
 					type="button"
 					onClick={() => navigate('/')}
 					className="button button-reset"
+					style={page === 'inventory' && { backgroundColor: '#FBAE43' }}
 				>
 					<img src={inventoryIcon} alt="inventory icon" />
 					Inventario
@@ -49,6 +43,7 @@ export default function NavBar({ page }) {
 					type="button"
 					onClick={() => navigate('/')}
 					className="button button-reset"
+					style={page === 'report' && { backgroundColor: '#FBAE43' }}
 				>
 					<img src={reportIcon} alt="report icon" />
 					Informe
