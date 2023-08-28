@@ -96,6 +96,12 @@ var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<HomeFixDbContext>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Usuario>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000"); //TODO cambiarlo en el deploy
+});
+
 try
 {
     await context.Database.MigrateAsync();
