@@ -33,7 +33,7 @@
 	font-weight: 400;
 	line-height: normal;
 	border-radius: 16px;
-	margin: 6px 0
+	margin: 6px 0;
 }
 
 .button img {
@@ -47,7 +47,10 @@
 
 .button:focus {
 	background-color: #FBAE43;
+}
 
+.actual-page {
+	background-color: #FBAE43;
 }
 
 h2 {

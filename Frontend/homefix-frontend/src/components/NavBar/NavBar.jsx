@@ -15,8 +15,11 @@ export default function NavBar({ page }) {
 				<button
 					type="button"
 					onClick={() => navigate('/')}
-					className="button button-reset"
-					style={page === 'summary' && { backgroundColor: '#FBAE43' }}
+					className={
+						page === 'summary'
+							? 'actual-page button button-reset'
+							: 'button button-reset'
+					}
 				>
 					<img src={summaryIcon} alt="summary icon" />
 					Resumen
@@ -24,8 +27,11 @@ export default function NavBar({ page }) {
 				<button
 					type="button"
 					onClick={() => navigate('/')}
-					className="button button-reset"
-					style={page === 'users' && { backgroundColor: '#FBAE43' }}
+					className={
+						page === 'users'
+							? 'actual-page button button-reset'
+							: 'button button-reset'
+					}
 				>
 					<img src={usersIcon} alt="users icon" />
 					Usuarios
@@ -33,8 +39,11 @@ export default function NavBar({ page }) {
 				<button
 					type="button"
 					onClick={() => navigate('/')}
-					className="button button-reset"
-					style={page === 'inventory' && { backgroundColor: '#FBAE43' }}
+					className={
+						page === 'inventory'
+							? 'actual-page button button-reset'
+							: 'button button-reset'
+					}
 				>
 					<img src={inventoryIcon} alt="inventory icon" />
 					Inventario
@@ -42,8 +51,11 @@ export default function NavBar({ page }) {
 				<button
 					type="button"
 					onClick={() => navigate('/')}
-					className="button button-reset"
-					style={page === 'report' && { backgroundColor: '#FBAE43' }}
+					className={
+						page === 'report'
+							? 'actual-page button button-reset'
+							: 'button button-reset'
+					}
 				>
 					<img src={reportIcon} alt="report icon" />
 					Informe
