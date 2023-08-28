@@ -23,15 +23,9 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
         modelBuilder.Entity<Rol>()
             .HasData(
                 new Rol {Id = 1, Name = "Trabajador", NormalizedName = "TRABAJADOR", Descripcion = "Trabajador "},
-                new Rol {Id = 2, Name = "administrador", NormalizedName = "ADMINISTRADOR", Descripcion = "Administrador"}
+                new Rol {Id = 2, Name = "Administrador", NormalizedName = "ADMINISTRADOR", Descripcion = "Administrador"}
             );
-        // modelBuilder.Entity<Subcategorias>(x=> x.HasKey(c=> new {c.CategoriaId, c.SubcategoriaId}));
-        // modelBuilder.Entity<Subcategorias>()
-        //     .HasMany(c => c.Categoria)
-        //     .WithOne(s => s.Subcategoria);
-        // modelBuilder.Entity<Subcategorias>()
-        //     .HasOne(c => c.Subcategoria)
-        //     .WithMany(s => s.);
+     
 
         
 

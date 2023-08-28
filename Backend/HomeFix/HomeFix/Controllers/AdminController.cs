@@ -18,7 +18,7 @@ public class AdminController : BaseController
         _userManager = userManager;
     }
     
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     [HttpPost("register")]
     public async Task<IActionResult> Registro(RegistroDto registroDto)
     {
@@ -60,7 +60,7 @@ public class AdminController : BaseController
     }
     
     //Devuelve los roles del usuario que es pasado por query.
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     [HttpGet("user-roles/{username}")]
     public async Task<ActionResult> GetUserRoles(string username)
     {
@@ -79,7 +79,7 @@ public class AdminController : BaseController
     //No tener en cuenta, proximo eliminacion/cambiar
     //Setea diversos roles. Ej de la url: /set-role/Usuario?roles=Member,Admin Para agregar esos dos roles al usuario
     [HttpPost("set-roles/{username}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> AsignRoles(string username, [FromQuery] string roles)
     {
         if (string.IsNullOrEmpty(roles))
@@ -107,7 +107,7 @@ public class AdminController : BaseController
     
     //Quita todos los roles al usuario.
     [HttpPost("remove-roles")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> RemoveRole(RolUpdateDto editRoleDto)
     {
         var user = await _userManager.FindByNameAsync(editRoleDto.UserName);

@@ -322,7 +322,7 @@ namespace HomeFix.Migrations
                 values: new object[,]
                 {
                     { 1, null, "Trabajador ", "Trabajador", "TRABAJADOR" },
-                    { 2, null, "Administrador", "administrador", "ADMINISTRADOR" }
+                    { 2, null, "Administrador", "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.CreateIndex(
