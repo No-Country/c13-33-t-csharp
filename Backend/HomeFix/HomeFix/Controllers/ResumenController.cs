@@ -20,12 +20,12 @@ namespace HomeFix.Controllers
 
 
 
-        [HttpGet("ArticuloMasVendido")]
-        public async Task<ActionResult<List<ArticuloMasVendidoDto>>> GetArticuloMasVendido()
-        {
-            var articulos = await _context.ArticulosMasVendidosPorMes.ToListAsync();
-            return _mapper.Map<List<ArticuloMasVendidoDto>>(articulos);
-        }
+        //[HttpGet("ArticuloMasVendido")]
+        //public async Task<ActionResult<List<ArticuloMasVendidoDto>>> GetArticuloMasVendido()
+        //{
+        //    //var articulos = await _context.ArticulosMasVendidosPorMes.ToListAsync();
+        //    return _mapper.Map<List<ArticuloMasVendidoDto>>(articulos);
+        //}
 
     }
 }
