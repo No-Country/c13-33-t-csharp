@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.CodeDom;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using HomeFix.DTOs;
+using HomeFix.Migrations;
 
 namespace HomeFix.Dbcontext;
 
@@ -34,6 +36,9 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
         //     .WithMany(s => s.);
 
         
+        modelBuilder.Entity<ArticuloMasVendidoDto>().HasNoKey().ToView("productomasvendidopormes");
+        modelBuilder.Entity<VentasPorMes>().HasNoKey().ToView("ventasultimos6meses");
+        modelBuilder.Entity<VentaMes>().HasNoKey().ToView("ventasmes");
 
     }
 
