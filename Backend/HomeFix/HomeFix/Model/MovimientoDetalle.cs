@@ -5,11 +5,7 @@ namespace HomeFix.Model
     public class MovimientoDetalle
     {
         public int Id { get; set; }
-
-        
-
-        [Required]
-        public int ProductoId { get; set; }
+       
 
         [Required]
         public int MovimientoId { get; set; }
@@ -20,6 +16,8 @@ namespace HomeFix.Model
         [Required]
         public float PrecioUnitario { get; set; }
 
+        [Required]
+        public int ArticuloId { get; set; }
         public Articulo Articulo { get; set; }
         public Movimiento Movimiento { get; set; }
     }

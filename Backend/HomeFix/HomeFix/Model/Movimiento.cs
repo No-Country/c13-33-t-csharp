@@ -15,6 +15,7 @@ namespace HomeFix.Model
         [Required]
         [Column(TypeName = "decimal(18,2)")] 
         public decimal PrecioTotal { get; set; } 
+        public List<MovimientoDetalle> MovimientoDetalles { get; set; } = new List<MovimientoDetalle>();
         
         public Usuario Usuario { get; set; }
     }
