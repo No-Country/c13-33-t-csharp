@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
+using HomeFix.Services.FileStorage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,11 +13,13 @@ public class ArticulosController : BaseController
 {
     private readonly HomeFixDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IFileStorageService _fileStorageService;
 
-    public ArticulosController(HomeFixDbContext context, IMapper mapper)
+    public ArticulosController(HomeFixDbContext context, IMapper mapper,IFileStorageService fileStorageService)
     {
         _context = context;
         _mapper = mapper;
+        _fileStorageService = fileStorageService;
     }
 
     [HttpGet]
@@ -43,27 +46,23 @@ public class ArticulosController : BaseController
     }
 
     [HttpPost]
-    public async Task<ActionResult<Articulo>> CreateArticulo(CreateArticuloDto createArticuloDto)
+    public async Task<ActionResult<Articulo>> CreateArticulo([FromForm]CreateArticuloDto createArticuloDto)
     {
         var articulo = _mapper.Map<Articulo>(createArticuloDto);
-        // var articulo = new Articulo()
-        // {
-        //     Nombre = createArticuloDto.Nombre,
-        //     Alto = createArticuloDto.Alto,
-        //     Ancho = createArticuloDto.Ancho,
-        //     MarcaId = createArticuloDto.MarcaId,
-        //     Cantidad = createArticuloDto.Cantidad,
-        //     Costo = createArticuloDto.Costo,
-        //     Precio = Decimal.Multiply(createArticuloDto.Costo, 1.2m),
-        //     Descripcion = createArticuloDto.Descripcion,
-        //     CantidadMinima = createArticuloDto.CantidadMinima,
-        //     Peso = createArticuloDto.Peso
-        // };
 
+        if (createArticuloDto.Imagen != null)
+        {
+            var extension = Path.GetExtension(createArticuloDto.Imagen.FileName);
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            var imagenResult = await _fileStorageService.UploadFile(createArticuloDto.Imagen, 1, fileName);
+            articulo.Imagen = imagenResult;
+        }
+        
         _context.Articulo.Add(articulo);
+        
         var result = await _context.SaveChangesAsync() > 0;
         // var articuloDto = _mapper.Map<ArticuloDto>(articulo);
-        var articuloDto = _context.Articulo.ProjectTo<ArticuloDto>(_mapper.ConfigurationProvider).First();
+        var articuloDto = _context.Articulo.ProjectTo<ArticuloDto>(_mapper.ConfigurationProvider).First(x => x.Id == articulo.Id);
         if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
         return BadRequest(new ProblemDetails {Title = "Problema creando el articulo"});
     }

@@ -1,17 +1,21 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Model
 {
     public class Articulo
     {
+       
         public int Id { get; set; }
         [Required] [MaxLength(50)] 
         public string Nombre { get; set; }
         [Required] [MaxLength(500)] 
         public string Descripcion { get; set; }
-        public List<Imagen> Imagenes { get; set; } = new List<Imagen>();
+        
+        [MaxLength(300)]
+        public string Imagen { get; set; }
 
         [Required]
         public int Cantidad { get; set; }

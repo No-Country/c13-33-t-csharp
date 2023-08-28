@@ -3,6 +3,7 @@ using System;
 using HomeFix.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    partial class HomeFixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230828210151_ArticuloImagen")]
+    partial class ArticuloImagen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,44 +24,6 @@ namespace HomeFix.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("HomeFix.DTOs.ArticuloMasVendidoDto", b =>
-                {
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("text");
-
-                    b.Property<int>("cantidad")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("imagenes")
-                        .HasColumnType("text");
-
-                    b.Property<double>("monto")
-                        .HasColumnType("double precision");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("productomasvendidopormes", (string)null);
-                });
-
-            modelBuilder.Entity("HomeFix.DTOs.VentasPorMes", b =>
-                {
-                    b.Property<int>("anio")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("mes")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("sumapreciototal")
-                        .HasColumnType("double precision");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ventasultimos6meses", (string)null);
-                });
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {

@@ -27,8 +27,11 @@ public class CreateArticuloDto
   
     public decimal Ancho { get; set; }
         
-
+   
+    public IFormFile Imagen { get; set; }
     public int MarcaId { get; set; }
+    
+    public int CategoriaId { get; set; }
     
     
     
