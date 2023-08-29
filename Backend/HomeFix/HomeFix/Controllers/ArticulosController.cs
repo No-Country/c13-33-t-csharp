@@ -36,6 +36,7 @@ public class ArticulosController : BaseController
             .Include(x => x.Categoria)
             .ThenInclude(x => x.CategoriaPadre)
             .Include(x => x.UsuarioUltimaModificacion)
+            .Where(x=> x.Activo)
             .ToListAsync();
         return _mapper.Map<List<ArticuloDto>>(articulos);
     }
@@ -101,6 +102,20 @@ public class ArticulosController : BaseController
         if(result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
         
         return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ArticuloDto>> DeleteArticulo(int id)
+    {
+        var articulo = await _context.Articulo.FirstAsync(x => x.Id == id);
+        
+        if (articulo == null) return NotFound();
+        articulo.Activo = false;
+        var result = await _context.SaveChangesAsync() > 0;
+
+        if (result) return Ok("Articulo elimilado correctamente");
+        
+        return BadRequest(new ProblemDetails {Title = "Problema eliminando el articulo"});
     }
 
     private static void MappingArticulo(UpdateArticuloDto updateDto, Articulo articulo)
