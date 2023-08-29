@@ -72,6 +72,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddScoped<PathProvider>();
 builder.Services.AddScoped<HelperUploadFiles>();
+builder.Services.AddScoped<ImageService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<TokenService>();

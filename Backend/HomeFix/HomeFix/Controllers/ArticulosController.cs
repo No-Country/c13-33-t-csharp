@@ -4,6 +4,7 @@ using AutoMapper.QueryableExtensions;
 using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
+using HomeFix.Services;
 using HomeFix.Services.FileStorage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,20 +13,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
+[Authorize]
 public class ArticulosController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
     private readonly HomeFixDbContext _context;
     private readonly IMapper _mapper;
-    private readonly IFileStorageService _fileStorageService;
+    private readonly ImageService _imageService;
 
     public ArticulosController(UserManager<Usuario> userManager, HomeFixDbContext context, IMapper mapper,
-        IFileStorageService fileStorageService)
+        ImageService imageService)
     {
         _userManager = userManager;
         _context = context;
         _mapper = mapper;
-        _fileStorageService = fileStorageService;
+        _imageService = imageService;
     }
 
 
@@ -36,7 +38,7 @@ public class ArticulosController : BaseController
             .Include(x => x.Categoria)
             .ThenInclude(x => x.CategoriaPadre)
             .Include(x => x.UsuarioUltimaModificacion)
-            .Where(x=> x.Activo)
+            .Where(x => x.Activo)
             .ToListAsync();
         return _mapper.Map<List<ArticuloDto>>(articulos);
     }
@@ -54,6 +56,7 @@ public class ArticulosController : BaseController
         return articulo;
     }
 
+    [Authorize(Roles = "Administrador")]
     [HttpPost]
     public async Task<ActionResult<Articulo>> CreateArticulo([FromForm] CreateArticuloDto createArticuloDto)
     {
@@ -62,22 +65,23 @@ public class ArticulosController : BaseController
         articulo.UsuarioUltimaModificacionId = usuario.Id;
         if (createArticuloDto.Imagen != null)
         {
-            var extension = Path.GetExtension(createArticuloDto.Imagen.FileName);
-            var fileName = $"{Guid.NewGuid()}{extension}";
-            var imagenResult = await _fileStorageService.UploadFile(createArticuloDto.Imagen, 1, fileName);
-            articulo.Imagen = imagenResult;
+            var imageResult = await _imageService.AddImage(createArticuloDto.Imagen);
+            if (imageResult.Error != null) return BadRequest(new ProblemDetails {Title = imageResult.Error.Message});
+            articulo.Imagen = imageResult.SecureUrl.ToString();
+            articulo.PublicId = imageResult.PublicId;
         }
 
         _context.Articulo.Add(articulo);
 
         var result = await _context.SaveChangesAsync() > 0;
-        // var articuloDto = _mapper.Map<ArticuloDto>(articulo);
+
         var articuloDto = _context.Articulo.ProjectTo<ArticuloDto>(_mapper.ConfigurationProvider)
             .First(x => x.Id == articulo.Id);
         if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
         return BadRequest(new ProblemDetails {Title = "Problema creando el articulo"});
     }
 
+    [Authorize(Roles = "Administrador")]
     [HttpPatch("{id}")]
     public async Task<ActionResult<ArticuloDto>> UpdateArticulo([FromForm] UpdateArticuloDto updateDto, int id)
     {
@@ -90,31 +94,33 @@ public class ArticulosController : BaseController
         articulo.UsuarioUltimaModificacionId = usuario.Id;
         if (updateDto.Imagen != null)
         {
-            var extension = Path.GetExtension(updateDto.Imagen.FileName);
-            var fileName = $"{Guid.NewGuid()}{extension}";
-            var imagenResult = await _fileStorageService.UploadFile(updateDto.Imagen, 1, fileName);
-            articulo.Imagen = imagenResult;
+            var imageResult = await _imageService.AddImage(updateDto.Imagen);
+            if (imageResult.Error != null) return BadRequest(new ProblemDetails {Title = imageResult.Error.Message});
+            if (!string.IsNullOrEmpty(articulo.PublicId)) await _imageService.DeleteImage(articulo.PublicId);
+            articulo.Imagen = imageResult.SecureUrl.ToString();
+            articulo.PublicId = imageResult.PublicId;
         }
 
         var result = await _context.SaveChangesAsync() > 0;
         var articuloDto = _context.Articulo.ProjectTo<ArticuloDto>(_mapper.ConfigurationProvider)
             .First(x => x.Id == articulo.Id);
-        if(result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
-        
+        if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
+
         return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
     }
-    
+
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ArticuloDto>> DeleteArticulo(int id)
     {
         var articulo = await _context.Articulo.FirstAsync(x => x.Id == id);
-        
+
         if (articulo == null) return NotFound();
         articulo.Activo = false;
         var result = await _context.SaveChangesAsync() > 0;
 
         if (result) return Ok("Articulo elimilado correctamente");
-        
+
         return BadRequest(new ProblemDetails {Title = "Problema eliminando el articulo"});
     }
 

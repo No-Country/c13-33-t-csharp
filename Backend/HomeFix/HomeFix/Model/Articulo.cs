@@ -50,5 +50,7 @@ namespace HomeFix.Model
         public Usuario UsuarioUltimaModificacion { get; set; }
         public int UsuarioUltimaModificacionId { get; set; }
         
+        public string PublicId { get; set; }
+        
     }
 }
