@@ -66,4 +66,47 @@ public class ArticulosController : BaseController
         if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
         return BadRequest(new ProblemDetails {Title = "Problema creando el articulo"});
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ArticuloDto>> UpdateProduct([FromForm] UpdateArticuloDto updateDto, int id)
+    {
+        var articulo = await _context.Articulo.FindAsync(id);
+        
+        if (articulo == null) return NotFound();
+
+        MappingArticulo(updateDto, articulo);
+        if (updateDto.Imagen != null )
+        {
+            var extension = Path.GetExtension(updateDto.Imagen.FileName);
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            var imagenResult = await _fileStorageService.UploadFile(updateDto.Imagen, 1, fileName);
+            articulo.Imagen = imagenResult;
+        }
+
+        var result = await _context.SaveChangesAsync() > 0;
+
+        if (result) return Ok(articulo);
+        
+        return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
+    }
+
+    private static void MappingArticulo(UpdateArticuloDto updateDto, Articulo articulo)
+    {
+        articulo.CategoriaId = updateDto?.CategoriaId ?? articulo.CategoriaId;
+        articulo.Nombre = updateDto?.Nombre ?? articulo.Nombre;
+        articulo.Descripcion = updateDto?.Descripcion ?? articulo.Descripcion;
+        articulo.Costo = updateDto?.Costo ?? articulo.Costo;
+        if (updateDto.Costo != null)
+        {
+            articulo.Peso = updateDto.Costo * 1.2m;
+        }
+
+        articulo.Nombre = updateDto?.Nombre ?? articulo.Nombre;
+        articulo.Cantidad = updateDto?.Cantidad ?? articulo.Cantidad;
+        articulo.CantidadMinima = updateDto?.CantidadMinima ?? articulo.CantidadMinima;
+        articulo.Alto = updateDto?.Alto ?? articulo.Alto;
+        articulo.Ancho = updateDto?.Ancho ?? articulo.Ancho;
+        articulo.Peso = updateDto?.Peso ?? articulo.Peso;
+        articulo.MarcaId = updateDto?.MarcaId ?? articulo.MarcaId;
+    }
 }

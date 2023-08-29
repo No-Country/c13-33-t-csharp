@@ -22,6 +22,11 @@ public class MappingProfiles : Profile
             .ForMember(x => x.Precio, opt => opt.MapFrom(a => a.Costo))
             .AfterMap((dto, ent) => ent.Precio = dto.Costo * 1.2m);
 
+        CreateMap<UpdateArticuloDto, Articulo>()
+            .ForMember(x => x.MarcaId, opt => opt.MapFrom(a => a.MarcaId))
+            .ForMember(x => x.CategoriaId, opt => opt.MapFrom(a =>a.CategoriaId))
+            .ForMember(x => x.Precio, opt => opt.MapFrom(a => a.Costo))
+            .AfterMap((dto, ent) => ent.Precio = dto.Costo * 1.2m);
 
         CreateMap<Categoria, CategoriaDto>()
             .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
