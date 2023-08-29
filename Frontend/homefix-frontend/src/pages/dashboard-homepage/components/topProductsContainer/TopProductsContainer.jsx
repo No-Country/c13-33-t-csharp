@@ -9,11 +9,8 @@ export default function TopProductsContainer() {
 				<div className="product-name">
 					<h5>Producto</h5>
 				</div>
-				<div className="product-id">
-					<h5>ID</h5>
-				</div>
-				<div className="product-price">
-					<h5>Precio</h5>
+				<div className="product-sales">
+					<h5>Cantidad vendida</h5>
 				</div>
 			</div>
 			<div className="top-products-list">
@@ -25,8 +22,7 @@ export default function TopProductsContainer() {
 						/>
 						<span>Descripción producto 1</span>
 					</div>
-					<div className="product-id-data product1-id">01</div>
-					<div className="product-price-data product1-price">$30.000</div>
+					<div className="product-sales-data product1-sales">15</div>
 				</button>
 				<button className="top-products-button top-products-button2">
 					<div className="product-descr product2-descr">
@@ -36,8 +32,7 @@ export default function TopProductsContainer() {
 						/>
 						<span>Descripción producto 2</span>
 					</div>
-					<div className="product-id-data product2-id">02</div>
-					<div className="product-price-data product2-price">$30.000</div>
+					<div className="product-sales-data product2-sales">11</div>
 				</button>
 				<button className="top-products-button top-products-button3">
 					<div className="product-descr product3-descr">
@@ -47,8 +42,7 @@ export default function TopProductsContainer() {
 						/>
 						<span>Descripción producto 3</span>
 					</div>
-					<div className="product-id-data product3-id">03</div>
-					<div className="product-price-data product3-price">$30.000</div>
+					<div className="product-sales-data product3-sales">10</div>
 				</button>
 			</div>
 		</div>

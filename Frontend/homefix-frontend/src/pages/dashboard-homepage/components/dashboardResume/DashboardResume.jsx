@@ -4,11 +4,11 @@ export default function DashboardResume() {
 	return (
 		<div className="dashboard-resume-container">
 			<div className="dashboard-resume-title">
-				<h3 className="dashboard-title">Visión General</h3>
+				<h3 className="dashboard-title">Visión general</h3>
 			</div>
 			<div className="total-sales">
 				<div className="box-title text-center text-white">
-					<h4>Total de Ventas</h4>
+					<h4>Total de ventas</h4>
 					<hr className="line" />
 				</div>
 				<div className="box-number">
@@ -17,7 +17,7 @@ export default function DashboardResume() {
 			</div>
 			<div className="total-cost">
 				<div className="box-title text-center text-white">
-					<h4>Total de Costos</h4>
+					<h4>Total de costos</h4>
 					<hr className="line" />
 				</div>
 				<div className="box-number">
@@ -35,7 +35,7 @@ export default function DashboardResume() {
 			</div>
 			<div className="products-sales">
 				<div className="box-title text-center text-white">
-					<h4>Productos Vendidos</h4>
+					<h4>Productos vendidos</h4>
 					<hr className="line" />
 				</div>
 				<div className="box-number">

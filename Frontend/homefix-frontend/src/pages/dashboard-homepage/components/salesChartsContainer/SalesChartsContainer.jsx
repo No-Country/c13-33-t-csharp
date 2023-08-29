@@ -39,8 +39,8 @@ export default function SalesChartsContainer({ monthNames }) {
 		labels,
 		datasets: [
 			{
-				label: 'Dataset 1',
-				data: labels.map(() => Math.floor(Math.random() * 9999)),
+				label: 'Ventas',
+				data: labels.map(() => Math.random() * 5),
 			},
 		],
 	}
