@@ -43,7 +43,7 @@
 	display: flex;
 	grid-area: product-sales;
 	height: 40px;
-	justify-content: end;
+	justify-content: flex-end;
 }
 
 .top-products-container h5 {
@@ -126,7 +126,7 @@
 	display: flex;
 	height: 54px;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 }
 
 .product-descr span {
