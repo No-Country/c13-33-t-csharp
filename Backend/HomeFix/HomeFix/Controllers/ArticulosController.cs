@@ -78,7 +78,7 @@ public class ArticulosController : BaseController
     }
 
     [HttpPatch("{id}")]
-    public async Task<ActionResult<ArticuloDto>> UpdateArticulos([FromForm] UpdateArticuloDto updateDto, int id)
+    public async Task<ActionResult<ArticuloDto>> UpdateArticulo([FromForm] UpdateArticuloDto updateDto, int id)
     {
         var articulo = await _context.Articulo.Include(x => x.UsuarioUltimaModificacion).FirstAsync(x => x.Id == id);
         var usuario = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -96,9 +96,10 @@ public class ArticulosController : BaseController
         }
 
         var result = await _context.SaveChangesAsync() > 0;
-
-        if (result) return Ok(articulo);
-
+        var articuloDto = _context.Articulo.ProjectTo<ArticuloDto>(_mapper.ConfigurationProvider)
+            .First(x => x.Id == articulo.Id);
+        if(result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
+        
         return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
     }
 
