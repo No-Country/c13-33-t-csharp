@@ -49,6 +49,9 @@ namespace HomeFix.Model
 
         public int MarcaId { get; set; }
         public Marca Marca { get; set; }
+
+        public Usuario UsuarioUltimaModificacion { get; set; }
+        public int UsuarioUltimaModificacionId { get; set; }
         
     }
 }

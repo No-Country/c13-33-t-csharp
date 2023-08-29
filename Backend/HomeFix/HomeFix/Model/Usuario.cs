@@ -16,5 +16,7 @@ namespace HomeFix.Model
         public string Apellido { get; set; }
 
         public List<Movimiento> Movimientos { get; set;}
+        
+        public List<Articulo> Articulos { get; set;} = new List<Articulo>();
     }
 }

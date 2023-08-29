@@ -33,4 +33,6 @@ public class ArticuloDto
     public int CategoriaId { get; set; }
     public string Categoria { get; set; }
     public string Subcategoria { get; set; }
+    
+    public string UsuarioUltimaModificacion { get; set; }
 }

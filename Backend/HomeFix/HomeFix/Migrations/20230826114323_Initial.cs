@@ -249,7 +249,7 @@ namespace HomeFix.Migrations
                     Alto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     Ancho = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     CategoriaId = table.Column<int>(type: "integer", nullable: false),
-                    MarcaId = table.Column<int>(type: "integer", nullable: false)
+                    MarcaId = table.Column<int>(type: "integer", nullable: false),
                 },
                 constraints: table =>
                 {

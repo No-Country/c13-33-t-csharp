@@ -35,6 +35,7 @@ public class SeedData
             await userManager.CreateAsync(usuario, "Pa$$w0rd123");
             await userManager.AddToRoleAsync(usuario, "Trabajador");
         }
+        await context.SaveChangesAsync();
         List<Marca> marcas = new List<Marca>();
         if (!context.Marcas.Any())
         {
@@ -141,8 +142,8 @@ public class SeedData
         List<Articulo> articulos = new List<Articulo>();
         if (!context.Articulo.Any())
         {
-
-
+        
+        
             articulos = new List<Articulo>
             {
                 new Articulo
@@ -158,7 +159,8 @@ public class SeedData
                     Peso = 0.042m,
                     Ancho = 3,
                     Alto = 10,
-                    MarcaId = 1
+                    MarcaId = 1,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -173,7 +175,8 @@ public class SeedData
                     Peso = 20.230m,
                     Ancho = 3000,
                     Alto = 10000,
-                    MarcaId = 3
+                    MarcaId = 3,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -188,7 +191,8 @@ public class SeedData
                     Peso = 0.082m,
                     Ancho = 0,
                     Alto = 0,
-                    MarcaId = 1
+                    MarcaId = 1,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -203,7 +207,8 @@ public class SeedData
                     Peso = 15.380m,
                     Ancho = 3000,
                     Alto = 10000,
-                    MarcaId = 4
+                    MarcaId = 4,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -218,7 +223,8 @@ public class SeedData
                     Peso = 0.90m,
                     Ancho = 30,
                     Alto = 40,
-                    MarcaId = 2
+                    MarcaId = 2,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -233,7 +239,8 @@ public class SeedData
                     Peso = 3.5m,
                     Ancho = 40,
                     Alto = 29,
-                    MarcaId = 2
+                    MarcaId = 2,
+                    UsuarioUltimaModificacionId = 1
                 },
                 new Articulo
                 {
@@ -248,7 +255,8 @@ public class SeedData
                     Peso = 25.820m,
                     Ancho = 3200,
                     Alto = 11000,
-                    MarcaId = 3
+                    MarcaId = 3,
+                    UsuarioUltimaModificacionId = 1
                 },
             };
         };
@@ -427,7 +435,6 @@ public class SeedData
         }
        
 
-        //context.Subcategorias.AddRange(subcategoria);
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);
         context.Articulo.AddRange(articulos);
