@@ -20,6 +20,7 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
     {
         base.OnModelCreating(modelBuilder);
 
+       
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         
         modelBuilder.Entity<Rol>()
@@ -29,7 +30,7 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
             );
      
 
-        
+        modelBuilder.Entity<Articulo>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
         modelBuilder.Entity<ArticuloMasVendidoDto>().HasNoKey().ToView("productomasvendidopormes");
         modelBuilder.Entity<VentasPorMes>().HasNoKey().ToView("ventasultimos6meses");
         modelBuilder.Entity<VentaMes>().HasNoKey().ToView("ventasmes");

@@ -145,21 +145,21 @@ public class SeedData
 
             articulos = new List<Articulo>
             {
-                // new Articulo
-                // {
-                //     Id = 1,
-                //     Nombre = "Martillo Carpintero",
-                //     CategoriaId = 1,
-                //     Descripcion = "Martillo con Mango de Fibra de Vidrio",
-                //     Cantidad = 18,
-                //     CantidadMinima = 5,
-                //     Costo = 2000,
-                //     Precio = 3600,
-                //     Peso = 0.042m,
-                //     Ancho = 3,
-                //     Alto = 10,
-                //     MarcaId = 1
-                // },
+                new Articulo
+                {
+                    Id = 1,
+                    Nombre = "Martillo Carpintero",
+                    CategoriaId = 1,
+                    Descripcion = "Martillo con Mango de Fibra de Vidrio",
+                    Cantidad = 18,
+                    CantidadMinima = 5,
+                    Costo = 2000,
+                    Precio = 3600,
+                    Peso = 0.042m,
+                    Ancho = 3,
+                    Alto = 10,
+                    MarcaId = 1
+                },
                 new Articulo
                 {
                     Id = 2,
@@ -252,188 +252,187 @@ public class SeedData
                 },
             };
         };
-        // List<Movimiento> movimientos = new List<Movimiento>();
-        // if (!context.Movimientos.Any())
-        // {
-        //     movimientos = new List<Movimiento>()
-        //     {
-        //         new Movimiento()
-        //         {
-        //             Id = 2,
-        //             UsuarioId = 1,
-        //             FechaYHora = DateTime.Now.ToUniversalTime(),
-        //             Descripcion = "Compra de articulos",
-        //             MovimientoDetalles = new List<MovimientoDetalle>()
-        //             {
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 1,
-        //                     ArticuloId = 1,
-        //                     Cantidad = 10,
-        //                     PrecioUnitario = 20000,
-        //                     MovimientoId = 2
-        //                 },
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 2,
-        //                     ArticuloId = 6,
-        //                     Cantidad = 10,
-        //                     PrecioUnitario = 4000,
-        //                     MovimientoId = 2
-        //                 }
-        //             },
-        //             PrecioTotal = 240000,
-        //
-        //         },
-        //         new Movimiento()
-        //         {
-        //             Id = 1,
-        //             UsuarioId = 1,
-        //             FechaYHora = DateTime.Now.ToUniversalTime(),
-        //             Descripcion = "Compra de articulos",
-        //             MovimientoDetalles = new List<MovimientoDetalle>()
-        //             {
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 3,
-        //                     ArticuloId = 1,
-        //                     Cantidad = 3,
-        //                     PrecioUnitario = 20000,
-        //                     MovimientoId = 1
-        //                 },
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 4,
-        //                     ArticuloId = 2,
-        //                     Cantidad = 3,
-        //                     PrecioUnitario = 4000,
-        //                     MovimientoId = 1
-        //                 }
-        //             },
-        //             PrecioTotal = 212000,
-        //
-        //         },
-        //         new Movimiento()
-        //         {
-        //             Id = 3,
-        //             UsuarioId = 1,
-        //             FechaYHora = DateTime.Now.AddMonths(-2).ToUniversalTime(),
-        //             Descripcion = "Compra de articulos",
-        //             MovimientoDetalles = new List<MovimientoDetalle>()
-        //             {
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 5,
-        //                     ArticuloId = 4,
-        //                     Cantidad = 10,
-        //                     PrecioUnitario = 20000,
-        //                     MovimientoId = 3
-        //                 },
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 6,
-        //                     ArticuloId = 1,
-        //                     Cantidad = 3,
-        //                     PrecioUnitario = 4000,
-        //                     MovimientoId = 3
-        //                 }
-        //             },
-        //             PrecioTotal = 1000,
-        //
-        //         },
-        //         new Movimiento()
-        //         {
-        //             Id = 4,
-        //             UsuarioId = 1,
-        //             FechaYHora = DateTime.Now.ToUniversalTime(),
-        //             Descripcion = "Compra de articulos",
-        //             MovimientoDetalles = new List<MovimientoDetalle>()
-        //             {
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 7,
-        //                     ArticuloId = 1,
-        //                     Cantidad = 3,
-        //                     PrecioUnitario = 20000,
-        //                     MovimientoId = 4
-        //                 },
-        //                 new MovimientoDetalle()
-        //                 {
-        //                     Id = 8,
-        //                     ArticuloId = 4,
-        //                     Cantidad = 3,
-        //                     PrecioUnitario = 4000,
-        //                     MovimientoId = 4
-        //                 }
-        //             },
-        //             PrecioTotal = 212000,
-        //
-        //         },
-        //
-        //
-        //     };
-        //     
-        // }
-        // List<Imagen> imagenes = new List<Imagen>();
-        // if (!context.Imagenes.Any())
-        // {
-        //     imagenes = new List<Imagen>()
-        //     {
-        //         new Imagen()
-        //         {
-        //             Id = 1,
-        //             ArticuloId = 1,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         },new Imagen()
-        //         {
-        //             Id = 2,
-        //             ArticuloId = 2,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         },
-        //         // new Imagen()
-        //         // {
-        //         //     Id = 3,
-        //         //     ArticuloId = 2,
-        //         //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         // },
-        //         new Imagen()
-        //         {
-        //             Id = 4,
-        //             ArticuloId = 5,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         },new Imagen()
-        //         {
-        //             Id = 5,
-        //             ArticuloId = 6,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         },new Imagen()
-        //         {
-        //             Id = 6,
-        //             ArticuloId = 7,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         },new Imagen()
-        //         {
-        //             Id = 7,
-        //             ArticuloId = 3,
-        //             Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         }
-        //         // ,new Imagen()
-        //         // {
-        //         //     Id = 8,
-        //         //     ArticuloId = 3,
-        //         //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-        //         // },
-        //     };
-        // }
+        List<Movimiento> movimientos = new List<Movimiento>();
+        if (!context.Movimientos.Any())
+        {
+            movimientos = new List<Movimiento>()
+            {
+                new Movimiento()
+                {
+                    Id = 2,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 1,
+                            ArticuloId = 1,
+                            Cantidad = 10,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 2
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 2,
+                            ArticuloId = 6,
+                            Cantidad = 10,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 2
+                        }
+                    },
+                    PrecioTotal = 240000,
+        
+                },
+                new Movimiento()
+                {
+                    Id = 1,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 3,
+                            ArticuloId = 1,
+                            Cantidad = 3,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 1
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 4,
+                            ArticuloId = 2,
+                            Cantidad = 3,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 1
+                        }
+                    },
+                    PrecioTotal = 212000,
+        
+                },
+                new Movimiento()
+                {
+                    Id = 3,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.AddMonths(-2).ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 5,
+                            ArticuloId = 4,
+                            Cantidad = 10,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 3
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 6,
+                            ArticuloId = 1,
+                            Cantidad = 3,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 3
+                        }
+                    },
+                    PrecioTotal = 1000,
+        
+                },
+                new Movimiento()
+                {
+                    Id = 4,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 7,
+                            ArticuloId = 1,
+                            Cantidad = 3,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 4
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 8,
+                            ArticuloId = 4,
+                            Cantidad = 3,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 4
+                        }
+                    },
+                    PrecioTotal = 212000,
+        
+                },
+        
+        
+            };
+            
+        }
+        List<Imagen> imagenes = new List<Imagen>();
+        if (!context.Imagenes.Any())
+        {
+            imagenes = new List<Imagen>()
+            {
+                new Imagen()
+                {
+                    Id = 1,
+                    ArticuloId = 1,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },new Imagen()
+                {
+                    Id = 2,
+                    ArticuloId = 2,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },
+                // new Imagen()
+                // {
+                //     Id = 3,
+                //     ArticuloId = 2,
+                //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                // },
+                new Imagen()
+                {
+                    Id = 4,
+                    ArticuloId = 5,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },new Imagen()
+                {
+                    Id = 5,
+                    ArticuloId = 6,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },new Imagen()
+                {
+                    Id = 6,
+                    ArticuloId = 7,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },new Imagen()
+                {
+                    Id = 7,
+                    ArticuloId = 3,
+                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                }
+                // ,new Imagen()
+                // {
+                //     Id = 8,
+                //     ArticuloId = 3,
+                //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                // },
+            };
+        }
        
 
         //context.Subcategorias.AddRange(subcategoria);
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);
         context.Articulo.AddRange(articulos);
-        // context.Movimientos.AddRange(movimientos);
-        // context.Imagenes.AddRange(imagenes);
+        context.Movimientos.AddRange(movimientos);
+        context.Imagenes.AddRange(imagenes);
         await context.SaveChangesAsync();
-        context.Database.ExecuteSql($"select setval(pg_get_serial_sequence('articulo', 'id'), (select max(id) from articulo))");
     }
 }
