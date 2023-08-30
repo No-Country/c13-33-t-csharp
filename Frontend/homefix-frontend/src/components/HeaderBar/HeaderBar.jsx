@@ -12,22 +12,22 @@ export default function HeaderBar() {
 	return (
 		<div className="headerBar-container">
 			<nav className="header-navbar">
-				<a href="/">
+				<a className="link-logo" href="/">
 					<img className="header-logo" src={HeaderNavLogo} alt="HomeFix Logo" />
 				</a>
 				<div className="header-profile-button dropdown">
-					<img
-						className="profile-icon-image"
-						src={placeHolderProfileImage}
-						alt="profile icon"
-					/>
 					<button
 						className="username btn"
 						type="button"
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{user.userName}
+						<img
+							className="profile-icon-image"
+							src={placeHolderProfileImage}
+							alt="profile icon"
+						/>
+						<span className="username-text">{user.userName}</span>
 					</button>
 					<ul className="dropdown-menu">
 						<li>
