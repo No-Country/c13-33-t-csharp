@@ -22,8 +22,6 @@ export default function SalesChartsContainer({ monthNames }) {
 		labels.push(monthNames(index + 1))
 	}
 
-	console.log(labels)
-
 	const options = {
 		responsive: true,
 		plugins: {
