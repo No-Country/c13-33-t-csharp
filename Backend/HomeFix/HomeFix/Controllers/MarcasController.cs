@@ -52,4 +52,26 @@ public class MarcasController : BaseController
         if (result) return CreatedAtRoute("GetMarca", new {Id = marcaDto.Id}, marcaDto);
         return BadRequest(new ProblemDetails { Title = "Problema creando la marca"});
     }
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteMarcaByIdAsync(int id)
+    {
+        if(id == 0) 
+            return BadRequest();
+
+        var marca = await _context.Marcas.FirstOrDefaultAsync(x => x.Id == id);
+
+        if(marca is null) 
+            return NotFound();
+    
+        try
+        {
+            _context.Marcas.Remove(marca);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

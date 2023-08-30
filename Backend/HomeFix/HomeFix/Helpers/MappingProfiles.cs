@@ -37,6 +37,19 @@ public class MappingProfiles : Profile
 
         CreateMap<Categoria, CategoriaDto>()
             .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
-        // .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre));
+
+        CreateMap<Usuario, UsuarioDto>();
+        CreateMap<MovimientoDetalle, DetalleMovimientoDto>();
+        CreateMap<Movimiento, MovimientoDto>()
+            .ForMember(dest => dest.MovimientoDetalles, opt => opt.MapFrom(src => src.MovimientoDetalles))
+            .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src.Usuario));
+
+        CreateMap<MovimientoDtoCreate, Movimiento>()
+            .ForMember(dest => dest.MovimientoDetalles, opt => opt.MapFrom(src => src.MovimientoDetalles));
+        CreateMap<DetalleMovientoCreateDto, MovimientoDetalle>();
+
+
+         //.ForMember(x => x.MovimientoDetalles);
+         // .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre));
     }
 }
