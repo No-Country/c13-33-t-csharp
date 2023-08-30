@@ -10,7 +10,7 @@
 	font-weight: 400;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 	.homepage-title-container {
 		display: inline-block;
 		height: auto;

@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)
-	const topSalesOrdered = [...topSales]
-	const topSalesOrderedSliced = topSalesOrdered
+	const topSalesCopy = [...topSales]
+	const topSalesOrderedSliced = topSalesCopy
 		.sort((a, b) => b.cantidad - a.cantidad)
 		.slice(0, 3)
 
