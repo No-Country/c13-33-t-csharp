@@ -3,7 +3,7 @@ import summaryIcon from '../../assets/image/gg_loadbar-doc.svg'
 import usersIcon from '../../assets/image/ph_users-fill.svg'
 import inventoryIcon from '../../assets/image/solar_box-bold.svg'
 import reportIcon from '../../assets/image/akar-icons_statistic-up.svg'
-import menuIcon from '../../assets/image/icons8-menú.svg'
+import menuIcon from '../../assets/image/icons8-menú.svg'
 import { useNavigate } from 'react-router-dom'
 
 export default function NavBar({ page }) {
@@ -40,7 +40,7 @@ export default function NavBar({ page }) {
 					</button>
 					<button
 						type="button"
-						onClick={() => navigate('/')}
+						onClick={() => navigate('/inventory')}
 						className={
 							page === 'inventory'
 								? 'actual-page button button-reset'
@@ -118,7 +118,7 @@ export default function NavBar({ page }) {
 							</button>
 							<button
 								type="button"
-								onClick={() => navigate('/')}
+								onClick={() => navigate('/inventory')}
 								className={
 									page === 'inventory'
 										? 'actual-page button button-reset'
