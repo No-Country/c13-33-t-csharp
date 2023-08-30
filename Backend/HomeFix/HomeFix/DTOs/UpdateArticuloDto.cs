@@ -32,5 +32,5 @@ public class UpdateArticuloDto
 
     public int? CategoriaId { get; set; } = null;
 
-    public int? SubcategoriaId { get; set; } = null;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
