@@ -41,10 +41,10 @@ public class MappingProfiles : Profile
             });
 
         CreateMap<Categoria, CategoriaDto>()
-            .ForMember(x => x.NombreCategoriaPadre,
-                opt => opt.MapFrom(a => a.CategoriaPadreId != null ? a.CategoriaPadre.Nombre : null));
-        // CreateMap<Categoria, CategoriaDto>()
-        //     .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
-        // .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre));
+            .ForMember(x => x.Categoria,
+                opt => opt.MapFrom(a => a.CategoriaPadreId != null ? a.CategoriaPadre.Nombre : a.Nombre))
+            .ForMember(x => x.Subcategoria,
+            opt => opt.MapFrom(a => a.CategoriaPadreId != null ? a.Nombre : null));
+        
     }
 }
