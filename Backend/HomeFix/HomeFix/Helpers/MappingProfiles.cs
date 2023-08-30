@@ -13,8 +13,8 @@ public class MappingProfiles : Profile
 
         CreateMap<Articulo, ArticuloDto>()
             .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre))
-            .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.Categoria.Nombre))
-            .ForMember(x => x.Subcategoria, opt => opt.MapFrom(a => a.Categoria.CategoriaPadre.Nombre))
+            .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.Categoria.CategoriaPadre != null ? a.Categoria.CategoriaPadre.Nombre : a.Categoria.Nombre))
+            .ForMember(x => x.Subcategoria, opt => opt.MapFrom(a => a.Categoria.CategoriaPadre != null ? a.Categoria.Nombre : null))
             .ForMember(x => x.UsuarioUltimaModificacion, opt => opt.MapFrom(a => a.UsuarioUltimaModificacion.UserName));
 
         CreateMap<CreateArticuloDto, Articulo>()
@@ -26,6 +26,7 @@ public class MappingProfiles : Profile
         CreateMap<UpdateArticuloDto, Articulo>()
             .ForMember(x => x.MarcaId, opt => opt.MapFrom(a => a.MarcaId))
             .ForMember(x => x.CategoriaId, opt => opt.MapFrom(a =>a.CategoriaId))
+            // .ForMember(x => x.SubcategoriaId, opt => opt.MapFrom(a => a.SubcategoriaId))
             .ForMember(x => x.Precio, opt => opt.MapFrom(a => a.Costo))
             .AfterMap((dto, ent) =>
             {
