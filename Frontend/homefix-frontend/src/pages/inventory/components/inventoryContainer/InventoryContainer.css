@@ -31,10 +31,8 @@
 
 .inventory-table-container::-webkit-scrollbar-track {
   background-color: transparent;
-  height: 10px !important;;
+  height: 10px !important;
 }
-
-
 
 .inventory-title-search-container {
   background-color: #f8f8f8;
@@ -46,8 +44,7 @@
   justify-content: space-between;
 }
 
-
-.addProduct-button{
+.addProduct-button {
   margin-left: 45%;
 }
 
@@ -75,7 +72,7 @@
   padding-bottom: 300px;
 }
 
-.searchIconBox{
+.searchIconBox {
   position: relative;
 }
 
@@ -87,10 +84,9 @@
   pointer-events: none;
 }
 
-.form-control:focus + .searchIcon  {
+.form-control:focus + .searchIcon {
   display: none;
 }
-
 
 .title-filter-container {
   width: 100%;
@@ -100,6 +96,7 @@
   justify-content: space-between;
   align-items: center;
   grid-area: title-filter-container;
+  z-index: 1000;
 }
 .table-container {
   width: 100%;
@@ -107,9 +104,8 @@
   grid-area: table-container;
 }
 
-.filter {
-  display: flex;
-  flex-direction: row;
+.dropdown {
+  z-index: 1000;
 }
 
 .filter-title {
@@ -128,9 +124,19 @@
   width: 100%;
   color: #ffff;
   border-radius: 25px;
-  border-left: 25px;  
-  position: sticky;
+  border-left: 25px;
   top: 0;
+  z-index: -1;
+}
+
+.table-title tr {
+  z-index: 1;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
 }
 
 th {
@@ -235,7 +241,7 @@ tr {
   box-shadow: 0 1px 0 1px #222222;
 }
 
-.product-icon{
+.product-icon {
   width: 42px;
   height: 42;
   border-radius: 50%;
@@ -244,14 +250,13 @@ tr {
 .product-image-container {
   width: 100%;
   grid-area: product-image-container;
-  border-top: 1px  solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   justify-self: center;
 }
 
-.product-detail-button{
+.product-detail-button {
   align-self: center;
   width: 80%;
 }
@@ -270,8 +275,7 @@ tr {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px  solid #e2e2e2;
-  border-top: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
 }
 
 .product-detail-title {
@@ -292,7 +296,7 @@ tr {
 .product-description-container {
   width: 100%;
   grid-area: product-description-container;
-  border-top: 1px  solid #e2e2e2;
+  border-top: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -300,18 +304,18 @@ tr {
 .product-stock-container {
   width: 100%;
   grid-area: product-stock-container;
-  border-left: 1px  solid #e2e2e2;
+  border-left: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 40px;
 }
 
-.stock-box{
+.stock-box {
   display: flex;
 }
 
-.stock-number{
+.stock-number {
   width: 20%;
   display: flex;
   height: 50%;
@@ -323,32 +327,31 @@ tr {
   align-items: center;
 }
 
-.button-stock-minus{
+.button-stock-minus {
   width: 30%;
   height: 50%;
   font-size: 1.5rem;
   border-radius: 10px 0px 0px 10px !important;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
 }
 
-
-.button-stock-plus{
+.button-stock-plus {
   width: 30%;
   height: 50%;
   font-size: 1.5rem;
   border-radius: 0px 10px 10px 0px !important;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
 }
 
-.button-stock-minus:hover{
+.button-stock-minus:hover {
   background-color: #fbae43 !important;
 }
 
-.button-stock-plus:hover{
+.button-stock-plus:hover {
   background-color: #fbae43 !important;
 }
 
@@ -356,7 +359,6 @@ tr {
   width: 100%;
   grid-area: product-category-container;
   border-bottom: 1px solid #e2e2e2;
-  border-top: 1px  solid #e2e2e2;
   display: flex;
   flex-direction: column;
   padding-left: 40px;
@@ -365,7 +367,7 @@ tr {
   padding-right: 10px;
   width: max-content;
   grid-area: product-ros-container;
-  border-bottom: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,37 +376,35 @@ tr {
   padding-right: 10px;
   width: max-content;
   grid-area: product-measurements-container;
-  border-bottom: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .product-brand-container {
   grid-area: product-brand-container;
-  border-bottom: 1px  solid #e2e2e2;
-  border-top: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .product-id-container {
   grid-area: product-id-container;
-  border-bottom: 1px  solid #e2e2e2;
-  border-top: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .product-weight-container {
   grid-area: product-weight-container;
-  border-bottom: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .product-sold-container {
   grid-area: product-sold-container;
-  border-bottom: 1px  solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -435,13 +435,12 @@ tr {
   justify-content: center;
 }
 
-
-.btn-yellow{
+.btn-yellow {
   background-color: #fbae43;
   width: 80%;
 }
 
-.btn-yellow:hover{
+.btn-yellow:hover {
   background-color: #fbae43;
 }
 
@@ -453,16 +452,84 @@ tr {
   padding: 5px;
   transition: border-color 0.3s;
   width: 80%;
-  
 }
 
-.btn-delete{
-  background-color: #F14B4B;
+.btn-delete {
+  background-color: #f14b4b;
   color: #e2e2e2;
   width: 80%;
 }
 
-.btn-delete:hover{
-  background-color: #F14B4B;
+.btn-delete:hover {
+  background-color: #f14b4b;
   color: #e2e2e2;
+}
+
+.ros-information {
+  width: 80%;
+  background-color: #fbae43;
+}
+.modal {
+  place-self: center;
+}
+.modal-header,
+.modal-footer {
+  border-bottom: none !important;
+  border-top: none !important;
+  width: 100%;
+  justify-content: end;
+}
+
+.modal-delete-title {
+  font-size: 24px;
+  justify-self: center;
+}
+.text-modal {
+  font-size: 16px;
+}
+.modal-button-box {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.modal-content {
+  padding: 0% 10% 0% 10%;
+}
+
+.btn-close-modal {
+  padding: 2%;
+  width: 9%;
+  height: auto;
+  background-color: #000 !important;
+  color: #e2e2e2 !important;
+  display: flex;
+}
+
+.closeimg {
+  justify-content: center;
+  align-items: center;
+}
+
+.trash-icon {
+  display: flex;
+  width: 57px;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
 }

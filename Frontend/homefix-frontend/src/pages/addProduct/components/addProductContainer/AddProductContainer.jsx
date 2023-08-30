@@ -83,7 +83,7 @@ export default function AddProductContainer() {
           </div>
         </div>
         <div className="addProduct-info-category">
-          <p>Categoria</p>
+          <p>Categoria &gt; subcategoria</p>
           <div className="dropdown">
             <button
               className="button-reset btn-filter btn-outline-dark"

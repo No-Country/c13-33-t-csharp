@@ -4,6 +4,9 @@ import searchIcon from "../../../../assets/image/searchIcon.png";
 import arrowDown from "../../../../assets/image/arrowVector.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import trashIcon from "../../../../assets/image/trash.png";
+import closeIcon from "../../../../assets/image/Vector.png";
+import boxIcon from "../../../../assets/image/solar_box-bold.png";
 
 export default function InventoryContainer() {
   const [detailShow, setDetailShow] = useState(false);
@@ -11,7 +14,7 @@ export default function InventoryContainer() {
   const [rotateAnimation, setRotateAnimation] = useState(0);
   const [stock, setStock] = useState(0);
   const [editor, setEditor] = useState(false);
-  const [isAdministrator, setIsAdministrator] = useState(true);
+  const [isAdministrator, setIsAdministrator] = useState(false);
   const navigate = useNavigate();
 
   const detailShowHandler = () => {
@@ -94,8 +97,8 @@ export default function InventoryContainer() {
         </div>
         <div className="table-container">
           <table className="table-format">
-            <thead className="table-title sticky-top">
-              <tr>
+            <thead className="table-title">
+              <tr className="sticky-top">
                 <th scope="col">Foto</th>
                 <th scope="col">Producto</th>
                 <th scope="col">Marca</th>
@@ -158,6 +161,8 @@ export default function InventoryContainer() {
                         <button
                           onClick={() => setEditor(false)} // Cambiar el valor de editor a false
                           type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#saveModal"
                           class="btn btn-yellow product-detail-button rounded-pill"
                         >
                           Guardar
@@ -177,7 +182,7 @@ export default function InventoryContainer() {
                           type="button"
                           class="btn btn-delete mx-auto rounded-pill"
                           data-bs-toggle="modal"
-                          data-bs-target="#DeleteModal"
+                          data-bs-target="#deleteModal"
                         >
                           Eliminar
                         </button>
@@ -207,45 +212,18 @@ export default function InventoryContainer() {
                         <p className="product-detail-information"> 40 x 29</p>
                       )}
                     </div>
-                    <div
-                      class="modal fade"
-                      id="DeleteModal"
-                      tabindex="-1"
-                      aria-labelledby="exampleModalLabel"
-                      aria-hidden="true"fade={false}
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                              Modal title
-                            </h1>
-                            <button
-                              type="button"
-                              class="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            ></button>
-                          </div>
-                          <div class="modal-body">...</div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                              Save changes
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     <div className="product-ros-container">
                       <p className="product-detail-title">Margen de ganancia</p>
-                      <p className="product-detail-information">20%</p>
+                      {editor && isAdministrator ? (
+                        <input
+                          className="addProduct-editable-input-yellow rounded-pill"
+                          placeholder="20%"
+                        />
+                      ) : (
+                        <p className="product-detail-information ros-information rounded-pill text-center">
+                          20%
+                        </p>
+                      )}
                     </div>
                     <div className="product-description-container">
                       <p className="product-detail-title">Descripcion</p>
@@ -357,12 +335,12 @@ export default function InventoryContainer() {
                             <ul className="dropdown-menu">
                               <li>
                                 <a className="dropdown-item" href="#">
-                                  Por ID
+                                  categoria
                                 </a>
                               </li>
                               <li>
                                 <a className="dropdown-item" href="#">
-                                  Por Categorias
+                                  categoria
                                 </a>
                               </li>
                             </ul>
@@ -374,7 +352,8 @@ export default function InventoryContainer() {
                     </div>
                     <div className="product-stock-container">
                       <div className="product-stock">
-                        <p className="product-detail-title">Stock</p>
+                        <p className="product-detail-title mt-3">Stock actual</p>
+                        <p className="product-detail-information">58</p>
                         {editor && isAdministrator ? (
                           <div className="stock-box">
                             <button
@@ -396,27 +375,8 @@ export default function InventoryContainer() {
                             </button>
                           </div>
                         ) : (
-                          <div className="stock-box">
-                            <button
-                              onClick={() => setStock(stock - 1)}
-                              type="button"
-                              class="btn btn-outline-dark button-stock-minus"
-                              disabled
-                            >
-                              <p className="button-sign my-3">-</p>
-                            </button>
-                            <p className="product-detail-information stock-number">
-                              {stock}
-                            </p>
-                            <button
-                              onClick={() => setStock(stock + 1)}
-                              type="button"
-                              class="btn btn-outline-dark button-stock-plus"
-                              disabled
-                            >
-                              <p className="button-sign my-3">+</p>
-                            </button>
-                          </div>
+                          <>
+                          </>
                         )}
                       </div>
                       <div className="product-modification">
@@ -436,6 +396,118 @@ export default function InventoryContainer() {
           </table>
         </div>
       </div>
+
+      {/* modal window delete */}
+      <div
+        class="modal fade"
+        id="deleteModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="btn-close-modal rounded-circle"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <img className="closeimg" src={closeIcon} alt="" />
+              </button>
+            </div>
+            <div class="modal-body">
+              <img
+                className="trash-icon mb-3"
+                src={trashIcon}
+                alt="Borrar Producto"
+              />
+              <h1 class="modal-delete-title text-center">Eliminar Producto</h1>
+              <p className="text-center text-modal">
+                ¿Esta seguro que desea eliminar el producto {"product.nombre"}{" "}
+                del inventario?
+              </p>
+            </div>
+            <div class="text-center modal-button-box">
+              <button
+                type="button"
+                class="btn btn-dark"
+                data-bs-dismiss="modal"
+              >
+                Si, eliminar producto
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-dark mt-3 mb-3"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* modal window delete */}
+
+      {/* modal window save */}
+      <div
+        class="modal fade"
+        id="saveModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="btn-close-modal rounded-circle"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <img className="closeimg" src={closeIcon} alt="" />
+              </button>
+            </div>
+            <div class="modal-body">
+              <img
+                className="trash-icon"
+                src={boxIcon}
+                alt="Borrar Producto"
+              />
+              <h1 class="modal-delete-title text-center">Haz modificado este producto</h1>
+              {stock !== 0 ? (<p className="text-center text-modal">
+                La cantidad disponible para este producto ha sido actualizada a 30 productos en stock
+              </p>) : (<></>)}
+              <p className="text-center text-modal">
+                ¿Desea confirmar el cambio en {"product.nombre"}?
+              </p>
+            </div>
+            <div class="text-center modal-button-box">
+              <button
+                type="button"
+                class="btn btn-dark"
+                data-bs-dismiss="modal"
+              >
+                Si, confirmo
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-dark mt-3 mb-3"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* modal window save */}
     </>
   );
 }

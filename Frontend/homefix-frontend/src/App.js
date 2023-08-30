@@ -49,8 +49,17 @@ const App = () => {
             )
           }
         ></Route>
-        <Route path="/inventory" element={<Inventory/>}></Route>
-        <Route path="/add-product" element={<AddProduct/>}></Route>
+        <Route
+          path="/inventory"
+          element={
+            user === null ? (
+              <Navigate replace to="/login-form" />
+            ) : (
+              <Inventory />
+            )
+          }
+        ></Route>
+        <Route path="/add-product" element={<AddProduct />}></Route>
       </Routes>
     </div>
   );

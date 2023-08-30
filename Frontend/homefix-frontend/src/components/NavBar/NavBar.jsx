@@ -38,7 +38,7 @@ export default function NavBar({ page }) {
 				</button>
 				<button
 					type="button"
-					onClick={() => navigate('/')}
+					onClick={() => navigate('/inventory')}
 					className={
 						page === 'inventory'
 							? 'actual-page button button-reset'
