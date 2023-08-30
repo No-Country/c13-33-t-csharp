@@ -25,6 +25,8 @@ public class ArticuloDto
         
   
     public decimal Ancho { get; set; }
+    
+    public string Imagen { get; set; }
         
 
     public int MarcaId { get; set; }

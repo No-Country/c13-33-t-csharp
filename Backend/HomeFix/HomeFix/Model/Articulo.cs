@@ -40,18 +40,17 @@ namespace HomeFix.Model
         [Column(TypeName = "decimal(18,2)")]
         public decimal Ancho { get; set; }
 
-
-
+        public bool Activo { get; set; } = true;
 
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
-        
-
         public int MarcaId { get; set; }
         public Marca Marca { get; set; }
 
         public Usuario UsuarioUltimaModificacion { get; set; }
         public int UsuarioUltimaModificacionId { get; set; }
+        
+        public string PublicId { get; set; }
         
     }
 }
