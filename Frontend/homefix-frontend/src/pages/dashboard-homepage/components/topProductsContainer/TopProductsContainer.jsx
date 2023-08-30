@@ -1,7 +1,14 @@
 import React from 'react'
 import './TopProductsContainer.css'
+import { useSelector } from 'react-redux'
 
 export default function TopProductsContainer() {
+	const topSales = useSelector(state => state.topSales)
+	const topSalesOrdered = [...topSales]
+	const topSalesOrderedSliced = topSalesOrdered
+		.sort((a, b) => b.cantidad - a.cantidad)
+		.slice(0, 3)
+
 	return (
 		<div className="top-products-container">
 			<div className="top-products-title">Más vendidos</div>
@@ -14,36 +21,24 @@ export default function TopProductsContainer() {
 				</div>
 			</div>
 			<div className="top-products-list">
-				<button className="top-products-button top-products-button1">
-					<div className="product-descr product1-descr">
-						<img
-							src="https://placehold.co/42x42.png"
-							alt="first best seller product"
-						/>
-						<span>Descripción producto 1</span>
-					</div>
-					<div className="product-sales-data product1-sales">15</div>
-				</button>
-				<button className="top-products-button top-products-button2">
-					<div className="product-descr product2-descr">
-						<img
-							src="https://placehold.co/42x42.png"
-							alt="second best seller product"
-						/>
-						<span>Descripción producto 2</span>
-					</div>
-					<div className="product-sales-data product2-sales">11</div>
-				</button>
-				<button className="top-products-button top-products-button3">
-					<div className="product-descr product3-descr">
-						<img
-							src="https://placehold.co/42x42.png"
-							alt="third best seller product"
-						/>
-						<span>Descripción producto 3</span>
-					</div>
-					<div className="product-sales-data product3-sales">10</div>
-				</button>
+				{topSalesOrderedSliced.map((product, i) => {
+					return (
+						<button
+							key={product.articuloId}
+							className={'top-products-button top-products-button' + [i + 1]}
+						>
+							<div className={'product-descr product' + [i + 1] + '-descr'}>
+								<img src="https://placehold.co/42x42.png" alt="best sellers" />
+								<span>{product.nombre}</span>
+							</div>
+							<div
+								className={'product-sales-data product' + [i + 1] + '-sales'}
+							>
+								{product.cantidad}
+							</div>
+						</button>
+					)
+				})}
 			</div>
 		</div>
 	)

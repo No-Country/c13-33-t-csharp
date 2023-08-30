@@ -12,6 +12,8 @@ import { setDashboardData } from './reducers/dashboardDataReducer'
 import dashboardService from './services/dashboard'
 import salesChartService from './services/salesChart'
 import { setSalesChartData } from './reducers/salesChartDataReducer'
+import topSalesService from './services/topSales'
+import { setTopSales } from './reducers/topSalesReducer'
 
 const App = () => {
 	const [loading, setLoading] = useState(true)
@@ -41,6 +43,12 @@ const App = () => {
 	useEffect(() => {
 		salesChartService.getData(token).then(data => {
 			dispatch(setSalesChartData(data))
+		})
+	}, [dispatch, token])
+
+	useEffect(() => {
+		topSalesService.getData(token).then(data => {
+			dispatch(setTopSales(data))
 		})
 	}, [dispatch, token])
 
