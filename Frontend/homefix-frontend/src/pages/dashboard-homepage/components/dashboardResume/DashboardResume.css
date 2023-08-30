@@ -52,6 +52,8 @@
 .box-title h4 {
 	font-size: 16px;
 	font-weight: 400;
+	margin-top: 9px;
+	margin-bottom: 7px;
 }
 
 .box-number h3 {
@@ -67,13 +69,8 @@
 	margin-top: 16px;
 }
 
-.box-title h4 {
-	margin-top: 9px;
-	margin-bottom: 7px;
-}
-
 .line {
-	width: 200px;
+	width: 95%;
 	height: 1px;
 	padding: 0 !important;
 	margin: 0 !important;
@@ -124,4 +121,67 @@
 	grid-template-areas:
 		"box-title"
 		"box-number";
+}
+
+@media (max-width: 767px) {
+	.dashboard-resume-container {
+		display: inline-block;
+		width: 100%;
+		height: auto;
+		text-align: center;
+		margin-bottom: 26px;
+	}
+
+	.dashboard-resume-title {
+		height: auto;
+		text-align: start;
+	}
+
+	.dashboard-title {
+		margin: 15px 0 13px 18px;
+		font-size: 16px;
+	}
+
+	.box-title h4 {
+		font-size: 12px;
+	}
+
+	.box-number {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 13px;
+	}
+
+	.box-number h3 {
+		font-size: 16px;
+	}
+
+	.total-sales {
+		display: inline-block;
+		width: 40%;
+		height: 80px;
+		margin-right: 9px;
+		margin-bottom: 13px;
+	}
+
+	.total-cost {
+		display: inline-block;
+		width: 40%;
+		height: 80px;
+	}
+
+	.ros {
+		display: inline-block;
+		width: 40%;
+		height: 80px;
+		margin-right: 9px;
+		margin-bottom: 17px;
+	}
+
+	.products-sales {
+		display: inline-block;
+		width: 40%;
+		height: 80px;
+	}
 }

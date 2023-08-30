@@ -76,21 +76,21 @@ export default function NavBar({ page }) {
 					<img src={menuIcon} alt="menu icon" />
 				</button>
 				<div
-					class="offcanvas offcanvas-start"
-					tabindex="-1"
+					className="offcanvas offcanvas-start"
+					tabIndex="-1"
 					id="offcanvasMenu"
 					aria-labelledby="offcanvasMenuLabel"
 				>
-					<div class="offcanvas-header">
+					<div className="offcanvas-header">
 						<h2 className="mt-5">Menú</h2>
 						<button
 							type="button"
-							class="btn-close"
+							className="btn-close"
 							data-bs-dismiss="offcanvas"
 							aria-label="Close"
 						></button>
 					</div>
-					<div class="offcanvas-body">
+					<div className="offcanvas-body">
 						<div className="button-menu-list">
 							<button
 								type="button"

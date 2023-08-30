@@ -16,8 +16,8 @@ export default function Layout() {
 
 	return (
 		<div className="dashboard-layout">
-			<HeaderBar />
-			<NavBar page="summary" />
+			<NavBar className="navBar" page="summary" />
+			<HeaderBar className="headerBar" />
 			<TitleContainer monthNames={monthNames} />
 			<DashboardResume />
 			<TopProductsContainer />

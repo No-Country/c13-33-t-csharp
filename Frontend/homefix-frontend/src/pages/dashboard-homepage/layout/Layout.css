@@ -16,3 +16,12 @@
 		". . . . . . .";
 	padding: 40px 60px 0;
 }
+
+@media (max-width: 767px) {
+	.dashboard-layout {
+		display: inline-block;
+		width: 100vw;
+		padding: 19px 32px 0;
+	}
+
+}
