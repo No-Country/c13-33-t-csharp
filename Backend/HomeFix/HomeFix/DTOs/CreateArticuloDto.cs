@@ -29,9 +29,12 @@ public class CreateArticuloDto
         
    
     public IFormFile Imagen { get; set; }
+    
     public int MarcaId { get; set; }
     
     public int CategoriaId { get; set; }
+    
+    public int? SubcategoriaId { get; set; }
     
     
     

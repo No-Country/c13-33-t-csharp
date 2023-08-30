@@ -13,7 +13,6 @@ public class SeedData
 {
     public static async Task Initialize(HomeFixDbContext context, UserManager<Usuario> userManager)
     {
-
         if (!userManager.Users.Any())
         {
             var admin = new Usuario
@@ -35,11 +34,11 @@ public class SeedData
             await userManager.CreateAsync(usuario, "Pa$$w0rd123");
             await userManager.AddToRoleAsync(usuario, "Trabajador");
         }
+
         await context.SaveChangesAsync();
         List<Marca> marcas = new List<Marca>();
         if (!context.Marcas.Any())
         {
-
             marcas = new List<Marca>()
             {
                 new Marca
@@ -62,11 +61,8 @@ public class SeedData
                     Id = 4,
                     Nombre = "Baldara"
                 }
-
             };
-
         }
-
 
 
         List<Categoria> categoria = new List<Categoria>();
@@ -78,8 +74,6 @@ public class SeedData
                 {
                     Id = 1,
                     Nombre = "Herramientas",
-
-
                 },
                 new Categoria
                 {
@@ -90,23 +84,20 @@ public class SeedData
                 {
                     Id = 3,
                     Nombre = "Hogar",
-
                 },
             };
         }
+
         if (context.Categorias.FirstOrDefault(x => x.CategoriaPadreId.HasValue) is null)
         {
             List<Categoria> categorias = new List<Categoria>()
             {
-
-            new Categoria
-            {
-                Id = 4,
-                Nombre = "Lamparas de exterior",
-                CategoriaPadreId = 2
-
-
-            },
+                new Categoria
+                {
+                    Id = 4,
+                    Nombre = "Lamparas de exterior",
+                    CategoriaPadreId = 2
+                },
                 new Categoria
                 {
                     Id = 5,
@@ -117,22 +108,19 @@ public class SeedData
                 {
                     Id = 6,
                     Nombre = "Puerta",
-                    CategoriaPadreId= 3
-
+                    CategoriaPadreId = 3
                 },
                 new Categoria
                 {
                     Id = 7,
                     Nombre = "Mesas",
-                    CategoriaPadreId= 3
-
+                    CategoriaPadreId = 3
                 },
                 new Categoria
                 {
                     Id = 8,
                     Nombre = "Bajo mesada",
-                       CategoriaPadreId= 3
-
+                    CategoriaPadreId = 3
                 },
             };
             categoria.AddRange(categorias);
@@ -142,8 +130,6 @@ public class SeedData
         List<Articulo> articulos = new List<Articulo>();
         if (!context.Articulo.Any())
         {
-        
-        
             articulos = new List<Articulo>
             {
                 new Articulo
@@ -259,7 +245,9 @@ public class SeedData
                     UsuarioUltimaModificacionId = 1
                 },
             };
-        };
+        }
+
+        ;
         List<Movimiento> movimientos = new List<Movimiento>();
         if (!context.Movimientos.Any())
         {
@@ -291,7 +279,6 @@ public class SeedData
                         }
                     },
                     PrecioTotal = 240000,
-        
                 },
                 new Movimiento()
                 {
@@ -319,7 +306,6 @@ public class SeedData
                         }
                     },
                     PrecioTotal = 212000,
-        
                 },
                 new Movimiento()
                 {
@@ -347,7 +333,6 @@ public class SeedData
                         }
                     },
                     PrecioTotal = 1000,
-        
                 },
                 new Movimiento()
                 {
@@ -375,13 +360,10 @@ public class SeedData
                         }
                     },
                     PrecioTotal = 212000,
-        
                 },
-        
-        
             };
-            
         }
+
         List<Imagen> imagenes = new List<Imagen>();
         if (!context.Imagenes.Any())
         {
@@ -391,12 +373,15 @@ public class SeedData
                 {
                     Id = 1,
                     ArticuloId = 1,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },new Imagen()
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },
+                new Imagen()
                 {
                     Id = 2,
                     ArticuloId = 2,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
                 },
                 // new Imagen()
                 // {
@@ -408,22 +393,29 @@ public class SeedData
                 {
                     Id = 4,
                     ArticuloId = 5,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },new Imagen()
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },
+                new Imagen()
                 {
                     Id = 5,
                     ArticuloId = 6,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },new Imagen()
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },
+                new Imagen()
                 {
                     Id = 6,
                     ArticuloId = 7,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },new Imagen()
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                },
+                new Imagen()
                 {
                     Id = 7,
                     ArticuloId = 3,
-                    Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+                    Ubicacion =
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
                 }
                 // ,new Imagen()
                 // {
@@ -433,7 +425,7 @@ public class SeedData
                 // },
             };
         }
-       
+
 
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);

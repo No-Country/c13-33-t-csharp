@@ -44,6 +44,10 @@ namespace HomeFix.Model
 
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
+        
+        // public int SubcategoriaId { get; set; }
+        //
+        // public Categoria Subcategoria { get; set; }
         public int MarcaId { get; set; }
         public Marca Marca { get; set; }
 

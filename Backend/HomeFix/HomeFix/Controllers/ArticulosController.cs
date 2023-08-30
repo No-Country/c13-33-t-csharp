@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
-[Authorize]
+
 public class ArticulosController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
@@ -40,6 +40,9 @@ public class ArticulosController : BaseController
             .Include(x => x.UsuarioUltimaModificacion)
             .Where(x => x.Activo)
             .ToListAsync();
+
+
+
         return _mapper.Map<List<ArticuloDto>>(articulos);
     }
 

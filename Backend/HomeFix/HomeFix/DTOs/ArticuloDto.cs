@@ -33,8 +33,11 @@ public class ArticuloDto
     public string Marca { get; set; }
     
     public int CategoriaId { get; set; }
+    // public Categoria Categoria { get; set; }
     public string Categoria { get; set; }
     public string Subcategoria { get; set; }
+    
+
     
     public string UsuarioUltimaModificacion { get; set; }
 }
