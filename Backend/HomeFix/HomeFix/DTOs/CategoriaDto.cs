@@ -6,6 +6,6 @@ public class CategoriaDto
    
     public string Nombre { get; set; }
     
-    public int CategoriaId { get; set; }
-    public int Categoria { get; set; }
+    public string NombreCategoriaPadre { get; set; }
+    
 }

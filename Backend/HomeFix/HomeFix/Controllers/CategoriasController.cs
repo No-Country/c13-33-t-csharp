@@ -3,15 +3,16 @@ using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
-public class CategoriaController : BaseController
+public class CategoriasController : BaseController
 {
     private readonly HomeFixDbContext _context;
     private readonly IMapper _mapper;
 
-    public CategoriaController(HomeFixDbContext context, IMapper mapper)
+    public CategoriasController(HomeFixDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -20,7 +21,7 @@ public class CategoriaController : BaseController
     [HttpGet]
     public async Task<List<CategoriaDto>> GetCategorias()
     {
-        var categorias = await _context.Categorias.FindAsync();
+        var categorias = await _context.Categorias.ToListAsync();
         return _mapper.Map<List<CategoriaDto>>(categorias);
     }
 

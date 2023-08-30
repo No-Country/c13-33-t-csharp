@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
-
+[Authorize]
 public class ArticulosController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
