@@ -28,3 +28,22 @@
 .bar-chart-container {
 	grid-area: bar-chart-container;
 }
+
+@media (max-width: 767px) {
+	.sales-chart-container {
+		display: inline-block;
+		margin-top: 26px;
+		padding: 15px 18px 24px;
+		height: auto;
+	}
+
+	.chart-title h3 {
+		font-size: 16px;
+		margin: 15px 15px 25px;
+		font-weight: 400;
+	}
+
+	.bar-chart-container {
+		height: 100%;
+	}
+}

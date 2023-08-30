@@ -1,3 +1,7 @@
+.offcanvas-menu {
+	display: none;
+}
+
 .navBar-container {
 	width: 211px;
 	height: 648px;
@@ -57,4 +61,34 @@ h2 {
 	margin-left: 30px;
 	font-size: 20px;
 	font-weight: 400;
+}
+
+@media (max-width: 767px) {
+	.navBar-container {
+		display: none;
+	}
+
+	.offcanvas-menu {
+		display: inline-block;
+		position: absolute;
+		text-align: center;
+		height: 40px;
+		width: 27%;
+	}
+
+	.hamburger-button {
+		outline: none;
+		border: none;
+		background-color: transparent;
+		height: 100%;
+	}
+
+	.hamburger-button img {
+		width: 24px;
+	}
+
+	.offcanvas hr {
+		width: 80%;
+		margin: 0 auto;
+	}
 }
