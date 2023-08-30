@@ -133,3 +133,42 @@
 	font-size: 16px;
 	margin: 0 0 0 16px;
 }
+
+@media (max-width: 767px) {
+	.top-products-container {
+		padding: 15px 15px 23px;
+	}
+
+	.top-products-title {
+		font-size: 16px;
+	}
+
+	.top-products-container h5 {
+		font-size: 12px;
+	}
+
+	.product-descr {
+		height: auto;
+	}
+
+	.product-descr span {
+		font-size: 12px;
+		text-align: left;
+	}
+
+	.product-sales-data {
+		font-size: 12px;
+		height: 40px;
+	}
+
+	.top-products-button {
+		height: 40px;
+	}
+
+	.top-products-button1,
+	.top-products-button2,
+	.top-products-button3 {
+		grid-template-columns: 0.8fr 0.2fr;
+		margin-bottom: 5px;
+	}
+}
