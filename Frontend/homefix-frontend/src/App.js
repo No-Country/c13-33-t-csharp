@@ -27,14 +27,9 @@ import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
 const App = () => {
   const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
-  const user = useSelector((state) => state.user);
-	const token = useSelector(state => state.token)
-=======
+
 	const user = useSelector(state => state.user)
 	const token = useSelector(state => state.token)
-
->>>>>>> remotes/origin/dev
 
   const dispatch = useDispatch();
 
@@ -49,7 +44,6 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-<<<<<<< HEAD
   useEffect(() => {
     allProductsService.getData(token).then((data) => {
       dispatch(setAllProductsData(data));
@@ -67,11 +61,6 @@ const App = () => {
       dispatch(setAllCategoriesData(data));
     });
   }, [dispatch, token]);
-
-  if (loading) {
-    return;
-  }
-=======
 	useEffect(() => {
 		dashboardService.getData(token).then(data => {
 			dispatch(setDashboardData(data))
@@ -93,8 +82,6 @@ const App = () => {
 	if (loading) {
 		return
 	}
-
->>>>>>> remotes/origin/dev
 
   return (
     <div className="App">
