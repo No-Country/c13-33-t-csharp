@@ -11,6 +11,9 @@ import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
 import messageReducer from './reducers/messageReducer'
 import dashboardDataReducer from './reducers/dashboardDataReducer'
+import allProductsDataReducer from './reducers/allProductsDataReducer';
+import allBrandsDataReducer from './reducers/allBrandsDataReducer';
+import allCategoriesReducer from './reducers/allCategoriesReducer';
 
 const queryClient = new QueryClient()
 
@@ -20,6 +23,9 @@ const store = configureStore({
 		token: tokenReducer,
 		message: messageReducer,
 		dashboardData: dashboardDataReducer,
+		allProductsData: allProductsDataReducer,
+		allBrandsData: allBrandsDataReducer,
+		allCategoriesDate: allCategoriesReducer
 	},
 })
 

@@ -110,7 +110,6 @@
 
 .filter-title {
   display: flex;
-
   align-items: center;
   align-self: center;
   align-content: center;
@@ -157,25 +156,8 @@ th:last-child {
   border-top-right-radius: 10px;
 }
 
-td {
-  border-style: solid #222222;
-  padding: 10px;
-  text-align: center;
-}
 
-td:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
 
-td:last-child {
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-table {
-  border-spacing: 100px !important;
-}
 
 .icon-placeholder {
   padding-left: 40px;
@@ -196,33 +178,18 @@ input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
 
-.product-row {
-  border-radius: 10px;
-  padding-top: 5px;
-}
-
-tr {
-  border-collapse: collapse;
-  border-radius: 10px;
-  border-style: hidden;
-  box-shadow: 0 0 0 1px #222222; /*genera sombra como un reborde del row */
-  cursor: pointer;
-}
-
 .dropdown-arrow {
   height: 8px;
   margin: 0px 0px 0px 10px;
 }
 
 .product-detail-container {
-  position: relative;
+  /*position: absolute;*/
+  width: 100%;
 }
 
 .product-details {
-  width: 959%;
-  margin-top: -10px;
-  position: absolute;
-  padding-top: 10px;
+  width: 100%;
   background-color: #ffff;
   display: grid;
   grid-auto-columns: 1fr;
@@ -237,9 +204,9 @@ tr {
     "product-image-container product-description-container product-description-container product-description-container product-description-container";
   border-radius: 0px 0px 25px 25px;
   font-size: 14px;
-  border-style: solid #222222;
-  box-shadow: 0 1px 0 1px #222222;
+  text-align: start;
 }
+
 
 .product-icon {
   width: 42px;
@@ -532,4 +499,63 @@ tr {
   justify-content: center;
   justify-self: center;
   justify-items: center;
+}
+
+
+tr.hide-table-padding td {
+  padding: 0;
+  height: 0px;
+  border-radius: 25px;
+  }
+
+  .expand-button {
+    position: relative;
+    border-radius: 25px;
+  }
+
+
+
+
+
+  .accordion-tr{
+    border-radius: 25px;
+    margin: 50px;
+  }
+
+
+ 
+
+table td {
+  border-top: 1px solid #000000;
+  color: #ffffff;
+  border-left: none;
+  border-bottom: 1px solid #000000;
+  border-radius: 10px !important;
+}
+table td:first-child{
+  border-left: 1px solid #000000;
+  
+}
+
+table td:last-child{
+  border-right: 1px solid #000000;
+}
+
+table tbody tr:first-child td:first-child {
+  border-radius: 20px 0 0 0;
+}
+
+table tbody tr:first-child td:last-child {
+  border-radius: 0 20px 0 0;
+}
+
+td{
+  width: 15px;
+  color: #000000!important;
+  text-align: center;
+  height: 50px;
+}
+
+
+td p{
 }
