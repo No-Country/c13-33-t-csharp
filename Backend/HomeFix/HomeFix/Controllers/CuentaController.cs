@@ -26,6 +26,12 @@ public class CuentaController : BaseController
         _config = config;
     }
 
+    /// <summary>
+    /// Logueo de usuario
+    /// </summary>
+    /// <param name="loginDto">Email y Contraseña del usuario a loguear</param>
+    /// <returns>Confirmacion de logueo + Token necesaria para operaciones de la API</returns>
+    
     [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<UsuarioDto>> Login(LoginDto loginDto)
@@ -48,9 +54,6 @@ public class CuentaController : BaseController
         return Unauthorized();
     }
     
-    
-
-    
     [Authorize]
     [HttpGet]
     public async Task<ActionResult<UsuarioDto>> GetCurrentUser()
@@ -65,7 +68,12 @@ public class CuentaController : BaseController
         };
     }
     
-    
+    /// <summary>
+    /// Recuperacion de contraseña
+    /// </summary>
+    /// <param name="forgotPasswordDto">Email del usuario a recuperar contraseña</param>
+    /// <returns>Confirmacion de recuperacion de contraseña + email al correo del usuario</returns>
+
     [AllowAnonymous]
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
@@ -94,6 +102,12 @@ public class CuentaController : BaseController
 
         return StatusCode(StatusCodes.Status400BadRequest);
     }
+    
+    /// <summary>
+    /// Reemplazar contraseña
+    /// </summary>
+    /// <param name="resetPassword">DTO de datos necesarios para cambiar la contraseña</param>
+    /// <returns>Confirmacion de cambio de contraseña</returns>
     
     [AllowAnonymous]
     [HttpPost("reset-password")]

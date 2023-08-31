@@ -19,6 +19,11 @@ public class MarcasController : BaseController
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// Devuelve las marcas de la base de datos
+    /// </summary>
+    /// <returns>Devuelve lista de marcas</returns>
+    
     [HttpGet]
     public async Task<List<MarcaDto>> GetMarcas()
     {
@@ -26,6 +31,12 @@ public class MarcasController : BaseController
         return _mapper.Map<List<MarcaDto>>(marcas);
     }
 
+    /// <summary>
+    /// Devuelve una marca por ID
+    /// </summary>
+    /// <param name="id">ID de la marca a retornar</param>
+    /// <returns>Marca con el ID ingresado</returns>
+    
     [HttpGet("{id}", Name = "GetMarca")]
     public async Task<ActionResult<MarcaDto>> GetMarcaById(int id)
     {
@@ -37,8 +48,13 @@ public class MarcasController : BaseController
 
         return _mapper.Map<MarcaDto>(marca);
     }
-
-
+    
+    /// <summary>
+    /// Registra una nueva marca en la base de datos
+    /// </summary>
+    /// <param name="createMarcaDto">Nombre de la marca a registrar</param>
+    /// <returns>Confirmacion de registro</returns>
+    
     [HttpPost]
     public async Task<ActionResult<Marca>> CreateMarca(CreateMarcaDto createMarcaDto)
     {
