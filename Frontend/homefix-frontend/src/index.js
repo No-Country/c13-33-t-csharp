@@ -11,6 +11,8 @@ import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
 import messageReducer from './reducers/messageReducer'
 import dashboardDataReducer from './reducers/dashboardDataReducer'
+import salesChartDataReducer from './reducers/salesChartDataReducer'
+import topSalesReducer from './reducers/topSalesReducer'
 
 const queryClient = new QueryClient()
 
@@ -20,6 +22,8 @@ const store = configureStore({
 		token: tokenReducer,
 		message: messageReducer,
 		dashboardData: dashboardDataReducer,
+		salesChartData: salesChartDataReducer,
+		topSales: topSalesReducer,
 	},
 })
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import './SalesChartsContainer.css'
 import {
 	Chart as ChartJS,
@@ -10,17 +9,14 @@ import {
 } from 'chart.js'
 
 import { Bar } from 'react-chartjs-2'
+import { useSelector } from 'react-redux'
 
 export default function SalesChartsContainer({ monthNames }) {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip)
 
-	const date = new Date()
-	const actualMonthNumber = date.getMonth()
+	const salesChartData = useSelector(state => state.salesChartData)
 
-	const labels = []
-	for (let index = actualMonthNumber - 6; index < actualMonthNumber; index++) {
-		labels.push(monthNames(index + 1))
-	}
+	const labels = salesChartData.map(object => monthNames(object.mes - 1))
 
 	const options = {
 		responsive: true,
@@ -38,7 +34,9 @@ export default function SalesChartsContainer({ monthNames }) {
 		datasets: [
 			{
 				label: 'Ventas',
-				data: labels.map(() => Math.random() * 5),
+				data: labels.map((v, i) => {
+					return salesChartData[i].sumapreciototal
+				}),
 			},
 		],
 	}

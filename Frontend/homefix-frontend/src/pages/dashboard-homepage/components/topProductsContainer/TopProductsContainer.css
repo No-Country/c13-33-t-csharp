@@ -44,6 +44,7 @@
 	grid-area: product-sales;
 	height: 40px;
 	justify-content: flex-end;
+	text-align: right;
 }
 
 .top-products-container h5 {
@@ -113,6 +114,7 @@
 }
 
 .top-products-list img {
+	width: 40px;
 	border-radius: 50%;
 }
 
@@ -132,9 +134,10 @@
 .product-descr span {
 	font-size: 16px;
 	margin: 0 0 0 16px;
+	text-align: left;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 	.top-products-container {
 		padding: 15px 15px 23px;
 	}

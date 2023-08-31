@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://homefix.fly.dev/api/Resumen/ventames'
+const baseUrl = 'https://homefix.fly.dev/api/Resumen/articuloMasVendido'
 
 const getData = async token => {
 	const config = {

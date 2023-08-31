@@ -29,7 +29,7 @@
 	grid-area: bar-chart-container;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 	.sales-chart-container {
 		display: inline-block;
 		margin-top: 26px;

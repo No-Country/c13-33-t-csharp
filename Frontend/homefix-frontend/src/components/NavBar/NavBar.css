@@ -63,7 +63,7 @@ h2 {
 	font-weight: 400;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 	.navBar-container {
 		display: none;
 	}

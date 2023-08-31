@@ -1,19 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './DashboardResume.css'
-import { useEffect } from 'react'
-import dashboardService from '../../../../services/dashboard'
-import { setDashboardData } from '../../../../reducers/dashboardDataReducer'
 
 export default function DashboardResume() {
-	const token = useSelector(state => state.token)
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		dashboardService.getData(token).then(data => {
-			dispatch(setDashboardData(data))
-		})
-	}, [dispatch, token])
-
 	const dashboardData = useSelector(state => state.dashboardData)
 
 	return (
