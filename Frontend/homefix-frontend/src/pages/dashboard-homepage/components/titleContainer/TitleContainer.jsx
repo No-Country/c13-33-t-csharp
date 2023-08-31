@@ -1,9 +1,10 @@
 import React from 'react'
 import './titleContainer.css'
+import { useMonthNames } from '../../../../hooks/hooks'
 
-export default function TitleContainer({ monthNames }) {
+export default function TitleContainer() {
 	const date = new Date()
-	const monthName = monthNames(date.getMonth())
+	const monthName = useMonthNames([date.getMonth()])
 	const actualYear = date.getFullYear()
 
 	return (

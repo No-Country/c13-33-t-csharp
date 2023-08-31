@@ -52,9 +52,9 @@ export default function NavBar({ page }) {
 					</button>
 					<button
 						type="button"
-						onClick={() => navigate('/')}
+						onClick={() => navigate('/reports')}
 						className={
-							page === 'report'
+							page === 'reports'
 								? 'actual-page button button-reset'
 								: 'button button-reset'
 						}
