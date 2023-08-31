@@ -11,9 +11,14 @@ import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
 import messageReducer from './reducers/messageReducer'
 import dashboardDataReducer from './reducers/dashboardDataReducer'
+<<<<<<< HEAD
 import allProductsDataReducer from './reducers/allProductsDataReducer';
 import allBrandsDataReducer from './reducers/allBrandsDataReducer';
 import allCategoriesReducer from './reducers/allCategoriesReducer';
+=======
+import salesChartDataReducer from './reducers/salesChartDataReducer'
+import topSalesReducer from './reducers/topSalesReducer'
+>>>>>>> remotes/origin/dev
 
 const queryClient = new QueryClient()
 
@@ -23,9 +28,14 @@ const store = configureStore({
 		token: tokenReducer,
 		message: messageReducer,
 		dashboardData: dashboardDataReducer,
+<<<<<<< HEAD
 		allProductsData: allProductsDataReducer,
 		allBrandsData: allBrandsDataReducer,
 		allCategoriesDate: allCategoriesReducer
+=======
+		salesChartData: salesChartDataReducer,
+		topSales: topSalesReducer,
+>>>>>>> remotes/origin/dev
 	},
 })
 

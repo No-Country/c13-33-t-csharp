@@ -17,7 +17,7 @@
 	padding: 40px 60px 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 	.dashboard-layout {
 		display: inline-block;
 		width: 100vw;
