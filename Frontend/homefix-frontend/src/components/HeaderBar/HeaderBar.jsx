@@ -2,12 +2,10 @@ import React from 'react'
 import './HeaderBar.css'
 import HeaderNavLogo from '../../assets/image/HomeFix-navbar-logo.png'
 import { useSelector } from 'react-redux'
+import noImg from '../../assets/image/icons8-sin-imágen-100.png'
 
 export default function HeaderBar() {
 	const user = useSelector(state => state.user)
-
-	const placeHolderProfileImage =
-		'https://www.shareicon.net/data/2016/07/05/791224_man_512x512.png'
 
 	return (
 		<div className="headerBar-container">
@@ -24,7 +22,7 @@ export default function HeaderBar() {
 					>
 						<img
 							className="profile-icon-image"
-							src={placeHolderProfileImage}
+							src={!user.imagen ? noImg : user.imagen}
 							alt="profile icon"
 						/>
 						<span className="username-text">{user.userName}</span>

@@ -1,6 +1,7 @@
 import React from 'react'
 import './TopProductsContainer.css'
 import { useSelector } from 'react-redux'
+import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
 
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)
@@ -28,7 +29,10 @@ export default function TopProductsContainer() {
 							className={'top-products-button top-products-button' + [i + 1]}
 						>
 							<div className={'product-descr product' + [i + 1] + '-descr'}>
-								<img src="https://placehold.co/42x42.png" alt="best sellers" />
+								<img
+									src={!product.imagenes ? noImage : product.imagenes}
+									alt="best sellers"
+								/>
 								<span>{product.nombre}</span>
 							</div>
 							<div
