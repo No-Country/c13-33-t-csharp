@@ -1,0 +1,16 @@
+.reports-description-container {
+	background-color: white;
+	border-radius: 16px;
+	padding: 13px 30px;
+}
+
+.reports-description-title {
+	font-size: 24px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-description-text {
+	margin: 0;
+	font-weight: 400;
+}

@@ -1,0 +1,9 @@
+.reports-title-container {
+	display: flex;
+	align-items: center;
+}
+
+.reports-title-container h2 {
+	margin: 0;
+	font-size: 24px;
+}
