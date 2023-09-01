@@ -6,9 +6,6 @@ namespace HomeFix.DTOs;
 public class DetalleMovientoCreateDto
 {
     public int Cantidad { get; set; }
-
-    public float PrecioUnitario { get; set; }
-
     public int ArticuloId { get; set; }
 
 }

@@ -143,7 +143,7 @@ namespace HomeFix.Migrations
 
                     b.HasIndex("UsuarioUltimaModificacionId");
 
-                    b.ToTable("Articulo");
+                    b.ToTable("Articulo", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.Categoria", b =>
@@ -166,7 +166,7 @@ namespace HomeFix.Migrations
 
                     b.HasIndex("CategoriaPadreId");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.Imagen", b =>
@@ -186,7 +186,7 @@ namespace HomeFix.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Imagenes");
+                    b.ToTable("Imagenes", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.Marca", b =>
@@ -204,7 +204,7 @@ namespace HomeFix.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Marcas");
+                    b.ToTable("Marcas", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.Movimiento", b =>
@@ -231,7 +231,7 @@ namespace HomeFix.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Movimientos");
+                    b.ToTable("Movimientos", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.MovimientoDetalle", b =>
@@ -260,7 +260,7 @@ namespace HomeFix.Migrations
 
                     b.HasIndex("MovimientoId");
 
-                    b.ToTable("MovimientosDetalle");
+                    b.ToTable("MovimientosDetalle", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.Model.Rol", b =>
