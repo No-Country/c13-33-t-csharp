@@ -25,7 +25,8 @@ export default function InventoryContainer() {
   const [filteredProductById, setFilteredProductsById] = useState([]);
   const [filteredProductByCategory, setFilteredProductsCategory] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
-  const [filterSelected, setFilterSelected] = useState("Por Producto")
+  const [filterSelected, setFilterSelected] = useState("Por Producto");
+  const [searchProduct, setSearchProduct] = useState("");
   const navigate = useNavigate();
 
 
@@ -128,6 +129,7 @@ export default function InventoryContainer() {
             type="search"
             placeholder="Busca un producto"
             aria-label="Search"
+            onChange={(e) => setSearchProduct(e.target.value)}
           />
         </form>
       </div>
@@ -179,7 +181,7 @@ export default function InventoryContainer() {
               </tr>
             </thead>
             <tbody>
-            {allProducts?.map((product, i) => (
+            {allProducts.filter(products => products.nombre.toLowerCase().includes(searchProduct))?.map((product, i) => (
                 <>
                   <br></br>
                   <tr
