@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Controllers;
 
-
+[Authorize]
 public class ArticulosController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
@@ -30,7 +30,11 @@ public class ArticulosController : BaseController
         _imageService = imageService;
     }
 
-
+    /// <summary>
+    /// Lista articulos de la API. Utiliza un token para poder verificar su uso
+    /// </summary>
+    /// <returns>Lista de Articulos</returns>
+       
     [HttpGet]
     public async Task<List<ArticuloDto>> GetArticulos()
     {
@@ -40,12 +44,15 @@ public class ArticulosController : BaseController
             .Include(x => x.UsuarioUltimaModificacion)
             .Where(x => x.Activo)
             .ToListAsync();
-
-
-
         return _mapper.Map<List<ArticuloDto>>(articulos);
     }
 
+    /// <summary>
+    /// Devuelve un articulo especifico de la API. Utiliza un token para verificar su uso
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+ 
     [HttpGet("{id}", Name = "GetArticulo")]
     public async Task<ActionResult<ArticuloDto>> GetArticulo(int id)
     {
@@ -59,6 +66,12 @@ public class ArticulosController : BaseController
         return articulo;
     }
 
+    /// <summary>
+    /// Registra un articulo dentro de la base de datos. Utiliza token para verificar uso
+    /// </summary>
+    /// <param name="createArticuloDto">Articulo que se va a registrar en la base de datos</param>
+    /// <returns>Confirmacion del registro del articulo</returns>
+      
     [Authorize(Roles = "Administrador")]
     [HttpPost]
     public async Task<ActionResult<Articulo>> CreateArticulo([FromForm] CreateArticuloDto createArticuloDto)
@@ -84,6 +97,14 @@ public class ArticulosController : BaseController
         return BadRequest(new ProblemDetails {Title = "Problema creando el articulo"});
     }
 
+
+    /// <summary>
+    /// Se realiza una actualizacion de un articulo en la base de datos. Utiliza token para verificar su uso
+    /// </summary>
+    /// <param name="updateDto">Datos del articulo que se van a actualizar</param>
+    /// <param name="id">ID del articulo que se va a actualizar</param>
+    /// <returns>Confirmacion de actualizacion de articulo</returns>
+   
     [Authorize(Roles = "Administrador")]
     [HttpPatch("{id}")]
     public async Task<ActionResult<ArticuloDto>> UpdateArticulo([FromForm] UpdateArticuloDto updateDto, int id)
@@ -112,6 +133,12 @@ public class ArticulosController : BaseController
         return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
     }
 
+    /// <summary>
+    /// Eliminacion de un articulo de la base de datos. Requiere autorizacion y rol de administrador
+    /// </summary>
+    /// <param name="id">Id del articulo a eliminar</param>
+    /// <returns>Confirmacion de eliminacion de articulo</returns>
+
     [Authorize(Roles = "Administrador")]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ArticuloDto>> DeleteArticulo(int id)
@@ -126,6 +153,12 @@ public class ArticulosController : BaseController
 
         return BadRequest(new ProblemDetails {Title = "Problema eliminando el articulo"});
     }
+
+    /// <summary>
+    /// TBD
+    /// </summary>
+    /// <param name="updateDto"></param>
+    /// <param name="articulo"></param>
 
     private static void MappingArticulo(UpdateArticuloDto updateDto, Articulo articulo)
     {
@@ -145,6 +178,5 @@ public class ArticulosController : BaseController
         articulo.Ancho = updateDto?.Ancho ?? articulo.Ancho;
         articulo.Peso = updateDto?.Peso ?? articulo.Peso;
         articulo.MarcaId = updateDto?.MarcaId ?? articulo.MarcaId;
-        articulo.UpdatedAt = DateTime.UtcNow.AddHours(-3);
     }
 }

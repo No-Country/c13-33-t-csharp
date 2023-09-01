@@ -20,7 +20,11 @@ namespace HomeFix.Controllers
         }
 
 
-
+    /// <summary>
+    /// Devuelve el articulo con mas ventas en la base de datos
+    /// </summary>
+    /// <returns>DTO con la informacion del articulo mas vendido</returns>
+    
         [HttpGet("ArticuloMasVendido")]
         public async Task<ActionResult<List<ArticuloMasVendidoDto>>> GetArticuloMasVendido()
         {
@@ -36,7 +40,11 @@ namespace HomeFix.Controllers
             return BadRequest();
         }
 
-
+    /// <summary>
+    /// Retorna las ventas de los ultimos 6 meses
+    /// </summary>
+    /// <returns>DTO con la cantidad de ventas de los ultimos 6 meses</returns>
+    
         [HttpGet("VentasUltimos6Meses")]
         public async Task<ActionResult<List<VentasPorMes>>> GetVentasPorMes()
         {
@@ -52,6 +60,10 @@ namespace HomeFix.Controllers
 
         }
 
+    /// <summary>
+    /// Retorna las ventas del ultimo mes
+    /// </summary>
+    /// <returns>DTO con la cantidad de ventas del ultimo mes</returns>
 
         [HttpGet("VentaMes")]
         public async Task<ActionResult<VentaMes>> GetVentasMes()

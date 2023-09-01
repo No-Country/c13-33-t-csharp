@@ -18,6 +18,12 @@ public class AdminController : BaseController
         _userManager = userManager;
     }
     
+    /// <summary>
+    /// Registra un usuario en la API. Requiere token de autorizacion y el rol administrador
+    /// </summary>
+    /// <param name="registroDto">Datos del usuario que se va a registrar</param>
+    /// <returns>Confirmacion de registro</returns>
+    
     [Authorize(Roles = "Administrador")]
     [HttpPost("register")]
     public async Task<IActionResult> Registro(RegistroDto registroDto)
@@ -59,7 +65,12 @@ public class AdminController : BaseController
 
     }
     
-    //Devuelve los roles del usuario que es pasado por query.
+    /// <summary>
+    /// Devuelve los roles del usuario que es pasado por query.
+    /// </summary>
+    /// <param name="username">Nombre del usuario cuyos roles se van a retornar</param>
+    /// <returns>Roles del usuario ingresado</returns>
+    
     [Authorize(Roles = "Administrador")]
     [HttpGet("user-roles/{username}")]
     public async Task<ActionResult> GetUserRoles(string username)
@@ -105,7 +116,13 @@ public class AdminController : BaseController
         return Ok(await _userManager.GetRolesAsync(user));
     }
     
-    //Quita todos los roles al usuario.
+
+    /// <summary>
+    /// Elimina todos los roles del usuario
+    /// </summary>
+    /// <param name="editRoleDto">DTO del usuario y el rol que se va a eliminar</param>
+    /// <returns>Confirmacion de eliminacion de roles</returns>
+    
     [HttpPost("remove-roles")]
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> RemoveRole(RolUpdateDto editRoleDto)
