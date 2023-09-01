@@ -9,13 +9,25 @@ import {
 } from 'chart.js'
 
 import { Bar } from 'react-chartjs-2'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useMonthNames } from '../../../../hooks/hooks'
+import { useEffect } from 'react'
+import { setSalesChartData } from '../../../../reducers/salesChartDataReducer'
+import salesChartService from '../../../../services/salesChart'
 
 export default function SalesChartsContainer() {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip)
 
 	const salesChartData = useSelector(state => state.salesChartData)
+	const token = useSelector(state => state.token)
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		salesChartService.getData(token).then(data => {
+			dispatch(setSalesChartData(data))
+		})
+	}, [dispatch, token])
 
 	const monthsArray = salesChartData.map(object => object.mes - 1)
 	const labels = useMonthNames(monthsArray)

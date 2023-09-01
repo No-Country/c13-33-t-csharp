@@ -1,28 +1,28 @@
 .dashboard-resume-container {
-	height: 243px;
+	height: 100%;
 	width: 100%;
 	background-color: #ffff;
 	display: grid;
 	grid-template-columns: repeat(4, 0.1fr 1fr) 0.1fr;
-	grid-template-rows: 0.4fr 1fr 0.1fr;
+	grid-template-rows: 0.4fr 0.6fr;
 	gap: 0px 0px;
 	grid-template-areas:
 		". dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title ."
-		". total-sales . total-cost . ros . products-sales ."
-		". . . . . . . . .";
+		". total-sales . total-cost . ros . products-sales .";
 	grid-area: dashboard-resume-container;
 	border-radius: 25px;
 }
 
 .dashboard-resume-title {
+	display: flex;
+	align-items: center;
 	grid-area: dashboard-resume-title;
 }
 
 .dashboard-title {
 	font-size: 26px;
 	font-weight: 400;
-	margin-top: 31px;
-	margin-bottom: 41px;
+	margin: 0;
 }
 
 .total-sales {
@@ -128,17 +128,13 @@
 		display: inline-block;
 		width: 100%;
 		height: auto;
-		text-align: center;
 		margin-bottom: 26px;
-	}
-
-	.dashboard-resume-title {
-		height: auto;
-		text-align: start;
+		padding: 0 15px;
+		text-align: center;
 	}
 
 	.dashboard-title {
-		margin: 15px 0 13px 18px;
+		margin: 15px 0;
 		font-size: 16px;
 	}
 

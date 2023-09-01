@@ -9,7 +9,7 @@ export default function TitleContainer() {
 
 	return (
 		<div className="homepage-title-container">
-			<h1 className="mt-5">
+			<h1>
 				¡Bienvenido! Este es tu resumen de lo que va de{' '}
 				<span style={{ color: '#FBAE43', textTransform: 'capitalize' }}>
 					{monthName}, {actualYear}
