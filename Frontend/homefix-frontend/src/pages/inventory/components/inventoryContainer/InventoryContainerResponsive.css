@@ -1,0 +1,82 @@
+@media screen and (max-width: 920px) {
+  .inventory-layout {
+    width: 100%;
+    display: inline-block;
+  }
+  .inventory-title-search-container {
+    width: 100%;
+    display: inline-block;
+    height: 10px;
+  }
+  .inventory-table-container {
+    width: 100%;
+  }
+  .navBar-container {
+    display: none;
+}
+
+.offcanvas-menu {
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    height: 40px;
+    width: 27%;
+}
+
+.hamburger-button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+}
+
+.hamburger-button img {
+    width: 24px;
+}
+
+.offcanvas hr {
+    width: 80%;
+    margin: 0 auto;
+}
+.headerBar-container {
+    display: inline-block;
+    margin: 0 0 0 30%;
+    width: 70%;
+    height: 40px;
+}
+
+.header-navbar {
+    height: 100%;
+}
+
+.link-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.header-logo {
+    width: auto;
+    height: 100%;
+}
+
+.header-profile-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.profile-icon-image {
+    margin: 0;
+}
+
+.username {
+    padding: 0;
+}
+
+.username-text {
+    display: none;
+}
+}

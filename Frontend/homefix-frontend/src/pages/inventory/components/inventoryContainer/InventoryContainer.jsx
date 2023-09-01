@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./InventoryContainer.css";
 import searchIcon from "../../../../assets/image/searchIcon.png";
 import arrowDown from "../../../../assets/image/arrowVector.png";
+import arrowUp from "../../../../assets/image/arrowVectorUp.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import trashIcon from "../../../../assets/image/trash.png";
 import closeIcon from "../../../../assets/image/Vector.png";
 import boxIcon from "../../../../assets/image/solar_box-bold.png";
 import { useSelector } from "react-redux";
+import "./InventoryContainerResponsive.css";
+
 
 export default function InventoryContainer() {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
-
   const [detailShow, setDetailShow] = useState(false);
   const [animationShown, setAnimationShown] = useState(0);
   const [rotateAnimation, setRotateAnimation] = useState(180);
-  const [stock, setStock] = useState(0);
+  const [stock, setStock] = useState();
   const [editor, setEditor] = useState(false);
   const [isAdministrator, setIsAdministrator] = useState(true);
   const navigate = useNavigate();
@@ -32,8 +34,6 @@ export default function InventoryContainer() {
     }
   };*/
 
-  console.log(allCategoriesData);
-
   useEffect(() => {
     if (detailShow) {
       setAnimationShown(0);
@@ -43,7 +43,7 @@ export default function InventoryContainer() {
     }
   }, [detailShow]);
 
-  console.log(allProductsData);
+
   return (
     <>
       <div className="inventory-title-search-container pb-3">
@@ -59,7 +59,7 @@ export default function InventoryContainer() {
         ) : (
           <></>
         )}
-        <form className="d-flex" role="search">
+        <form className="d-flex searchbox" role="search">
           <div className="searchIconBox">
             <img
               className="searchIcon"
@@ -124,150 +124,234 @@ export default function InventoryContainer() {
                 <th scope="col"></th>
               </tr>
             </thead>
-              <tbody>
-                {allProductsData.map((product, i) => (
-                  <>
+            <tbody>
+              {allProductsData.map((product, i) => (
+                <>
                   <br></br>
-                    <tr
-                      key={i}
-                      className={`accordion-toggle collapsed ${
-                        expandedRow === i ? "expanded" : ""
-                      } pt-5`}
-                      //onClick={() => toggleExpand(i)}
-                      id="accordion1"
-                      data-bs-toggle="collapse"
-                      data-bs-parent="#accordion1"
-                      href="#collapseOne"
-                      aria-controls="collapseOne">
-                      <td>
+                  <tr
+                    key={i}
+                    className={`accordion-toggle collapsed pt-5`}
+                    onClick={() => setDetailShow(!detailShow)}
+                    id="accordion1"
+                    data-bs-toggle="collapse"
+                    data-bs-parent="#accordion1"
+                    href={`#collapse${i}`}
+                    aria-controls={`collapse${i}`}
+                  >
+                    <td>
+                      <img
+                        src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
+                        alt="Product Icon"
+                        className="product-icon"
+                      />
+                    </td>
+                    <td>{product.nombre}</td>
+                    <td>{product.marca}</td>
+                    <td>{product.id}</td>
+                    <td>{product.categoria}</td>
+                    <td>${product.precio}</td>
+                    <td>{product.cantidad}</td>
+                    <td>{product.cantidad}</td>
+                    <td>
+                      <motion.div animate={rotateAnimation}>
                         <img
-                          src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
-                          alt="Product Icon"
-                          className="product-icon"
+                          className="detailArrow"
+                          src={arrowDown}
+                          alt="down arrow"
                         />
-                      </td>
-                      <td >{product.nombre}</td>
-                      <td>{product.marca}</td>
-                      <td>{product.id}</td>
-                      <td>{product.categoria}</td>
-                      <td>${product.precio}</td>
-                      <td>{product.cantidad}</td>
-                      <td>{product.cantidad}</td>
-                      <td>
-                        <motion.div animate={rotateAnimation}>
+                      </motion.div>
+                    </td>
+                  </tr>
+                  <tr class="hide-table-padding ">
+                    <td colspan="9">
+                      <div
+                        id={`collapse${i}`}
+                        class="collapse in p-3 product-details"
+                      >
+                        <div className="product-image-container">
                           <img
-                            className="detailArrow"
-                            src={arrowDown}
-                            alt="down arrow"
+                            className="product-img"
+                            src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
+                            alt="productimage"
                           />
-                        </motion.div>
-                      </td>
-                    </tr>
-                    <tr class="hide-table-padding ">
-                      <td colspan="9">
-                        <div
-                          id="collapseOne"
-                          class="collapse in p-3 product-details"
-                        >
-                          <div className="product-image-container">
-                            <img
-                              className="product-img"
-                              src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
-                              alt="productimage"
+                          {editor ? (
+                            // Mostrar este botón cuando editor es true
+                            <button
+                              onClick={() => setEditor(false)} // Cambiar el valor de editor a false
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#saveModal"
+                              class="btn btn-yellow product-detail-button rounded-pill"
+                            >
+                              Guardar
+                            </button>
+                          ) : (
+                            // Mostrar este botón cuando editor es false
+                            <button
+                              onClick={() => setEditor(true)} // Cambiar el valor de editor a true
+                              type="button"
+                              class="btn btn-dark product-detail-button rounded-pill"
+                            >
+                              Editar
+                            </button>
+                          )}
+                          {editor && isAdministrator ? (
+                            <button
+                              type="button"
+                              class="btn btn-delete mx-auto rounded-pill"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteModal"
+                            >
+                              Eliminar
+                            </button>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="product-name-container">
+                          <p className="product-detail-title">Producto</p>
+                          {editor ? (
+                            <input
+                              className="editable-input"
+                              placeholder="Lampara"
                             />
-                            {editor ? (
-                              // Mostrar este botón cuando editor es true
-                              <button
-                                onClick={() => setEditor(false)} // Cambiar el valor de editor a false
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#saveModal"
-                                class="btn btn-yellow product-detail-button rounded-pill"
-                              >
-                                Guardar
-                              </button>
-                            ) : (
-                              // Mostrar este botón cuando editor es false
-                              <button
-                                onClick={() => setEditor(true)} // Cambiar el valor de editor a true
-                                type="button"
-                                class="btn btn-dark product-detail-button rounded-pill"
-                              >
-                                Editar
-                              </button>
-                            )}
-                            {editor && isAdministrator ? (
-                              <button
-                                type="button"
-                                class="btn btn-delete mx-auto rounded-pill"
-                                data-bs-toggle="modal"
-                                data-bs-target="#deleteModal"
-                              >
-                                Eliminar
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="product-name-container">
-                            <p className="product-detail-title">Producto</p>
-                            {editor ? (
-                              <input
-                                className="editable-input"
-                                placeholder="Lampara"
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                {product.nombre}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-measurements-container">
-                            <p className="product-detail-title">
-                              Ancho x Alto (cm)
+                          ) : (
+                            <p className="product-detail-information">
+                              {product.nombre}
                             </p>
-                            {editor ? (
-                              <input
-                                className="editable-input"
-                                placeholder="40 x 29"
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                {product.ancho} x {product.alto}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-ros-container">
-                            <p className="product-detail-title">
-                              Margen de ganancia
+                          )}
+                        </div>
+                        <div className="product-measurements-container">
+                          <p className="product-detail-title">
+                            Ancho x Alto (cm)
+                          </p>
+                          {editor ? (
+                            <input
+                              className="editable-input"
+                              placeholder="40 x 29"
+                            />
+                          ) : (
+                            <p className="product-detail-information">
+                              {product.ancho} x {product.alto}
                             </p>
-                            {editor && isAdministrator ? (
-                              <input
-                                className="addProduct-editable-input-yellow rounded-pill"
-                                placeholder="20%"
-                              />
-                            ) : (
-                              <p className="product-detail-information ros-information rounded-pill text-center">
-                                20%
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-description-container">
-                            <p className="product-detail-title">Descripcion</p>
-                            {editor && isAdministrator ? (
-                              <input
-                                className="editable-input"
-                                placeholder={product.descripcion}
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                {product.descripcion}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-brand-container">
-                            <p className="product-detail-title">Marca</p>
-                            {editor && isAdministrator ? (
+                          )}
+                        </div>
+                        <div className="product-ros-container">
+                          <p className="product-detail-title">
+                            Margen de ganancia
+                          </p>
+                          {editor && isAdministrator ? (
+                            <input
+                              className="addProduct-editable-input-yellow rounded-pill"
+                              placeholder="20%"
+                            />
+                          ) : (
+                            <p className="product-detail-information ros-information rounded-pill text-center">
+                              20%
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-description-container">
+                          <p className="product-detail-title">Descripcion</p>
+                          {editor && isAdministrator ? (
+                            <input
+                              className="editable-input"
+                              placeholder={product.descripcion}
+                            />
+                          ) : (
+                            <p className="product-detail-information">
+                              {product.descripcion}
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-brand-container">
+                          <p className="product-detail-title">Marca</p>
+                          {editor && isAdministrator ? (
+                            <div className="dropdown">
+                              <button
+                                className="button-reset btn-filter btn-outline-dark"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                {product.marca}
+                                <img
+                                  className="dropdown-arrow"
+                                  src={arrowDown}
+                                  alt="arrow down"
+                                />
+                              </button>
+                              <ul className="dropdown-menu">
+                                {allBrandsData.map((brand, i) => (
+                                  <li key={i}>
+                                    <a className="dropdown-item" href="#">
+                                      {brand.nombre}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ) : (
+                            <p className="product-detail-information">
+                              {product.marca}
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-weight-container">
+                          <p className="product-detail-title">Peso</p>
+                          {editor ? (
+                            <input
+                              className="editable-input"
+                              placeholder={product.peso}
+                            />
+                          ) : (
+                            <p className="product-detail-information">
+                              {product.peso}
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-cost-container">
+                          <p className="product-detail-title">Costo</p>
+                          {editor && isAdministrator ? (
+                            <input
+                              className="editable-input"
+                              placeholder={`$${product.costo}`}
+                            />
+                          ) : (
+                            <p className="product-detail-information">
+                              ${product.costo}
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-id-container">
+                          <p className="product-detail-title">ID</p>
+                          <p className="product-detail-information">
+                            {product.id}
+                          </p>
+                        </div>
+                        <div className="product-sold-container">
+                          <p className="product-detail-title">Vendidos</p>
+                          <p className="product-detail-information">9</p>
+                        </div>
+                        <div className="product-price-container">
+                          <p className="product-detail-title">Precio</p>
+                          {editor && isAdministrator ? (
+                            <input
+                              className="editable-input"
+                              placeholder={`$${product.precio}`}
+                            />
+                          ) : (
+                            <p className="product-detail-information">
+                              ${product.precio}
+                            </p>
+                          )}
+                        </div>
+                        <div className="product-category-container">
+                          <p className="product-detail-title ">
+                            Categoria &gt; subcategoria
+                          </p>
+                          <p className="product-detail-information">
+                            {editor ? (
                               <div className="dropdown">
                                 <button
                                   className="button-reset btn-filter btn-outline-dark"
@@ -275,7 +359,7 @@ export default function InventoryContainer() {
                                   data-bs-toggle="dropdown"
                                   aria-expanded="false"
                                 >
-                                  {product.marca}
+                                  {product.categoria}
                                   <img
                                     className="dropdown-arrow"
                                     src={arrowDown}
@@ -283,159 +367,72 @@ export default function InventoryContainer() {
                                   />
                                 </button>
                                 <ul className="dropdown-menu">
-                                  {allBrandsData.map((brand, i) => (
-                                    <li key={i}>
-                                      <a className="dropdown-item" href="#">
-                                        {brand.nombre}
-                                      </a>
-                                    </li>
-                                  ))}
+                                  <li>
+                                    <a className="dropdown-item" href="#">
+                                      categoria
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a className="dropdown-item" href="#">
+                                      categoria
+                                    </a>
+                                  </li>
                                 </ul>
                               </div>
                             ) : (
-                              <p className="product-detail-information">
-                                {product.marca}
-                              </p>
+                              <p>{product.categoria}</p>
                             )}
-                          </div>
-                          <div className="product-weight-container">
-                            <p className="product-detail-title">Peso</p>
-                            {editor ? (
-                              <input
-                                className="editable-input"
-                                placeholder={product.peso}
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                {product.peso}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-cost-container">
-                            <p className="product-detail-title">Costo</p>
-                            {editor && isAdministrator ? (
-                              <input
-                                className="editable-input"
-                                placeholder={`$${product.costo}`}
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                ${product.costo}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-id-container">
-                            <p className="product-detail-title">ID</p>
-                            <p className="product-detail-information">
-                              {product.id}
-                            </p>
-                          </div>
-                          <div className="product-sold-container">
-                            <p className="product-detail-title">Vendidos</p>
-                            <p className="product-detail-information">9</p>
-                          </div>
-                          <div className="product-price-container">
-                            <p className="product-detail-title">Precio</p>
-                            {editor && isAdministrator ? (
-                              <input
-                                className="editable-input"
-                                placeholder={`$${product.precio}`}
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                ${product.precio}
-                              </p>
-                            )}
-                          </div>
-                          <div className="product-category-container">
-                            <p className="product-detail-title ">
-                              Categoria &gt; subcategoria
+                          </p>
+                        </div>
+                        <div className="product-stock-container">
+                          <div className="product-stock">
+                            <p className="product-detail-title mt-3">
+                              Stock actual
                             </p>
                             <p className="product-detail-information">
-                              {editor ? (
-                                <div className="dropdown">
-                                  <button
-                                    className="button-reset btn-filter btn-outline-dark"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
-                                    {product.categoria}
-                                    <img
-                                      className="dropdown-arrow"
-                                      src={arrowDown}
-                                      alt="arrow down"
-                                    />
-                                  </button>
-                                  <ul className="dropdown-menu">
-                                    <li>
-                                      <a className="dropdown-item" href="#">
-                                        categoria
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a className="dropdown-item" href="#">
-                                        categoria
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
-                              ) : (
-                                <p>{product.categoria}</p>
-                              )}
+                              {product.cantidad}
                             </p>
+                            {editor && isAdministrator ? (
+                              <div className="stock-box">
+                                <button
+                                  type="button"
+                                  class="btn btn-outline-dark button-stock-minus"
+                                >
+                                  <p className="button-sign my-3">-</p>
+                                </button>
+                                <p className="product-detail-information stock-number">
+                                  {stock ? stock : product.cantidad}
+                                </p>
+                                <button
+                                  type="button"
+                                  class="btn btn-outline-dark button-stock-plus"
+                                >
+                                  <p className="button-sign my-3">+</p>
+                                </button>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
                           </div>
-                          <div className="product-stock-container">
-                            <div className="product-stock">
-                              <p className="product-detail-title mt-3">
-                                Stock actual
-                              </p>
-                              <p className="product-detail-information">
-                                {product.cantidad}
-                              </p>
-                              {editor && isAdministrator ? (
-                                <div className="stock-box">
-                                  <button
-                                    onClick={() => setStock(stock - 1)}
-                                    type="button"
-                                    class="btn btn-outline-dark button-stock-minus"
-                                  >
-                                    <p className="button-sign my-3">-</p>
-                                  </button>
-                                  <p className="product-detail-information stock-number">
-                                    {stock}
-                                  </p>
-                                  <button
-                                    onClick={() => setStock(stock + 1)}
-                                    type="button"
-                                    class="btn btn-outline-dark button-stock-plus"
-                                  >
-                                    <p className="button-sign my-3">+</p>
-                                  </button>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                            <div className="product-modification">
-                              <p className="product-detail-title">
-                                Ultima modificacion
-                              </p>
-                              <p>02/07/2023 17:30</p>
-                              <p className="product-detail-information">
-                                {product.usuarioUltimaModificacion}
-                              </p>
-                            </div>
+                          <div className="product-modification">
+                            <p className="product-detail-title">
+                              Ultima modificacion
+                            </p>
+                            <p>02/07/2023 17:30</p>
+                            <p className="product-detail-information">
+                              {product.usuarioUltimaModificacion}
+                            </p>
                           </div>
                         </div>
-                      </td>
-                    </tr>
-                  </>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      </div>
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </div>
 
       {/* modal window delete */}
       <div
@@ -467,7 +464,7 @@ export default function InventoryContainer() {
               />
               <h1 class="modal-delete-title text-center">Eliminar Producto</h1>
               <p className="text-center text-modal">
-                ¿Esta seguro que desea eliminar el producto {"product.nombre"}{" "}
+                ¿Esta seguro que desea eliminar el producto {"product.nombre"}
                 del inventario?
               </p>
             </div>
