@@ -46,7 +46,7 @@ public class MappingProfiles : Profile
             .ForMember(x => x.Subcategoria,
             opt => opt.MapFrom(a => a.CategoriaPadreId != null ? a.Nombre : null));
         
-            .ForMember(x => x.Categoria, opt => opt.MapFrom(a => a.CategoriaPadre.Nombre));
+      
 
         CreateMap<Usuario, UsuarioDto>();
         CreateMap<MovimientoDetalle, DetalleMovimientoDto>();
