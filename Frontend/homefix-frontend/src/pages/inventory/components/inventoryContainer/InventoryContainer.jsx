@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./InventoryContainer.css";
 import searchIcon from "../../../../assets/image/searchIcon.png";
 import arrowDown from "../../../../assets/image/arrowVector.png";
-import arrowUp from "../../../../assets/image/arrowVectorUp.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import trashIcon from "../../../../assets/image/trash.png";
@@ -75,6 +74,30 @@ export default function InventoryContainer() {
   const filteredProductsByCategory = (e) => {
     setFilterSelected(e.target.value)
     setIsFiltered(false);
+  };
+
+  const increaseProductQuantity = (productId) => {
+    setAllProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id === productId) {
+          // Incrementa la cantidad del producto en 1
+          return { ...product, cantidad: product.cantidad + 1 };
+        }
+        return product;
+      })
+    );
+  };
+
+  const decreaseProductQuantity = (productId) => {
+    setAllProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id === productId) {
+          // Incrementa la cantidad del producto en 1
+          return { ...product, cantidad: product.cantidad - 1 };
+        }
+        return product;
+      })
+    );
   };
 
   return (
@@ -421,13 +444,14 @@ export default function InventoryContainer() {
                               Stock actual
                             </p>
                             <p className="product-detail-information">
-                              {product.cantidad}
+                            {stock ? stock : product.cantidad}
                             </p>
                             {editor && isAdministrator ? (
                               <div className="stock-box">
                                 <button
                                   type="button"
                                   class="btn btn-outline-dark button-stock-minus"
+                                  onClick={() => decreaseProductQuantity(product.id)}
                                 >
                                   <p className="button-sign my-3">-</p>
                                 </button>
@@ -437,6 +461,7 @@ export default function InventoryContainer() {
                                 <button
                                   type="button"
                                   class="btn btn-outline-dark button-stock-plus"
+                                  onClick={() => increaseProductQuantity(product.id)}
                                 >
                                   <p className="button-sign my-3">+</p>
                                 </button>
