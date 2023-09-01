@@ -11,28 +11,25 @@ import boxIcon from "../../../../assets/image/solar_box-bold.png";
 import { useSelector } from "react-redux";
 import "./InventoryContainerResponsive.css";
 
-
 export default function InventoryContainer() {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
+  
   const [detailShow, setDetailShow] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(null);
   const [animationShown, setAnimationShown] = useState(0);
   const [rotateAnimation, setRotateAnimation] = useState(180);
   const [stock, setStock] = useState();
   const [editor, setEditor] = useState(false);
   const [isAdministrator, setIsAdministrator] = useState(true);
+  const [filteredProductById, setFilteredProductsById] = useState([]);
+  const [filteredProductByCategory, setFilteredProductsCategory] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filterSelected, setFilterSelected] = useState("Por Producto")
   const navigate = useNavigate();
 
-  const [expandedRow, setExpandedRow] = useState(null);
 
-  /*const toggleExpand = (index) => {
-    if (expandedRow === index) {
-      setExpandedRow(null);
-    } else {
-      setExpandedRow(index);
-    }
-  };*/
 
   useEffect(() => {
     if (detailShow) {
@@ -43,6 +40,42 @@ export default function InventoryContainer() {
     }
   }, [detailShow]);
 
+  useEffect(() => {
+    const productsCopyForName = [...allProductsData];
+    const filteredByName = productsCopyForName.sort((a, b) => a.nombre - b.nombre);
+    setAllProducts(filteredByName);
+  }, [])
+
+  useEffect(() => {
+    if(isFiltered === null){
+      const productsCopyForProduct = [...allProductsData];
+    const filteredByProduct = productsCopyForProduct.sort((a, b) => a.nombre - b.nombre);
+    setAllProducts(filteredByProduct)
+    }
+  }, [])
+
+  useEffect(() => {
+    const productsCopyForID = [...allProductsData];
+    const filteredById = productsCopyForID.sort((a, b) => a.id - b.id);
+    setFilteredProductsById(filteredById);
+
+    const productsCopyForCategory = [...allProductsData];
+    const filteredByCategory = productsCopyForCategory.sort((a, b) => a.categoria - b.categoria);
+    setFilteredProductsCategory(filteredByCategory);
+
+    // Dependiendo del valor de isFiltered, actualiza allProducts con la lista correcta
+    setAllProducts(isFiltered ? filteredById : filteredByCategory);
+  }, [isFiltered]);
+
+  const filteredProductsById = (e) => {
+    setFilterSelected(e.target.value)
+    setIsFiltered(true);
+  };
+
+  const filteredProductsByCategory = (e) => {
+    setFilterSelected(e.target.value)
+    setIsFiltered(false);
+  };
 
   return (
     <>
@@ -87,7 +120,7 @@ export default function InventoryContainer() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Por producto
+                {filterSelected}
                 <img
                   className="dropdown-arrow"
                   src={arrowDown}
@@ -96,14 +129,12 @@ export default function InventoryContainer() {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Por ID
-                  </a>
+                  <button value="ID" className="button-reset  w-50" onClick={(e) => filteredProductsById(e)}>Por ID</button>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button value="Categoria" className="button-reset mx-2 w-75" onClick={(e)=> filteredProductsByCategory(e)}>
                     Por Categorias
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -125,7 +156,7 @@ export default function InventoryContainer() {
               </tr>
             </thead>
             <tbody>
-              {allProductsData.map((product, i) => (
+            {allProducts?.map((product, i) => (
                 <>
                   <br></br>
                   <tr
@@ -464,7 +495,7 @@ export default function InventoryContainer() {
               />
               <h1 class="modal-delete-title text-center">Eliminar Producto</h1>
               <p className="text-center text-modal">
-                ¿Esta seguro que desea eliminar el producto {"product.nombre"}
+                ¿Esta seguro que desea eliminar el producto 
                 del inventario?
               </p>
             </div>
