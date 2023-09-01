@@ -1,14 +1,18 @@
 import './Layout.css'
 import HeaderBar from '../../../components/HeaderBar/HeaderBar'
 import NavBar from '../../../components/NavBar/NavBar'
-import ReportsContainer from '../components/reportsContainer/ReportsContainer'
+import TitleContainer from '../components/titleContainer/TitleContainer'
+import MonthButtonContainer from '../components/monthButtonContainer/MonthButtonContainer'
+import DescriptionContainer from '../components/descriptionContainer/DescriptionContainer'
 
 const Layout = () => {
 	return (
-		<div className="dashboard-layout">
+		<div className="reports-layout">
 			<HeaderBar />
 			<NavBar page="reports" />
-			<ReportsContainer />
+			<TitleContainer />
+			<MonthButtonContainer />
+			<DescriptionContainer />
 		</div>
 	)
 }
