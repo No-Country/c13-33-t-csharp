@@ -4,6 +4,7 @@ import NavBar from '../../../components/NavBar/NavBar'
 import TitleContainer from '../components/titleContainer/TitleContainer'
 import MonthButtonContainer from '../components/monthButtonContainer/MonthButtonContainer'
 import DescriptionContainer from '../components/descriptionContainer/DescriptionContainer'
+import OverviewContainer from '../components/overviewContainer/OverviewContainer'
 
 const Layout = () => {
 	return (
@@ -13,6 +14,7 @@ const Layout = () => {
 			<TitleContainer />
 			<MonthButtonContainer />
 			<DescriptionContainer />
+			<OverviewContainer />
 		</div>
 	)
 }

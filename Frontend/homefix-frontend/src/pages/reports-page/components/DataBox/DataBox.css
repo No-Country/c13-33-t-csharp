@@ -1,0 +1,25 @@
+.databox-container {
+	background-color: #FBAE43;
+	width: 23%;
+	border-radius: 16px;
+	padding: 9px 8px 18px;
+	text-align: center;
+}
+
+.databox-container hr {
+	margin: 7px 0 16px;
+}
+
+.databox-title {
+	color: #222222;
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.databox-data {
+	color: #222222;
+	font-size: 32px;
+	font-weight: 400;
+	margin: 0;
+}
