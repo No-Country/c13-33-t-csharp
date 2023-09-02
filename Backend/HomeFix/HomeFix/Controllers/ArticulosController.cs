@@ -178,5 +178,6 @@ public class ArticulosController : BaseController
         articulo.Ancho = updateDto?.Ancho ?? articulo.Ancho;
         articulo.Peso = updateDto?.Peso ?? articulo.Peso;
         articulo.MarcaId = updateDto?.MarcaId ?? articulo.MarcaId;
+        articulo.UpdatedAt = DateTime.UtcNow.AddHours(-3);
     }
 }
