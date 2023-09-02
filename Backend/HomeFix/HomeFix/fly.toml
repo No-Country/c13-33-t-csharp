@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for homefix on 2023-08-29T19:17:08-03:00
+# fly.toml app configuration file generated for homefix on 2023-08-31T10:44:06-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -11,8 +11,8 @@ primary_region = "eze"
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
+  CLoudinary__ApiKey = "292779544951742"
   Cloudinary__CloudName = "da3vlvjjo"
-  CLoudinary__ApiKey= "292779544951742"
 
 [http_service]
   internal_port = 8080

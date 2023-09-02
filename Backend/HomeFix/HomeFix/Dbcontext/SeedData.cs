@@ -146,7 +146,9 @@ public class SeedData
                     Ancho = 3,
                     Alto = 10,
                     MarcaId = 1,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-2),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693487996/martillo-de-carpintero_chp40f.jpg"
                 },
                 new Articulo
                 {
@@ -162,7 +164,9 @@ public class SeedData
                     Ancho = 3000,
                     Alto = 10000,
                     MarcaId = 3,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-3),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488436/puerta-placa-pino-70x200-derecha-herfasa-principal_s9hz8e.webp"
                 },
                 new Articulo
                 {
@@ -178,7 +182,9 @@ public class SeedData
                     Ancho = 0,
                     Alto = 0,
                     MarcaId = 1,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-4),
+                    Imagen="https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488501/destornillador_mae7rn.jpg"
                 },
                 new Articulo
                 {
@@ -194,7 +200,9 @@ public class SeedData
                     Ancho = 3000,
                     Alto = 10000,
                     MarcaId = 4,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-1),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488562/puertapvc_olteoc.png"
                 },
                 new Articulo
                 {
@@ -210,7 +218,9 @@ public class SeedData
                     Ancho = 30,
                     Alto = 40,
                     MarcaId = 2,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-2),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488622/lamparapie_vpvwsw.webp"
                 },
                 new Articulo
                 {
@@ -226,7 +236,9 @@ public class SeedData
                     Ancho = 40,
                     Alto = 29,
                     MarcaId = 2,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-5),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488666/lamparacolgante_fuwp8i.webp"
                 },
                 new Articulo
                 {
@@ -242,7 +254,9 @@ public class SeedData
                     Ancho = 3200,
                     Alto = 11000,
                     MarcaId = 3,
-                    UsuarioUltimaModificacionId = 1
+                    UsuarioUltimaModificacionId = 1,
+                    UpdatedAt = DateTime.UtcNow.AddDays(-2),
+                    Imagen = "https://res.cloudinary.com/da3vlvjjo/image/upload/v1693488804/puertaventana_qjijxq.jpg"
                 },
             };
         }
@@ -364,74 +378,74 @@ public class SeedData
             };
         }
 
-        List<Imagen> imagenes = new List<Imagen>();
-        if (!context.Imagenes.Any())
-        {
-            imagenes = new List<Imagen>()
-            {
-                new Imagen()
-                {
-                    Id = 1,
-                    ArticuloId = 1,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },
-                new Imagen()
-                {
-                    Id = 2,
-                    ArticuloId = 2,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },
-                // new Imagen()
-                // {
-                //     Id = 3,
-                //     ArticuloId = 2,
-                //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                // },
-                new Imagen()
-                {
-                    Id = 4,
-                    ArticuloId = 5,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },
-                new Imagen()
-                {
-                    Id = 5,
-                    ArticuloId = 6,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },
-                new Imagen()
-                {
-                    Id = 6,
-                    ArticuloId = 7,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                },
-                new Imagen()
-                {
-                    Id = 7,
-                    ArticuloId = 3,
-                    Ubicacion =
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                }
-                // ,new Imagen()
-                // {
-                //     Id = 8,
-                //     ArticuloId = 3,
-                //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
-                // },
-            };
-        }
+        // List<Imagen> imagenes = new List<Imagen>();
+        // if (!context.Imagenes.Any())
+        // {
+        //     imagenes = new List<Imagen>()
+        //     {
+        //         new Imagen()
+        //         {
+        //             Id = 1,
+        //             ArticuloId = 1,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         },
+        //         new Imagen()
+        //         {
+        //             Id = 2,
+        //             ArticuloId = 2,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         },
+        //         // new Imagen()
+        //         // {
+        //         //     Id = 3,
+        //         //     ArticuloId = 2,
+        //         //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         // },
+        //         new Imagen()
+        //         {
+        //             Id = 4,
+        //             ArticuloId = 5,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         },
+        //         new Imagen()
+        //         {
+        //             Id = 5,
+        //             ArticuloId = 6,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         },
+        //         new Imagen()
+        //         {
+        //             Id = 6,
+        //             ArticuloId = 7,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         },
+        //         new Imagen()
+        //         {
+        //             Id = 7,
+        //             ArticuloId = 3,
+        //             Ubicacion =
+        //                 "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         }
+        //         // ,new Imagen()
+        //         // {
+        //         //     Id = 8,
+        //         //     ArticuloId = 3,
+        //         //     Ubicacion = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.xataka.com%2Fservicios%2Fgoogle-cambia-de-imagen-la-simplicidad-por-estandarte&psig=AOvVaw08kd84zNc2ta-PTkHEs8kz&ust=1693227896240000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJi5t8zz_IADFQAAAAAdAAAAABAE"
+        //         // },
+        //     };
+        // }
 
 
         context.Marcas.AddRange(marcas);
         context.Categorias.AddRange(categoria);
         context.Articulo.AddRange(articulos);
         context.Movimientos.AddRange(movimientos);
-        context.Imagenes.AddRange(imagenes);
+        // context.Imagenes.AddRange(imagenes);
         await context.SaveChangesAsync();
     }
 }
