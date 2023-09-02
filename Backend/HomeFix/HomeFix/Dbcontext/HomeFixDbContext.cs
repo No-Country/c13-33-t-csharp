@@ -31,6 +31,8 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
      
 
         modelBuilder.Entity<Articulo>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
+        modelBuilder.Entity<Marca>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
+        modelBuilder.Entity<Categoria>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
         modelBuilder.Entity<Movimiento>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
         modelBuilder.Entity<MovimientoDetalle>().Property(b => b.Id).HasIdentityOptions(startValue: 200);
 

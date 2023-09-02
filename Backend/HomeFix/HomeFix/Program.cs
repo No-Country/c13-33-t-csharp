@@ -1,6 +1,9 @@
 using System.Text;
+using HomeFix.Data;
 using HomeFix.Dbcontext;
+using HomeFix.Extensions;
 using HomeFix.Helpers;
+using HomeFix.Interfaces;
 using HomeFix.Model;
 using HomeFix.Services;
 using HomeFix.Services.FileStorage;
@@ -15,7 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddApplicationService();
+builder.Services.AddIdentityService(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,36 +50,9 @@ builder.Services.AddDbContext<HomeFixDbContext>(opt =>
 {
     opt.UseNpgsql(connString);
 });
-builder.Services.AddCors();
-builder.Services.AddIdentityCore<Usuario>(opt =>
-    {
-        opt.User.RequireUniqueEmail = true;
-        opt.SignIn.RequireConfirmedEmail = false;
-    })
-    .AddRoles<Rol>()
-    .AddEntityFrameworkStores<HomeFixDbContext>().AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"]))
-    };
-});
-builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IFileStorageService, FileStorageService>();
-builder.Services.AddScoped<PathProvider>();
-builder.Services.AddScoped<HelperUploadFiles>();
-builder.Services.AddScoped<ImageService>();
 
-builder.Services.AddAuthorization();
-builder.Services.AddScoped<TokenService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
