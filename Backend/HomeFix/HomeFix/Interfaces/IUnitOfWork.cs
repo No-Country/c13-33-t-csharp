@@ -7,6 +7,8 @@ public interface IUnitOfWork
     ICategoriasRepository CategoriasRepository { get; }
     
     ICuentaRepository CuentaRepository { get; }
+    
+    IArticulosRepository ArticulosRepository { get; }
     Task<bool> Complete();
 
  

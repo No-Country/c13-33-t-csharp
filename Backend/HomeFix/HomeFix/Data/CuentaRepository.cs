@@ -18,6 +18,11 @@ public class CuentaRepository : ICuentaRepository
         return  await _userManager.FindByEmailAsync(email);
     }
 
+    public async Task<Usuario> FindUserById(string id)
+    {
+        return  await _userManager.FindByIdAsync(id);
+    }
+
     public async Task<bool> ComparePassword(Usuario usuario, string password)
     {
         return await _userManager.CheckPasswordAsync(usuario, password);
@@ -32,4 +37,6 @@ public class CuentaRepository : ICuentaRepository
     {
         return await _userManager.ResetPasswordAsync(user, token, newPassword);
     }
+    
+    
 }
