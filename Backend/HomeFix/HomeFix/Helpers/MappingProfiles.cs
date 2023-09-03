@@ -11,7 +11,7 @@ public class MappingProfiles : Profile
         CreateMap<Marca, MarcaDto>();
 
         CreateMap<CreateMarcaDto, Marca>().ForMember(x => x.Articulos, opt => opt.Ignore());
-
+        CreateMap<CreateCategoriaDto, Categoria>();
         CreateMap<Articulo, ArticuloDto>()
             .ForMember(x => x.Marca, opt => opt.MapFrom(a => a.Marca.Nombre))
             .ForMember(x => x.Categoria,

@@ -14,7 +14,8 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IMarcasRepository MarcasRepository => new MarcasRepository(_context);
-    
+    public ICategoriasRepository CategoriasRepository => new CategoriasRepository(_context);
+
     public async Task<bool> Complete()
     {
         return await _context.SaveChangesAsync() > 0;
