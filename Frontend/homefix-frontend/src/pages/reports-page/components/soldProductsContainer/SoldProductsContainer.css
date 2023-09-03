@@ -1,0 +1,21 @@
+.reports-sold-products-container {
+	background-color: white;
+	border-radius: 16px;
+	padding: 21px 22px 23px;
+}
+
+.reports-sold-products-container hr {
+	margin-top: 17px;
+}
+
+.reports-sold-products-title {
+	font-size: 24px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-sold-products-barchart-container {
+	display: flex;
+	justify-content: center;
+	padding: 30px 10% 0;
+}

@@ -6,6 +6,7 @@ import MonthButtonContainer from '../components/monthButtonContainer/MonthButton
 import DescriptionContainer from '../components/descriptionContainer/DescriptionContainer'
 import OverviewContainer from '../components/overviewContainer/OverviewContainer'
 import SalesContainer from '../components/salesContainer/SalesContainer'
+import SoldProductsContainer from '../components/soldProductsContainer/SoldProductsContainer'
 
 const Layout = () => {
 	return (
@@ -17,6 +18,7 @@ const Layout = () => {
 			<DescriptionContainer />
 			<OverviewContainer />
 			<SalesContainer />
+			<SoldProductsContainer />
 		</div>
 	)
 }
