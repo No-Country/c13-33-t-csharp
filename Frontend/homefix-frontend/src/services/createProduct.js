@@ -1,11 +1,20 @@
-import axios from 'axios'
-const baseUrl = 'https://homefix.fly.dev/api/articulos'
+import axios from "axios";
 
-const createProduct = async newPrduct => {
-	const response = await axios.post(baseUrl, newPrduct)
-	return response.data
-}
+export const createProduct = (productData, token) => async (dispatch) => {
+  try {
+    const response = await axios.post('https://homefix.fly.dev/api/articulos', productData, {
+      headers: {
+        Authorization: token
+      },
+    });
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { createProduct }
-
+    if (response.status === 201) {
+      const newProduct = response.data;
+      dispatch({ type: "CREATE_PRODUCT", payload: newProduct });
+    } else {
+      console.error("Error al crear el producto:", response.data);
+    }
+  } catch (error) {
+    console.error("Error al crear el producto:", error);
+  }
+};

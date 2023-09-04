@@ -115,10 +115,10 @@
 .addProduct-semiCirlce-wrapper {
 	background-color: rgba(22, 22, 22, 0.6);
 	grid-area: addProduct-semiCirlce-wrapper;
-	border-bottom-left-radius: 53% 100%;
-	border-bottom-right-radius: 53% 100%;
-	width: 95.8%;
-	height: 120%;
+	border-bottom-left-radius: 50% 100%;
+	border-bottom-right-radius: 50% 100%;
+	width: 96%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	justify-self: center;

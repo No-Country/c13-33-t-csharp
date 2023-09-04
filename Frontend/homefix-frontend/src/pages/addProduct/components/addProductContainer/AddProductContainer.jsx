@@ -5,11 +5,11 @@ import cameraIcon from "../../../../assets/image/camera-solid.png";
 import imageIcon from "../../../../assets/image/bi_image.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCreateProduct } from "../../../../reducers/allProductsDataReducer";
-import createProductService from "../../../../services/createProduct";
+import { createProduct } from "../../../../services/createProduct";
 import './AddProductContainerResponsive.css'
 
 export default function AddProductContainer() {
+  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
   const [categorySelect, setCategorySelect] = useState([]);
   const [brandSelect, setBrandSelect] = useState([]);
@@ -86,52 +86,29 @@ export default function AddProductContainer() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const productData = {
-    id: inputValues.id,
-    nombre: inputValues.nombre,
-    descripcion: inputValues.nombre.descripcion,
-    cantidad: stock,
-    cantidadMinima: "5",
-    costo: inputValues.costo,
-    precio: inputValues.precio,
-    peso: inputValues.peso,
-    alto: inputValues.alto,
-    ancho: inputValues.ancho,
-    imagen: productImage,
-    marcaid: brandSelect.id,
-    marca: brandSelect.nombre,
-    categoriaId: categorySelect.id,
-    categoria: categorySelect.categoria,
-    subcategoria: categorySelect.categoria,
-    updatedAt: formattedDate,
-    usuarioUltimaModificacion: user.userName,
-	token: user.token
-  }	
-  handleDispatch(productData);
-}
-
-
-const handleDispatch = async (productData) => {
-  try {
-    const newProduct = await createProductService.createProduct(productData)
-    dispatch(setCreateProduct(newProduct))
-    navigate('/inventory')
-  } catch (error) {
-    console.log('error');
-  }
-}
-
-/*  const dispatchdata = async(productData) => {
-	try {
-		const newProduct = await createProductService.createPrduct({ productData })
-		dispatch(setCreateProduct(newProduct))
-		navigate('/')
-	} catch (error) {
-		dispatch(
-			error('error')
-		)
-	}
-} */
+    const formData = new FormData();
+    formData.append('id', inputValues.id);
+    formData.append('nombre', inputValues.nombre);
+    formData.append('descripcion', inputValues.descripcion);
+    formData.append('cantidad', stock);
+    formData.append('cantidadMinima', '5');
+    formData.append('costo', inputValues.costo);
+    formData.append('precio', inputValues.precio);
+    formData.append('peso', inputValues.peso);
+    formData.append('alto', inputValues.alto);
+    formData.append('ancho', inputValues.ancho);
+    formData.append('imagen', productImage);
+    formData.append('marcaid', brandSelect.id);
+    formData.append('marca', brandSelect.nombre);
+    formData.append('categoriaId', categorySelect.id);
+    formData.append('categoria', categorySelect.categoria);
+    formData.append('subcategoria', categorySelect.subcategoria);
+    formData.append('updatedAt', formattedDate);
+    formData.append('usuarioUltimaModificacion', user.userName);
+    dispatch(createProduct(formData, token))
+    navigate('/inventory');
+  };
+  
 
 
 

@@ -7,16 +7,9 @@ const allProductsDataSlice = createSlice({
     setAllProductsData(state, action) {
       return action.payload;
     },
-    setCreateProduct(state, action) {
-      state.push(action.payload);
-    },
-    setDeleteProduct(state, action) {
-      const updatedProducts = state.find((product) => product.id === action.payload);
-	  return { ...updatedProducts };
-    },
   },
 });
 
-export const { setAllProductsData, setCreateProduct,setDeleteProduct } =
+export const { setAllProductsData, setCreateProduct, setDeleteProduct,updateProduct } =
   allProductsDataSlice.actions;
 export default allProductsDataSlice.reducer;

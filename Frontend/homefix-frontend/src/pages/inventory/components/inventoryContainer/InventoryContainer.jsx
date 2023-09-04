@@ -12,7 +12,7 @@ import "./InventoryContainerResponsive.css";
 import noImage from "../../../../assets/image/icons8-sin-imágen-100.png";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
-import { updateProduct } from "../../../../reducers/updateProductReducer";
+import { updateProduct } from "../../../../reducers/allProductsDataReducer";
 const { format } = require("date-fns");
 
 export default function InventoryContainer() {
