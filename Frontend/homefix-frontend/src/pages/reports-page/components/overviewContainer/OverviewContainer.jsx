@@ -1,5 +1,6 @@
 import DataBox from '../DataBox/DataBox'
 import './OverviewContainer.css'
+import questIcon from '../../../../assets/image/quest-icon.svg'
 
 const OverviewContainer = () => {
 	return (
@@ -17,7 +18,12 @@ const OverviewContainer = () => {
 					number={'3.545.878'}
 					numberFormat={'$'}
 				/>
-				<DataBox title={'ROS'} number={'20.33'} numberFormat={'%'} />
+				<DataBox
+					title={'ROS'}
+					number={'20.33'}
+					numberFormat={'%'}
+					icon={questIcon}
+				/>
 				<DataBox title={'Productos vendidos'} number={'72'} numberFormat={''} />
 			</div>
 		</div>

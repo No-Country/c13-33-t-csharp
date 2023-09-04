@@ -1,4 +1,5 @@
 .databox-container {
+	position: relative;
 	background-color: #FBAE43;
 	width: 23%;
 	border-radius: 1rem;
@@ -22,4 +23,41 @@
 	font-size: 2rem;
 	font-weight: 400;
 	margin: 0;
+}
+
+.databox-icon-container {
+	position: absolute;
+	background-color: #222222;
+	width: 1.625rem;
+	height: 1.625rem;
+	border-radius: 50%;
+	right: 0;
+	top: -0.44rem;
+}
+
+.databox-icon-infotext {
+	position: absolute;
+	width: 14.75rem;
+	height: 6.125rem;
+	padding: 1.25rem 1.5rem 1.31rem;
+	right: 0;
+	top: 2.19rem;
+	background-color: #FDD6A0;
+	z-index: 1;
+	border-radius: 0.5rem;
+	display: none;
+}
+
+.databox-icon-infotext-paragraph {
+	font-size: 1rem;
+	font-weight: 400;
+	margin: 0;
+	text-align: justify;
+	line-height: normal;
+}
+
+.databox-icon-container:hover {
+	.databox-icon-infotext {
+		display: block;
+	}
 }
