@@ -7,6 +7,7 @@ import DescriptionContainer from '../components/descriptionContainer/Description
 import OverviewContainer from '../components/overviewContainer/OverviewContainer'
 import SalesContainer from '../components/salesContainer/SalesContainer'
 import SoldProductsContainer from '../components/soldProductsContainer/SoldProductsContainer'
+import BestSellingContainer from '../components/bestSellingContainer/BestSellingContainer'
 
 const Layout = () => {
 	return (
@@ -19,6 +20,7 @@ const Layout = () => {
 			<OverviewContainer />
 			<SalesContainer />
 			<SoldProductsContainer />
+			<BestSellingContainer />
 		</div>
 	)
 }

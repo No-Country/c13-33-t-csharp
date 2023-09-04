@@ -1,6 +1,6 @@
 .reports-layout {
 	background-color: #f8f8f8;
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -16,7 +16,7 @@
 		"navBar-container reports-overview-container"
 		"navBar-container reports-sales-container"
 		"navBar-container reports-sold-products-container"
-		"navBar-container ."
+		"navBar-container reports-best-selling-container"
 		"navBar-container .";
 	padding: 40px 60px;
 }
