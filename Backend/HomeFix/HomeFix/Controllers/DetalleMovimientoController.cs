@@ -14,6 +14,12 @@ public class DetalleMovimientoController : BaseController
         _context = context;
     }
 
+    /// <summary>
+    /// Elimina un detalle movimiento de la db y revierte cambios a datos relacionados
+    /// </summary>
+    /// <param name="id">Id del movimientoDetalle a eliminar</param>
+    /// <returns>Confirmacion de eliminacion</returns>
+    
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Delete(int id)
     {
@@ -42,6 +48,12 @@ public class DetalleMovimientoController : BaseController
         return Ok();
     }
 
+    /// <summary>
+    /// Inserta un movimientoDetalle dentro de la db y modifica datos relacionados a este
+    /// </summary>
+    /// <param name="detalle">movimientoDetalle a registrar</param>
+    /// <returns>Confirmacion de registro</returns>
+    
     [HttpPost]
     public async Task<ActionResult<int>> InsertDetalleMovimiento(DetalleMovimientoDto detalle)
     {
@@ -85,6 +97,12 @@ public class DetalleMovimientoController : BaseController
 
     }
 
+    /// <summary>
+    /// Edita un detalleMovimiento de la base de datos y sus datos relacionados
+    /// </summary>
+    /// <param name="detalle">Detalle a editar</param>
+    /// <returns>Confirmacion de edicion</returns>
+    
     [HttpPut]
     public async Task<ActionResult<int>> EditDetalleMovimiento(DetalleMovimientoDto detalle)
     {

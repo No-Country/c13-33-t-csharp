@@ -13,8 +13,12 @@ public class CreateArticuloDto
     [Required] public int CantidadMinima { get; set; }
 
     [Required] public decimal Costo { get; set; }
-
-
+    
+    [Required]
+    public int MarcaId { get; set; }
+    [Required]
+    public int CategoriaId { get; set; }
+    
     public decimal Peso { get; set; }
 
 
@@ -25,10 +29,7 @@ public class CreateArticuloDto
 
 
     public IFormFile Imagen { get; set; }
-
-    public int MarcaId { get; set; }
-
-    public int CategoriaId { get; set; }
+    
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
