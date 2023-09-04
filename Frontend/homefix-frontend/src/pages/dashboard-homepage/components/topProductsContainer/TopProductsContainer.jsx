@@ -1,7 +1,7 @@
 import React from 'react'
 import './TopProductsContainer.css'
 import { useSelector } from 'react-redux'
-import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
+import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
 
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)

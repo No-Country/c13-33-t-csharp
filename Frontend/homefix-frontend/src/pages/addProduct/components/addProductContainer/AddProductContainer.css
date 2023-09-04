@@ -117,8 +117,8 @@
 	grid-area: addProduct-semiCirlce-wrapper;
 	border-bottom-left-radius: 50% 100%;
 	border-bottom-right-radius: 50% 100%;
-	width: 95.5%;
-	height: 95%;
+	width: 96%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	justify-self: center;
@@ -294,3 +294,22 @@
 	background-color: #fbae43;
 	text-align: center;
 }
+
+.imgProduct-container{
+	width: 100%;
+	background-color: transparent !important;
+	display: flex;
+}
+
+
+.img-circle {
+	border-radius: 50%;
+	max-width: 40%; 
+	height: auto;
+  }
+
+
+  .messure{
+	display: flex;
+	flex-direction: row;
+  }
