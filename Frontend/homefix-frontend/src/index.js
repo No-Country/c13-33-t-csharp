@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App';
+import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -13,6 +13,8 @@ import messageReducer from './reducers/messageReducer'
 import dashboardDataReducer from './reducers/dashboardDataReducer'
 import salesChartDataReducer from './reducers/salesChartDataReducer'
 import topSalesReducer from './reducers/topSalesReducer'
+import monthSalesReducer from './reducers/monthSalesReducer'
+import consultedMonthReducer from './reducers/consultedMonthReducer'
 
 const queryClient = new QueryClient()
 
@@ -24,6 +26,8 @@ const store = configureStore({
 		dashboardData: dashboardDataReducer,
 		salesChartData: salesChartDataReducer,
 		topSales: topSalesReducer,
+		monthSales: monthSalesReducer,
+		consultedMonth: consultedMonthReducer,
 	},
 })
 

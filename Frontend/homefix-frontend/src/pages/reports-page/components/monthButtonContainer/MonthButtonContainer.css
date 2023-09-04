@@ -18,4 +18,5 @@
 .reports-month-button-text {
 	font-size: 1.5rem;
 	color: white;
+	text-transform: capitalize;
 }

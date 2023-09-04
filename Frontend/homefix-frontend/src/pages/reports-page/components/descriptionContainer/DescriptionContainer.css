@@ -6,9 +6,14 @@
 
 .reports-description-title {
 	font-size: 1.5rem;
+	text-transform: capitalize;
 }
 
 .reports-description-text {
 	margin: 0;
 	font-weight: 400;
+}
+
+.reports-description-text span {
+	text-transform: capitalize;
 }
