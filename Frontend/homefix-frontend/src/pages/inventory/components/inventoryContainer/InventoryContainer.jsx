@@ -12,7 +12,7 @@ import "./InventoryContainerResponsive.css";
 import noImage from "../../../../assets/image/icons8-sin-imágen-100.png";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
-import { updateProduct } from "../../../../reducers/allProductsDataReducer";
+import { updateProduct } from "../../../../services/updateProduct";
 const { format } = require("date-fns");
 
 export default function InventoryContainer() {
@@ -36,6 +36,16 @@ export default function InventoryContainer() {
   const [brandSelect, setBrandSelect] = useState([]);
   const [productIdForDelete, setProductIdForDelete] = useState();
   const [editedProduct, setEditedProduct] = useState([]);
+  const [inputValues, setInputValues] = useState({
+    id: "",
+    nombre: "",
+    descripcion: "",
+    costo: "",
+    precio: "",
+    peso: "",
+    alto: "",
+    ancho: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,7 +59,7 @@ export default function InventoryContainer() {
     } else{
       setIsAdministrator(false)
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (detailShow) {
@@ -148,6 +158,30 @@ export default function InventoryContainer() {
         return product;
       })
     );
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('id', inputValues.id);
+    formData.append('nombre', inputValues.nombre);
+    formData.append('descripcion', inputValues.descripcion);
+    formData.append('costo', inputValues.costo);
+    formData.append('precio', inputValues.precio);
+    formData.append('peso', inputValues.peso);
+    formData.append('alto', inputValues.alto);
+    formData.append('ancho', inputValues.ancho);
+    dispatch(updateProduct(formData, token));
+
+    navigate('/inventory');
   };
 
   return (
@@ -352,6 +386,7 @@ export default function InventoryContainer() {
                                 name="nombre"
                                 className="editable-input"
                                 placeholder={product.nombre}
+                                onChange={handleInputChange}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -390,6 +425,7 @@ export default function InventoryContainer() {
                                 name="descripcion"
                                 className="editable-input"
                                 placeholder={product.descripcion}
+                                onChange={handleInputChange}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -443,6 +479,7 @@ export default function InventoryContainer() {
                                 name="peso"
                                 className="editable-input"
                                 placeholder={product.peso}
+                                onChange={handleInputChange}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -457,6 +494,7 @@ export default function InventoryContainer() {
                                 name="costo"
                                 className="editable-input"
                                 placeholder={`$${product.costo}`}
+                                onChange={handleInputChange}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -481,6 +519,7 @@ export default function InventoryContainer() {
                                 name="precio"
                                 className="editable-input"
                                 placeholder={`$${product.precio}`}
+                                onChange={handleInputChange}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -698,7 +737,7 @@ export default function InventoryContainer() {
                 type="button"
                 class="btn btn-dark"
                 data-bs-dismiss="modal"
-                onClick={() => sendUpdateProduct()}
+                onClick={(e) => handleSubmit(e)}
               >
                 Si, confirmo
               </button>

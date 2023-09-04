@@ -6,7 +6,7 @@ import imageIcon from "../../../../assets/image/bi_image.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../../../services/createProduct";
-import './AddProductContainerResponsive.css'
+import "./AddProductContainerResponsive.css";
 
 export default function AddProductContainer() {
   const token = useSelector((state) => state.token);
@@ -47,13 +47,13 @@ export default function AddProductContainer() {
   const newDate = new Date();
   const formattedDate = format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-  const selectCategory = (e,category) => {
-	e.preventDefault();
+  const selectCategory = (e, category) => {
+    e.preventDefault();
     setCategorySelect(category);
   };
 
-  const selectBrand = (e,brand) => {
-	e.preventDefault();
+  const selectBrand = (e, brand) => {
+    e.preventDefault();
     setBrandSelect(brand);
   };
 
@@ -87,34 +87,31 @@ export default function AddProductContainer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('id', inputValues.id);
-    formData.append('nombre', inputValues.nombre);
-    formData.append('descripcion', inputValues.descripcion);
-    formData.append('cantidad', stock);
-    formData.append('cantidadMinima', '5');
-    formData.append('costo', inputValues.costo);
-    formData.append('precio', inputValues.precio);
-    formData.append('peso', inputValues.peso);
-    formData.append('alto', inputValues.alto);
-    formData.append('ancho', inputValues.ancho);
-    formData.append('imagen', productImage);
-    formData.append('marcaid', brandSelect.id);
-    formData.append('marca', brandSelect.nombre);
-    formData.append('categoriaId', categorySelect.id);
-    formData.append('categoria', categorySelect.categoria);
-    formData.append('subcategoria', categorySelect.subcategoria);
-    formData.append('updatedAt', formattedDate);
-    formData.append('usuarioUltimaModificacion', user.userName);
-    dispatch(createProduct(formData, token))
-    navigate('/inventory');
+    formData.append("id", inputValues.id);
+    formData.append("nombre", inputValues.nombre);
+    formData.append("descripcion", inputValues.descripcion);
+    formData.append("cantidad", stock);
+    formData.append("cantidadMinima", "5");
+    formData.append("costo", inputValues.costo);
+    formData.append("precio", inputValues.precio);
+    formData.append("peso", inputValues.peso);
+    formData.append("alto", inputValues.alto);
+    formData.append("ancho", inputValues.ancho);
+    formData.append("imagen", productImage);
+    formData.append("marcaid", brandSelect.id);
+    formData.append("marca", brandSelect.nombre);
+    formData.append("categoriaId", categorySelect.id);
+    formData.append("categoria", categorySelect.categoria);
+    formData.append("subcategoria", categorySelect.subcategoria);
+    formData.append("updatedAt", formattedDate);
+    formData.append("usuarioUltimaModificacion", user.userName);
+    dispatch(createProduct(formData, token));
+    navigate("/inventory");
   };
-  
-
-
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <div className="add-product-title-container" >
+      <div className="add-product-title-container">
         <div className="add-product-title">
           <h2 className="text-center">Inventario - Añadir Producto</h2>
         </div>
@@ -159,6 +156,7 @@ export default function AddProductContainer() {
               <div className="addProduct-semiCirlce-wrapper">
                 <label>
                   <input
+                    name="imagen"
                     type="file"
                     accept="image/*"
                     hidden
@@ -218,7 +216,7 @@ export default function AddProductContainer() {
                   <button
                     value={brand}
                     className="dropdown-item  z-index-3 bg-white"
-                    onClick={(e) => selectBrand(e,brand)}
+                    onClick={(e) => selectBrand(e, brand)}
                   >
                     {brand.nombre}
                   </button>
@@ -255,7 +253,7 @@ export default function AddProductContainer() {
                   <button
                     value={category}
                     className="dropdown-item z-index-3 bg-white"
-                    onClick={(e) => selectCategory(e,category)}
+                    onClick={(e) => selectCategory(e, category)}
                   >
                     {category.categoria}
                   </button>
@@ -380,6 +378,6 @@ export default function AddProductContainer() {
           </div>
         </div>
       </div>
-	  </form>
+    </form>
   );
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const updateProduct = (productId, updatedProductData, token) => async (dispatch) => {
+export const updateProduct = (formData, token) => async (dispatch) => {
   try {
-    const response = await axios.put(`https://homefix.fly.dev/api/articulos/${productId}`, updatedProductData, {
+    const response = await axios.put(`https://homefix.fly.dev/api/articulos/${formData.id}`, formData, {
       headers: {
         Authorization: token
       },
