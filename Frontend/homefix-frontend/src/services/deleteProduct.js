@@ -8,7 +8,7 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
       },
     });
 
-    dispatch({ type: "DELETE_PRODUCT", payload: productId });
+    dispatch({type: "DELETE_PRODUCT", payload: productId });
   } catch (error) {
     console.error("Error al eliminar el producto:", error);
   }

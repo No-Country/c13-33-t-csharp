@@ -5,8 +5,8 @@ import cameraIcon from "../../../../assets/image/camera-solid.png";
 import imageIcon from "../../../../assets/image/bi_image.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCreateProduct } from "../../../../reducers/createProductReducer";
-import createProductService  from "../../../../services/createProduct";
+import { setCreateProduct } from "../../../../reducers/allProductsDataReducer";
+import createProductService from "../../../../services/createProduct";
 import './AddProductContainerResponsive.css'
 
 export default function AddProductContainer() {
@@ -43,6 +43,7 @@ export default function AddProductContainer() {
 
   const user = useSelector((state) => state.user);
 
+  console.log(user);
   const newDate = new Date();
   const formattedDate = format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -106,10 +107,21 @@ export default function AddProductContainer() {
     usuarioUltimaModificacion: user.userName,
 	token: user.token
   }	
- dispatchdata(productData)
+  handleDispatch(productData);
 }
 
- const dispatchdata = async(productData) => {
+
+const handleDispatch = async (productData) => {
+  try {
+    const newProduct = await createProductService.createProduct(productData)
+    dispatch(setCreateProduct(newProduct))
+    navigate('/inventory')
+  } catch (error) {
+    console.log('error');
+  }
+}
+
+/*  const dispatchdata = async(productData) => {
 	try {
 		const newProduct = await createProductService.createPrduct({ productData })
 		dispatch(setCreateProduct(newProduct))
@@ -119,7 +131,7 @@ export default function AddProductContainer() {
 			error('error')
 		)
 	}
-}
+} */
 
 
 

@@ -1,15 +1,14 @@
-// reducers/productReducer.js
 
 const initialState = {
-    products: [], // Tu estado de productos
+    products: [], 
   };
   
   const deleteProductReducer = (state = initialState, action) => {
+    
     switch (action.type) {
       case 'DELETE_PRODUCT':
-        const updatedProducts = state.products.filter(
-          (product) => product.id !== action.payload
-        );
+        const updatedProducts = state.find(product => product.id === action.payload);
+        console.log(updatedProducts);
         return { ...state, products: updatedProducts };
   
       default:
