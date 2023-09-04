@@ -30,7 +30,6 @@ namespace HomeFix.Controllers
         {
             try
             {
-
                 var articulos = await _context.Set<ArticuloMasVendidoDto>().ToListAsync();  
                 return Ok(articulos);
             }catch(Exception e)

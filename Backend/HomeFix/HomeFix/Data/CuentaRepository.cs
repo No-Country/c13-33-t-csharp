@@ -1,16 +1,25 @@
+using HomeFix.Dbcontext;
 using HomeFix.Interfaces;
 using HomeFix.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeFix.Data;
 
 public class CuentaRepository : ICuentaRepository
 {
     private readonly UserManager<Usuario> _userManager;
+    private readonly HomeFixDbContext _context;
 
-    public CuentaRepository(UserManager<Usuario> userManager)
+    public CuentaRepository(UserManager<Usuario> userManager, HomeFixDbContext context)
     {
         _userManager = userManager;
+        _context = context;
+    }
+
+    public async Task<List<Usuario>> GetAllUsers()
+    {
+        return await _context.Users.ToListAsync();
     }
 
     public async Task<Usuario> FindUserByEmail(string email)

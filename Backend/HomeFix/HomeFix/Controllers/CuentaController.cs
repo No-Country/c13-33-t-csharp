@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Interfaces;
 using HomeFix.Model;
@@ -18,8 +19,8 @@ public class CuentaController : BaseController
     private readonly IConfiguration _config;
     private readonly IUnitOfWork _uow;
 
-
-    public CuentaController(TokenService tokenService, IEmailService emailService, IConfiguration config, IUnitOfWork uow)
+    public CuentaController(TokenService tokenService, IEmailService emailService,
+        IConfiguration config, IUnitOfWork uow)
     {
         _tokenService = tokenService;
         _emailService = emailService;
@@ -32,7 +33,6 @@ public class CuentaController : BaseController
     /// </summary>
     /// <param name="loginDto">Email y Contraseña del usuario a loguear</param>
     /// <returns>Confirmacion de logueo + Token necesaria para operaciones de la API</returns>
-    
     [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<UsuarioDto>> Login(LoginDto loginDto)
@@ -48,14 +48,14 @@ public class CuentaController : BaseController
             {
                 UserName = usuario.UserName,
                 ImagenPerfil = usuario.ImagenPerfil,
-                Token =  await _tokenService.GenerateToken(usuario),
+                Token = await _tokenService.GenerateToken(usuario),
                 Roles = roles
             };
         }
 
         return Unauthorized();
     }
-    
+
     [Authorize]
     [HttpGet]
     public async Task<ActionResult<UsuarioDto>> GetCurrentUser()
@@ -66,51 +66,50 @@ public class CuentaController : BaseController
         {
             UserName = usuario.UserName,
             ImagenPerfil = usuario.ImagenPerfil,
-            Token =  await _tokenService.GenerateToken(usuario),
+            Token = await _tokenService.GenerateToken(usuario),
         };
     }
-    
+
     /// <summary>
     /// Recuperacion de contraseña
     /// </summary>
     /// <param name="forgotPasswordDto">Email del usuario a recuperar contraseña</param>
     /// <returns>Confirmacion de recuperacion de contraseña + email al correo del usuario</returns>
-
     [AllowAnonymous]
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
     {
         Console.WriteLine(forgotPasswordDto.Email);
         var user = await _uow.CuentaRepository.FindUserByEmail(forgotPasswordDto.Email);
-        
+
 
         if (user != null)
         {
             var token = await _uow.CuentaRepository.GenerateResetToken(user);
             var baseUrl = _config.GetSection("ClientUrl").Value;
             var url = $"{baseUrl}/reset?email={user.Email}&token={token}";
-            
+
             var request = new EmailDto
             {
                 To = user.Email,
                 Subject = "Recuperar contraseña",
                 Body = $"Por favor ingrese al siguiente link para recuperar la contraseña. <a href={url}>Click aqui</a>"
             };
-            
+
             _emailService.SendEmail(request);
-         
-            return StatusCode(StatusCodes.Status200OK, "Envio de email para recuperar contraseña enviado. Por favor verifique su direccion de email.");
+
+            return StatusCode(StatusCodes.Status200OK,
+                "Envio de email para recuperar contraseña enviado. Por favor verifique su direccion de email.");
         }
 
         return StatusCode(StatusCodes.Status400BadRequest);
     }
-    
+
     /// <summary>
     /// Reemplazar contraseña
     /// </summary>
     /// <param name="resetPassword">DTO de datos necesarios para cambiar la contraseña</param>
     /// <returns>Confirmacion de cambio de contraseña</returns>
-    
     [AllowAnonymous]
     [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
@@ -118,7 +117,8 @@ public class CuentaController : BaseController
         var user = await _uow.CuentaRepository.FindUserByEmail(resetPassword.Email);
         if (user != null)
         {
-            var resetPasswordResult = await _uow.CuentaRepository.ResetPassword(user, resetPassword.Token, resetPassword.Password);
+            var resetPasswordResult =
+                await _uow.CuentaRepository.ResetPassword(user, resetPassword.Token, resetPassword.Password);
             if (!resetPasswordResult.Succeeded)
             {
                 foreach (var error in resetPasswordResult.Errors)
@@ -128,6 +128,7 @@ public class CuentaController : BaseController
 
                 return Ok(ModelState);
             }
+
             return StatusCode(StatusCodes.Status200OK, "La contraseña se ha modificado correctamente");
         }
 
@@ -144,9 +145,8 @@ public class CuentaController : BaseController
     //         user
     //     });
     // }
-    
-    
-    
+
+
     //Los siguientes metodos son de desarrollo.
     // [AllowAnonymous]
     // [HttpPost("signup")]

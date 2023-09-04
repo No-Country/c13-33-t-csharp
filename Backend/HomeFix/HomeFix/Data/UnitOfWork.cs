@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HomeFix.Data;
 
-
 public class UnitOfWork : IUnitOfWork
 {
     private readonly HomeFixDbContext _context;
@@ -22,15 +21,13 @@ public class UnitOfWork : IUnitOfWork
 
     public IMarcasRepository MarcasRepository => new MarcasRepository(_context);
     public ICategoriasRepository CategoriasRepository => new CategoriasRepository(_context);
-    public ICuentaRepository CuentaRepository => new CuentaRepository(_userManager);
+    public ICuentaRepository CuentaRepository => new CuentaRepository(_userManager, _context);
     public IArticulosRepository ArticulosRepository => new ArticulosRepository(_context, _mapper);
+
+    public IUsuariosRepository UsuariosRepository => new UsuariosRepository(_context);
 
     public async Task<bool> Complete()
     {
         return await _context.SaveChangesAsync() > 0;
     }
-
-   
-    
-    
 }

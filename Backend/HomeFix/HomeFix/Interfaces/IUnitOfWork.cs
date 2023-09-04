@@ -9,6 +9,8 @@ public interface IUnitOfWork
     ICuentaRepository CuentaRepository { get; }
     
     IArticulosRepository ArticulosRepository { get; }
+    
+    IUsuariosRepository UsuariosRepository { get; }
     Task<bool> Complete();
 
  

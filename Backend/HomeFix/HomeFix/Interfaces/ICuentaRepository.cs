@@ -6,6 +6,7 @@ namespace HomeFix.Interfaces;
 
 public interface ICuentaRepository
 {
+    
     Task<Usuario> FindUserByEmail(string email);
     
     Task<Usuario> FindUserById(string id);

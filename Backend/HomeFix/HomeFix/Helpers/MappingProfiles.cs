@@ -9,6 +9,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Marca, MarcaDto>();
+        CreateMap<Usuario, UsuariosDto>();
 
         CreateMap<CreateMarcaDto, Marca>().ForMember(x => x.Articulos, opt => opt.Ignore());
         CreateMap<CreateCategoriaDto, Categoria>();
