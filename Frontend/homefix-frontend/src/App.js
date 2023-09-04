@@ -20,7 +20,7 @@ import allProductsService from "./services/allProducts";
 import { setAllProductsData } from "./reducers/allProductsDataReducer";
 import allBrandsService from "./services/brands";
 import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
-import allCategoriesService from "./services//categories";
+import allCategoriesService from "./services/categories";
 import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
 
 
@@ -61,6 +61,7 @@ const App = () => {
       dispatch(setAllCategoriesData(data));
     });
   }, [dispatch, token]);
+
 	useEffect(() => {
 		dashboardService.getData(token).then(data => {
 			dispatch(setDashboardData(data))

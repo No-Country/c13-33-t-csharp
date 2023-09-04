@@ -9,12 +9,17 @@ import closeIcon from "../../../../assets/image/Vector.png";
 import boxIcon from "../../../../assets/image/solar_box-bold.png";
 import { useSelector } from "react-redux";
 import "./InventoryContainerResponsive.css";
+import noImage from "../../../../assets/image/icons8-sin-imágen-100.png";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../../services/deleteProduct";
+import { updateProduct } from "../../../../reducers/updateProductReducer";
+const { format } = require("date-fns");
 
 export default function InventoryContainer() {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
-  
+
   const [detailShow, setDetailShow] = useState(false);
   const [isFiltered, setIsFiltered] = useState(null);
   const [animationShown, setAnimationShown] = useState(0);
@@ -27,9 +32,14 @@ export default function InventoryContainer() {
   const [allProducts, setAllProducts] = useState([]);
   const [filterSelected, setFilterSelected] = useState("Por Producto");
   const [searchProduct, setSearchProduct] = useState("");
+  const [categorySelect, setCategorySelect] = useState([]);
+  const [brandSelect, setBrandSelect] = useState([]);
+  const [productIdForDelete, setProductIdForDelete] = useState();
+  const [editedProduct, setEditedProduct] = useState([]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
+  const token = useSelector((state) => state.token);
 
   useEffect(() => {
     if (detailShow) {
@@ -42,17 +52,21 @@ export default function InventoryContainer() {
 
   useEffect(() => {
     const productsCopyForName = [...allProductsData];
-    const filteredByName = productsCopyForName.sort((a, b) => a.nombre - b.nombre);
+    const filteredByName = productsCopyForName.sort(
+      (a, b) => a.nombre - b.nombre
+    );
     setAllProducts(filteredByName);
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if(isFiltered === null){
+    if (isFiltered === null) {
       const productsCopyForProduct = [...allProductsData];
-    const filteredByProduct = productsCopyForProduct.sort((a, b) => a.nombre - b.nombre);
-    setAllProducts(filteredByProduct)
+      const filteredByProduct = productsCopyForProduct.sort(
+        (a, b) => a.nombre - b.nombre
+      );
+      setAllProducts(filteredByProduct);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const productsCopyForID = [...allProductsData];
@@ -60,7 +74,9 @@ export default function InventoryContainer() {
     setFilteredProductsById(filteredById);
 
     const productsCopyForCategory = [...allProductsData];
-    const filteredByCategory = productsCopyForCategory.sort((a, b) => a.categoria - b.categoria);
+    const filteredByCategory = productsCopyForCategory.sort(
+      (a, b) => a.categoria - b.categoria
+    );
     setFilteredProductsCategory(filteredByCategory);
 
     // Dependiendo del valor de isFiltered, actualiza allProducts con la lista correcta
@@ -68,13 +84,36 @@ export default function InventoryContainer() {
   }, [isFiltered]);
 
   const filteredProductsById = (e) => {
-    setFilterSelected(e.target.value)
+    setFilterSelected(e.target.value);
     setIsFiltered(true);
   };
 
   const filteredProductsByCategory = (e) => {
-    setFilterSelected(e.target.value)
+    setFilterSelected(e.target.value);
     setIsFiltered(false);
+  };
+
+  const selectCategory = (category) => {
+    setCategorySelect(category);
+  };
+
+  const selectBrand = (brand) => {
+    setBrandSelect(brand);
+  };
+
+  const updateProductHandler = (product) => {
+    const newDate = new Date();
+    const formattedDate = format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+    const newProduct = {
+      ...product,
+      updatedAt: formattedDate,
+    };
+    setEditedProduct(newProduct);
+  };
+
+  const sendUpdateProduct = () => {
+    dispatch(updateProduct({ id: editedProduct.id, ...editedProduct }));
   };
 
   const increaseProductQuantity = (productId) => {
@@ -154,10 +193,20 @@ export default function InventoryContainer() {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button value="ID" className="button-reset  w-50" onClick={(e) => filteredProductsById(e)}>Por ID</button>
+                  <button
+                    value="ID"
+                    className="button-reset  w-50"
+                    onClick={(e) => filteredProductsById(e)}
+                  >
+                    Por ID
+                  </button>
                 </li>
                 <li>
-                  <button value="Categoria" className="button-reset mx-2 w-75" onClick={(e)=> filteredProductsByCategory(e)}>
+                  <button
+                    value="Categoria"
+                    className="button-reset mx-2 w-75"
+                    onClick={(e) => filteredProductsByCategory(e)}
+                  >
                     Por Categorias
                   </button>
                 </li>
@@ -169,245 +218,178 @@ export default function InventoryContainer() {
           <table className="table-format">
             <thead className="table-title">
               <tr className="sticky-top">
-                <th scope="col">Foto</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Marca</th>
-                <th scope="col">ID</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Vendidos</th>
-                <th scope="col">Stock</th>
+                <th className="hidden-mobile"  scope="col">Foto</th>
+                <th scope="col">
+                  Producto
+                </th>
+                <th className="hidden-mobile"  scope="col">Marca</th>
+                <th className="hidden-mobile"  scope="col">ID</th>
+                <th className="hidden-mobile"  scope="col">Categoria</th>
+                <th id="precio" scope="col">
+                  Precio
+                </th>
+                <th scope="col">
+                  Vendidos
+                </th>
+                <th id="stock" scope="col">
+                  Stock
+                </th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-            {allProducts.filter(products => products.nombre.toLowerCase().includes(searchProduct))?.map((product, i) => (
-                <>
-                  <br></br>
-                  <tr
-                    key={i}
-                    className={`accordion-toggle collapsed pt-5`}
-                    onClick={() => setDetailShow(!detailShow)}
-                    id="accordion1"
-                    data-bs-toggle="collapse"
-                    data-bs-parent="#accordion1"
-                    href={`#collapse${i}`}
-                    aria-controls={`collapse${i}`}
-                  >
-                    <td>
-                      <img
-                        src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
-                        alt="Product Icon"
-                        className="product-icon"
-                      />
-                    </td>
-                    <td>{product.nombre}</td>
-                    <td>{product.marca}</td>
-                    <td>{product.id}</td>
-                    <td>{product.categoria}</td>
-                    <td>${product.precio}</td>
-                    <td>{product.cantidad}</td>
-                    <td>{product.cantidad}</td>
-                    <td>
-                      <motion.div animate={rotateAnimation}>
+              {allProducts
+                .filter((products) =>
+                  products.nombre.toLowerCase().includes(searchProduct)
+                )
+                ?.map((product, i) => (
+                  <>
+                    <br></br>
+                    <tr
+                      key={i}
+                      className={`accordion-toggle collapsed pt-5`}
+                      onClick={() => setDetailShow(!detailShow)}
+                      id="accordion1"
+                      data-bs-toggle="collapse"
+                      data-bs-parent="#accordion1"
+                      href={`#collapse${i}`}
+                      aria-controls={`collapse${i}`}
+                    >
+                      <td>
                         <img
-                          className="detailArrow"
-                          src={arrowDown}
-                          alt="down arrow"
+                          src={product.imagen}
+                          alt="Product Icon"
+                          className="product-icon"
                         />
-                      </motion.div>
-                    </td>
-                  </tr>
-                  <tr class="hide-table-padding ">
-                    <td colspan="9">
-                      <div
-                        id={`collapse${i}`}
-                        class="collapse in p-3 product-details"
-                      >
-                        <div className="product-image-container">
+                      </td>
+                      <td className="mobile-name" >{product.nombre}</td>
+                      <td className="hidden-mobile" >{product.marca}</td>
+                      <td className="hidden-mobile" >{product.id}</td>
+                      <td className="hidden-mobile" >{product.categoria}</td>
+                      <td>${product.precio}</td>
+                      <td>{product.cantidad}</td>
+                      <td>{product.cantidad}</td>
+                      <td>
+                        <motion.div animate={rotateAnimation}>
                           <img
-                            className="product-img"
-                            src="https://img.freepik.com/free-photo/kitchen-front-utensil-nobody-equipment_1303-373.jpg?w=996&t=st=1693353157~exp=1693353757~hmac=21a32e5570de8752b05118bf2b847784616a4b7f559749e673d3341f9274ab6b"
-                            alt="productimage"
+                            className="detailArrow"
+                            src={arrowDown}
+                            alt="down arrow"
                           />
-                          {editor ? (
-                            // Mostrar este botón cuando editor es true
-                            <button
-                              onClick={() => setEditor(false)} // Cambiar el valor de editor a false
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target="#saveModal"
-                              class="btn btn-yellow product-detail-button rounded-pill"
-                            >
-                              Guardar
-                            </button>
-                          ) : (
-                            // Mostrar este botón cuando editor es false
-                            <button
-                              onClick={() => setEditor(true)} // Cambiar el valor de editor a true
-                              type="button"
-                              class="btn btn-dark product-detail-button rounded-pill"
-                            >
-                              Editar
-                            </button>
-                          )}
-                          {editor && isAdministrator ? (
-                            <button
-                              type="button"
-                              class="btn btn-delete mx-auto rounded-pill"
-                              data-bs-toggle="modal"
-                              data-bs-target="#deleteModal"
-                            >
-                              Eliminar
-                            </button>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className="product-name-container">
-                          <p className="product-detail-title">Producto</p>
-                          {editor ? (
-                            <input
-                              className="editable-input"
-                              placeholder="Lampara"
+                        </motion.div>
+                      </td>
+                    </tr>
+                    <tr class="hide-table-padding ">
+                      <td className="product-details-mobile" colspan="9">
+                        <div
+                          id={`collapse${i}`}
+                          class="collapse in p-3 product-details"
+                        >
+                          <div className="product-image-container">
+                            <img
+                              className="product-img"
+                              src={product.imagen}
+                              alt="productimage"
                             />
-                          ) : (
-                            <p className="product-detail-information">
-                              {product.nombre}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-measurements-container">
-                          <p className="product-detail-title">
-                            Ancho x Alto (cm)
-                          </p>
-                          {editor ? (
-                            <input
-                              className="editable-input"
-                              placeholder="40 x 29"
-                            />
-                          ) : (
-                            <p className="product-detail-information">
-                              {product.ancho} x {product.alto}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-ros-container">
-                          <p className="product-detail-title">
-                            Margen de ganancia
-                          </p>
-                          {editor && isAdministrator ? (
-                            <input
-                              className="addProduct-editable-input-yellow rounded-pill"
-                              placeholder="20%"
-                            />
-                          ) : (
-                            <p className="product-detail-information ros-information rounded-pill text-center">
-                              20%
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-description-container">
-                          <p className="product-detail-title">Descripcion</p>
-                          {editor && isAdministrator ? (
-                            <input
-                              className="editable-input"
-                              placeholder={product.descripcion}
-                            />
-                          ) : (
-                            <p className="product-detail-information">
-                              {product.descripcion}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-brand-container">
-                          <p className="product-detail-title">Marca</p>
-                          {editor && isAdministrator ? (
-                            <div className="dropdown">
-                              <button
-                                className="button-reset btn-filter btn-outline-dark"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                {product.marca}
-                                <img
-                                  className="dropdown-arrow"
-                                  src={arrowDown}
-                                  alt="arrow down"
-                                />
-                              </button>
-                              <ul className="dropdown-menu">
-                                {allBrandsData.map((brand, i) => (
-                                  <li key={i}>
-                                    <a className="dropdown-item" href="#">
-                                      {brand.nombre}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ) : (
-                            <p className="product-detail-information">
-                              {product.marca}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-weight-container">
-                          <p className="product-detail-title">Peso</p>
-                          {editor ? (
-                            <input
-                              className="editable-input"
-                              placeholder={product.peso}
-                            />
-                          ) : (
-                            <p className="product-detail-information">
-                              {product.peso}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-cost-container">
-                          <p className="product-detail-title">Costo</p>
-                          {editor && isAdministrator ? (
-                            <input
-                              className="editable-input"
-                              placeholder={`$${product.costo}`}
-                            />
-                          ) : (
-                            <p className="product-detail-information">
-                              ${product.costo}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-id-container">
-                          <p className="product-detail-title">ID</p>
-                          <p className="product-detail-information">
-                            {product.id}
-                          </p>
-                        </div>
-                        <div className="product-sold-container">
-                          <p className="product-detail-title">Vendidos</p>
-                          <p className="product-detail-information">9</p>
-                        </div>
-                        <div className="product-price-container">
-                          <p className="product-detail-title">Precio</p>
-                          {editor && isAdministrator ? (
-                            <input
-                              className="editable-input"
-                              placeholder={`$${product.precio}`}
-                            />
-                          ) : (
-                            <p className="product-detail-information">
-                              ${product.precio}
-                            </p>
-                          )}
-                        </div>
-                        <div className="product-category-container">
-                          <p className="product-detail-title ">
-                            Categoria &gt; subcategoria
-                          </p>
-                          <p className="product-detail-information">
                             {editor ? (
+                              <button
+                                onClick={() => {
+                                  setEditor(false);
+                                  updateProductHandler(product);
+                                }}
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#saveModal"
+                                class="btn btn-yellow product-detail-button rounded-pill"
+                              >
+                                Guardar
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  setEditor(true);
+                                }}
+                                type="button"
+                                class="btn btn-dark product-detail-button rounded-pill"
+                              >
+                                Editar
+                              </button>
+                            )}
+                            {editor && isAdministrator ? (
+                              <button
+                                type="button"
+                                class="btn btn-delete mx-auto rounded-pill"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                onClick={() =>
+                                  setProductIdForDelete(product.id)
+                                }
+                              >
+                                Eliminar
+                              </button>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                          <div className="product-name-container">
+                            <p className="product-detail-title">Producto</p>
+                            {editor ? (
+                              <input
+                                className="editable-input"
+                                placeholder="Lampara"
+                              />
+                            ) : (
+                              <p className="product-detail-information">
+                                {product.nombre}
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-measurements-container">
+                            <p className="product-detail-title">
+                              Ancho x Alto (cm)
+                            </p>
+                            {editor ? (
+                              <input
+                                className="editable-input"
+                                placeholder="40 x 29"
+                              />
+                            ) : (
+                              <p className="product-detail-information">
+                                {product.ancho} x {product.alto}
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-ros-container">
+                            <p className="product-detail-title">
+                              Margen de ganancia
+                            </p>
+                            {editor && isAdministrator ? (
+                              <input
+                                className="addProduct-editable-input-yellow rounded-pill"
+                                placeholder="20%"
+                              />
+                            ) : (
+                              <p className="product-detail-information ros-information rounded-pill text-center">
+                                20%
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-description-container">
+                            <p className="product-detail-title">Descripcion</p>
+                            {editor && isAdministrator ? (
+                              <input
+                                className="editable-input"
+                                placeholder={product.descripcion}
+                              />
+                            ) : (
+                              <p className="product-detail-information">
+                                {product.descripcion}
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-brand-container">
+                            <p className="product-detail-title">Marca</p>
+                            {editor && isAdministrator ? (
                               <div className="dropdown">
                                 <button
                                   className="button-reset btn-filter btn-outline-dark"
@@ -415,7 +397,9 @@ export default function InventoryContainer() {
                                   data-bs-toggle="dropdown"
                                   aria-expanded="false"
                                 >
-                                  {product.categoria}
+                                  {brandSelect
+                                    ? brandSelect.nombre
+                                    : product.marca}
                                   <img
                                     className="dropdown-arrow"
                                     src={arrowDown}
@@ -423,70 +407,178 @@ export default function InventoryContainer() {
                                   />
                                 </button>
                                 <ul className="dropdown-menu">
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      categoria
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      categoria
-                                    </a>
-                                  </li>
+                                  {allBrandsData.map((brand, i) => (
+                                    <li key={i}>
+                                      <button
+                                        value={brand}
+                                        className="dropdown-item  z-index-3 bg-white"
+                                        onClick={(e) => selectBrand(brand)}
+                                      >
+                                        {brand.nombre}
+                                      </button>
+                                    </li>
+                                  ))}
                                 </ul>
                               </div>
                             ) : (
-                              <p>{product.categoria}</p>
+                              <p className="product-detail-information">
+                                {product.marca}
+                              </p>
                             )}
-                          </p>
-                        </div>
-                        <div className="product-stock-container">
-                          <div className="product-stock">
-                            <p className="product-detail-title mt-3">
-                              Stock actual
-                            </p>
-                            <p className="product-detail-information">
-                            {stock ? stock : product.cantidad}
-                            </p>
-                            {editor && isAdministrator ? (
-                              <div className="stock-box">
-                                <button
-                                  type="button"
-                                  class="btn btn-outline-dark button-stock-minus"
-                                  onClick={() => decreaseProductQuantity(product.id)}
-                                >
-                                  <p className="button-sign my-3">-</p>
-                                </button>
-                                <p className="product-detail-information stock-number">
-                                  {stock ? stock : product.cantidad}
-                                </p>
-                                <button
-                                  type="button"
-                                  class="btn btn-outline-dark button-stock-plus"
-                                  onClick={() => increaseProductQuantity(product.id)}
-                                >
-                                  <p className="button-sign my-3">+</p>
-                                </button>
-                              </div>
+                          </div>
+                          <div className="product-weight-container">
+                            <p className="product-detail-title">Peso</p>
+                            {editor ? (
+                              <input
+                                className="editable-input"
+                                placeholder={product.peso}
+                              />
                             ) : (
-                              <></>
+                              <p className="product-detail-information">
+                                {product.peso}
+                              </p>
                             )}
                           </div>
-                          <div className="product-modification">
-                            <p className="product-detail-title">
-                              Ultima modificacion
-                            </p>
-                            <p>02/07/2023 17:30</p>
+                          <div className="product-cost-container">
+                            <p className="product-detail-title">Costo</p>
+                            {editor && isAdministrator ? (
+                              <input
+                                className="editable-input"
+                                placeholder={`$${product.costo}`}
+                              />
+                            ) : (
+                              <p className="product-detail-information">
+                                ${product.costo}
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-id-container">
+                            <p className="product-detail-title">ID</p>
                             <p className="product-detail-information">
-                              {product.usuarioUltimaModificacion}
+                              {product.id}
                             </p>
                           </div>
+                          <div className="product-sold-container">
+                            <p className="product-detail-title">Vendidos</p>
+                            <p className="product-detail-information">9</p>
+                          </div>
+                          <div className="product-price-container">
+                            <p className="product-detail-title">Precio</p>
+                            {editor && isAdministrator ? (
+                              <input
+                                className="editable-input"
+                                placeholder={`$${product.precio}`}
+                              />
+                            ) : (
+                              <p className="product-detail-information">
+                                ${product.precio}
+                              </p>
+                            )}
+                          </div>
+                          <div className="product-category-container">
+                            <p className="product-detail-title ">
+                              Categoria &gt; subcategoria
+                            </p>
+                            <p className="product-detail-information">
+                              {editor ? (
+                                <div className="dropdown">
+                                  <button
+                                    className="button-reset btn-filter btn-outline-dark"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                  >
+                                    {categorySelect
+                                      ? categorySelect.categoria
+                                      : product.categoria}
+                                    <img
+                                      className="dropdown-arrow"
+                                      src={arrowDown}
+                                      alt="arrow down"
+                                    />
+                                  </button>
+                                  <ul className="dropdown-menu ">
+                                    {allCategoriesData.map((category, i) => (
+                                      <li key={i}>
+                                        <button
+                                          value={category}
+                                          className="dropdown-item z-index-3 bg-white"
+                                          onClick={(e) =>
+                                            selectCategory(category)
+                                          }
+                                        >
+                                          {category.categoria}
+                                        </button>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ) : (
+                                <p>{product.categoria}</p>
+                              )}
+                            </p>
+                          </div>
+                          <div className="product-stock-container">
+                            <div className="product-stock">
+                              <p className="product-detail-title mt-3">
+                                Stock actual
+                              </p>
+                              <p className="product-detail-information">
+                                {stock ? stock : product.cantidad}
+                              </p>
+                              {editor && isAdministrator ? (
+                                <div className="stock-box">
+                                  <button
+                                    type="button"
+                                    class="btn btn-outline-dark button-stock-minus"
+                                    onClick={() =>
+                                      decreaseProductQuantity(product.id)
+                                    }
+                                  >
+                                    <p className="button-sign my-3">-</p>
+                                  </button>
+                                  <p className="product-detail-information stock-number">
+                                    {stock ? stock : product.cantidad}
+                                  </p>
+                                  <button
+                                    type="button"
+                                    class="btn btn-outline-dark button-stock-plus"
+                                    onClick={() =>
+                                      increaseProductQuantity(product.id)
+                                    }
+                                  >
+                                    <p className="button-sign my-3">+</p>
+                                  </button>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="product-modification">
+                              <p className="product-detail-title">
+                                Ultima modificacion
+                              </p>
+                              <p>
+                                {new Date(product.updatedAt).toLocaleDateString(
+                                  "es-ar",
+                                  {
+                                    weekday: "long",
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                  }
+                                )}
+                              </p>
+                              <p className="product-detail-information">
+                                {product.usuarioUltimaModificacion}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                </>
-              ))}
+                      </td>
+                    </tr>
+                  </>
+                ))}
             </tbody>
           </table>
         </div>
@@ -522,8 +614,7 @@ export default function InventoryContainer() {
               />
               <h1 class="modal-delete-title text-center">Eliminar Producto</h1>
               <p className="text-center text-modal">
-                ¿Esta seguro que desea eliminar el producto 
-                del inventario?
+                ¿Esta seguro que desea eliminar el producto del inventario?
               </p>
             </div>
             <div class="text-center modal-button-box">
@@ -531,6 +622,9 @@ export default function InventoryContainer() {
                 type="button"
                 class="btn btn-dark"
                 data-bs-dismiss="modal"
+                onClick={() =>
+                  dispatch(deleteProduct(productIdForDelete, token))
+                }
               >
                 Si, eliminar producto
               </button>
@@ -591,6 +685,7 @@ export default function InventoryContainer() {
                 type="button"
                 class="btn btn-dark"
                 data-bs-dismiss="modal"
+                onClick={() => sendUpdateProduct()}
               >
                 Si, confirmo
               </button>

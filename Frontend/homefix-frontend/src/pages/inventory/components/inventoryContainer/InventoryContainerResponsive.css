@@ -1,82 +1,69 @@
-@media screen and (max-width: 920px) {
+/* Estilos para pantallas con un ancho máximo de 920px */
+@media screen and (max-width: 960px) {
   .inventory-layout {
+    width: 800px;
     width: 100%;
     display: inline-block;
   }
-  .inventory-title-search-container {
-    width: 100%;
-    display: inline-block;
-    height: 10px;
-  }
-  .inventory-table-container {
-    width: 100%;
-  }
-  .navBar-container {
-    display: none;
-}
 
-.offcanvas-menu {
-    display: inline-block;
-    position: absolute;
-    text-align: center;
-    height: 40px;
-    width: 27%;
-}
-
-.hamburger-button {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    height: 100%;
-}
-
-.hamburger-button img {
-    width: 24px;
-}
-
-.offcanvas hr {
-    width: 80%;
-    margin: 0 auto;
-}
-.headerBar-container {
-    display: inline-block;
-    margin: 0 0 0 30%;
-    width: 70%;
-    height: 40px;
-}
-
-.header-navbar {
-    height: 100%;
-}
-
-.link-logo {
+  .inventory-title-search-container{
     display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    max-width: 800px;
+    justify-content: space-around;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .searchbox{
+    width: 50%;
+  }
+  .inventory-table-container{
+    justify-content: center;
+  }
+
+  .addProduct-button{
+    margin-left: 10px;
+    width: 650px;
+  }
+}
+
+/* Estilos para pantallas con un ancho máximo de 767px */
+@media screen and (max-width: 767px) {
+  .inventory-layout {
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .inventory-title-search-container{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 100%;
+    max-width: 600px;
     justify-content: center;
     align-items: center;
-    width: 60%;
-}
-
-.header-logo {
-    width: auto;
-    height: 100%;
-}
-
-.header-profile-button {
-    display: flex;
+  }
+  .inventory-table-container{
     justify-content: center;
-    align-items: center;
-    width: 40%;
-}
+  }
 
-.profile-icon-image {
-    margin: 0;
-}
-
-.username {
-    padding: 0;
-}
-
-.username-text {
+  .hidden-mobile{
     display: none;
+  }
+
+.product-details-mobile{
+  width: 50px;
 }
+
+.product-details{
+  display: inline-block;
+  width: 350px;
+}
+
 }

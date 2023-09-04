@@ -1,18 +1,7 @@
-import axios from 'axios'
-const baseUrl = 'https://homefix.fly.dev/api/articulos/'
+import axios from 'axios';
 
-const getData = async token => {
-	const config = {
-		headers: {
-			Authorization: token,
-		},
-        body: {
-            
-        }
-	}
-	const response = await axios.patch(baseUrl, config)
-	return response.data
-}
+const updateProduct = axios.put({
+  baseURL: 'https://homefix.fly.dev/api/articulos',
+});
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { getData }
+export default updateProduct;

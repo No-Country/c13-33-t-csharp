@@ -1,0 +1,23 @@
+@media screen and (max-width: 960px) {
+  .addProduct-layout {
+    padding-bottom: none;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 100vw;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+  }
+  .add-product-title-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 75px;
+  }
+
+}
+
+
