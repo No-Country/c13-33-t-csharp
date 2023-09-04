@@ -1,7 +1,5 @@
 using System.Security.Claims;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Interfaces;
 using HomeFix.Model;

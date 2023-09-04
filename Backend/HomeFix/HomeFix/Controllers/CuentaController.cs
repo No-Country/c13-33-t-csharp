@@ -39,7 +39,7 @@ public class CuentaController : BaseController
     {
         var usuario = await _uow.CuentaRepository.FindUserByEmail(loginDto.Email);
         if (usuario == null) return Unauthorized();
-
+        var roles = await _uow.CuentaRepository.getRoles(usuario);
         var result = await _uow.CuentaRepository.ComparePassword(usuario, loginDto.Password);
 
         if (result)
@@ -49,6 +49,7 @@ public class CuentaController : BaseController
                 UserName = usuario.UserName,
                 ImagenPerfil = usuario.ImagenPerfil,
                 Token =  await _tokenService.GenerateToken(usuario),
+                Roles = roles
             };
         }
 

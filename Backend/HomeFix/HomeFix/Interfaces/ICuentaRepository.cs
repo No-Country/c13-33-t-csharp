@@ -9,6 +9,8 @@ public interface ICuentaRepository
     Task<Usuario> FindUserByEmail(string email);
     
     Task<Usuario> FindUserById(string id);
+    
+    Task<IList<string>> getRoles(Usuario usuario); 
 
     Task<bool> ComparePassword(Usuario usuario, string password);
 

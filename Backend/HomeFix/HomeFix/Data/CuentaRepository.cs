@@ -23,6 +23,11 @@ public class CuentaRepository : ICuentaRepository
         return  await _userManager.FindByIdAsync(id);
     }
 
+    public async Task<IList<string>> getRoles(Usuario usuario)
+    {
+        return await _userManager.GetRolesAsync(usuario);
+    }
+
     public async Task<bool> ComparePassword(Usuario usuario, string password)
     {
         return await _userManager.CheckPasswordAsync(usuario, password);

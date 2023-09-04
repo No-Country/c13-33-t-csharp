@@ -45,7 +45,6 @@ public class AdminController : BaseController
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
             Email = registroDto.Email,
-            
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
