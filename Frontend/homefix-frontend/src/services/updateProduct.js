@@ -1,25 +1,21 @@
-const initialState = {
-  products: [],
-};
+import axios from "axios";
 
-const updateProductReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'UPDATE_PRODUCT':
-      const index = state.products.findIndex(product => product.id === action.payload.id);
-      
+export const updateProduct = (productId, updatedProductData, token) => async (dispatch) => {
+  try {
+    const response = await axios.put(`https://homefix.fly.dev/api/articulos/${productId}`, updatedProductData, {
+      headers: {
+        Authorization: token
+      },
+    });
 
-      const updatedProducts = [...state.products];
-
-      if (index !== -1) {
-        updatedProducts[index] = action.payload;
-      }
-
-      console.log(updatedProducts);
-      return { ...state, products: updatedProducts };
-
-    default:
-      return state;
+    if (response.status === 200) {
+      const updatedProduct = response.data;
+      dispatch({ type: "UPDATE_PRODUCT", payload: updatedProduct });
+      console.log("producto actualizado");
+    } else {
+      console.error("Error al actualizar el producto:", response.data);
+    }
+  } catch (error) {
+    console.error("Error al actualizar el producto:", error);
   }
 };
-
-export default updateProductReducer;

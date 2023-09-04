@@ -26,7 +26,7 @@ export default function InventoryContainer() {
   const [rotateAnimation, setRotateAnimation] = useState(180);
   const [stock, setStock] = useState();
   const [editor, setEditor] = useState(false);
-  const [isAdministrator, setIsAdministrator] = useState(true);
+  const [isAdministrator, setIsAdministrator] = useState(false);
   const [filteredProductById, setFilteredProductsById] = useState([]);
   const [filteredProductByCategory, setFilteredProductsCategory] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
@@ -40,6 +40,16 @@ export default function InventoryContainer() {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
+  
+  const user = useSelector((state) => state.user);
+  
+  useEffect(() => {
+    if(user.userName === "AdminTest"){
+      setIsAdministrator(true)
+    } else{
+      setIsAdministrator(false)
+    }
+  }, [])
 
   useEffect(() => {
     if (detailShow) {
@@ -218,19 +228,23 @@ export default function InventoryContainer() {
           <table className="table-format">
             <thead className="table-title">
               <tr className="sticky-top">
-                <th className="hidden-mobile"  scope="col">Foto</th>
-                <th scope="col">
-                  Producto
+                <th className="hidden-mobile" scope="col">
+                  Foto
                 </th>
-                <th className="hidden-mobile"  scope="col">Marca</th>
-                <th className="hidden-mobile"  scope="col">ID</th>
-                <th className="hidden-mobile"  scope="col">Categoria</th>
+                <th scope="col">Producto</th>
+                <th className="hidden-mobile" scope="col">
+                  Marca
+                </th>
+                <th className="hidden-mobile" scope="col">
+                  ID
+                </th>
+                <th className="hidden-mobile" scope="col">
+                  Categoria
+                </th>
                 <th id="precio" scope="col">
                   Precio
                 </th>
-                <th scope="col">
-                  Vendidos
-                </th>
+                <th scope="col">Vendidos</th>
                 <th id="stock" scope="col">
                   Stock
                 </th>
@@ -262,10 +276,10 @@ export default function InventoryContainer() {
                           className="product-icon"
                         />
                       </td>
-                      <td className="mobile-name" >{product.nombre}</td>
-                      <td className="hidden-mobile" >{product.marca}</td>
-                      <td className="hidden-mobile" >{product.id}</td>
-                      <td className="hidden-mobile" >{product.categoria}</td>
+                      <td className="mobile-name">{product.nombre}</td>
+                      <td className="hidden-mobile">{product.marca}</td>
+                      <td className="hidden-mobile">{product.id}</td>
+                      <td className="hidden-mobile">{product.categoria}</td>
                       <td>${product.precio}</td>
                       <td>{product.cantidad}</td>
                       <td>{product.cantidad}</td>
@@ -335,8 +349,9 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">Producto</p>
                             {editor ? (
                               <input
+                                name="nombre"
                                 className="editable-input"
-                                placeholder="Lampara"
+                                placeholder={product.nombre}
                               />
                             ) : (
                               <p className="product-detail-information">
@@ -348,16 +363,9 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">
                               Ancho x Alto (cm)
                             </p>
-                            {editor ? (
-                              <input
-                                className="editable-input"
-                                placeholder="40 x 29"
-                              />
-                            ) : (
-                              <p className="product-detail-information">
-                                {product.ancho} x {product.alto}
-                              </p>
-                            )}
+                            <p className="product-detail-information">
+                              {product.ancho} x {product.alto}
+                            </p>
                           </div>
                           <div className="product-ros-container">
                             <p className="product-detail-title">
@@ -365,6 +373,7 @@ export default function InventoryContainer() {
                             </p>
                             {editor && isAdministrator ? (
                               <input
+                                name="Margen Ganancia"
                                 className="addProduct-editable-input-yellow rounded-pill"
                                 placeholder="20%"
                               />
@@ -378,6 +387,7 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">Descripcion</p>
                             {editor && isAdministrator ? (
                               <input
+                                name="descripcion"
                                 className="editable-input"
                                 placeholder={product.descripcion}
                               />
@@ -430,6 +440,7 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">Peso</p>
                             {editor ? (
                               <input
+                                name="peso"
                                 className="editable-input"
                                 placeholder={product.peso}
                               />
@@ -443,6 +454,7 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">Costo</p>
                             {editor && isAdministrator ? (
                               <input
+                                name="costo"
                                 className="editable-input"
                                 placeholder={`$${product.costo}`}
                               />
@@ -466,6 +478,7 @@ export default function InventoryContainer() {
                             <p className="product-detail-title">Precio</p>
                             {editor && isAdministrator ? (
                               <input
+                                name="precio"
                                 className="editable-input"
                                 placeholder={`$${product.precio}`}
                               />
