@@ -1,0 +1,37 @@
+.reports-costs-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 0.8125rem 1.875rem 0.9375rem;
+}
+
+.reports-costs-container hr {
+	margin: 0.8125rem 0 0.5625rem;
+	opacity: 0.6;
+	border-color: black;
+}
+
+.reports-costs-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-costs-table {
+	width: 100%;
+}
+
+.reports-costs-table tr {
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.reports-costs-table-header {
+	border-bottom: rgba(0, 0, 0, 0.25) 1px solid;
+}
+
+.reports-costs-table-header th {
+	background-color: white;
+	color: rgba(0, 0, 0, 0.25);
+	font-size: 1rem;
+	font-weight: 400;
+}
