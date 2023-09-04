@@ -5,22 +5,24 @@
 	display: grid;
 	grid-template-columns: repeat(4, 0.1fr 1fr) 0.1fr;
 	grid-template-rows: 0.4fr 0.6fr;
-	gap: 0px 0px;
+	gap: 0;
 	grid-template-areas:
 		". dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title dashboard-resume-title ."
 		". total-sales . total-cost . ros . products-sales .";
 	grid-area: dashboard-resume-container;
-	border-radius: 25px;
+	border-radius: 1.5625rem;
+	padding: 1.94rem 2.13rem 2.25rem;
 }
 
 .dashboard-resume-title {
 	display: flex;
 	align-items: center;
+	margin-bottom: 2.56rem;
 	grid-area: dashboard-resume-title;
 }
 
 .dashboard-title {
-	font-size: 26px;
+	font-size: 1.625rem;
 	font-weight: 400;
 	margin: 0;
 }
@@ -129,7 +131,7 @@
 		width: 100%;
 		height: auto;
 		margin-bottom: 26px;
-		padding: 0 15px;
+		padding: 0 0.94rem;
 		text-align: center;
 	}
 
@@ -155,7 +157,7 @@
 
 	.total-sales {
 		display: inline-block;
-		width: 40%;
+		width: 45%;
 		height: 80px;
 		margin-right: 9px;
 		margin-bottom: 13px;
@@ -163,13 +165,13 @@
 
 	.total-cost {
 		display: inline-block;
-		width: 40%;
+		width: 45%;
 		height: 80px;
 	}
 
 	.ros {
 		display: inline-block;
-		width: 40%;
+		width: 45%;
 		height: 80px;
 		margin-right: 9px;
 		margin-bottom: 17px;
@@ -177,7 +179,7 @@
 
 	.products-sales {
 		display: inline-block;
-		width: 40%;
+		width: 45%;
 		height: 80px;
 	}
 }

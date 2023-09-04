@@ -1,5 +1,5 @@
 .reports-best-selling-container {
-	height: 227px;
+	height: 14.1875rem;
 }
 
 .reports-best-selling-images-container {
@@ -10,8 +10,8 @@
 	position: absolute;
 	z-index: 1;
 	border-radius: 50%;
-	width: 227px;
-	height: 227px;
+	width: 14.1875rem;
+	height: 14.1875rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,8 +19,8 @@
 }
 
 .reposts-best-selling-product-image {
-	width: 211px;
-	height: 211px;
+	width: 13.1875rem;
+	height: 13.1875rem;
 	border-radius: 50%;
 }
 
@@ -29,15 +29,15 @@
 	z-index: 2;
 	background-color: white;
 	border-radius: 50%;
-	width: 77px;
-	height: 77px;
-	left: 154px;
+	width: 4.8125rem;
+	height: 4.8125rem;
+	left: 9.625rem;
 	display: flex;
 	justify-content: center;
 }
 
 .reports-best-selling-crown-image {
-	width: 47px;
+	width: 2.9375rem;
 }
 
 .reports-best-selling-texts-container {
@@ -45,26 +45,26 @@
 	top: 50%;
 	transform: translateY(-50%);
 	background-color: white;
-	border-radius: 16px;
+	border-radius: 1rem;
 	text-align: center;
-	margin-left: 77px;
-	padding: 22px 0 18px;
+	margin-left: 4.8125rem;
+	padding: 1.375rem 0 1.125rem;
 }
 
 .reports-best-selling-title {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: 400;
 	margin: 0;
 }
 
 .reports-best-selling-product-name {
-	font-size: 48px;
+	font-size: 3rem;
 	font-weight: 400;
 	margin: 0;
 }
 
 .reports-best-selling-product-quantity {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: 400;
 	margin: 0;
 	background-image: url('../../../../assets/image/Rectangle\ 153.svg');

@@ -3,19 +3,19 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: 73px;
+	height: 4.5625rem;
 	background-color: #222222;
-	border-radius: 16px;
+	border-radius: 1rem;
 }
 
 .reports-month-button {
 	width: 10%;
-	border-radius: 16px;
+	border-radius: 1rem;
 	background-color: transparent;
 	border: none;
 }
 
 .reports-month-button-text {
-	font-size: 24px;
+	font-size: 1.5rem;
 	color: white;
 }

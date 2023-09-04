@@ -1,17 +1,17 @@
 .reports-sales-container {
 	background-color: white;
-	border-radius: 16px;
-	padding: 13px 30px 15px;
+	border-radius: 1rem;
+	padding: 0.8125rem 1.875rem 0.9375rem;
 }
 
 .reports-sales-container hr {
-	margin: 13px 0 9px;
+	margin: 0.8125rem 0 0.5625rem;
 	opacity: 0.6;
 	border-color: black;
 }
 
 .reports-sales-title {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: 400;
 	margin: 0;
 }
@@ -32,6 +32,6 @@
 .reports-sales-table-header th {
 	background-color: white;
 	color: rgba(0, 0, 0, 0.25);
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 }

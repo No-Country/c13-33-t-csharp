@@ -1,11 +1,11 @@
 .reports-description-container {
 	background-color: white;
-	border-radius: 16px;
-	padding: 13px 30px;
+	border-radius: 1rem;
+	padding: 0.8125rem 1.875rem;
 }
 
 .reports-description-title {
-	font-size: 24px;
+	font-size: 1.5rem;
 }
 
 .reports-description-text {
