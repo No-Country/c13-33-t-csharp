@@ -1,14 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const allUsersDataSlice = createSlice({
 	name: 'allUsersData',
-	initialState: {},
+	initialState: [],
 	reducers: {
-		setDashboardData(state, action) {
+		setAllUsersData(state, action) {
 			return action.payload
 		},
 	},
 })
 
-export const { setAllUsersData } = allUsersDataSlice.actions
-export default allUsersDataSlice.reducer
+export const { setAllUsersData } = allUsersDataSlice.actions;
+
+export default allUsersDataSlice.reducer;

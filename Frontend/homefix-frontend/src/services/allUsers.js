@@ -1,7 +1,7 @@
 import axios from 'axios'
 const baseUrl = 'https://homefix.fly.dev/api/usuarios'
 
-const getData = async token => {
+const getUsersData = async token => {
 	const config = {
 		headers: {
 			Authorization: token,
@@ -12,4 +12,4 @@ const getData = async token => {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getData }
+export default { getUsersData }

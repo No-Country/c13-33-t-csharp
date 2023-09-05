@@ -45,7 +45,6 @@ const App = () => {
   }, []);
 
 
-
   useEffect(() => {
     allBrandsService.getData(token).then((data) => {
       dispatch(setAllBrandsData(data));

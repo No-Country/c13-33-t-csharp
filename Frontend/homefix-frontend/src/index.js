@@ -18,6 +18,7 @@ import salesChartDataReducer from './reducers/salesChartDataReducer';
 import topSalesReducer from './reducers/topSalesReducer';
 import deleteProductReducer from './reducers/deleteProductReducer';
 import updateProductReducer from './reducers/updateProductReducer';
+import allUsersDataReducer from './reducers/allUsersDataReducer';
 
 const queryClient = new QueryClient()
 
@@ -33,7 +34,8 @@ const store = configureStore({
 		salesChartData: salesChartDataReducer,
 		topSales: topSalesReducer,
 		deleteProduct: deleteProductReducer,
-		updateProduct: updateProductReducer
+		updateProduct: updateProductReducer,
+		allUsersData: allUsersDataReducer
 	},
 })
 

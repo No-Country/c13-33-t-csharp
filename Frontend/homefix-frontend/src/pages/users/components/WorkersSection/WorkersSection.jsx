@@ -1,7 +1,7 @@
 import React from "react";
 import "./WorkersSection.css";
 
-export default function WorkersSection() {
+export default function WorkersSection({workersUsers}) {
   return (
     <div className="users-workersSection">
       <div className="users-workersSection-title">
