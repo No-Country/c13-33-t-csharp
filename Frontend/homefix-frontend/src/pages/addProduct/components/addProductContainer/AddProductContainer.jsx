@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../../../services/createProduct";
 import "./AddProductContainerResponsive.css";
-
+import imageShadow from "../../../../assets/image/ImageShadow.png";
 export default function AddProductContainer() {
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
@@ -113,7 +113,7 @@ export default function AddProductContainer() {
     <form className="form-container" onSubmit={handleSubmit}>
       <div className="add-product-title-container">
         <div className="add-product-title">
-          <h2 className="text-center">Inventario - Añadir Producto</h2>
+          <h2 className="text-center">Inventario &gt; Añadir Producto</h2>
         </div>
         <div className="add-product-saveButton">
           <button
@@ -140,33 +140,36 @@ export default function AddProductContainer() {
           <h2>Información del Producto</h2>
         </div>
         <div className="addProduct-info-img">
-          {productImage ? (
-            <div className="addProduct-image-circle imgProduct-container">
-              <img
-                className="img-circle"
-                src={productImage}
-                alt="Imagen del producto"
-              />
-            </div>
-          ) : (
-            <div className="addProduct-image-circle rounded-circle">
-              <div className="pictureIcon">
-                <img src={imageIcon} alt="Icono de imagen" />
-              </div>
-              <div className="addProduct-semiCirlce-wrapper">
-                <label>
-                  <input
-                    name="imagen"
-                    type="file"
-                    accept="image/*"
-                    hidden
-                    onChange={handleImageChange}
-                  />
-                  <img src={cameraIcon} alt="Icono de cámara" />
-                </label>
-              </div>
-            </div>
-          )}
+          <div className="addProduct-image-circle imgProduct-container">
+            <input
+              name="imagen"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+              id="uploadInput"
+            />
+            <label
+              className="circular-image-container"
+              htmlFor="uploadInput"
+              style={{ cursor: "pointer" }}
+            >
+              {productImage ? (
+                <img
+                  src={productImage}
+                  alt=""
+                  style={{ maxWidth: "200px", maxHeight: "200px" }}
+                />
+              ) : (
+                <img
+                  className="circular-image"
+                  src={imageShadow}
+                  alt=""
+                  style={{ maxWidth: "200px", maxHeight: "200px" }}
+                />
+              )}
+            </label>
+          </div>
         </div>
         <div className="addProduct-info-name">
           <p>Producto</p>

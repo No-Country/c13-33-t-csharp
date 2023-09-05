@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddUsersRolContainer.css";
 
 export default function AddUserRolContainer() {
+  const [selectedRole, setSelectedRole] = useState("");
+
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
+  };
   return (
     <div className="add-users-rol-container">
       <div className="addUserRol-title">
@@ -24,18 +29,26 @@ export default function AddUserRolContainer() {
         <div className="rol-selection rounded-4">
           <div className="rol-worker">
             <input
-              class="form-check-input mx-3"
+              id="checkBox-user"
+              name="userRole"
+              className="form-check-input mx-3"
               type="radio"
-              value=""
+              value="Trabajador"
+              checked={selectedRole === "Trabajador"}
+              onChange={handleRoleChange}
               aria-label="Radio button for following text input"
             />
             <p className="my-auto">Trabajador</p>
           </div>
           <div className="rol-admin">
             <input
-              class="form-check-input mx-3"
+              id="checkBox-admin"
+              name="userRole"
+              className="form-check-input mx-3"
               type="radio"
-              value=""
+              value="Administrador"
+              checked={selectedRole === "Administrador"}
+              onChange={handleRoleChange}
               aria-label="Radio button for following text input"
             />
             <p className="my-auto">Administrador</p>

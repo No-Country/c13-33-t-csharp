@@ -1,7 +1,9 @@
 import React from "react";
 import "./AddUsersTitleContainer.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AddUsersTitleContainer() {
+  const navigate = useNavigate();
   return (
     <div className="add-users-title-container">
       <div className="addUsers-title">
@@ -11,7 +13,7 @@ export default function AddUsersTitleContainer() {
         <button
           type="button"
           class="btn btn-outline-dark mx-4 rounded-pill"
-          /*onClick={() => navigate("/add-users")}*/
+          onClick={() => navigate("/users")}
         >
           Cancelar
         </button>
