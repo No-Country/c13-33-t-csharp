@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HomeFix.Dbcontext;
 using HomeFix.DTOs;
+using HomeFix.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,14 +12,17 @@ namespace HomeFix.Controllers
     {
         private readonly HomeFixDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
 
 
-        public ResumenController(HomeFixDbContext context, IMapper mapper)
+        public ResumenController(HomeFixDbContext context, IMapper mapper, IUnitOfWork uow)
         {
             _context = context;
             _mapper = mapper;
+            _uow = uow;
         }
 
+      
 
     /// <summary>
     /// Devuelve el articulo con mas ventas en la base de datos
