@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
 import { loadTopSales } from '../../../../reducers/topSalesReducer'
 
+
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)
 	const token = useSelector(state => state.token)

@@ -7,9 +7,9 @@ import InventoryContainer from "../components/inventoryContainer/InventoryContai
 export default function Layout() {
   return (
     <div className="inventory-layout">
-      <HeaderBar />
-      <NavBar />
-      <InventoryContainer/>
+      <NavBar className="navBar" />
+      <HeaderBar className="headerBar" />
+      <InventoryContainer />
     </div>
   );
 }

@@ -1,56 +1,192 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddProductContainer.css";
 import arrowDown from "../../../../assets/image/arrowVector.png";
 import cameraIcon from "../../../../assets/image/camera-solid.png";
 import imageIcon from "../../../../assets/image/bi_image.png";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { createProduct } from "../../../../services/createProduct";
+import "./AddProductContainerResponsive.css";
 
 export default function AddProductContainer() {
-    const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  const [categorySelect, setCategorySelect] = useState([]);
+  const [brandSelect, setBrandSelect] = useState([]);
+  const [stock, setStock] = useState(0);
+  const [productImage, setProductImage] = useState(null);
+  const { format } = require("date-fns");
+  const [inputValues, setInputValues] = useState({
+    id: "",
+    nombre: "",
+    descripcion: "",
+    cantidad: "",
+    cantidadMinima: "",
+    costo: "",
+    precio: "",
+    peso: "",
+    alto: "",
+    ancho: "",
+    imagen: "",
+    marcaId: "",
+    marca: "",
+    categoriaId: "",
+    categoria: "",
+    subcategoria: "",
+    updatedAt: "",
+    usuarioUltimaModificacion: "",
+  });
+  const allBrandsData = useSelector((state) => state.allBrandsData);
+  const allCategoriesData = useSelector((state) => state.allCategoriesData);
+
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+
+  console.log(user);
+  const newDate = new Date();
+  const formattedDate = format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+  const selectCategory = (e, category) => {
+    e.preventDefault();
+    setCategorySelect(category);
+  };
+
+  const selectBrand = (e, brand) => {
+    e.preventDefault();
+    setBrandSelect(brand);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProductImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+      marca: brandSelect.nombre,
+      marcaId: brandSelect.id,
+      cantidad: stock,
+      categoria: categorySelect.categoria,
+      categoriaId: categorySelect.id,
+      imagen: productImage,
+      usuarioUltimaModificacion: user.userName,
+      updatedAt: formattedDate,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("id", inputValues.id);
+    formData.append("nombre", inputValues.nombre);
+    formData.append("descripcion", inputValues.descripcion);
+    formData.append("cantidad", stock);
+    formData.append("cantidadMinima", "5");
+    formData.append("costo", inputValues.costo);
+    formData.append("precio", inputValues.precio);
+    formData.append("peso", inputValues.peso);
+    formData.append("alto", inputValues.alto);
+    formData.append("ancho", inputValues.ancho);
+    formData.append("imagen", productImage);
+    formData.append("marcaid", brandSelect.id);
+    formData.append("marca", brandSelect.nombre);
+    formData.append("categoriaId", categorySelect.id);
+    formData.append("categoria", categorySelect.categoria);
+    formData.append("subcategoria", categorySelect.subcategoria);
+    formData.append("updatedAt", formattedDate);
+    formData.append("usuarioUltimaModificacion", user.userName);
+    dispatch(createProduct(formData, token));
+    navigate("/inventory");
+  };
+
   return (
-    <>
+    <form className="form-container" onSubmit={handleSubmit}>
       <div className="add-product-title-container">
         <div className="add-product-title">
-          <h2 className="text-center">Inventario - Anadir Producto</h2>
+          <h2 className="text-center">Inventario - Añadir Producto</h2>
         </div>
         <div className="add-product-saveButton">
           <button
-            onClick={() => navigate("/inventory")}  type="button" class="btn btn-outline-dark rounded-pill">
+            onClick={() => navigate("/inventory")}
+            type="button"
+            className="btn btn-outline-dark rounded-pill"
+          >
             Cancelar
           </button>
-          <button 
-            onClick={() => navigate("/inventory")} type="button" class="btn btn-dark rounded-pill">
+          <button
+            type="submit"
+            onClick={() => {
+              //navigate("/inventory");
+              console.log(inputValues);
+            }}
+            className="btn btn-dark rounded-pill"
+          >
             Guardar
           </button>
         </div>
       </div>
       <div className="add-product-info-container">
         <div className="addProduct-info-title">
-          <h2>Informacion del Producto</h2>
+          <h2>Información del Producto</h2>
         </div>
         <div className="addProduct-info-img">
-          <div className="addProduct-image-circle rounded-circle">
-            <div className="pictureIcon">
-              <img src={imageIcon} alt="" />
+          {productImage ? (
+            <div className="addProduct-image-circle imgProduct-container">
+              <img
+                className="img-circle"
+                src={productImage}
+                alt="Imagen del producto"
+              />
             </div>
-            <div className="addProduct-semiCirlce-wrapper">
-              <label>
-                <input type="file" hidden />
-                <img src={cameraIcon} alt="" />
-              </label>
+          ) : (
+            <div className="addProduct-image-circle rounded-circle">
+              <div className="pictureIcon">
+                <img src={imageIcon} alt="Icono de imagen" />
+              </div>
+              <div className="addProduct-semiCirlce-wrapper">
+                <label>
+                  <input
+                    name="imagen"
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleImageChange}
+                  />
+                  <img src={cameraIcon} alt="Icono de cámara" />
+                </label>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="addProduct-info-name">
           <p>Producto</p>
           <input
+            name="nombre"
             className="addProduct-editable-input"
             placeholder="Nombre del Producto"
+            value={inputValues.nombre}
+            onChange={handleInputChange}
           />
         </div>
         <div className="addProduct-info-id">
           <p>ID</p>
-          <input className="addProduct-editable-input" placeholder="ID" />
+          <input
+            name="id"
+            className="addProduct-editable-input"
+            placeholder="ID"
+            value={inputValues.id}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="addProduct-info-brand">
           <p>Marca</p>
@@ -61,7 +197,13 @@ export default function AddProductContainer() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Abitare
+              <input
+                name="marca"
+                className="addProduct-editable-input"
+                placeholder={brandSelect.nombre}
+                value={inputValues.marca}
+                onChange={handleInputChange}
+              />
               <img
                 className="dropdown-arrow"
                 src={arrowDown}
@@ -69,16 +211,17 @@ export default function AddProductContainer() {
               />
             </button>
             <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Marca
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  marca
-                </a>
-              </li>
+              {allBrandsData.map((brand, i) => (
+                <li key={i}>
+                  <button
+                    value={brand}
+                    className="dropdown-item  z-index-3 bg-white"
+                    onClick={(e) => selectBrand(e, brand)}
+                  >
+                    {brand.nombre}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -91,24 +234,31 @@ export default function AddProductContainer() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              categoria
+              <input
+                name="categoria"
+                className="addProduct-editable-input"
+                placeholder={categorySelect.categoria}
+                value={inputValues.categoria}
+                onChange={handleInputChange}
+              />
               <img
                 className="dropdown-arrow"
                 src={arrowDown}
                 alt="arrow down"
               />
             </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Por ID
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Por Categorias
-                </a>
-              </li>
+            <ul className="dropdown-menu ">
+              {allCategoriesData.map((category, i) => (
+                <li key={i}>
+                  <button
+                    value={category}
+                    className="dropdown-item z-index-3 bg-white"
+                    onClick={(e) => selectCategory(e, category)}
+                  >
+                    {category.categoria}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -118,20 +268,39 @@ export default function AddProductContainer() {
           <h2>Caracteristicas del Producto</h2>
         </div>
         <div className="char">
-          <p>Ancho X Alto (cm)</p>
-          <input
-            className="addProduct-editable-input"
-            placeholder="Medidas del Producto"
-          />
+          <div className="messure">
+            <p>Ancho (cm)</p>
+            <input
+              name="ancho"
+              className="addProduct-editable-input"
+              placeholder="Medidas Ancho"
+              value={inputValues.ancho}
+              onChange={handleInputChange}
+            />
+            <p>Alto (cm)</p>
+            <input
+              name="alto"
+              className="addProduct-editable-input"
+              placeholder="Medidas Alto"
+              value={inputValues.alto}
+              onChange={handleInputChange}
+            />
+          </div>
           <p>Peso (kg)</p>
           <input
+            name="peso"
             className="addProduct-editable-input"
             placeholder="Peso del Producto"
+            value={inputValues.peso}
+            onChange={handleInputChange}
           />
           <p>Descripcion</p>
           <input
+            name="descripcion"
             className="addProduct-editable-input"
             placeholder="Descripcion del Producto"
+            value={inputValues.descripcion}
+            onChange={handleInputChange}
           />
         </div>
       </div>
@@ -143,19 +312,30 @@ export default function AddProductContainer() {
           <p>Stock</p>
           <div className="addProduct-buttons-container">
             <button
-              //onClick={() => setStock(stock - 1)}
+              onClick={() => {
+                if (stock >= 1) {
+                  setStock(stock - 1);
+                }
+              }}
               type="button"
-              class="btn btn-outline-dark button-stock-minus"
+              className="btn btn-outline-dark button-stock-minus"
             >
               <p className="button-sign my-3">-</p>
             </button>
-            <p className="product-detail-information my-auto addProduct-stock">
-              {/*stock*/}20
-            </p>
+            <input
+              name="cantidad"
+              className="product-detail-information my-auto addProduct-stock text-center"
+              value={stock}
+              onChange={handleInputChange}
+            />
             <button
-              //onClick={() => setStock(stock + 1)}
+              onClick={() => {
+                if (stock >= 0) {
+                  setStock(stock + 1);
+                }
+              }}
               type="button"
-              class="btn btn-outline-dark button-stock-plus"
+              className="btn btn-outline-dark button-stock-plus"
             >
               <p className="button-sign my-3">+</p>
             </button>
@@ -169,21 +349,35 @@ export default function AddProductContainer() {
         <div className="addProduct-price-input">
           <div>
             <p>Costo</p>
-            <input className="addProduct-editable-input" placeholder="$" />
+            <input
+              name="costo"
+              className="addProduct-editable-input"
+              placeholder="$"
+              value={inputValues.costo}
+              onChange={handleInputChange}
+            />
           </div>
           <div>
             <p>Margen de Ganancia</p>
             <input
+              name="margen"
               className="addProduct-editable-input-yellow rounded-pill"
               placeholder="20%"
+              value="20"
             />
           </div>
           <div>
             <p>Precio</p>
-            <input className="addProduct-editable-input" placeholder="$" />
+            <input
+              name="precio"
+              className="addProduct-editable-input"
+              placeholder="$"
+              value={inputValues.precio}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 }

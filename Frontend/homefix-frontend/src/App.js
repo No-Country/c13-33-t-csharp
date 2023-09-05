@@ -11,14 +11,21 @@ import { setToken } from './reducers/tokenReducer'
 import Inventory from './pages/inventory/Inventory'
 import AddProduct from './pages/addProduct/AddProduct'
 import Reports from './pages/reports-page/Reports'
+import allProductsService from "./services/allProducts";
+import { setAllProductsData } from "./reducers/allProductsDataReducer";
+import allBrandsService from "./services/brands";
+import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
+import allCategoriesService from "./services/categories";
+import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
+
 
 const App = () => {
 	const [loading, setLoading] = useState(true)
 
+
 	const user = useSelector(state => state.user)
 
 	const dispatch = useDispatch()
-
 	useEffect(() => {
 		const JSONloggedUser = window.localStorage.getItem('loggedHomefixUser')
 		if (JSONloggedUser) {
@@ -29,6 +36,24 @@ const App = () => {
 		setLoading(false)
 		// eslint-disable-next-line
 	}, [])
+
+  useEffect(() => {
+    allProductsService.getData(token).then((data) => {
+      dispatch(setAllProductsData(data));
+    });
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    allBrandsService.getData(token).then((data) => {
+      dispatch(setAllBrandsData(data));
+    });
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    allCategoriesService.getData(token).then((data) => {
+      dispatch(setAllCategoriesData(data));
+    });
+  }, [dispatch, token]);
 
 	if (loading) {
 		return

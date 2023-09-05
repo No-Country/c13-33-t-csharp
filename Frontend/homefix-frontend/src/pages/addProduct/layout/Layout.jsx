@@ -7,8 +7,8 @@ import AddProductContainer from "../components/addProductContainer/AddProductCon
 export default function Layout() {
   return (
     <div className="add-product-layout">
-      <HeaderBar />
-      <NavBar />
+      <NavBar className="navBar" />
+      <HeaderBar className="headerBar" />
       <AddProductContainer/>
     </div>
   );
