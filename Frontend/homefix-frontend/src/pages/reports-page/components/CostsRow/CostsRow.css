@@ -6,6 +6,7 @@
 .costsrow-table-row td {
 	font-size: 1rem;
 	font-weight: 400;
+	box-shadow: none;
 }
 
 @media (max-width: 900px) {
