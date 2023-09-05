@@ -69,15 +69,22 @@ export default function AddUsersInformationContainer() {
         />
       </div>
       <div className="addUsersInformation-mail">
-      <p>Correo Electronico</p>
+        <p>Nombre de Usuario</p>
         <input
-          name="nombre"
+          name="userName"
           className="addProduct-editable-input"
-          placeholder="Ingresa el nombre del nuevo usuario"
+          placeholder="Ingresa al correo electronico del usuario"
           //value={inputValues.descripcion}
           //onChange={handleInputChange}
         />
-        <p className="pt-4"> • El usuario podrá cambiar la contraseña e imagen una vez inicie sesión</p>
+        <p>Correo Electronico</p>
+        <input
+          name="nombre"
+          className="addProduct-editable-input"
+          placeholder="Ingresa al correo electronico del usuario"
+          //value={inputValues.descripcion}
+          //onChange={handleInputChange}
+        />
       </div>
     </div>
   );

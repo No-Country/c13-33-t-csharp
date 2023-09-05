@@ -10,6 +10,6 @@ const allProductsDataSlice = createSlice({
   },
 });
 
-export const { setAllProductsData, setCreateProduct, setDeleteProduct,updateProduct } =
+export const { setAllProductsData } =
   allProductsDataSlice.actions;
 export default allProductsDataSlice.reducer;

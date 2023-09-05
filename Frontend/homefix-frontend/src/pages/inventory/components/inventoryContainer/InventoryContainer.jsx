@@ -13,6 +13,8 @@ import noImage from "../../../../assets/image/icons8-sin-imágen-100.png";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
+import allProductsService from "../../../../services/allProducts";
+import { setAllProductsData } from "../../../../reducers/allProductsDataReducer";
 const { format } = require("date-fns");
 
 export default function InventoryContainer() {
@@ -50,14 +52,20 @@ export default function InventoryContainer() {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
-  
+
   const user = useSelector((state) => state.user);
-  
+
   useEffect(() => {
-    if(user.userName === "AdminTest"){
-      setIsAdministrator(true)
-    } else{
-      setIsAdministrator(false)
+    allProductsService.getData(token).then((data) => {
+      dispatch(setAllProductsData(data));
+    });
+  }, [allProducts,allProductsData]);
+
+  useEffect(() => {
+    if (user.userName === "AdminTest") {
+      setIsAdministrator(true);
+    } else {
+      setIsAdministrator(false);
     }
   }, []);
 
@@ -171,17 +179,17 @@ export default function InventoryContainer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('id', inputValues.id);
-    formData.append('nombre', inputValues.nombre);
-    formData.append('descripcion', inputValues.descripcion);
-    formData.append('costo', inputValues.costo);
-    formData.append('precio', inputValues.precio);
-    formData.append('peso', inputValues.peso);
-    formData.append('alto', inputValues.alto);
-    formData.append('ancho', inputValues.ancho);
+    formData.append("id", inputValues.id);
+    formData.append("nombre", inputValues.nombre);
+    formData.append("descripcion", inputValues.descripcion);
+    formData.append("costo", inputValues.costo);
+    formData.append("precio", inputValues.precio);
+    formData.append("peso", inputValues.peso);
+    formData.append("alto", inputValues.alto);
+    formData.append("ancho", inputValues.ancho);
     dispatch(updateProduct(formData, token));
 
-    navigate('/inventory');
+    navigate("/inventory");
   };
 
   return (

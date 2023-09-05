@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddProductContainer.css";
 import arrowDown from "../../../../assets/image/arrowVector.png";
 import cameraIcon from "../../../../assets/image/camera-solid.png";
@@ -60,14 +60,12 @@ export default function AddProductContainer() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProductImage(e.target.result);
+        setProductImage(file);
       };
-      reader.readAsDataURL(file);
     }
-  };
 
+
+  console.log()
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setInputValues((prevValues) => ({

@@ -16,8 +16,6 @@ import topSalesService from './services/topSales'
 import { setTopSales } from './reducers/topSalesReducer'
 import Inventory from "./pages/inventory/Inventory";
 import AddProduct from "./pages/addProduct/AddProduct";
-import allProductsService from "./services/allProducts";
-import { setAllProductsData } from "./reducers/allProductsDataReducer";
 import allBrandsService from "./services/brands";
 import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
 import allCategoriesService from "./services/categories";
@@ -46,11 +44,7 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    allProductsService.getData(token).then((data) => {
-      dispatch(setAllProductsData(data));
-    });
-  }, [dispatch, token]);
+
 
   useEffect(() => {
     allBrandsService.getData(token).then((data) => {

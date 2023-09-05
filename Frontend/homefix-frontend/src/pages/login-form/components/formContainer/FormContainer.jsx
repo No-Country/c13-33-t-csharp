@@ -42,6 +42,7 @@ export default function FormContainer() {
 		try {
 			const user = await loginService.login({ email, password })
 			dispatch(setToken(`bearer ${user.token}`))
+			console.log(user.token);
 			window.localStorage.setItem('loggedHomefixUser', JSON.stringify(user))
 			dispatch(setUser(user))
 			navigate('/')

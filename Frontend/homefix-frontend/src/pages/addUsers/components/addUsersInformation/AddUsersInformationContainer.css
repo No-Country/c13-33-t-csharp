@@ -49,10 +49,10 @@
 }
 
 .circular-image-container {
-  width: 150px; /* Define el tamaño deseado */
-  height: 150px; /* Define el tamaño deseado */
-  border-radius: 50%; /* Hace que el contenedor sea circular */
-  overflow: hidden; /* Oculta cualquier parte de la imagen fuera del contenedor circular */
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; 
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,6 +61,10 @@
 .circular-image {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* La imagen se ajustará dentro del círculo sin estirarla ni recortarla */
-  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+input::placeholder{
+    font-size: 14px ;
 }
