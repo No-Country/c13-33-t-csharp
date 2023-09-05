@@ -1,0 +1,25 @@
+.users-adminSection {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background-color: #ffff;
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+  grid-template-rows: 0.3fr 1fr 0.1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". users-adminSection-title ."
+    ". users-admin-cards ."
+    ". . .";
+  grid-area: users-adminSection;
+  align-items: center;
+  align-content: center;
+}
+
+.users-adminSection-title {
+  grid-area: users-adminSection-title;
+}
+
+.users-admin-cards {
+  grid-area: users-admin-cards;
+}

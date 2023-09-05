@@ -22,6 +22,7 @@ import allBrandsService from "./services/brands";
 import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
 import allCategoriesService from "./services/categories";
 import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
+import User from './pages/users/User';
 
 
 const App = () => {
@@ -111,6 +112,16 @@ const App = () => {
           }
         ></Route>
         <Route path="/add-product" element={<AddProduct />}></Route>
+        <Route
+          path="/users"
+          element={
+            user === null ? (
+              <Navigate replace to="/login-form" />
+            ) : (
+              <User/>
+            )
+          }
+        ></Route>
       </Routes>
     </div>
   );
