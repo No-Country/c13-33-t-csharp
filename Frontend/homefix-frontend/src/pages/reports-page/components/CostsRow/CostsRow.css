@@ -1,0 +1,20 @@
+.costsrow-table-row {
+	border: 0;
+	border-bottom: rgba(0, 0, 0, 0.25) 1px solid;
+}
+
+.costsrow-table-row td {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+@media (max-width: 900px) {
+	.costsrow-table-row td {
+		font-size: 0.75rem;
+		text-align: left;
+	}
+
+	.costsrow-hide {
+		display: none;
+	}
+}

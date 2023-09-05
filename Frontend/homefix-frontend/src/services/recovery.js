@@ -2,7 +2,13 @@ import axios from 'axios'
 const baseUrl = 'https://homefix.fly.dev/api/cuenta/forgot-password'
 
 const recovery = async email => {
-	const response = await axios.post(baseUrl, email)
+	let response
+
+	try {
+		response = await axios.post(baseUrl, email)
+	} catch (error) {
+		console.log(error.message)
+	}
 	return response.data
 }
 

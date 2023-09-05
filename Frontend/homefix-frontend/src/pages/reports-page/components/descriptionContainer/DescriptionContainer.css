@@ -1,0 +1,38 @@
+.reports-description-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 0.8125rem 1.875rem;
+}
+
+.reports-description-title {
+	font-size: 1.5rem;
+	text-transform: capitalize;
+}
+
+.reports-description-text {
+	margin: 0;
+	font-weight: 400;
+}
+
+.reports-description-text span {
+	text-transform: capitalize;
+}
+
+@media (max-width: 900px) {
+	.reports-description-container {
+		margin-bottom: 1.7rem;
+		padding: 0.75rem 0.69rem 1rem;
+	}
+
+	.reports-description-container p {
+		text-align: justify;
+	}
+
+	.reports-description-text {
+		font-size: 0.75rem;
+	}
+
+	.reports-description-title {
+		font-size: 1rem;
+	}
+}

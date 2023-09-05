@@ -1,31 +1,37 @@
 .sales-chart-container {
-	width: 100%;
-	height: 280px;
-	background-color: burlywood;
 	display: grid;
-	grid-template-columns: 0.1fr 1fr 0.1fr;
-	grid-template-rows: 0.2fr 1fr 0.1fr;
+	width: 100%;
+	height: 35vh;
+	background-color: burlywood;
+	grid-template-columns: 1fr;
+	grid-template-rows: 0.2fr 0.7fr;
 	gap: 0px 0px;
 	grid-template-areas:
-		". chart-title ."
-		". bar-chart-container ."
-		". . .";
+		"chart-title"
+		"bar-chart-container";
 	grid-area: sales-chart-container;
 	background-color: #ffff;
 	border-radius: 25px;
+	padding: 0 15%;
 }
 
 .chart-title {
+	display: flex;
+	align-items: center;
 	grid-area: chart-title;
+
 }
 
 .chart-title h3 {
 	font-size: 20px;
-	margin: 23px 0 0 0;
 	font-weight: 400;
+	margin: 0;
 }
 
 .bar-chart-container {
+	display: flex;
+	height: 99%;
+	justify-content: center;
 	grid-area: bar-chart-container;
 }
 

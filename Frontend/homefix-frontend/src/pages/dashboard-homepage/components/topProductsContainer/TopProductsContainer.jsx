@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './TopProductsContainer.css'
-import { useSelector } from 'react-redux'
-import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
+import { useDispatch, useSelector } from 'react-redux'
+import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
+import { loadTopSales } from '../../../../reducers/topSalesReducer'
+
 
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)
+	const token = useSelector(state => state.token)
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(loadTopSales(token))
+		//eslint-disable-next-line
+	}, [])
+
 	const topSalesCopy = [...topSales]
 	const topSalesOrderedSliced = topSalesCopy
 		.sort((a, b) => b.cantidad - a.cantidad)

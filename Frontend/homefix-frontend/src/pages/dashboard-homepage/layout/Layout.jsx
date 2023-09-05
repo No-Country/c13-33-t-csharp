@@ -7,21 +7,14 @@ import SalesChartsContainer from '../components/salesChartsContainer/SalesCharts
 import TitleContainer from '../components/titleContainer/TitleContainer'
 
 export default function Layout() {
-	const date = new Date()
-
-	const monthNames = monthNumber => {
-		date.setMonth(monthNumber)
-		return new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(date)
-	}
-
 	return (
 		<div className="dashboard-layout">
-			<NavBar className="navBar" page="summary" />
-			<HeaderBar className="headerBar" />
-			<TitleContainer monthNames={monthNames} />
+			<NavBar page="summary" />
+			<HeaderBar />
+			<TitleContainer />
 			<DashboardResume />
 			<TopProductsContainer />
-			<SalesChartsContainer monthNames={monthNames} />
+			<SalesChartsContainer />
 		</div>
 	)
 }

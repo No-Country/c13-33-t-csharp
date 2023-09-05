@@ -27,7 +27,7 @@
 
 .add-product-saveButton {
 	width: 100%;
-	justify-self: end;
+	justify-self: flex-end;
 	justify-content: flex-end;
 	align-self: center;
 	display: flex;

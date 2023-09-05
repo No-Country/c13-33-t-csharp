@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App';
+import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -11,11 +11,13 @@ import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
 import messageReducer from './reducers/messageReducer'
 import dashboardDataReducer from './reducers/dashboardDataReducer'
+import salesChartDataReducer from './reducers/salesChartDataReducer'
+import topSalesReducer from './reducers/topSalesReducer'
+import monthSalesReducer from './reducers/monthSalesReducer'
+import consultedMonthReducer from './reducers/consultedMonthReducer'
 import allProductsDataReducer from './reducers/allProductsDataReducer';
 import allBrandsDataReducer from './reducers/allBrandsDataReducer';
 import allCategoriesReducer from './reducers/allCategoriesReducer';
-import salesChartDataReducer from './reducers/salesChartDataReducer';
-import topSalesReducer from './reducers/topSalesReducer';
 import deleteProductReducer from './reducers/deleteProductReducer';
 import updateProductReducer from './reducers/updateProductReducer';
 
@@ -32,6 +34,8 @@ const store = configureStore({
 		allCategoriesData: allCategoriesReducer,
 		salesChartData: salesChartDataReducer,
 		topSales: topSalesReducer,
+		monthSales: monthSalesReducer,
+		consultedMonth: consultedMonthReducer,
 		deleteProduct: deleteProductReducer,
 		updateProduct: updateProductReducer
 	},

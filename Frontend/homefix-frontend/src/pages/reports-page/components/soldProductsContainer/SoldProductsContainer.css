@@ -1,0 +1,41 @@
+.reports-sold-products-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 1.3125rem 1.375rem 1.4375rem;
+}
+
+.reports-sold-products-container hr {
+	margin-top: 1.0625rem;
+}
+
+.reports-sold-products-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-sold-products-barchart-container {
+	display: flex;
+	justify-content: center;
+	padding: 1.875rem 10% 0;
+}
+
+@media (max-width: 900px) {
+	.reports-sold-products-container {
+		padding: 0.95rem 0.45rem 0.75rem;
+		margin-bottom: 1rem;
+	}
+
+	.reports-sold-products-title {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.reports-sold-products-container hr {
+		display: none;
+	}
+
+	.reports-sold-products-barchart-container {
+		padding: 0;
+	}
+}
