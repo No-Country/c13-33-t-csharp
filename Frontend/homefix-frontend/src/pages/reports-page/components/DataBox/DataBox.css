@@ -79,4 +79,14 @@
 	.databox-data {
 		font-size: 1rem;
 	}
+
+	.databox-icon-infotext {
+		width: 10rem;
+		height: 4.5rem;
+		padding: 0.5rem 0.8rem;
+	}
+
+	.databox-icon-infotext-paragraph {
+		font-size: 0.75rem;
+	}
 }

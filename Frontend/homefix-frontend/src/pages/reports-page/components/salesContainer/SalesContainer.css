@@ -1,4 +1,4 @@
-.carousel {
+.sales-carousel {
 	display: none;
 }
 
@@ -45,12 +45,12 @@
 		display: none;
 	}
 
-	.carousel {
+	.sales-carousel {
 		display: inline-block;
 		margin-bottom: 1.6rem;
 	}
 
-	.carousel hr {
+	.sales-carousel hr {
 		margin-bottom: 0;
 	}
 
@@ -62,22 +62,22 @@
 		font-size: 0.75rem;
 	}
 
-	.carousel {
+	.sales-carousel {
 		background-color: white;
 		border-radius: 1rem;
 		width: 100%;
 		padding: 0.69rem;
 	}
 
-	.carousel-item {
+	.sales-carousel-item {
 		padding: 1.3rem 2.5rem;
 	}
 
-	.carousel-control-next {
+	.sales-carousel-control-next {
 		justify-content: flex-end
 	}
 
-	.carousel-control-prev {
+	.sales-carousel-control-prev {
 		justify-content: flex-start;
 	}
 
@@ -85,7 +85,7 @@
 		text-align: left;
 	}
 
-	.carousel-indicators {
+	.sales-carousel-indicators {
 		margin-bottom: 0;
 	}
 }

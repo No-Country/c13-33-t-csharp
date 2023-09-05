@@ -67,10 +67,13 @@ const SalesContainer = () => {
 
 			{/* CAROUSEL */}
 
-			<div id="carouselExample" className="carousel carousel-dark slide">
+			<div
+				id="carouselSales"
+				className="sales-carousel carousel carousel-dark slide"
+			>
 				<h3 className="reports-sales-title">Ventas</h3>
 				<hr />
-				<div className="carousel-indicators">
+				<div className="sales-carousel-indicators carousel-indicators">
 					<button
 						type="button"
 						data-bs-target="#carouselExampleIndicators"
@@ -87,7 +90,7 @@ const SalesContainer = () => {
 					></button>
 				</div>
 				<div className="carousel-inner">
-					<div className="carousel-item active">
+					<div className="sales-carousel-item carousel-item active">
 						<table className="reports-sales-table">
 							<thead>
 								<tr className="reports-sales-table-header">
@@ -110,7 +113,7 @@ const SalesContainer = () => {
 							</tbody>
 						</table>
 					</div>
-					<div className="carousel-item">
+					<div className="sales-carousel-item carousel-item">
 						<table className="reports-sales-table">
 							<thead>
 								<tr className="reports-sales-table-header">
@@ -135,9 +138,9 @@ const SalesContainer = () => {
 					</div>
 				</div>
 				<button
-					className="carousel-control-prev"
+					className="sales-carousel-control-prev carousel-control-prev"
 					type="button"
-					data-bs-target="#carouselExample"
+					data-bs-target="#carouselSales"
 					data-bs-slide="prev"
 				>
 					<span
@@ -147,9 +150,9 @@ const SalesContainer = () => {
 					<span className="visually-hidden">Previous</span>
 				</button>
 				<button
-					className="carousel-control-next"
+					className="sales-carousel-control-next carousel-control-next"
 					type="button"
-					data-bs-target="#carouselExample"
+					data-bs-target="#carouselSales"
 					data-bs-slide="next"
 				>
 					<span

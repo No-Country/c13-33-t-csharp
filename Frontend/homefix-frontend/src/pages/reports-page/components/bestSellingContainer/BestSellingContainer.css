@@ -72,3 +72,54 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+@media (max-width: 900px) {
+	.reports-best-selling-container {
+		height: 4.8rem;
+		margin-bottom: 1rem;
+	}
+
+	.reports-best-selling-product-image-container {
+		width: 4.8rem;
+		height: 4.8rem;
+	}
+
+	.reposts-best-selling-product-image {
+		width: 4.4rem;
+		height: 4.4rem;
+	}
+
+	.reports-best-selling-crown-container {
+		width: 1.7rem;
+		height: 1.7rem;
+		left: 3.12rem;
+	}
+
+	.reports-best-selling-crown-image {
+		width: 0.9rem;
+	}
+
+	.reports-best-selling-texts-container {
+		margin-left: 1.69rem;
+		padding: 0.5rem 0 0.63rem;
+		margin-left: 1.7rem;
+	}
+
+	.reports-best-selling-title {
+		font-size: 0.625rem;
+	}
+
+	.reports-best-selling-product-name {
+		font-size: 1rem;
+	}
+
+	.reports-best-selling-product-quantity {
+		font-size: 0.625rem;
+	}
+
+	.reports-best-selling-product-quantity {
+		background-image: url('../../../../assets/image/Rectangle\ 153\ mobile.svg');
+	}
+
+
+}

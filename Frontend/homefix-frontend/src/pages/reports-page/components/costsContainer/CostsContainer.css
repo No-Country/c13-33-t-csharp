@@ -1,3 +1,7 @@
+.costs-carousel {
+	display: none;
+}
+
 .reports-costs-container {
 	background-color: white;
 	border-radius: 1rem;
@@ -34,4 +38,54 @@
 	color: rgba(0, 0, 0, 0.25);
 	font-size: 1rem;
 	font-weight: 400;
+}
+
+@media (max-width: 900px) {
+	.reports-costs-container {
+		display: none;
+	}
+
+	.costs-carousel {
+		display: inline-block;
+		margin-bottom: 1.6rem;
+	}
+
+	.costs-carousel hr {
+		margin-bottom: 0;
+	}
+
+	.reports-costs-title {
+		font-size: 1rem;
+	}
+
+	.reports-costs-table-header th {
+		font-size: 0.75rem;
+	}
+
+	.costs-carousel {
+		background-color: white;
+		border-radius: 1rem;
+		width: 100%;
+		padding: 0.69rem;
+	}
+
+	.costs-carousel-item {
+		padding: 1.3rem 2.5rem;
+	}
+
+	.costs-carousel-control-next {
+		justify-content: flex-end
+	}
+
+	.costs-carousel-control-prev {
+		justify-content: flex-start;
+	}
+
+	.reports-costs-table-header th {
+		text-align: left;
+	}
+
+	.costs-carousel-indicators {
+		margin-bottom: 0;
+	}
 }
