@@ -12,10 +12,12 @@ namespace HomeFix.Controllers;
 public class AdminController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
+    private readonly ImageService _imageService;
 
-    public AdminController(UserManager<Usuario> userManager)
+    public AdminController(UserManager<Usuario> userManager, ImageService imageService)
     {
         _userManager = userManager;
+        _imageService = imageService;
     }
     
     /// <summary>
@@ -26,7 +28,7 @@ public class AdminController : BaseController
     
     [Authorize(Roles = "Administrador")]
     [HttpPost("register")]
-    public async Task<IActionResult> Registro(RegistroDto registroDto)
+    public async Task<IActionResult> Registro([FromForm]RegistroDto registroDto)
     {
         
         if (await _userManager.Users.AnyAsync(usuario => usuario.UserName == registroDto.UserName))
@@ -39,12 +41,14 @@ public class AdminController : BaseController
             return BadRequest("Email en uso");
         }
 
+        var imageResult =  await _imageService.AddImage(registroDto.Imagen);
         var usuario = new Usuario
         {
             UserName = registroDto.UserName,
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
             Email = registroDto.Email,
+            ImagenPerfil = imageResult.SecureUrl.ToString()
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
