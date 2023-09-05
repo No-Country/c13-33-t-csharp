@@ -7,3 +7,14 @@
 	font-size: 1rem;
 	font-weight: 400;
 }
+
+@media (max-width: 900px) {
+	.salesrow-table-row td {
+		font-size: 0.75rem;
+		text-align: left;
+	}
+
+	.hide {
+		display: none;
+	}
+}

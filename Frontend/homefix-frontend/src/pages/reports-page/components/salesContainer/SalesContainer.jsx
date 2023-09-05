@@ -36,32 +36,130 @@ const testTableData = [
 
 const SalesContainer = () => {
 	return (
-		<div className="reports-sales-container">
-			<h3 className="reports-sales-title">Ventas</h3>
-			<hr />
-			<table className="reports-sales-table">
-				<thead>
-					<tr className="reports-sales-table-header">
-						<th>Producto</th>
-						<th>Precio</th>
-						<th>Vendidos</th>
-						<th>Venta total</th>
-					</tr>
-				</thead>
-				<tbody>
-					{testTableData.map(d => {
-						return (
-							<SalesRow
-								key={d.id}
-								product={d.product}
-								price={d.price}
-								quantity={d.quantity}
-							/>
-						)
-					})}
-				</tbody>
-			</table>
-		</div>
+		<>
+			<div className="reports-sales-container">
+				<h3 className="reports-sales-title">Ventas</h3>
+				<hr />
+				<table className="reports-sales-table">
+					<thead>
+						<tr className="reports-sales-table-header">
+							<th>Producto</th>
+							<th>Precio</th>
+							<th>Vendidos</th>
+							<th>Venta total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{testTableData.map(d => {
+							return (
+								<SalesRow
+									key={d.id}
+									product={d.product}
+									price={d.price}
+									quantity={d.quantity}
+									slide="0"
+								/>
+							)
+						})}
+					</tbody>
+				</table>
+			</div>
+
+			{/* CAROUSEL */}
+
+			<div id="carouselExample" className="carousel carousel-dark slide">
+				<h3 className="reports-sales-title">Ventas</h3>
+				<hr />
+				<div className="carousel-indicators">
+					<button
+						type="button"
+						data-bs-target="#carouselExampleIndicators"
+						data-bs-slide-to="0"
+						className="active"
+						aria-current="true"
+						aria-label="Slide 1"
+					></button>
+					<button
+						type="button"
+						data-bs-target="#carouselExampleIndicators"
+						data-bs-slide-to="1"
+						aria-label="Slide 2"
+					></button>
+				</div>
+				<div className="carousel-inner">
+					<div className="carousel-item active">
+						<table className="reports-sales-table">
+							<thead>
+								<tr className="reports-sales-table-header">
+									<th>Producto</th>
+									<th>Precio</th>
+								</tr>
+							</thead>
+							<tbody>
+								{testTableData.map(d => {
+									return (
+										<SalesRow
+											key={d.id}
+											product={d.product}
+											price={d.price}
+											quantity={d.quantity}
+											slide="1"
+										/>
+									)
+								})}
+							</tbody>
+						</table>
+					</div>
+					<div className="carousel-item">
+						<table className="reports-sales-table">
+							<thead>
+								<tr className="reports-sales-table-header">
+									<th>Vendidos</th>
+									<th>Venta total</th>
+								</tr>
+							</thead>
+							<tbody>
+								{testTableData.map(d => {
+									return (
+										<SalesRow
+											key={d.id}
+											product={d.product}
+											price={d.price}
+											quantity={d.quantity}
+											slide="2"
+										/>
+									)
+								})}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<button
+					className="carousel-control-prev"
+					type="button"
+					data-bs-target="#carouselExample"
+					data-bs-slide="prev"
+				>
+					<span
+						className="carousel-control-prev-icon"
+						aria-hidden="true"
+					></span>
+					<span className="visually-hidden">Previous</span>
+				</button>
+				<button
+					className="carousel-control-next"
+					type="button"
+					data-bs-target="#carouselExample"
+					data-bs-slide="next"
+				>
+					<span
+						className="carousel-control-next-icon"
+						aria-hidden="true"
+					></span>
+					<span className="visually-hidden">Next</span>
+				</button>
+			</div>
+		</>
 	)
 }
 

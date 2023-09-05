@@ -61,3 +61,22 @@
 		display: block;
 	}
 }
+
+@media (max-width:900px) {
+	.databox-container {
+		width: 48%;
+	}
+
+	.databox-container:nth-child(1),
+	.databox-container:nth-child(2) {
+		margin-bottom: 0.81rem;
+	}
+
+	.databox-title {
+		font-size: 0.75rem;
+	}
+
+	.databox-data {
+		font-size: 1rem;
+	}
+}

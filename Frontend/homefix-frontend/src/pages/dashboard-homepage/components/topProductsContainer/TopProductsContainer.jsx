@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import './TopProductsContainer.css'
 import { useDispatch, useSelector } from 'react-redux'
 import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
-import { setTopSales } from '../../../../reducers/topSalesReducer'
-import topSalesService from '../../../../services/topSales'
+import { loadTopSales } from '../../../../reducers/topSalesReducer'
 
 export default function TopProductsContainer() {
 	const topSales = useSelector(state => state.topSales)
@@ -12,10 +11,9 @@ export default function TopProductsContainer() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		topSalesService.getData(token).then(data => {
-			dispatch(setTopSales(data))
-		})
-	}, [dispatch, token])
+		dispatch(loadTopSales(token))
+		//eslint-disable-next-line
+	}, [])
 
 	const topSalesCopy = [...topSales]
 	const topSalesOrderedSliced = topSalesCopy

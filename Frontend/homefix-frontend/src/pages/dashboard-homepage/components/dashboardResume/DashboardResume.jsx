@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './DashboardResume.css'
 import { useEffect } from 'react'
-import { setDashboardData } from '../../../../reducers/dashboardDataReducer'
-import dashboardService from '../../../../services/dashboard'
+import { loadDashboardData } from '../../../../reducers/dashboardDataReducer'
 
 export default function DashboardResume() {
 	const dashboardData = useSelector(state => state.dashboardData)
@@ -11,10 +10,9 @@ export default function DashboardResume() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dashboardService.getData(token).then(data => {
-			dispatch(setDashboardData(data))
-		})
-	}, [dispatch, token])
+		dispatch(loadDashboardData(token))
+		// eslint-disable-next-line
+	}, [])
 
 	return (
 		<div className="dashboard-resume-container">
@@ -28,7 +26,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{typeof dashboardData !== {} ? 'NoData' : '$' + dashboardData.sum}
+						{!dashboardData.sum ? 'NoData' : '$' + dashboardData.sum}
 					</h3>
 				</div>
 			</div>
@@ -39,9 +37,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{typeof dashboardData !== {}
-							? 'NoData'
-							: '$' + dashboardData.sum * 0.8}
+						{!dashboardData.sum ? 'NoData' : '$' + dashboardData.sum * 0.8}
 					</h3>
 				</div>
 			</div>
@@ -51,9 +47,7 @@ export default function DashboardResume() {
 					<hr className="line" />
 				</div>
 				<div className="box-number">
-					<h3 className="text-white">
-						{typeof dashboardData !== {} ? 'NoData' : '20%'}
-					</h3>
+					<h3 className="text-white">20%</h3>
 				</div>
 			</div>
 			<div className="products-sales">
@@ -63,7 +57,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{typeof dashboardData !== {}
+						{!dashboardData.productosvendidos
 							? 'NoData'
 							: dashboardData.productosvendidos}
 					</h3>
