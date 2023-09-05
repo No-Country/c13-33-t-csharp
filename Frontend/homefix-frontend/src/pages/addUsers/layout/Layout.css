@@ -1,0 +1,24 @@
+.add-users-layout {
+  background-color: #f8f8f8;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 0.3fr 0.5fr 0.1fr repeat(2, 1fr) 0.3fr;
+  grid-template-rows: 0.1fr 0.2fr 0.3fr 1fr 0.1fr 1.5fr 0.3fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "headerBar-container headerBar-container headerBar-container headerBar-container headerBar-container headerBar-container"
+    ". . . . . ."
+    ". navBar-container . add-users-title-container add-users-title-container ."
+    ". navBar-container . add-users-information-container add-users-information-container ."
+    ". navBar-container . . . ."
+    ". navBar-container . add-users-rol-container add-users-rol-container ."
+    ". . . . . .";
+}
+
+.headerBar-container {
+  grid-area: headerBar-container;
+}
+.navBar-container {
+  grid-area: navBar-container;
+}

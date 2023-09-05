@@ -23,6 +23,7 @@ import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
 import allCategoriesService from "./services/categories";
 import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
 import User from './pages/users/User';
+import AddUsers from './pages/addUsers/AddUsers'
 
 
 const App = () => {
@@ -119,6 +120,16 @@ const App = () => {
               <Navigate replace to="/login-form" />
             ) : (
               <User/>
+            )
+          }
+        ></Route>
+                <Route
+          path="/add-users"
+          element={
+            user === null ? (
+              <Navigate replace to="/login-form" />
+            ) : (
+              <AddUsers/>
             )
           }
         ></Route>

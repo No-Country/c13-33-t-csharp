@@ -1,0 +1,10 @@
+.add-users-title-container {
+  background-color: #f8f8f8;
+  width: 100%;
+  height: 100%;
+  grid-area: add-users-title-container;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

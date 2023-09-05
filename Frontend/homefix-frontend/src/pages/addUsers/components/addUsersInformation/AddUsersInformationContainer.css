@@ -1,0 +1,66 @@
+.add-users-information-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 0.1fr 0.5fr repeat(2, 1fr) 0.1fr;
+  grid-template-rows: 0.5fr 1fr 0.fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". adduser-InformationTitle adduser-InformationTitle adduser-InformationTitle ."
+    ". addUsersInformation-image addUsersInformation-namePass addUsersInformation-mail ."
+    ". . . . .";
+  grid-area: add-users-information-container;
+  justify-content: center;
+  align-items: center;
+}
+
+.adduser-InformationTitle {
+  width: 100%;
+  height: 100%;
+  grid-area: adduser-InformationTitle;
+  display: flex;
+  align-items: center;
+  border-bottom: #b1adad 2px solid;
+}
+
+.addUsersInformation-image {
+  grid-area: addUsersInformation-image;
+}
+
+.addUsersInformation-namePass {
+  height: 100%;
+  width: 100%;
+  grid-area: addUsersInformation-namePass;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addUsersInformation-mail {
+  height: 100%;
+  width: 100%;
+  grid-area: addUsersInformation-mail;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.circular-image-container {
+  width: 150px; /* Define el tamaño deseado */
+  height: 150px; /* Define el tamaño deseado */
+  border-radius: 50%; /* Hace que el contenedor sea circular */
+  overflow: hidden; /* Oculta cualquier parte de la imagen fuera del contenedor circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* La imagen se ajustará dentro del círculo sin estirarla ni recortarla */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+}

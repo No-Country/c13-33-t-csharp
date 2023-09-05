@@ -1,18 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+const initialState = {
+  products: [],
+};
 
-const updateProductSlice = createSlice({
-  name: 'updateProduct',
-  initialState: [],
-  reducers: {
-    updateProduct: (state, action) => {
-      const updatedProduct = action.payload;
-      const index = state.findIndex(product => product.id === updatedProduct.id);
-      if (index !== -1) {
-        state[index] = updatedProduct;
-      }
-    },
-  },
-});
+const updateProductReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'UPDATE_PRODUCT':
+      const updatedProducts = state.products.map(product => {
+        if (product.id === action.payload.id) {
+          // Actualizamos el producto con los datos del payload
+          return { ...product, ...action.payload };
+        }
+        return product;
+      });
+      console.log(updatedProducts);
+      return { ...state, products: updatedProducts };
 
-export const { updateProduct } = updateProductSlice.actions;
-export default updateProductSlice.reducer;
+    default:
+      return state;
+  }
+};
+
+export default updateProductReducer;
