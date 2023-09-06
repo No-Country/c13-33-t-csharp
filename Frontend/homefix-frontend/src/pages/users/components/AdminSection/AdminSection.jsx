@@ -25,7 +25,7 @@ export default function AdminSection({ adminUsers }) {
                     />
                   ) : (
                     <img
-                      src={user.imagen}
+                      src={user.imagenPerfil}
                       alt=""
                       className="circular-image"
                       style={{ maxWidth: "100px", maxHeight: "100px"  }}
