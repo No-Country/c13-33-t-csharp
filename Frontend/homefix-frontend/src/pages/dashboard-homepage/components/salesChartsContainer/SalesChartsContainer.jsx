@@ -9,14 +9,26 @@ import {
 } from 'chart.js'
 
 import { Bar } from 'react-chartjs-2'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useMonthNames } from '../../../../hooks/hooks'
+import { useEffect } from 'react'
+import { loadSalesChartData } from '../../../../reducers/salesChartDataReducer'
 
-export default function SalesChartsContainer({ monthNames }) {
+export default function SalesChartsContainer() {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip)
 
 	const salesChartData = useSelector(state => state.salesChartData)
+	const token = useSelector(state => state.token)
 
-	const labels = salesChartData.map(object => monthNames(object.mes - 1))
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(loadSalesChartData(token))
+		//eslint-disable-next-line
+	}, [])
+
+	const monthsArray = salesChartData.map(object => object.mes - 1)
+	const labels = useMonthNames(monthsArray)
 
 	const options = {
 		responsive: true,

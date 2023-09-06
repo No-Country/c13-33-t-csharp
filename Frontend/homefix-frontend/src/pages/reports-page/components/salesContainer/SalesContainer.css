@@ -1,0 +1,91 @@
+.sales-carousel {
+	display: none;
+}
+
+.reports-sales-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 0.8125rem 1.875rem 0.9375rem;
+}
+
+.reports-sales-container hr {
+	margin: 0.8125rem 0 0.5625rem;
+	opacity: 0.6;
+	border-color: black;
+}
+
+.reports-sales-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-sales-table {
+	width: 100%;
+}
+
+.reports-sales-table tr {
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.reports-sales-table-header {
+	border-bottom: rgba(0, 0, 0, 0.25) 1px solid;
+}
+
+.reports-sales-table-header th {
+	background-color: white;
+	color: rgba(0, 0, 0, 0.25);
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+@media (max-width: 900px) {
+	.reports-sales-container {
+		display: none;
+	}
+
+	.sales-carousel {
+		display: inline-block;
+		margin-bottom: 1.6rem;
+	}
+
+	.sales-carousel hr {
+		margin-bottom: 0;
+	}
+
+	.reports-sales-title {
+		font-size: 1rem;
+	}
+
+	.reports-sales-table-header th {
+		font-size: 0.75rem;
+	}
+
+	.sales-carousel {
+		background-color: white;
+		border-radius: 1rem;
+		width: 100%;
+		padding: 0.69rem;
+	}
+
+	.sales-carousel-item {
+		padding: 1.3rem 2.5rem;
+	}
+
+	.sales-carousel-control-next {
+		justify-content: flex-end
+	}
+
+	.sales-carousel-control-prev {
+		justify-content: flex-start;
+	}
+
+	.reports-sales-table-header th {
+		text-align: left;
+	}
+
+	.sales-carousel-indicators {
+		margin-bottom: 0;
+	}
+}

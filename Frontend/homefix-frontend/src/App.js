@@ -8,70 +8,52 @@ import DashboardHomepage from './pages/dashboard-homepage/DashboardHomepage'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from './reducers/userReducer'
 import { setToken } from './reducers/tokenReducer'
-import { setDashboardData } from './reducers/dashboardDataReducer'
-import dashboardService from './services/dashboard'
-import salesChartService from './services/salesChart'
-import { setSalesChartData } from './reducers/salesChartDataReducer'
-import topSalesService from './services/topSales'
-import { setTopSales } from './reducers/topSalesReducer'
-import Inventory from "./pages/inventory/Inventory";
-import AddProduct from "./pages/addProduct/AddProduct";
-import allBrandsService from "./services/brands";
-import { setAllBrandsData } from "./reducers/allBrandsDataReducer";
-import allCategoriesService from "./services/categories";
-import { setAllCategoriesData } from "./reducers/allCategoriesReducer";
+import Inventory from './pages/inventory/Inventory'
+import AddProduct from './pages/addProduct/AddProduct'
+import Reports from './pages/reports-page/Reports'
+import allProductsService from './services/allProducts'
+import { setAllProductsData } from './reducers/allProductsDataReducer'
+import allBrandsService from './services/brands'
+import { setAllBrandsData } from './reducers/allBrandsDataReducer'
+import allCategoriesService from './services/categories'
+import { setAllCategoriesData } from './reducers/allCategoriesReducer'
 import User from './pages/users/User';
 import AddUsers from './pages/addUsers/AddUsers'
 
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true)
 
-
-	const user = useSelector(state => state.user)
 	const token = useSelector(state => state.token)
+	const user = useSelector(state => state.user)
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const JSONloggedUser = window.localStorage.getItem("loggedHomefixUser");
-    if (JSONloggedUser) {
-      const user = JSON.parse(JSONloggedUser);
-      dispatch(setUser(user));
-      dispatch(setToken(user.token));
-    }
-    setLoading(false);
-    // eslint-disable-next-line
-  }, []);
-
-
-  useEffect(() => {
-    allBrandsService.getData(token).then((data) => {
-      dispatch(setAllBrandsData(data));
-    });
-  }, [dispatch, token]);
-
-  useEffect(() => {
-    allCategoriesService.getData(token).then((data) => {
-      dispatch(setAllCategoriesData(data));
-    });
-  }, [dispatch, token]);
+	const dispatch = useDispatch()
+	useEffect(() => {
+		const JSONloggedUser = window.localStorage.getItem('loggedHomefixUser')
+		if (JSONloggedUser) {
+			const user = JSON.parse(JSONloggedUser)
+			dispatch(setUser(user))
+			dispatch(setToken(user.token))
+		}
+		setLoading(false)
+		// eslint-disable-next-line
+	}, [])
 
 	useEffect(() => {
-		dashboardService.getData(token).then(data => {
-			dispatch(setDashboardData(data))
+		allProductsService.getData(token).then(data => {
+			dispatch(setAllProductsData(data))
 		})
 	}, [dispatch, token])
 
 	useEffect(() => {
-		salesChartService.getData(token).then(data => {
-			dispatch(setSalesChartData(data))
+		allBrandsService.getData(token).then(data => {
+			dispatch(setAllBrandsData(data))
 		})
 	}, [dispatch, token])
 
 	useEffect(() => {
-		topSalesService.getData(token).then(data => {
-			dispatch(setTopSales(data))
+		allCategoriesService.getData(token).then(data => {
+			dispatch(setAllCategoriesData(data))
 		})
 	}, [dispatch, token])
 
@@ -126,9 +108,15 @@ const App = () => {
             )
           }
         ></Route>
+        				<Route
+					path="/reports"
+					element={
+						user === null ? <Navigate replace to="/login-form" /> : <Reports />
+					}
+				/>
       </Routes>
     </div>
   );
 };
 
-export default App;
+export default App

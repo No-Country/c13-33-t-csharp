@@ -7,7 +7,13 @@ const getData = async token => {
 			Authorization: token,
 		},
 	}
-	const response = await axios.get(baseUrl, config)
+	let response = {}
+	try {
+		response = await axios.get(baseUrl, config)
+	} catch (error) {
+		console.log(error.message)
+	}
+
 	return response.data
 }
 

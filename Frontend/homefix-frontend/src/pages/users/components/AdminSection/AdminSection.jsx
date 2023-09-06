@@ -31,7 +31,7 @@ export default function AdminSection({ adminUsers }) {
                       style={{ maxWidth: "100px", maxHeight: "100px"  }}
                     />
                   )}
-                  <p>{user.nombre} {user.apellido}</p>
+                  <p className="text-center">{user.nombre} {user.apellido}</p>
                 </div>
               ))}
             </div>

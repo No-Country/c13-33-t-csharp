@@ -1,0 +1,125 @@
+.reports-best-selling-container {
+	height: 14.1875rem;
+}
+
+.reports-best-selling-images-container {
+	position: absolute;
+}
+
+.reports-best-selling-product-image-container {
+	position: absolute;
+	z-index: 1;
+	border-radius: 50%;
+	width: 14.1875rem;
+	height: 14.1875rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: #FBAE43 4px solid;
+}
+
+.reposts-best-selling-product-image {
+	width: 13.1875rem;
+	height: 13.1875rem;
+	border-radius: 50%;
+}
+
+.reports-best-selling-crown-container {
+	position: absolute;
+	z-index: 2;
+	background-color: white;
+	border-radius: 50%;
+	width: 4.8125rem;
+	height: 4.8125rem;
+	left: 9.625rem;
+	display: flex;
+	justify-content: center;
+}
+
+.reports-best-selling-crown-image {
+	width: 2.9375rem;
+}
+
+.reports-best-selling-texts-container {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: white;
+	border-radius: 1rem;
+	text-align: center;
+	margin-left: 4.8125rem;
+	padding: 1.375rem 0 1.125rem;
+	border-right: #FBAE43 1.06rem solid;
+}
+
+.reports-best-selling-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-best-selling-product-name {
+	font-size: 3rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-best-selling-product-quantity {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+	background-image: url('../../../../assets/image/Rectangle\ 153.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+@media (max-width: 900px) {
+	.reports-best-selling-container {
+		height: 4.8rem;
+		margin-bottom: 1rem;
+	}
+
+	.reports-best-selling-product-image-container {
+		width: 4.8rem;
+		height: 4.8rem;
+	}
+
+	.reposts-best-selling-product-image {
+		width: 4.4rem;
+		height: 4.4rem;
+	}
+
+	.reports-best-selling-crown-container {
+		width: 1.7rem;
+		height: 1.7rem;
+		left: 3.12rem;
+	}
+
+	.reports-best-selling-crown-image {
+		width: 0.9rem;
+	}
+
+	.reports-best-selling-texts-container {
+		margin-left: 1.69rem;
+		padding: 0.5rem 0 0.63rem;
+		margin-left: 1.7rem;
+	}
+
+	.reports-best-selling-title {
+		font-size: 0.625rem;
+	}
+
+	.reports-best-selling-product-name {
+		font-size: 1rem;
+	}
+
+	.reports-best-selling-product-quantity {
+		font-size: 0.625rem;
+	}
+
+	.reports-best-selling-product-quantity {
+		background-image: url('../../../../assets/image/Rectangle\ 153\ mobile.svg');
+	}
+
+
+}
