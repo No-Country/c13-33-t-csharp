@@ -21,6 +21,7 @@ import allCategoriesReducer from './reducers/allCategoriesReducer';
 import deleteProductReducer from './reducers/deleteProductReducer';
 import updateProductReducer from './reducers/updateProductReducer';
 import allUsersDataReducer from './reducers/allUsersDataReducer';
+import createUserReducer from './reducers/createUserReducer'
 
 const queryClient = new QueryClient()
 
@@ -39,7 +40,8 @@ const store = configureStore({
 		consultedMonth: consultedMonthReducer,
 		deleteProduct: deleteProductReducer,
 		updateProduct: updateProductReducer,
-		allUsersData: allUsersDataReducer
+		allUsersData: allUsersDataReducer,
+		createUser: createUserReducer
 	},
 })
 

@@ -1,4 +1,5 @@
 .users-layout {
+  height: 100vh;
   background-color: #f8f8f8;
   display: grid;
   grid-template-columns: 0.1fr 0.3fr 0.1fr repeat(2, 1fr) 0.1fr;
@@ -15,6 +16,9 @@
     ". navBar-container . . . ."
     ". navBar-container . users-workersSection users-workersSection ."
     ". . . . . .";
+  padding: 40px 60px 0;
+  overflow: auto;
+  padding-bottom: 50px;
 }
 
 .headerBar-container {
