@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './TopProductsContainer.css'
 import { useDispatch, useSelector } from 'react-redux'
-import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
+import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
 import { loadTopSales } from '../../../../reducers/topSalesReducer'
 
 

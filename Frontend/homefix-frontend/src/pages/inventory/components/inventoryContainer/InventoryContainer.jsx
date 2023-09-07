@@ -9,10 +9,10 @@ import closeIcon from '../../../../assets/image/Vector.png'
 import boxIcon from '../../../../assets/image/solar_box-bold.png'
 import { useSelector } from 'react-redux'
 import './InventoryContainerResponsive.css'
-import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
 import { useDispatch } from 'react-redux'
 import { deleteProduct } from '../../../../services/deleteProduct'
 import { updateProduct } from '../../../../services/updateProduct'
+import { updateAllProductsData } from '../../../../reducers/allProductsDataReducer'
 const { format } = require('date-fns')
 
 export default function InventoryContainer() {
@@ -21,21 +21,16 @@ export default function InventoryContainer() {
 	const allCategoriesData = useSelector(state => state.allCategoriesData)
 
 	const [detailShow, setDetailShow] = useState(false)
-	const [isFiltered, setIsFiltered] = useState(null)
-	const [animationShown, setAnimationShown] = useState(0)
 	const [rotateAnimation, setRotateAnimation] = useState(180)
-	const [stock, setStock] = useState()
 	const [editor, setEditor] = useState(false)
 	const [isAdministrator, setIsAdministrator] = useState(false)
-	const [filteredProductById, setFilteredProductsById] = useState([])
-	const [filteredProductByCategory, setFilteredProductsCategory] = useState([])
 	const [allProducts, setAllProducts] = useState([])
-	const [filterSelected, setFilterSelected] = useState('Por Producto')
+	const [filterSelected, setFilterSelected] = useState('Producto')
 	const [searchProduct, setSearchProduct] = useState('')
 	const [categorySelect, setCategorySelect] = useState([])
 	const [brandSelect, setBrandSelect] = useState([])
 	const [productIdForDelete, setProductIdForDelete] = useState()
-	const [editedProduct, setEditedProduct] = useState([])
+	const [editedProduct, setEditedProduct] = useState({})
 	const [inputValues, setInputValues] = useState({
 		id: '',
 		nombre: '',
@@ -43,8 +38,6 @@ export default function InventoryContainer() {
 		costo: '',
 		precio: '',
 		peso: '',
-		alto: '',
-		ancho: '',
 	})
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -54,16 +47,16 @@ export default function InventoryContainer() {
 	const user = useSelector(state => state.user)
 
 	useEffect(() => {
-		if (user.userName === 'AdminTest') {
+		if (user.roles[0].toLowerCase() === 'administrador') {
 			setIsAdministrator(true)
 		} else {
 			setIsAdministrator(false)
 		}
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect(() => {
 		if (detailShow) {
-			setAnimationShown(0)
 			setRotateAnimation({ rotate: 180 }, { duration: 0.2 })
 		} else {
 			setRotateAnimation({ rotate: 0 })
@@ -71,47 +64,36 @@ export default function InventoryContainer() {
 	}, [detailShow])
 
 	useEffect(() => {
-		const productsCopyForName = [...allProductsData]
-		const filteredByName = productsCopyForName.sort(
-			(a, b) => a.nombre - b.nombre
-		)
-		setAllProducts(filteredByName)
-	}, [])
-
-	useEffect(() => {
-		if (isFiltered === null) {
+		if (filterSelected === 'Producto') {
 			const productsCopyForProduct = [...allProductsData]
-			const filteredByProduct = productsCopyForProduct.sort(
-				(a, b) => a.nombre - b.nombre
-			)
+			const filteredByProduct = productsCopyForProduct.sort((a, b) => {
+				if (a.nombre < b.nombre) {
+					return -1
+				}
+				if (a.nombre > b.nombre) {
+					return 1
+				}
+				return 0
+			})
 			setAllProducts(filteredByProduct)
+		} else if (filterSelected === 'ID') {
+			const productsCopyForID = [...allProductsData]
+			const filteredById = productsCopyForID.sort((a, b) => a.id - b.id)
+			setAllProducts(filteredById)
+		} else if (filterSelected === 'Categoria') {
+			const productsCopyForCategory = [...allProductsData]
+			const filteredByCategory = productsCopyForCategory.sort((a, b) => {
+				if (a.categoria < b.categoria) {
+					return -1
+				}
+				if (a.categoria > b.categoria) {
+					return 1
+				}
+				return 0
+			})
+			setAllProducts(filteredByCategory)
 		}
-	}, [])
-
-	useEffect(() => {
-		const productsCopyForID = [...allProductsData]
-		const filteredById = productsCopyForID.sort((a, b) => a.id - b.id)
-		setFilteredProductsById(filteredById)
-
-		const productsCopyForCategory = [...allProductsData]
-		const filteredByCategory = productsCopyForCategory.sort(
-			(a, b) => a.categoria - b.categoria
-		)
-		setFilteredProductsCategory(filteredByCategory)
-
-		// Dependiendo del valor de isFiltered, actualiza allProducts con la lista correcta
-		setAllProducts(isFiltered ? filteredById : filteredByCategory)
-	}, [isFiltered])
-
-	const filteredProductsById = e => {
-		setFilterSelected(e.target.value)
-		setIsFiltered(true)
-	}
-
-	const filteredProductsByCategory = e => {
-		setFilterSelected(e.target.value)
-		setIsFiltered(false)
-	}
+	}, [filterSelected, allProductsData])
 
 	const selectCategory = category => {
 		setCategorySelect(category)
@@ -127,60 +109,68 @@ export default function InventoryContainer() {
 
 		const newProduct = {
 			...product,
+			nombre: inputValues.nombre,
+			descripcion: inputValues.descripcion,
+			costo: inputValues.costo,
+			precio: inputValues.precio,
+			peso: inputValues.peso,
+			cantidad: newQuantity ? newQuantity : product.cantidad,
 			updatedAt: formattedDate,
 		}
+
 		setEditedProduct(newProduct)
+
+		// const formData = new FormData()
+		// formData.append('nombre', editedProduct.nombre)
+		// formData.append('descripcion', editedProduct.descripcion)
+		// formData.append('costo', editedProduct.costo)
+		// formData.append('precio', editedProduct.precio)
+		// formData.append('peso', editedProduct.peso)
+		// formData.append('cantidad', editedProduct.cantidad)
+		// formData.append('updatedAt', editedProduct.updatedAt)
+
+		// console.log('formData', formData)
 	}
 
-	const sendUpdateProduct = () => {
-		dispatch(updateProduct({ id: editedProduct.id, ...editedProduct }))
-	}
+	const [incDecStock, setIncDecStock] = useState(0)
+	const [newQuantity, setNewQuantity] = useState(null)
 
 	const increaseProductQuantity = productId => {
-		setAllProducts(prevProducts =>
-			prevProducts.map(product => {
-				if (product.id === productId) {
-					// Incrementa la cantidad del producto en 1
-					return { ...product, cantidad: product.cantidad + 1 }
-				}
-				return product
+		setIncDecStock(prevIncDecStock => {
+			const updatedButtonPlus = prevIncDecStock + 1
+			setNewQuantity(() => {
+				const productToUpdate = allProducts.filter(p => p.id === productId)
+				return productToUpdate[0].cantidad + updatedButtonPlus
 			})
-		)
+			return updatedButtonPlus
+		})
 	}
 
 	const decreaseProductQuantity = productId => {
-		setAllProducts(prevProducts =>
-			prevProducts.map(product => {
-				if (product.id === productId) {
-					// Incrementa la cantidad del producto en 1
-					return { ...product, cantidad: product.cantidad - 1 }
-				}
-				return product
+		setIncDecStock(prevIncDecStock => {
+			const updatedButtonMinus = prevIncDecStock - 1
+			setNewQuantity(() => {
+				const productToUpdate = allProducts.filter(p => p.id === productId)
+				return productToUpdate[0].cantidad + updatedButtonMinus
 			})
-		)
+			return updatedButtonMinus
+		})
 	}
 
 	const handleInputChange = e => {
 		const { name, value } = e.target
-		setInputValues({
-			...inputValues,
+		setInputValues(prevInputValues => ({
+			...prevInputValues,
 			[name]: value,
-		})
+		}))
 	}
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
-		const formData = new FormData()
-		formData.append('id', inputValues.id)
-		formData.append('nombre', inputValues.nombre)
-		formData.append('descripcion', inputValues.descripcion)
-		formData.append('costo', inputValues.costo)
-		formData.append('precio', inputValues.precio)
-		formData.append('peso', inputValues.peso)
-		formData.append('alto', inputValues.alto)
-		formData.append('ancho', inputValues.ancho)
-		dispatch(updateProduct(formData, token))
-
+		console.log('editedProduct: ', editedProduct)
+		const updatedProduct = await updateProduct(editedProduct, token) // VERIFICAR CON BACKEND PARA QUE NOS ENVIEN DE RESPUESTA EL PRODUCTO MODIFICADO!!!
+		// console.log(updatedProduct)
+		dispatch(updateAllProductsData(editedProduct)) // UNA VEZ HECHO EL CAMBIO EN BACKEND CAMBIAR editedProduct POR updatedProduct
 		navigate('/inventory')
 	}
 
@@ -192,7 +182,7 @@ export default function InventoryContainer() {
 					<button
 						onClick={() => navigate('/add-product')}
 						type="button"
-						class="btn btn-outline-dark rounded-pill addProduct-button"
+						className="btn btn-outline-dark rounded-pill addProduct-button"
 					>
 						Añadir Producto
 					</button>
@@ -208,7 +198,7 @@ export default function InventoryContainer() {
 						></img>
 					</div>
 					<input
-						class="form-control rounded-pill icon-placeholder me-2"
+						className="form-control rounded-pill icon-placeholder me-2"
 						type="search"
 						placeholder="Busca un producto"
 						aria-label="Search"
@@ -238,20 +228,26 @@ export default function InventoryContainer() {
 							<ul className="dropdown-menu">
 								<li>
 									<button
-										value="ID"
 										className="button-reset  w-50"
-										onClick={e => filteredProductsById(e)}
+										onClick={() => setFilterSelected('ID')}
 									>
 										Por ID
 									</button>
 								</li>
 								<li>
 									<button
-										value="Categoria"
 										className="button-reset mx-2 w-75"
-										onClick={e => filteredProductsByCategory(e)}
+										onClick={() => setFilterSelected('Categoria')}
 									>
-										Por Categorias
+										Por Categorías
+									</button>
+								</li>
+								<li>
+									<button
+										className="button-reset mx-2 w-75"
+										onClick={() => setFilterSelected('Producto')}
+									>
+										Por Producto
 									</button>
 								</li>
 							</ul>
@@ -273,7 +269,7 @@ export default function InventoryContainer() {
 									ID
 								</th>
 								<th className="hidden-mobile" scope="col">
-									Categoria
+									Categoría
 								</th>
 								<th id="precio" scope="col">
 									Precio
@@ -288,13 +284,16 @@ export default function InventoryContainer() {
 						<tbody>
 							{allProducts
 								.filter(products =>
-									products.nombre.toLowerCase().includes(searchProduct)
+									products.nombre
+										.toLowerCase()
+										.slice(0, searchProduct.length)
+										.includes(searchProduct.toLocaleLowerCase())
 								)
-								?.map((product, i) => (
+								.map((product, i) => (
 									<>
-										<br></br>
+										<br />
 										<tr
-											key={i}
+											key={product.id}
 											className={`accordion-toggle collapsed pt-5`}
 											onClick={() => setDetailShow(!detailShow)}
 											id="accordion1"
@@ -327,11 +326,11 @@ export default function InventoryContainer() {
 												</motion.div>
 											</td>
 										</tr>
-										<tr class="hide-table-padding ">
-											<td className="product-details-mobile" colspan="9">
+										<tr className="hide-table-padding ">
+											<td className="product-details-mobile" colSpan="9">
 												<div
 													id={`collapse${i}`}
-													class="collapse in p-3 product-details"
+													className="collapse in p-3 product-details"
 												>
 													<div className="product-image-container">
 														<img
@@ -348,7 +347,7 @@ export default function InventoryContainer() {
 																type="button"
 																data-bs-toggle="modal"
 																data-bs-target="#saveModal"
-																class="btn btn-yellow product-detail-button rounded-pill"
+																className="btn btn-yellow product-detail-button rounded-pill"
 															>
 																Guardar
 															</button>
@@ -358,7 +357,7 @@ export default function InventoryContainer() {
 																	setEditor(true)
 																}}
 																type="button"
-																class="btn btn-dark product-detail-button rounded-pill"
+																className="btn btn-dark product-detail-button rounded-pill"
 															>
 																Editar
 															</button>
@@ -366,7 +365,7 @@ export default function InventoryContainer() {
 														{editor && isAdministrator ? (
 															<button
 																type="button"
-																class="btn btn-delete mx-auto rounded-pill"
+																className="btn btn-delete mx-auto rounded-pill"
 																data-bs-toggle="modal"
 																data-bs-target="#deleteModal"
 																onClick={() =>
@@ -419,7 +418,7 @@ export default function InventoryContainer() {
 														)}
 													</div>
 													<div className="product-description-container">
-														<p className="product-detail-title">Descripcion</p>
+														<p className="product-detail-title">Descripción</p>
 														{editor && isAdministrator ? (
 															<input
 																name="descripcion"
@@ -454,7 +453,7 @@ export default function InventoryContainer() {
 																</button>
 																<ul className="dropdown-menu">
 																	{allBrandsData.map((brand, i) => (
-																		<li key={i}>
+																		<li key={allBrandsData.id}>
 																			<button
 																				value={brand}
 																				className="dropdown-item  z-index-3 bg-white"
@@ -529,9 +528,9 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-category-container">
 														<p className="product-detail-title ">
-															Categoria &gt; subcategoria
+															Categoría &gt; subcategoría
 														</p>
-														<p className="product-detail-information">
+														<div className="product-detail-information">
 															{editor ? (
 																<div className="dropdown">
 																	<button
@@ -551,7 +550,7 @@ export default function InventoryContainer() {
 																	</button>
 																	<ul className="dropdown-menu ">
 																		{allCategoriesData.map((category, i) => (
-																			<li key={i}>
+																			<li key={allCategoriesData.id}>
 																				<button
 																					value={category}
 																					className="dropdown-item z-index-3 bg-white"
@@ -568,7 +567,7 @@ export default function InventoryContainer() {
 															) : (
 																<p>{product.categoria}</p>
 															)}
-														</p>
+														</div>
 													</div>
 													<div className="product-stock-container">
 														<div className="product-stock">
@@ -576,13 +575,13 @@ export default function InventoryContainer() {
 																Stock actual
 															</p>
 															<p className="product-detail-information">
-																{stock ? stock : product.cantidad}
+																{product.cantidad}
 															</p>
 															{editor && isAdministrator ? (
 																<div className="stock-box">
 																	<button
 																		type="button"
-																		class="btn btn-outline-dark button-stock-minus"
+																		className="btn btn-outline-dark button-stock-minus"
 																		onClick={() =>
 																			decreaseProductQuantity(product.id)
 																		}
@@ -590,11 +589,11 @@ export default function InventoryContainer() {
 																		<p className="button-sign my-3">-</p>
 																	</button>
 																	<p className="product-detail-information stock-number">
-																		{stock ? stock : product.cantidad}
+																		{product.cantidad + incDecStock}
 																	</p>
 																	<button
 																		type="button"
-																		class="btn btn-outline-dark button-stock-plus"
+																		className="btn btn-outline-dark button-stock-plus"
 																		onClick={() =>
 																			increaseProductQuantity(product.id)
 																		}
@@ -608,7 +607,7 @@ export default function InventoryContainer() {
 														</div>
 														<div className="product-modification">
 															<p className="product-detail-title">
-																Ultima modificacion
+																Última modificación
 															</p>
 															<p>
 																{new Date(product.updatedAt).toLocaleDateString(
@@ -638,51 +637,53 @@ export default function InventoryContainer() {
 
 			{/* modal window delete */}
 			<div
-				class="modal fade"
+				className="modal fade"
 				id="deleteModal"
 				data-bs-backdrop="static"
 				data-bs-keyboard="false"
-				tabindex="-1"
+				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
 				aria-hidden="true"
 			>
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
 							<button
 								type="button"
-								class="btn-close-modal rounded-circle"
+								className="btn-close-modal rounded-circle"
 								data-bs-dismiss="modal"
 								aria-label="Close"
 							>
 								<img className="closeimg" src={closeIcon} alt="" />
 							</button>
 						</div>
-						<div class="modal-body">
+						<div className="modal-body">
 							<img
 								className="trash-icon mb-3"
 								src={trashIcon}
 								alt="Borrar Producto"
 							/>
-							<h1 class="modal-delete-title text-center">Eliminar Producto</h1>
+							<h1 className="modal-delete-title text-center">
+								Eliminar Producto
+							</h1>
 							<p className="text-center text-modal">
-								¿Esta seguro que desea eliminar el producto del inventario?
+								¿Está seguro que desea eliminar el producto del inventario?
 							</p>
 						</div>
-						<div class="text-center modal-button-box">
+						<div className="text-center modal-button-box">
 							<button
 								type="button"
-								class="btn btn-dark"
+								className="btn btn-dark"
 								data-bs-dismiss="modal"
 								onClick={() =>
 									dispatch(deleteProduct(productIdForDelete, token))
 								}
 							>
-								Si, eliminar producto
+								Sí, eliminar producto
 							</button>
 							<button
 								type="button"
-								class="btn btn-outline-dark mt-3 mb-3"
+								className="btn btn-outline-dark mt-3 mb-3"
 								data-bs-dismiss="modal"
 							>
 								Cancelar
@@ -695,55 +696,54 @@ export default function InventoryContainer() {
 
 			{/* modal window save */}
 			<div
-				class="modal fade"
+				className="modal fade"
 				id="saveModal"
 				data-bs-backdrop="static"
 				data-bs-keyboard="false"
-				tabindex="-1"
+				tabIndex="-1"
 				aria-labelledby="staticBackdropLabel"
 				aria-hidden="true"
 			>
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
 							<button
 								type="button"
-								class="btn-close-modal rounded-circle"
+								className="btn-close-modal rounded-circle"
 								data-bs-dismiss="modal"
 								aria-label="Close"
 							>
 								<img className="closeimg" src={closeIcon} alt="" />
 							</button>
 						</div>
-						<div class="modal-body">
+						<div className="modal-body">
 							<img className="trash-icon" src={boxIcon} alt="Borrar Producto" />
-							<h1 class="modal-delete-title text-center">
-								Haz modificado este producto
+							<h1 className="modal-delete-title text-center">
+								Has modificado este producto
 							</h1>
-							{stock !== 0 ? (
+							{newQuantity !== 0 ? (
 								<p className="text-center text-modal">
 									La cantidad disponible para este producto ha sido actualizada
-									a 30 productos en stock
 								</p>
 							) : (
 								<></>
 							)}
 							<p className="text-center text-modal">
-								¿Desea confirmar el cambio en {'product.nombre'}?
+								¿Desea confirmar el cambio?
 							</p>
 						</div>
-						<div class="text-center modal-button-box">
+						<div className="text-center modal-button-box">
 							<button
 								type="button"
-								class="btn btn-dark"
+								className="btn btn-dark"
 								data-bs-dismiss="modal"
 								onClick={e => handleSubmit(e)}
 							>
-								Si, confirmo
+								Sí, confirmo
 							</button>
 							<button
 								type="button"
-								class="btn btn-outline-dark mt-3 mb-3"
+								className="btn btn-outline-dark mt-3 mb-3"
 								data-bs-dismiss="modal"
 							>
 								Cancelar

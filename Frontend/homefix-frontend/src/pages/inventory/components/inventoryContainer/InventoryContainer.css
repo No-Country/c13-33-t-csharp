@@ -534,10 +534,6 @@ tr.hide-table-padding td {
 	border-radius: 25px;
 }
 
-
-
-
-
 .accordion-tr {
 	border-radius: 25px;
 	margin: 50px;
@@ -555,7 +551,6 @@ table td {
 	border-left: none;
 	border-radius: 10px !important;
 }
-
 
 .inventory-table tbody tr:first-child td:first-child {
 	border-radius: 20px 0 0 0;
