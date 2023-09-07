@@ -23,15 +23,15 @@ builder.Services.AddIdentityService(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers().AddNewtonsoftJson(options=>
-     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 string connString;
 if (builder.Environment.IsDevelopment())
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
 else
 {
     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-    
+
     connUrl = connUrl.Replace("postgres://", string.Empty);
     var pgUserPass = connUrl.Split("@")[0];
     var pgHostPortDb = connUrl.Split("@")[1];
@@ -41,15 +41,13 @@ else
     var pgUser = pgUserPass.Split(":")[0];
     var pgPass = pgUserPass.Split(":")[1];
     var pgHost = pgHostPort.Split(":")[0];
-    var pgPort = pgHostPort.Split(":")[1];//postgres://postgres:hyjq7MAfPGBr51v@homefix-db.flycast:5432
+    var pgPort = pgHostPort.Split(":")[1]; //postgres://postgres:hyjq7MAfPGBr51v@homefix-db.flycast:5432
     var updatedHost = pgHost.Replace("flycast", "internal");
 
     connString = $"Server={updatedHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
 }
-builder.Services.AddDbContext<HomeFixDbContext>(opt =>
-{
-    opt.UseNpgsql(connString);
-});
+
+builder.Services.AddDbContext<HomeFixDbContext>(opt => { opt.UseNpgsql(connString); });
 
 var app = builder.Build();
 
@@ -75,7 +73,8 @@ var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000"); //TODO cambiarlo en el deploy
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+        .WithOrigins("http://localhost:3000", "https://homefixapp.vercel.app"); //TODO cambiarlo en el deploy
 });
 
 try
