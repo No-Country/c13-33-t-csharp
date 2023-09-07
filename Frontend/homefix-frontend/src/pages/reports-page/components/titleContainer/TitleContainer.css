@@ -1,0 +1,20 @@
+.reports-title-container {
+	display: flex;
+	align-items: center;
+	padding-top: 1.8rem;
+}
+
+.reports-title-container h2 {
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+@media (max-width: 900px) {
+	.reports-title-container {
+		margin-bottom: 1.7rem;
+	}
+
+	.reports-title-container h2 {
+		font-size: 1rem;
+	}
+}

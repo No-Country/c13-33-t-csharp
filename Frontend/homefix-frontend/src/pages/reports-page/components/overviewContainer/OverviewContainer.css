@@ -1,0 +1,32 @@
+.reports-overview-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 0.6875rem 1.375rem 1.4375rem;
+}
+
+.reports-overview-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin: 0;
+}
+
+.reports-overview-dataBox-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+	.reports-overview-container {
+		margin-bottom: 1.7rem;
+		padding: 0.8rem 0.69rem 1rem;
+	}
+
+	.reports-overview-title {
+		font-size: 1rem;
+	}
+
+	.reports-overview-dataBox-container {
+		flex-wrap: wrap;
+		align-content: space-between;
+	}
+}
