@@ -7,5 +7,6 @@ public class UsuariosDto
     public string Apellido { get; set; }
     public string UserName { get; set; }
     public string Email { get; set; }
+    public string ImagenPerfil { get; set; }
     
 }

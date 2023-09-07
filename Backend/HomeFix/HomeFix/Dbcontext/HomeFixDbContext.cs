@@ -41,6 +41,7 @@ public class HomeFixDbContext : IdentityDbContext <Usuario, Rol, int>
         modelBuilder.Entity<ArticuloMasVendidoDto>().HasNoKey().ToView("productomasvendidopormes");
         modelBuilder.Entity<VentasPorMes>().HasNoKey().ToView("ventasultimos6meses");
         modelBuilder.Entity<VentaMes>().HasNoKey().ToView("ventasmes");
+        modelBuilder.Entity<ArticuloPorMes>().HasNoKey().ToView("masvendidospormes");
 
     }
 

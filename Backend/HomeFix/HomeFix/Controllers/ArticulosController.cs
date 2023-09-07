@@ -112,9 +112,10 @@ public class ArticulosController : BaseController
             articulo.Imagen = imageResult.SecureUrl.ToString();
             articulo.PublicId = imageResult.PublicId;
         }
-        
+
+        var result = await _uow.Complete();
         var articuloDto = _uow.ArticulosRepository.FindProjectedArticuloById(id);
-        if (await _uow.Complete()) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
+        if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
 
         return BadRequest(new ProblemDetails {Title = "Problema actualizando el articulo"});
     }

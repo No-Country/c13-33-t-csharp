@@ -296,6 +296,60 @@ public class SeedData
                 },
                 new Movimiento()
                 {
+                    Id = 6,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.AddMonths(-1).ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 11,
+                            ArticuloId = 1,
+                            Cantidad = 10,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 2
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 12,
+                            ArticuloId = 6,
+                            Cantidad = 10,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 2
+                        }
+                    },
+                    PrecioTotal = 240000,
+                },
+                new Movimiento()
+                {
+                    Id = 5,
+                    UsuarioId = 1,
+                    FechaYHora = DateTime.Now.AddDays(1).ToUniversalTime(),
+                    Descripcion = "Compra de articulos",
+                    MovimientoDetalles = new List<MovimientoDetalle>()
+                    {
+                        new MovimientoDetalle()
+                        {
+                            Id = 9,
+                            ArticuloId = 1,
+                            Cantidad = 13,
+                            PrecioUnitario = 20000,
+                            MovimientoId = 2
+                        },
+                        new MovimientoDetalle()
+                        {
+                            Id = 10,
+                            ArticuloId = 6,
+                            Cantidad = 14,
+                            PrecioUnitario = 4000,
+                            MovimientoId = 2
+                        }
+                    },
+                    PrecioTotal = 240000,
+                },
+                new Movimiento()
+                {
                     Id = 1,
                     UsuarioId = 1,
                     FechaYHora = DateTime.Now.ToUniversalTime(),
