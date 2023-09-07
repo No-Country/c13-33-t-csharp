@@ -5,7 +5,8 @@ import cameraIcon from '../../../../assets/image/camera-solid.png'
 import imageIcon from '../../../../assets/image/bi_image.png'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { createProduct } from '../../../../services/createProduct'
+import { createProduct } from '../../../../services/createProduct';
+import noProductImage from "../../../../assets/image/noProduct-image.png";
 import './AddProductContainerResponsive.css'
 
 export default function AddProductContainer() {
@@ -140,20 +141,22 @@ export default function AddProductContainer() {
 				</div>
 				<div className="addProduct-info-img">
 					{changeImage ? (
-						<div className="addProduct-image-circle imgProduct-container">
+						<div className="addProduct-image-circle circular-image-container imgProduct-container">
 							<img
-								className="img-circle"
+								className="circular-image"
 								src={changeImage}
 								alt="Imagen del producto"
+								style={{ maxWidth: "200px", maxHeight: "200px" }}
 							/>
 						</div>
 					) : (
-						<div className="addProduct-image-circle rounded-circle">
-							<div className="pictureIcon">
-								<img src={imageIcon} alt="Icono de imagen" />
-							</div>
-							<div className="addProduct-semiCirlce-wrapper">
-								<label>
+						<div className="addProduct-image-circle">
+								<label
+								className="circular-image-container">
+								<img 
+								className='circular-image'
+								src={noProductImage} alt=''
+								style={{ maxWidth: "200px", maxHeight: "200px" }}/>
 									<input
 										name="imagen"
 										type="file"
@@ -161,9 +164,7 @@ export default function AddProductContainer() {
 										hidden
 										onChange={handleImageChange}
 									/>
-									<img src={cameraIcon} alt="Icono de cámara" />
 								</label>
-							</div>
 						</div>
 					)}
 				</div>
@@ -202,10 +203,10 @@ export default function AddProductContainer() {
 						</button>
 						<ul className="dropdown-menu">
 							{allBrandsData.map((brand, i) => (
-								<li key={i}>
+								<li className='  z-index-3 bg-white' key={i}>
 									<button
 										value={brand}
-										className="dropdown-item  z-index-3 bg-white"
+										className="dropdown-item  z-index-correction bg-white"
 										onClick={e => selectBrand(e, brand)}
 									>
 										{brand.nombre}
@@ -242,7 +243,7 @@ export default function AddProductContainer() {
 								<li key={i}>
 									<button
 										value={category}
-										className="dropdown-item z-index-3 bg-white"
+										className="dropdown-item bg-white addProduct-info-category"
 										onClick={e => selectCategory(e, category)}
 									>
 										{category.categoria}
