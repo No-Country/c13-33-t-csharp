@@ -25,6 +25,7 @@ export default function Layout() {
 		if (allProductsData.length > 0) {
 			setLoading(false)
 		}
+		// eslint-disable-next-line
 	}, [allProductsData, fetchData])
 
 	if (loading) {
