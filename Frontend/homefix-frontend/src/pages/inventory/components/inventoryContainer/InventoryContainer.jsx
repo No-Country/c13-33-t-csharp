@@ -167,10 +167,8 @@ export default function InventoryContainer() {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		console.log('editedProduct: ', editedProduct)
-		const updatedProduct = await updateProduct(editedProduct, token) // VERIFICAR CON BACKEND PARA QUE NOS ENVIEN DE RESPUESTA EL PRODUCTO MODIFICADO!!!
-		// console.log(updatedProduct)
-		dispatch(updateAllProductsData(editedProduct)) // UNA VEZ HECHO EL CAMBIO EN BACKEND CAMBIAR editedProduct POR updatedProduct
+		const updatedProduct = await updateProduct(editedProduct, token)
+		dispatch(updateAllProductsData(updatedProduct))
 		navigate('/inventory')
 	}
 
