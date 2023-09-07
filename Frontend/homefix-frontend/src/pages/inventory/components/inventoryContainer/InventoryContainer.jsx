@@ -464,6 +464,7 @@ export default function InventoryContainer() {
                               <input
                                 name="costo"
                                 className="editable-input"
+								value={inputValues.costo}
                                 placeholder={`$${product.costo}`}
                                 onChange={handleInputChange}
                               />
@@ -489,6 +490,7 @@ export default function InventoryContainer() {
                               <input
                                 name="precio"
                                 className="editable-input"
+								value={inputValues.costo * 1.2}
                                 placeholder={`$${product.precio}`}
                                 onChange={handleInputChange}
                               />
