@@ -43,8 +43,6 @@ export default function InventoryContainer() {
 		costo: '',
 		precio: '',
 		peso: '',
-		alto: '',
-		ancho: '',
 	})
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -117,13 +115,27 @@ export default function InventoryContainer() {
 
 		const newProduct = {
 			...product,
-			cantidad: newQuantity,
-			updatedAt: formattedDate,
+      nombre: inputValues.nombre,
+      descripcion: inputValues.descripcion,
+      costo: inputValues.costo,
+      precio: inputValues.precio,
+      peso: inputValues.peso,
+      cantidad: newQuantity,
+      updatedAt: formattedDate,
 		}
 
-		console.log(newProduct)
+		console.log("newProduct",newProduct)
 		setEditedProduct(newProduct)
-		console.log(editedProduct)
+		console.log("editedProduct",editedProduct)
+    
+		const formData = new FormData();
+		formData.append('nombre', editedProduct.nombre)
+		formData.append('descripcion', editedProduct.descripcion)
+		formData.append('costo', editedProduct.costo)
+		formData.append('precio', editedProduct.precio)
+		formData.append('peso', editedProduct.peso)
+    formData.append('cantidad', editedProduct.ancho)
+    formData.append('updatedAt', editedProduct.ancho)
 	}
 
 	// const sendUpdateProduct = () => {
@@ -133,13 +145,17 @@ export default function InventoryContainer() {
 	const [buttonPlus, setButtonPlus] = useState(0)
 	const [newQuantity, setNewQuantity] = useState(0)
 
-	const increaseProductQuantity = productId => {
-		setButtonPlus(buttonPlus + 1)
-		setNewQuantity(() => {
-			const productToUpdate = allProducts.filter(p => p.id === productId)
-			console.log(buttonPlus)
-			return productToUpdate[0].cantidad + buttonPlus
-		})
+  const increaseProductQuantity = productId => {
+    setButtonPlus(prevButtonPlus => {
+      const updatedButtonPlus = prevButtonPlus + 1;
+      setNewQuantity(() => {
+        const productToUpdate = allProducts.filter(p => p.id === productId);
+        console.log(updatedButtonPlus);
+        return productToUpdate[0].cantidad + updatedButtonPlus;
+      });
+      return updatedButtonPlus;
+    });
+  
 		// setAllProducts(prevProducts =>
 		// 	prevProducts.map(product => {
 		// 		if (product.id === productId) {
@@ -152,40 +168,32 @@ export default function InventoryContainer() {
 	}
 
 	const decreaseProductQuantity = productId => {
-		setAllProducts(prevProducts =>
-			prevProducts.map(product => {
-				if (product.id === productId) {
-					// Decrementa la cantidad del producto en 1
-					return { ...product, cantidad: product.cantidad - 1 }
-				}
-				return product
+    setButtonPlus(prevButtonPlus => {
+      const updatedButtonMinus = prevButtonPlus - 1;
+      setNewQuantity(() => {
+        const productToUpdate = allProducts.filter(p => p.id === productId);
+        console.log(updatedButtonMinus);
+        return productToUpdate[0].cantidad + updatedButtonMinus;
+      });
+      return updatedButtonMinus;
 			})
-		)
 	}
 
-	const handleInputChange = e => {
-		const { name, value } = e.target
-		setInputValues({
-			...inputValues,
-			[name]: value,
-		})
-	}
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setInputValues(prevInputValues => ({
+      ...prevInputValues,
+      [name]: value,
+    }));
+  };
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		const formData = new FormData()
-		formData.append('id', editedProduct.id)
-		formData.append('nombre', editedProduct.nombre)
-		formData.append('descripcion', editedProduct.descripcion)
-		formData.append('costo', editedProduct.costo)
-		formData.append('precio', editedProduct.precio)
-		formData.append('peso', editedProduct.peso)
-		formData.append('alto', editedProduct.alto)
-		formData.append('ancho', editedProduct.ancho)
-		dispatch(updateProduct(formData, token))
-		console.log(formData)
+		console.log("formData",editedProduct)
+		dispatch(updateProduct(editedProduct, token))
 		navigate('/inventory')
 	}
+  
 
 	return (
 		<>
@@ -737,13 +745,12 @@ export default function InventoryContainer() {
 							{stock !== 0 ? (
 								<p className="text-center text-modal">
 									La cantidad disponible para este producto ha sido actualizada
-									a 30 productos en stock
 								</p>
 							) : (
 								<></>
 							)}
 							<p className="text-center text-modal">
-								¿Desea confirmar el cambio en {'product.nombre'}?
+								¿Desea confirmar el cambio?
 							</p>
 						</div>
 						<div className="text-center modal-button-box">
