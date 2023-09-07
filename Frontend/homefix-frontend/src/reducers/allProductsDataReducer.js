@@ -8,10 +8,22 @@ const allProductsDataSlice = createSlice({
 		setAllProductsData(state, action) {
 			return action.payload
 		},
+		updateAllProductsData(state, action) {
+			const productObject = action.payload
+			const newState = state.map(product => {
+				if (product.id === productObject.id) {
+					return productObject
+				} else {
+					return product
+				}
+			})
+			return newState
+		},
 	},
 })
 
-export const { setAllProductsData } = allProductsDataSlice.actions
+export const { setAllProductsData, updateAllProductsData } =
+	allProductsDataSlice.actions
 
 export const initializeAllProductsData = token => {
 	return async dispatch => {

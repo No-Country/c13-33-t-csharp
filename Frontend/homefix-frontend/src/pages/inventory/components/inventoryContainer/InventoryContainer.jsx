@@ -12,6 +12,7 @@ import './InventoryContainerResponsive.css'
 import { useDispatch } from 'react-redux'
 import { deleteProduct } from '../../../../services/deleteProduct'
 import { updateProduct } from '../../../../services/updateProduct'
+import { updateAllProductsData } from '../../../../reducers/allProductsDataReducer'
 const { format } = require('date-fns')
 
 export default function InventoryContainer() {
@@ -19,16 +20,10 @@ export default function InventoryContainer() {
 	const allBrandsData = useSelector(state => state.allBrandsData)
 	const allCategoriesData = useSelector(state => state.allCategoriesData)
 
-	const [typeFilter, setTypeFilter] = useState(null)
 	const [detailShow, setDetailShow] = useState(false)
-	const [isFiltered, setIsFiltered] = useState('')
-	// const [animationShown, setAnimationShown] = useState(0)
 	const [rotateAnimation, setRotateAnimation] = useState(180)
-	const [stock, setStock] = useState()
 	const [editor, setEditor] = useState(false)
 	const [isAdministrator, setIsAdministrator] = useState(false)
-	const [filteredProductById, setFilteredProductsById] = useState([])
-	const [filteredProductByCategory, setFilteredProductsCategory] = useState([])
 	const [allProducts, setAllProducts] = useState([])
 	const [filterSelected, setFilterSelected] = useState('Producto')
 	const [searchProduct, setSearchProduct] = useState('')
@@ -57,11 +52,11 @@ export default function InventoryContainer() {
 		} else {
 			setIsAdministrator(false)
 		}
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect(() => {
 		if (detailShow) {
-			// setAnimationShown(0)
 			setRotateAnimation({ rotate: 180 }, { duration: 0.2 })
 		} else {
 			setRotateAnimation({ rotate: 0 })
@@ -98,7 +93,7 @@ export default function InventoryContainer() {
 			})
 			setAllProducts(filteredByCategory)
 		}
-	}, [filterSelected])
+	}, [filterSelected, allProductsData])
 
 	const selectCategory = category => {
 		setCategorySelect(category)
@@ -109,91 +104,75 @@ export default function InventoryContainer() {
 	}
 
 	const updateProductHandler = product => {
-		console.log(product)
 		const newDate = new Date()
 		const formattedDate = format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 
 		const newProduct = {
 			...product,
-      nombre: inputValues.nombre,
-      descripcion: inputValues.descripcion,
-      costo: inputValues.costo,
-      precio: inputValues.precio,
-      peso: inputValues.peso,
-      cantidad: newQuantity,
-      updatedAt: formattedDate,
+			nombre: inputValues.nombre,
+			descripcion: inputValues.descripcion,
+			costo: inputValues.costo,
+			precio: inputValues.precio,
+			peso: inputValues.peso,
+			cantidad: newQuantity ? newQuantity : product.cantidad,
+			updatedAt: formattedDate,
 		}
 
-		console.log("newProduct",newProduct)
 		setEditedProduct(newProduct)
-		console.log("editedProduct",editedProduct)
-    
-		const formData = new FormData();
-		formData.append('nombre', editedProduct.nombre)
-		formData.append('descripcion', editedProduct.descripcion)
-		formData.append('costo', editedProduct.costo)
-		formData.append('precio', editedProduct.precio)
-		formData.append('peso', editedProduct.peso)
-    formData.append('cantidad', editedProduct.ancho)
-    formData.append('updatedAt', editedProduct.ancho)
+
+		// const formData = new FormData()
+		// formData.append('nombre', editedProduct.nombre)
+		// formData.append('descripcion', editedProduct.descripcion)
+		// formData.append('costo', editedProduct.costo)
+		// formData.append('precio', editedProduct.precio)
+		// formData.append('peso', editedProduct.peso)
+		// formData.append('cantidad', editedProduct.cantidad)
+		// formData.append('updatedAt', editedProduct.updatedAt)
+
+		// console.log('formData', formData)
 	}
 
-	// const sendUpdateProduct = () => {
-	// 	dispatch(updateProduct({ id: editedProduct.id, ...editedProduct }))
-	// }
+	const [incDecStock, setIncDecStock] = useState(0)
+	const [newQuantity, setNewQuantity] = useState(null)
 
-	const [buttonPlus, setButtonPlus] = useState(0)
-	const [newQuantity, setNewQuantity] = useState(0)
-
-  const increaseProductQuantity = productId => {
-    setButtonPlus(prevButtonPlus => {
-      const updatedButtonPlus = prevButtonPlus + 1;
-      setNewQuantity(() => {
-        const productToUpdate = allProducts.filter(p => p.id === productId);
-        console.log(updatedButtonPlus);
-        return productToUpdate[0].cantidad + updatedButtonPlus;
-      });
-      return updatedButtonPlus;
-    });
-  
-		// setAllProducts(prevProducts =>
-		// 	prevProducts.map(product => {
-		// 		if (product.id === productId) {
-		// 			// Incrementa la cantidad del producto en 1
-		// 			return { ...product, cantidad: product.cantidad + 1 }
-		// 		}
-		// 		return product
-		// 	})
-		// )
+	const increaseProductQuantity = productId => {
+		setIncDecStock(prevIncDecStock => {
+			const updatedButtonPlus = prevIncDecStock + 1
+			setNewQuantity(() => {
+				const productToUpdate = allProducts.filter(p => p.id === productId)
+				return productToUpdate[0].cantidad + updatedButtonPlus
+			})
+			return updatedButtonPlus
+		})
 	}
 
 	const decreaseProductQuantity = productId => {
-    setButtonPlus(prevButtonPlus => {
-      const updatedButtonMinus = prevButtonPlus - 1;
-      setNewQuantity(() => {
-        const productToUpdate = allProducts.filter(p => p.id === productId);
-        console.log(updatedButtonMinus);
-        return productToUpdate[0].cantidad + updatedButtonMinus;
-      });
-      return updatedButtonMinus;
+		setIncDecStock(prevIncDecStock => {
+			const updatedButtonMinus = prevIncDecStock - 1
+			setNewQuantity(() => {
+				const productToUpdate = allProducts.filter(p => p.id === productId)
+				return productToUpdate[0].cantidad + updatedButtonMinus
 			})
+			return updatedButtonMinus
+		})
 	}
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setInputValues(prevInputValues => ({
-      ...prevInputValues,
-      [name]: value,
-    }));
-  };
+	const handleInputChange = e => {
+		const { name, value } = e.target
+		setInputValues(prevInputValues => ({
+			...prevInputValues,
+			[name]: value,
+		}))
+	}
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
-		console.log("formData",editedProduct)
-		dispatch(updateProduct(editedProduct, token))
+		console.log('editedProduct: ', editedProduct)
+		// const updatedProduct = await updateProduct(editedProduct, token) VERIFICAR CON BACKEND PARA QUE NOS ENVIEN DE RESPUESTA EL PRODUCTO MODIFICADO!!!
+		// console.log(updatedProduct)
+		dispatch(updateAllProductsData(editedProduct)) // UNA VEZ HECHO EL CAMBIO EN BACKEND CAMBIAR editedProduct POR updatedProduct
 		navigate('/inventory')
 	}
-  
 
 	return (
 		<>
@@ -260,7 +239,7 @@ export default function InventoryContainer() {
 										className="button-reset mx-2 w-75"
 										onClick={() => setFilterSelected('Categoria')}
 									>
-										Por Categorias
+										Por Categorías
 									</button>
 								</li>
 								<li>
@@ -290,7 +269,7 @@ export default function InventoryContainer() {
 									ID
 								</th>
 								<th className="hidden-mobile" scope="col">
-									Categoria
+									Categoría
 								</th>
 								<th id="precio" scope="col">
 									Precio
@@ -439,7 +418,7 @@ export default function InventoryContainer() {
 														)}
 													</div>
 													<div className="product-description-container">
-														<p className="product-detail-title">Descripcion</p>
+														<p className="product-detail-title">Descripción</p>
 														{editor && isAdministrator ? (
 															<input
 																name="descripcion"
@@ -549,7 +528,7 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-category-container">
 														<p className="product-detail-title ">
-															Categoria &gt; subcategoria
+															Categoría &gt; subcategoría
 														</p>
 														<div className="product-detail-information">
 															{editor ? (
@@ -610,7 +589,7 @@ export default function InventoryContainer() {
 																		<p className="button-sign my-3">-</p>
 																	</button>
 																	<p className="product-detail-information stock-number">
-																		{product.cantidad + buttonPlus}
+																		{product.cantidad + incDecStock}
 																	</p>
 																	<button
 																		type="button"
@@ -628,7 +607,7 @@ export default function InventoryContainer() {
 														</div>
 														<div className="product-modification">
 															<p className="product-detail-title">
-																Ultima modificacion
+																Última modificación
 															</p>
 															<p>
 																{new Date(product.updatedAt).toLocaleDateString(
@@ -688,7 +667,7 @@ export default function InventoryContainer() {
 								Eliminar Producto
 							</h1>
 							<p className="text-center text-modal">
-								¿Esta seguro que desea eliminar el producto del inventario?
+								¿Está seguro que desea eliminar el producto del inventario?
 							</p>
 						</div>
 						<div className="text-center modal-button-box">
@@ -700,7 +679,7 @@ export default function InventoryContainer() {
 									dispatch(deleteProduct(productIdForDelete, token))
 								}
 							>
-								Si, eliminar producto
+								Sí, eliminar producto
 							</button>
 							<button
 								type="button"
@@ -740,9 +719,9 @@ export default function InventoryContainer() {
 						<div className="modal-body">
 							<img className="trash-icon" src={boxIcon} alt="Borrar Producto" />
 							<h1 className="modal-delete-title text-center">
-								Haz modificado este producto
+								Has modificado este producto
 							</h1>
-							{stock !== 0 ? (
+							{newQuantity !== 0 ? (
 								<p className="text-center text-modal">
 									La cantidad disponible para este producto ha sido actualizada
 								</p>
@@ -760,7 +739,7 @@ export default function InventoryContainer() {
 								data-bs-dismiss="modal"
 								onClick={e => handleSubmit(e)}
 							>
-								Si, confirmo
+								Sí, confirmo
 							</button>
 							<button
 								type="button"
