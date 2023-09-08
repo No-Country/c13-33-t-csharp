@@ -272,7 +272,7 @@ export default function InventoryContainer() {
                       href={`#collapse${i}`}
                       aria-controls={`collapse${i}`}
                     >
-                      <td>
+                      <td className="hidden-mobile">
                         <img
                           src={product.imagen}
                           alt="Product Icon"
