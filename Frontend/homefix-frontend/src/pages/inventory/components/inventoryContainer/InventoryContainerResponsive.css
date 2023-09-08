@@ -6,7 +6,7 @@
     display: inline-block;
   }
 
-  .inventory-title-search-container{
+  .inventory-title-search-container {
     display: flex;
     flex-direction: row;
     height: 100px;
@@ -19,14 +19,14 @@
     align-content: center;
   }
 
-  .searchbox{
+  .searchbox {
     width: 50%;
   }
-  .inventory-table-container{
+  .inventory-table-container {
     justify-content: center;
   }
 
-  .addProduct-button{
+  .addProduct-button {
     margin-left: 10px;
     width: 650px;
   }
@@ -34,7 +34,6 @@
 
 /* Estilos para pantallas con un ancho máximo de 767px */
 @media screen and (max-width: 767px) {
-  
   .inventory-layout {
     display: inline-block;
     width: 110%;
@@ -44,29 +43,43 @@
     padding: 0;
   }
 
-  tbody{
-    width: 200px;
+  .addProduct-button {
+    width: 100%;
+    max-width: 350px;
+    margin: 0;
+    padding: 0;
   }
 
-  .inventory-title-search-container{
- display: inline-block;
+  .searchbox{
+    display: flex;
+    width: 100%;
+    max-width: 350px;;
+    margin: 0;
+    padding: 0;
+  }
+
+  .searchForm{
+    width: 800px;
+  }
+
+  .inventory-title-search-container {
+    display: flex;
+    flex-direction: column;
     height: 100px;
-    width: 180%;
-    max-width: 800px;
+    margin: 0;
+    padding: 0;
   }
- 
 
-  .hidden-mobile{
+  .hidden-mobile {
     display: none;
   }
 
-.product-details-mobile{
-  width: 50px;
-}
+  .product-details-mobile {
+    width: 50px;
+  }
 
-.product-details{
-  display: inline-block;
-  max-width: 300px;
-}
-
+  .product-details {
+    display: inline-block;
+    max-width: 315px;
+  }
 }
