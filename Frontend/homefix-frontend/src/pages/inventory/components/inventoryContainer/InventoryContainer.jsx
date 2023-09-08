@@ -23,7 +23,6 @@ export default function InventoryContainer() {
 	const [detailShow, setDetailShow] = useState(false)
 	const [rotateAnimation, setRotateAnimation] = useState(180)
 	const [editor, setEditor] = useState(false)
-	const [isAdministrator, setIsAdministrator] = useState(false)
 	const [allProducts, setAllProducts] = useState([])
 	const [filterSelected, setFilterSelected] = useState('Producto')
 	const [searchProduct, setSearchProduct] = useState('')
@@ -43,17 +42,6 @@ export default function InventoryContainer() {
 	const navigate = useNavigate()
 
 	const token = useSelector(state => state.token)
-
-	const user = useSelector(state => state.user)
-
-	useEffect(() => {
-		if (user.roles[0].toLowerCase() === 'administrador') {
-			setIsAdministrator(true)
-		} else {
-			setIsAdministrator(false)
-		}
-		// eslint-disable-next-line
-	}, [])
 
 	useEffect(() => {
 		if (detailShow) {
@@ -113,23 +101,11 @@ export default function InventoryContainer() {
 			descripcion: inputValues.descripcion,
 			costo: inputValues.costo,
 			precio: inputValues.precio,
-			peso: inputValues.peso,
 			cantidad: newQuantity ? newQuantity : product.cantidad,
 			updatedAt: formattedDate,
 		}
 
 		setEditedProduct(newProduct)
-
-		// const formData = new FormData()
-		// formData.append('nombre', editedProduct.nombre)
-		// formData.append('descripcion', editedProduct.descripcion)
-		// formData.append('costo', editedProduct.costo)
-		// formData.append('precio', editedProduct.precio)
-		// formData.append('peso', editedProduct.peso)
-		// formData.append('cantidad', editedProduct.cantidad)
-		// formData.append('updatedAt', editedProduct.updatedAt)
-
-		// console.log('formData', formData)
 	}
 
 	const [incDecStock, setIncDecStock] = useState(0)
@@ -176,17 +152,13 @@ export default function InventoryContainer() {
 		<>
 			<div className="inventory-title-search-container pb-3">
 				<h3>Inventario</h3>
-				{isAdministrator ? (
-					<button
-						onClick={() => navigate('/add-product')}
-						type="button"
-						className="btn btn-outline-dark rounded-pill addProduct-button"
-					>
-						Añadir Producto
-					</button>
-				) : (
-					<></>
-				)}
+				<button
+					onClick={() => navigate('/add-product')}
+					type="button"
+					className="btn btn-outline-dark rounded-pill addProduct-button"
+				>
+					Añadir Producto
+				</button>
 				<form className="d-flex searchbox" role="search">
 					<div className="searchIconBox">
 						<img
@@ -360,7 +332,18 @@ export default function InventoryContainer() {
 																Editar
 															</button>
 														)}
-														{editor && isAdministrator ? (
+														{editor ? (
+															<button
+																type="button"
+																className="product-detail-button btn btn-outline-dark mx-auto rounded-pill"
+																onClick={() => setEditor(false)}
+															>
+																Cancelar
+															</button>
+														) : (
+															<></>
+														)}
+														{editor ? (
 															<button
 																type="button"
 																className="btn btn-delete mx-auto rounded-pill"
@@ -403,7 +386,7 @@ export default function InventoryContainer() {
 														<p className="product-detail-title">
 															Margen de ganancia
 														</p>
-														{editor && isAdministrator ? (
+														{editor ? (
 															<input
 																name="Margen Ganancia"
 																className="addProduct-editable-input-yellow rounded-pill"
@@ -417,7 +400,7 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-description-container">
 														<p className="product-detail-title">Descripción</p>
-														{editor && isAdministrator ? (
+														{editor ? (
 															<input
 																name="descripcion"
 																className="editable-input"
@@ -432,7 +415,7 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-brand-container">
 														<p className="product-detail-title">Marca</p>
-														{editor && isAdministrator ? (
+														{editor ? (
 															<div className="dropdown">
 																<button
 																	className="button-reset btn-filter btn-outline-dark"
@@ -471,22 +454,13 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-weight-container">
 														<p className="product-detail-title">Peso</p>
-														{editor ? (
-															<input
-																name="peso"
-																className="editable-input"
-																placeholder={product.peso}
-																onChange={handleInputChange}
-															/>
-														) : (
-															<p className="product-detail-information">
-																{product.peso}
-															</p>
-														)}
+														<p className="product-detail-information">
+															{product.peso}
+														</p>
 													</div>
 													<div className="product-cost-container">
 														<p className="product-detail-title">Costo</p>
-														{editor && isAdministrator ? (
+														{editor ? (
 															<input
 																name="costo"
 																className="editable-input"
@@ -511,7 +485,7 @@ export default function InventoryContainer() {
 													</div>
 													<div className="product-price-container">
 														<p className="product-detail-title">Precio</p>
-														{editor && isAdministrator ? (
+														{editor ? (
 															<input
 																name="precio"
 																className="editable-input"
@@ -575,7 +549,7 @@ export default function InventoryContainer() {
 															<p className="product-detail-information">
 																{product.cantidad}
 															</p>
-															{editor && isAdministrator ? (
+															{editor ? (
 																<div className="stock-box">
 																	<button
 																		type="button"

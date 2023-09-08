@@ -15,7 +15,6 @@
 		". table-container ."
 		". . .";
 	grid-area: inventory-table-container;
-	overflow-y: auto;
 }
 
 .inventory-table-container::-webkit-scrollbar {
@@ -234,11 +233,8 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .product-img {
 	width: 160px;
-	/* Ajusta el ancho según tus necesidades */
 	height: 160px;
-	/* Ajusta la altura según tus necesidades */
 	border-radius: 50%;
-	/* Hace que la imagen sea completamente redonda */
 	object-fit: cover;
 	align-self: center;
 }

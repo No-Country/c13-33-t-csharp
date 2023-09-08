@@ -1,125 +1,126 @@
 @media screen and (max-width: 920px) {
-  .passwordReset_layout {
-    height: 100vh;
-    width: 100%;
-    max-width: 920px;
-    display: inline-block;
-    overflow-y: hidden;
-  }
+	.passwordReset_layout {
+		height: 100vh;
+		width: 100%;
+		max-width: 920px;
+		display: inline-block;
+		overflow-y: hidden;
+	}
 
-  .passwordReset_titleContainer {
-    max-width: 100%;
-    bottom: 420px;
-    position: relative;
-    justify-content: center;
-    margin-left: 70px;
-    border-radius: 25px;
-    z-index: 2;
-  }
+	.passwordReset_titleContainer {
+		max-width: 100%;
+		bottom: 420px;
+		position: relative;
+		justify-content: center;
+		margin-left: 70px;
+		border-radius: 25px;
+		z-index: 2;
+	}
 
-  .passwordReset_logoContainer {
-    border-radius: 20px;
-    bottom: 220px;
-    z-index: 3;
-    position: relative;
-  }
+	.passwordReset_logoContainer {
+		border-radius: 20px;
+		bottom: 220px;
+		z-index: 3;
+		position: relative;
+	}
 
-  .passwordReset_textContainer {
-    height: 50px;
-    bottom: 920px;
-    max-width: 100%;
-    z-index: 3;
-    position: relative;
-  }
+	.passwordReset_textContainer {
+		height: 50px;
+		bottom: 920px;
+		max-width: 100%;
+		z-index: 3;
+		position: relative;
+	}
 
-  .passwordReset_text {
-    max-width: 400px;
-  }
+	.passwordReset_text {
+		max-width: 400px;
+	}
 
-  .passwordReset_formContainer {
-    max-width: 70%;
-    width: 580px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 210px;
-    padding-top: 200px;
-    margin-left: 130px;
-    z-index: 1;
-    border-radius: 25px;
-    max-height: 800px;
-  }
+	.passwordReset_formContainer {
+		max-width: 70%;
+		width: 580px;
+		background-color: #ffffff;
+		position: absolute;
+		top: 210px;
+		padding-top: 200px;
+		margin-left: 130px;
+		z-index: 1;
+		border-radius: 25px;
+		max-height: 800px;
+	}
 
-  .password_form {
-    padding-top: 200px;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 480px;
-  }
+	.password_form {
+		padding-top: 200px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: 480px;
+	}
 
-  .passwordReset_buttonContainer {
-    max-width: 100%;
-    z-index: 1;
-  }
+	.passwordReset_buttonContainer {
+		max-width: 100%;
+		z-index: 1;
+	}
 
-  .passwordReset-position {
-    max-width: 440px;
-  }
+	.passwordReset-position {
+		max-width: 440px;
+	}
 }
 
 @media screen and (max-width: 767px) {
-    
-    .passwordReset_layout {
-        height: 100vh;
-        max-width: 767px;
-        display: inline-block;
-      }
 
-      .passwordReset_titleContainer {
-        max-width: 100%;
-        bottom: 450px;
-      }
+	.passwordReset_layout {
+		height: 100vh;
+		max-width: 767px;
+		display: inline-block;
+	}
 
-      .passwordReset_logoContainer {
-        bottom: 285px;
-      }
+	.passwordReset_titleContainer {
+		max-width: 100%;
+		bottom: 450px;
+	}
 
-  .passwordReset_formContainer {
-    max-width: 100%;
-    width: 767px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 110px;
-    padding-top: 100px;
-    margin-left: 0px;
-    z-index: 1;
-    border-radius: 25px;
-    max-height: 800px;
-  }
+	.passwordReset_logoContainer {
+		bottom: 285px;
+	}
 
-  .passwordReset_buttonContainer{
-    padding-bottom: 550px;
-  }
+	.passwordReset_formContainer {
+		max-width: 100%;
+		width: 767px;
+		background-color: #ffffff;
+		position: absolute;
+		top: 110px;
+		padding-top: 100px;
+		margin-left: 0px;
+		z-index: 1;
+		border-radius: 25px;
+		max-height: 800px;
+	}
 
-  .passwordReset_textContainer {
-    bottom: 890px;
-    max-width: 100%;
-  }
+	.passwordReset_buttonContainer {
+		padding-bottom: 550px;
+	}
 
-  .passwordReset_text {
-    width: 800px;
-  }
+	.passwordReset_textContainer {
+		bottom: 890px;
+		max-width: 100%;
+	}
 
-  .password_form {
-    padding-top: 200px;
-    padding-left: 10px;
-    padding-right: 20px;
-    max-width: 380px;
-  }
+	.passwordReset_text {
+		width: 800px;
+	}
 
-  .passwordReset_text {
-    max-width: 250px;
-  }
-  .passwordReset-position {
-    max-width: 350px;
-  }
+	.password_form {
+		padding-top: 200px;
+		padding-left: 10px;
+		padding-right: 20px;
+		max-width: 380px;
+	}
+
+	.passwordReset_text {
+		max-width: 250px;
+	}
+
+	.passwordReset-position {
+		max-width: 350px;
+	}
 }
