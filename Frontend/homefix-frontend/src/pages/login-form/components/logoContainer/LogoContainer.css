@@ -1,19 +1,17 @@
 .login_logoContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . ."
-    ". . login_logoPosition"
-    ". . .";
-  grid-area: login_logoContainer;
+	display: flex;
+	height: 11.2rem;
+	width: 100%;
+	justify-content: flex-end;
+	align-items: flex-end;
 }
 
-.login_logoPosition {
-  grid-area: login_logoPosition;
+.login_logoImage {
+	height: 6.25rem;
 }
 
-.logoImage {
-  width: 80px;
+@media screen and (max-width: 920px) {
+	.login_logoContainer {
+		display: none;
+	}
 }

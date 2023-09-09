@@ -1,14 +1,63 @@
 .passwordReset_layout {
 	height: 100vh;
+	width: 100vw;
 	display: grid;
 	grid-auto-columns: 1fr;
 	grid-auto-rows: 1fr;
-	grid-template-columns: 0.9fr 1.5fr;
-	grid-template-rows: 1fr 0.5fr 1fr 1fr;
-	gap: 0px 50px;
+	grid-template-columns: 0.45fr 0.55fr;
+	grid-template-rows: 1fr;
+	gap: 0;
 	grid-template-areas:
-		"login_imageContainer passwordReset_titleLogoContainer"
-		"login_imageContainer passwordReset_textContainer"
-		"login_imageContainer passwordReset_formContainer"
-		"login_imageContainer passwordReset_buttonContainer";
+		"login_imageContainer login-main-reset-container";
+}
+
+.login-main-reset-container {
+	display: grid;
+	height: 100%;
+	width: 100%;
+	padding: 0 7.5rem;
+	grid-auto-columns: 1fr;
+	grid-auto-rows: 1fr;
+	grid-template-columns: 1fr;
+	grid-template-rows: 0.20fr 0.13fr 0.67fr;
+	gap: 0;
+	grid-template-areas:
+		"passwordReset_titleLogoContainer"
+		"passwordReset_textContainer"
+		"passwordReset_formContainer";
+}
+
+@media screen and (max-width: 920px) {
+	.passwordReset_layout {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+	}
+
+	.login-main-reset-container {
+		display: grid;
+		height: 100%;
+		width: 100%;
+		padding: 0 7.5rem;
+		grid-auto-columns: 1fr;
+		grid-auto-rows: 1fr;
+		grid-template-columns: 1fr;
+		grid-template-rows: 0.1fr 0.125fr 0.125fr 0.65fr;
+		gap: 0;
+		grid-template-areas:
+			"passwordReset_titleLogoContainer"
+			"login_logo-resp-container"
+			"passwordReset_textContainer"
+			"passwordReset_formContainer";
+	}
+
+	.login-main-reset-container {
+		position: relative;
+		height: 50vh;
+		transform: translateY(50%);
+		padding: 0 2rem;
+		background-color: white;
+		border-radius: 1.875rem 1.875rem 0 0;
+	}
+
 }
