@@ -36,34 +36,31 @@ const App = () => {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path="/login-form" element={<LoginForm />}></Route>
-				<Route path="/password-reset" element={<PaswordReset />}></Route>
-				<Route path="/reset" element={<NewPassword />}></Route>
 				<Route
 					path="/"
 					element={
 						user === null ? (
-							<Navigate replace to="/login-form" />
+							<Navigate replace to="/login" />
 						) : (
 							<DashboardHomepage />
 						)
 					}
-				></Route>
+				/>
+				<Route path="/login" element={<LoginForm />} />
+				<Route path="/password-reset" element={<PaswordReset />} />
+				<Route path="/reset" element={<NewPassword />} />
+
 				<Route
 					path="/inventory"
 					element={
-						user === null ? (
-							<Navigate replace to="/login-form" />
-						) : (
-							<Inventory />
-						)
+						user === null ? <Navigate replace to="/login" /> : <Inventory />
 					}
-				></Route>
-				<Route path="/add-product" element={<AddProduct />}></Route>
+				/>
+				<Route path="/add-product" element={<AddProduct />} />
 				<Route
 					path="/reports"
 					element={
-						user === null ? <Navigate replace to="/login-form" /> : <Reports />
+						user === null ? <Navigate replace to="/login" /> : <Reports />
 					}
 				/>
 			</Routes>
