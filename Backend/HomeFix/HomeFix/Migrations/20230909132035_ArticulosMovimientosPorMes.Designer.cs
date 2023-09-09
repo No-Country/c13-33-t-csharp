@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HomeFix.Migrations
 {
     [DbContext(typeof(HomeFixDbContext))]
-    [Migration("20230906221205_articulospormes")]
-    partial class articulospormes
+    [Migration("20230909132035_ArticulosMovimientosPorMes")]
+    partial class ArticulosMovimientosPorMes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,28 +45,6 @@ namespace HomeFix.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("productomasvendidopormes", (string)null);
-                });
-
-            modelBuilder.Entity("HomeFix.DTOs.ArticuloPorMes", b =>
-                {
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("text");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("masvendidospormes", (string)null);
                 });
 
             modelBuilder.Entity("HomeFix.DTOs.VentaMes", b =>

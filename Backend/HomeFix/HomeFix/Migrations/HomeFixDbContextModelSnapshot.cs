@@ -44,28 +44,6 @@ namespace HomeFix.Migrations
                     b.ToView("productomasvendidopormes", (string)null);
                 });
 
-            modelBuilder.Entity("HomeFix.DTOs.ArticuloPorMes", b =>
-                {
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("text");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("masvendidospormes", (string)null);
-                });
-
             modelBuilder.Entity("HomeFix.DTOs.VentaMes", b =>
                 {
                     b.Property<int>("productosvendidos")

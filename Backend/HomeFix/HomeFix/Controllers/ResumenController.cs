@@ -26,18 +26,18 @@ namespace HomeFix.Controllers
 
 
         [HttpGet("MasVendidosPorMes")]
-        public async Task<ActionResult<List<ArticuloPorMes>>> GetArticulosPorMes()
+        public async Task<ActionResult<List<ArticuloPorMesDto>>> GetArticulosPorMes()
         {
             try
             {
-                var articulos = await _context.Set<ArticuloPorMes>().ToListAsync();
+                var articulos = await _context.Set<ArticuloPorMesDto>().ToListAsync();
                 return Ok(articulos);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
+        
             return BadRequest();
         }
 
