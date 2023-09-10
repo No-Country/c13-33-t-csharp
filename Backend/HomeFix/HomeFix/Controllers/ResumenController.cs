@@ -24,6 +24,49 @@ namespace HomeFix.Controllers
         }
 
 
+        [HttpGet("articulosporfecha")]
+        public async Task<List<ArticuloPorMesDto>> GetArt(int month, int year)
+        {
+            if (year == 0) year = DateTime.Now.Year;
+            if (month == 0) month = DateTime.Now.Month;
+            var result = await _context.MovimientosDetalle
+                .Include(x => x.Movimiento)
+                .Include(x => x.Articulo)
+                .Where(x => x.Movimiento.FechaYHora.Month == month && x.Movimiento.FechaYHora.Year == year)
+                .GroupBy(x => x.ArticuloId)
+                .ToListAsync();
+            
+            var articulosPorMes = new List<ArticuloPorMesDto>();
+            foreach (var articulo in result)
+            {
+                var cant = 0;
+                var nombreArticulo = "";
+                var precioUnitario = 0.0;
+                var articuloId = 0;
+                
+                foreach (var item in articulo)
+                {
+                    cant += item.Cantidad;
+                    nombreArticulo = item.Articulo.Nombre;
+                    articuloId = item.ArticuloId;
+                    precioUnitario = item.PrecioUnitario;
+                }
+                
+                var articuloPorMes = new ArticuloPorMesDto
+                {
+                    cantidad = cant,
+                    Nombre = nombreArticulo,
+                    mes    = month,
+                    anio = year,
+                    total = cant * precioUnitario,
+                    precio_unitario = precioUnitario,
+                    ArticuloId = articuloId
+                };
+                articulosPorMes.Add(articuloPorMes);
+            }
+
+            return articulosPorMes;
+        }
 
         [HttpGet("MasVendidosPorMes")]
         public async Task<ActionResult<List<ArticuloPorMesDto>>> GetArticulosPorMes()
@@ -37,7 +80,7 @@ namespace HomeFix.Controllers
             {
                 Console.WriteLine(e);
             }
-        
+
             return BadRequest();
         }
 
