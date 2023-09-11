@@ -37,7 +37,19 @@ public class ArticulosController : BaseController
     public async Task<List<ArticuloDto>> GetArticulos()
     {
         var articulos = await _uow.ArticulosRepository.GetAllArticulos();
-        return _mapper.Map<List<ArticuloDto>>(articulos);
+        var articulosDto = _mapper.Map<List<ArticuloDto>>(articulos);
+        foreach (var articulo in articulosDto)
+        {
+            var totalVendidos = 0;
+            var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == articulo.Id)
+                .Select( x=> x.Cantidad).ToListAsync();
+        
+            movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
+
+            articulo.Vendidos = totalVendidos;
+        }
+
+        return articulosDto;
     }
 
     /// <summary>
@@ -49,17 +61,18 @@ public class ArticulosController : BaseController
     public async Task<ActionResult<ArticuloDto>> GetArticulo(int id)
     {
         var articulo = await _uow.ArticulosRepository.FindProjectedArticuloByIdAsync(id);
-        var totalVendidos = 0;
-        var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == id)
-            .Select( x=> x.Cantidad).ToListAsync();
-        
-        movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
+       
      
 
         if (articulo == null)
         {
             return NotFound();
         }
+        var totalVendidos = 0;
+        var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == id)
+            .Select( x=> x.Cantidad).ToListAsync();
+        
+        movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
 
         articulo.Vendidos = totalVendidos;
         return articulo;
