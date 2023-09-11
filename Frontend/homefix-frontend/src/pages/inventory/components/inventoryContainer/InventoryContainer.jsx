@@ -13,15 +13,19 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
 import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
+import { updateMonthSales } from "../../../../reducers/monthSalesReducer";
 import trashImg from "../../../../assets/image/trashIcon.png";
 const { format } = require("date-fns");
 
-export default function InventoryContainer({newProductAdded}) {
+export default function InventoryContainer({ newProductAdded }) {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
+  const consultedMonth = useSelector((state) => state.consultedMonth);
 
-  console.log(allProductsData);
+  const monthSales = useSelector((state) => state.monthSales);
+
+  console.log(monthSales);
 
   const [detailShow, setDetailShow] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -47,10 +51,15 @@ export default function InventoryContainer({newProductAdded}) {
 
   const token = useSelector((state) => state.token);
 
+  useEffect(() => {
+    dispatch(updateMonthSales(token, consultedMonth + 1));
+    // eslint-disable-next-line
+  }, [consultedMonth]);
+
   const handleDeleteProduct = async (productId) => {
-      await dispatch(deleteProduct(productId, token));
-      setIsDeleted(true);
-    };
+    await dispatch(deleteProduct(productId, token));
+    setIsDeleted(true);
+  };
 
   useEffect(() => {
     if (isDeleted || newProductAdded) {
@@ -299,7 +308,15 @@ export default function InventoryContainer({newProductAdded}) {
                       <td className="hidden-mobile">{product.id}</td>
                       <td className="hidden-mobile">{product.categoria}</td>
                       <td>${product.precio.toLocaleString()}</td>
-                      <td>{product.cantidad}</td>
+                      <td key={product.id}>
+                        {monthSales.some(
+                          (article) => article.articuloId === product.id
+                        )
+                          ? monthSales.find(
+                              (article) => article.articuloId === product.id
+                            ).cantidad
+                          : "0"}
+                      </td>
                       <td>{product.cantidad}</td>
                       <td>
                         <motion.div animate={rotateAnimation}>
@@ -502,7 +519,20 @@ export default function InventoryContainer({newProductAdded}) {
                           </div>
                           <div className="product-sold-container">
                             <p className="product-detail-title">Vendidos</p>
-                            <p className="product-detail-information">9</p>
+                            <p className="product-detail-information">
+                              {monthSales.map((sale) => {
+                                const productSale = monthSales.find(
+                                  (article) => article.articuloId === product.id
+                                );
+                                return (
+                                  <div key={product.id}>
+                                    {productSale && (
+                                      <p>{productSale.cantidad}</p>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </p>
                           </div>
                           <div className="product-price-container">
                             <p className="product-detail-title">Precio</p>
