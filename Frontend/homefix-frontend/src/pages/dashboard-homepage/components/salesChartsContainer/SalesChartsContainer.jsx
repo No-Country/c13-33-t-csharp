@@ -9,26 +9,50 @@ import {
 } from 'chart.js'
 
 import { Bar } from 'react-chartjs-2'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useMonthNames } from '../../../../hooks/hooks'
-import { useEffect } from 'react'
-import { loadSalesChartData } from '../../../../reducers/salesChartDataReducer'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function SalesChartsContainer() {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip)
 
-	const salesChartData = useSelector(state => state.salesChartData)
+	const [recentSales, setRecentSales] = useState([])
+	const date = new Date()
+	const currentMonth = date.getMonth() + 1
+
 	const token = useSelector(state => state.token)
 
-	const dispatch = useDispatch()
-
 	useEffect(() => {
-		dispatch(loadSalesChartData(token))
-		//eslint-disable-next-line
+		const getSales = async month => {
+			const baseUrl = 'https://homefix.fly.dev/api/resumen/articulosporfecha'
+			const config = {
+				headers: {
+					Authorization: token,
+				},
+			}
+			const response = await axios.get(`${baseUrl}?month=${month}`, config)
+			return response.data
+		}
+
+		const fillRecentSales = async month => {
+			const response = await getSales(month)
+			if (response.length > 0) {
+				const object = {
+					month: response[0].mes,
+					total: response.reduce((acc, curr) => acc + curr.total, 0),
+				}
+				setRecentSales((prev, curr) => prev.concat(object))
+			}
+		}
+		for (let index = currentMonth; index > currentMonth - 6; index--) {
+			fillRecentSales(index)
+		}
+		// eslint-disable-next-line
 	}, [])
 
-	const monthsArray = salesChartData.map(object => object.mes - 1)
-	const labels = useMonthNames(monthsArray)
+	const orderedRecentSales = recentSales.sort((a, b) => a.month - b.month)
+	const labels = useMonthNames(orderedRecentSales.map(v => v.month - 1))
 
 	const options = {
 		responsive: true,
@@ -46,9 +70,7 @@ export default function SalesChartsContainer() {
 		datasets: [
 			{
 				label: 'Ventas',
-				data: labels.map((v, i) => {
-					return salesChartData[i].sumapreciototal
-				}),
+				data: orderedRecentSales.map(v => v.total),
 			},
 		],
 	}

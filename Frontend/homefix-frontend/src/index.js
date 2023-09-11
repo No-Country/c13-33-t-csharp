@@ -9,9 +9,6 @@ import { Provider } from 'react-redux'
 import userReducer from './reducers/userReducer'
 import tokenReducer from './reducers/tokenReducer'
 import messageReducer from './reducers/messageReducer'
-import dashboardDataReducer from './reducers/dashboardDataReducer'
-import salesChartDataReducer from './reducers/salesChartDataReducer'
-import topSalesReducer from './reducers/topSalesReducer'
 import monthSalesReducer from './reducers/monthSalesReducer'
 import consultedMonthReducer from './reducers/consultedMonthReducer'
 import allProductsDataReducer from './reducers/allProductsDataReducer'
@@ -25,12 +22,9 @@ const store = configureStore({
 		user: userReducer,
 		token: tokenReducer,
 		message: messageReducer,
-		dashboardData: dashboardDataReducer,
 		allProductsData: allProductsDataReducer,
 		allBrandsData: allBrandsDataReducer,
 		allCategoriesData: allCategoriesReducer,
-		salesChartData: salesChartDataReducer,
-		topSales: topSalesReducer,
 		monthSales: monthSalesReducer,
 		consultedMonth: consultedMonthReducer,
 		deleteProduct: deleteProductReducer,

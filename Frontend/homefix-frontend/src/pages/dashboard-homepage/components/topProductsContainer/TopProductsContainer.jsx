@@ -1,25 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './TopProductsContainer.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import noImage from '../../../../assets/image/icons8-sin-imágen-100.png'
-import { loadTopSales } from '../../../../reducers/topSalesReducer'
-
 
 export default function TopProductsContainer() {
-	const topSales = useSelector(state => state.topSales)
-	const token = useSelector(state => state.token)
-
-	const dispatch = useDispatch()
+	const [topSales, setTopSales] = useState([])
+	const monthSales = useSelector(state => state.monthSales)
 
 	useEffect(() => {
-		dispatch(loadTopSales(token))
-		//eslint-disable-next-line
-	}, [])
+		if (monthSales.length > 0) {
+			let dashboardDataCopy = [...monthSales]
+			dashboardDataCopy = dashboardDataCopy.sort(
+				(a, b) => b.cantidad - a.cantidad
+			)
+			setTopSales(() => {
+				return dashboardDataCopy.slice(0, 3)
+			})
+		}
+	}, [monthSales])
 
-	const topSalesCopy = [...topSales]
-	const topSalesOrderedSliced = topSalesCopy
-		.sort((a, b) => b.cantidad - a.cantidad)
-		.slice(0, 3)
+	if (topSales.length === 0) {
+		return
+	}
 
 	return (
 		<div className="top-products-container">
@@ -33,7 +35,7 @@ export default function TopProductsContainer() {
 				</div>
 			</div>
 			<div className="top-products-list">
-				{topSalesOrderedSliced.map((product, i) => {
+				{topSales.map((product, i) => {
 					return (
 						<button
 							key={product.articuloId}
@@ -41,7 +43,9 @@ export default function TopProductsContainer() {
 						>
 							<div className={'product-descr product' + [i + 1] + '-descr'}>
 								<img
-									src={!product.imagenes ? noImage : product.imagenes}
+									src={
+										!product.hasOwnProperty('imagen') ? noImage : product.imagen
+									}
 									alt="best sellers"
 								/>
 								<span>{product.nombre}</span>

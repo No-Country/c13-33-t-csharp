@@ -1,40 +1,10 @@
+import { useSelector } from 'react-redux'
 import SalesRow from '../SalesRow/SalesRow'
 import './SalesContainer.css'
 
-const testTableData = [
-	{
-		id: 1,
-		product: 'Destornillador cruz',
-		price: '3690',
-		quantity: 9,
-	},
-	{
-		id: 2,
-		product: 'Lampara colgante',
-		price: '40990',
-		quantity: 15,
-	},
-	{
-		id: 3,
-		product: 'Lampara pie',
-		price: '30000',
-		quantity: 11,
-	},
-	{
-		id: 4,
-		product: 'Martillo carpintero',
-		price: '5990',
-		quantity: 5,
-	},
-	{
-		id: 5,
-		product: 'Puerta con ventanas',
-		price: '176000',
-		quantity: 5,
-	},
-]
-
 const SalesContainer = () => {
+	const monthSales = useSelector(state => state.monthSales)
+
 	return (
 		<>
 			<div className="reports-sales-container">
@@ -50,13 +20,13 @@ const SalesContainer = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{testTableData.map(d => {
+						{monthSales.map(article => {
 							return (
 								<SalesRow
-									key={d.id}
-									product={d.product}
-									price={d.price}
-									quantity={d.quantity}
+									key={article.articuloId}
+									product={article.nombre}
+									price={article.precio_unitario}
+									quantity={article.cantidad}
 									slide="0"
 								/>
 							)
@@ -99,13 +69,13 @@ const SalesContainer = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{testTableData.map(d => {
+								{monthSales.map(article => {
 									return (
 										<SalesRow
-											key={d.id}
-											product={d.product}
-											price={d.price}
-											quantity={d.quantity}
+											key={article.articuloId}
+											product={article.nombre}
+											price={article.precio_unitario}
+											quantity={article.cantidad}
 											slide="1"
 										/>
 									)
@@ -122,13 +92,13 @@ const SalesContainer = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{testTableData.map(d => {
+								{monthSales.map(article => {
 									return (
 										<SalesRow
-											key={d.id}
-											product={d.product}
-											price={d.price}
-											quantity={d.quantity}
+											key={article.articuloId}
+											product={article.nombre}
+											price={article.precio_unitario}
+											quantity={article.cantidad}
 											slide="2"
 										/>
 									)

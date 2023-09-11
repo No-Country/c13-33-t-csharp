@@ -1,18 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './DashboardResume.css'
-import { useEffect } from 'react'
-import { loadDashboardData } from '../../../../reducers/dashboardDataReducer'
+import { useEffect, useState } from 'react'
 
 export default function DashboardResume() {
-	const dashboardData = useSelector(state => state.dashboardData)
-	const token = useSelector(state => state.token)
-
-	const dispatch = useDispatch()
+	const [totalSales, setTotalSales] = useState()
+	const [soldProducts, setSoldProducts] = useState()
+	const monthSales = useSelector(state => state.monthSales)
 
 	useEffect(() => {
-		dispatch(loadDashboardData(token))
-		// eslint-disable-next-line
-	}, [])
+		if (monthSales.length > 0) {
+			setTotalSales(() => {
+				return monthSales.reduce((acc, current) => acc + current.total, 0)
+			})
+			setSoldProducts(() => {
+				return monthSales.reduce((acc, current) => acc + current.cantidad, 0)
+			})
+		}
+	}, [monthSales])
 
 	return (
 		<div className="dashboard-resume-container">
@@ -26,7 +30,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{!dashboardData.sum ? 'NoData' : '$' + dashboardData.sum}
+						{!totalSales ? 'NoData' : '$' + totalSales}
 					</h3>
 				</div>
 			</div>
@@ -37,7 +41,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{!dashboardData.sum ? 'NoData' : '$' + dashboardData.sum * 0.8}
+						{!totalSales ? 'NoData' : '$' + totalSales / 1.2}
 					</h3>
 				</div>
 			</div>
@@ -57,9 +61,7 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{!dashboardData.productosvendidos
-							? 'NoData'
-							: dashboardData.productosvendidos}
+						{!soldProducts ? 'NoData' : soldProducts}
 					</h3>
 				</div>
 			</div>
