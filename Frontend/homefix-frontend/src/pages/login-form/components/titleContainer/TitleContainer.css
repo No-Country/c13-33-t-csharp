@@ -1,15 +1,33 @@
 .login_titleContainer {
-  width: 500px;
-  height:60px;
-  grid-area: login_titleContainer;
-  display: flex;
-  justify-self: center;
+	display: flex;
+	margin: 0;
+	align-items: center;
+	height: 0.15fr;
 }
 
+.login_titleContainer h2 {
+	font-size: 1.5rem;
+	margin: 0;
+}
 
-.login_titleContainer h2{
-  margin-top: -50px;
-  padding-bottom: -20px;
-  font-weight: 400;
-  font-size: 27px;
+.login-notification-container {
+	position: absolute;
+	top: 14rem;
+}
+
+@media screen and (max-width:920px) {
+	.login_titleContainer {
+		justify-content: center;
+		padding: 1rem 0;
+		border-bottom: rgba(0, 0, 0, 0.60) solid;
+	}
+
+	.login_titleContainer h2 {
+		font-size: 1rem;
+	}
+
+	.login-notification-container {
+		top: 9rem;
+		font-size: 0.75rem;
+	}
 }

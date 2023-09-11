@@ -2,7 +2,7 @@ import React from 'react'
 import './HeaderBar.css'
 import HeaderNavLogo from '../../assets/image/HomeFix-navbar-logo.png'
 import { useSelector } from 'react-redux'
-import noImg from "../../assets/image/icons8-sin-imágen-100.png";
+import noImg from '../../assets/image/icons8-sin-imágen-100.png'
 
 export default function HeaderBar() {
 	const user = useSelector(state => state.user)
@@ -34,7 +34,7 @@ export default function HeaderBar() {
 							</a>
 						</li>
 						<li>
-							<a id="close-link" className="dropdown-item" href="/login-form">
+							<a id="close-link" className="dropdown-item" href="/login">
 								Cerrar Sesión
 							</a>
 						</li>

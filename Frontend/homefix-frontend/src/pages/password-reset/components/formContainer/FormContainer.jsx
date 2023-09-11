@@ -38,8 +38,8 @@ export default function FormContainer() {
 	return (
 		<>
 			<div className="passwordReset_formContainer">
-				<form className="password_form" onSubmit={handlePasswordReset}>
-					<div className="mb-3">
+				<form className="passwordReset_form" onSubmit={handlePasswordReset}>
+					<div className="passwordReset_labelInput-container">
 						<label htmlFor="email" className="form-label">
 							Correo electrónico
 						</label>

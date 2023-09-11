@@ -4,7 +4,6 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import userReducer from './reducers/userReducer'
@@ -15,13 +14,11 @@ import salesChartDataReducer from './reducers/salesChartDataReducer'
 import topSalesReducer from './reducers/topSalesReducer'
 import monthSalesReducer from './reducers/monthSalesReducer'
 import consultedMonthReducer from './reducers/consultedMonthReducer'
-import allProductsDataReducer from './reducers/allProductsDataReducer';
-import allBrandsDataReducer from './reducers/allBrandsDataReducer';
-import allCategoriesReducer from './reducers/allCategoriesReducer';
-import deleteProductReducer from './reducers/deleteProductReducer';
-import updateProductReducer from './reducers/updateProductReducer';
-
-const queryClient = new QueryClient()
+import allProductsDataReducer from './reducers/allProductsDataReducer'
+import allBrandsDataReducer from './reducers/allBrandsDataReducer'
+import allCategoriesReducer from './reducers/allCategoriesReducer'
+import deleteProductReducer from './reducers/deleteProductReducer'
+import updateProductReducer from './reducers/updateProductReducer'
 
 const store = configureStore({
 	reducer: {
@@ -37,19 +34,17 @@ const store = configureStore({
 		monthSales: monthSalesReducer,
 		consultedMonth: consultedMonthReducer,
 		deleteProduct: deleteProductReducer,
-		updateProduct: updateProductReducer
+		updateProduct: updateProductReducer,
 	},
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-	<Provider store={store}>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</QueryClientProvider>
-	</Provider>
+	<BrowserRouter>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</BrowserRouter>
 )
 
 // If you want to start measuring performance in your app, pass a function
