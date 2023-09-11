@@ -1,11 +1,13 @@
 using System.Security.Claims;
 using AutoMapper;
+using HomeFix.Dbcontext;
 using HomeFix.DTOs;
 using HomeFix.Interfaces;
 using HomeFix.Model;
 using HomeFix.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace HomeFix.Controllers;
@@ -16,21 +18,21 @@ public class ArticulosController : BaseController
     private readonly IMapper _mapper;
     private readonly ImageService _imageService;
     private readonly IUnitOfWork _uow;
+    private readonly HomeFixDbContext _context;
 
     public ArticulosController(IMapper mapper,
-        ImageService imageService, IUnitOfWork uow)
+        ImageService imageService, IUnitOfWork uow, HomeFixDbContext context)
     {
-  
         _mapper = mapper;
         _imageService = imageService;
         _uow = uow;
+        _context = context;
     }
 
     /// <summary>
     /// Lista articulos de la API. Utiliza un token para poder verificar su uso
     /// </summary>
     /// <returns>Lista de Articulos</returns>
-       
     [HttpGet]
     public async Task<List<ArticuloDto>> GetArticulos()
     {
@@ -43,16 +45,23 @@ public class ArticulosController : BaseController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
- 
     [HttpGet("{id}", Name = "GetArticulo")]
     public async Task<ActionResult<ArticuloDto>> GetArticulo(int id)
     {
         var articulo = await _uow.ArticulosRepository.FindProjectedArticuloByIdAsync(id);
+        var totalVendidos = 0;
+        var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == id)
+            .Select( x=> x.Cantidad).ToListAsync();
+        
+        movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
+     
+
         if (articulo == null)
         {
             return NotFound();
         }
 
+        articulo.Vendidos = totalVendidos;
         return articulo;
     }
 
@@ -61,7 +70,6 @@ public class ArticulosController : BaseController
     /// </summary>
     /// <param name="createArticuloDto">Articulo que se va a registrar en la base de datos</param>
     /// <returns>Confirmacion del registro del articulo</returns>
-      
     [Authorize(Roles = "Administrador")]
     [HttpPost]
     public async Task<ActionResult<Articulo>> CreateArticulo([FromForm] CreateArticuloDto createArticuloDto)
@@ -76,9 +84,10 @@ public class ArticulosController : BaseController
             articulo.Imagen = imageResult.SecureUrl.ToString();
             articulo.PublicId = imageResult.PublicId;
         }
+
         _uow.ArticulosRepository.AddArticulo(articulo);
 
-        var result =await _uow.Complete();
+        var result = await _uow.Complete();
 
         var articuloDto = _uow.ArticulosRepository.FindProjectedArticuloById(articulo.Id);
         if (result) return CreatedAtRoute("GetArticulo", new {Id = articuloDto.Id}, articuloDto);
@@ -92,7 +101,6 @@ public class ArticulosController : BaseController
     /// <param name="updateDto">Datos del articulo que se van a actualizar</param>
     /// <param name="id">ID del articulo que se va a actualizar</param>
     /// <returns>Confirmacion de actualizacion de articulo</returns>
-   
     [Authorize(Roles = "Administrador")]
     [HttpPatch("{id}")]
     public async Task<ActionResult<ArticuloDto>> UpdateArticulo([FromForm] UpdateArticuloDto updateDto, int id)
@@ -125,7 +133,6 @@ public class ArticulosController : BaseController
     /// </summary>
     /// <param name="id">Id del articulo a eliminar</param>
     /// <returns>Confirmacion de eliminacion de articulo</returns>
-
     [Authorize(Roles = "Administrador")]
     [HttpDelete("{id}")]
     public async Task<ActionResult<ArticuloDto>> DeleteArticulo(int id)
@@ -146,7 +153,6 @@ public class ArticulosController : BaseController
     /// </summary>
     /// <param name="updateDto"></param>
     /// <param name="articulo"></param>
-
     private static void MappingArticulo(UpdateArticuloDto updateDto, Articulo articulo)
     {
         articulo.CategoriaId = updateDto?.CategoriaId ?? articulo.CategoriaId;

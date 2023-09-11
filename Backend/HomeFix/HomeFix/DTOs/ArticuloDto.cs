@@ -39,6 +39,8 @@ public class ArticuloDto
     public string Subcategoria { get; set; }
     public DateTime UpdatedAt { get; set; }
     
+    public int Vendidos { get; set; }
+    
 
 
     public string UsuarioUltimaModificacion { get; set; }
