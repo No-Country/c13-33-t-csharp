@@ -11,12 +11,10 @@ const getMonthSales = async (token, id) => {
 	let response = {}
 
 	try {
-		response = await axios.get(`${baseUrl}?month=${id}&year=2023`, config)
-		console.log(response.data)
+		response = await axios.get(`${baseUrl}?month=${id}`, config)
 	} catch (error) {
 		console.log(error.message)
 	}
-
 	return response.data
 }
 

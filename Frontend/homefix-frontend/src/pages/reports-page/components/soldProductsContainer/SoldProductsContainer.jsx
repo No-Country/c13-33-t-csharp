@@ -24,6 +24,7 @@ const SoldProductsContainer = () => {
 		setLabels(() => {
 			return sortedMonthSalesCopy.map(d => d.nombre)
 		})
+		// eslint-disable-next-line
 	}, [monthSales])
 
 	const options = {

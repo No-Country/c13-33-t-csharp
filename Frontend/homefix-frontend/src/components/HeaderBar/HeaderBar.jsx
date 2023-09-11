@@ -29,11 +29,6 @@ export default function HeaderBar() {
 					</button>
 					<ul className="dropdown-menu">
 						<li>
-							<a id="profile-link" className="dropdown-item" href="/#">
-								Mi Perfil
-							</a>
-						</li>
-						<li>
 							<a id="close-link" className="dropdown-item" href="/login">
 								Cerrar Sesión
 							</a>
