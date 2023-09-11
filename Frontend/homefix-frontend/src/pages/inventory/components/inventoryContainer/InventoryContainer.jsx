@@ -21,6 +21,8 @@ export default function InventoryContainer({newProductAdded}) {
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
 
+  console.log(allProductsData);
+
   const [detailShow, setDetailShow] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [rotateAnimation, setRotateAnimation] = useState(180);
@@ -296,7 +298,7 @@ export default function InventoryContainer({newProductAdded}) {
                       <td className="hidden-mobile">{product.marca}</td>
                       <td className="hidden-mobile">{product.id}</td>
                       <td className="hidden-mobile">{product.categoria}</td>
-                      <td>${product.precio}</td>
+                      <td>${product.precio.toLocaleString()}</td>
                       <td>{product.cantidad}</td>
                       <td>{product.cantidad}</td>
                       <td>

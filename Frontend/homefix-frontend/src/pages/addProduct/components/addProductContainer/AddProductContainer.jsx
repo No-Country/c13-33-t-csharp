@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../../../services/createProduct";
 import noProductImage from "../../../../assets/image/noProduct-image.png";
+import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
 import "./AddProductContainerResponsive.css";
 
 export default function AddProductContainer(setNewProductAdded) {

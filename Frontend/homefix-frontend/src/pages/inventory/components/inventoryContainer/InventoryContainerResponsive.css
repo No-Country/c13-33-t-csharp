@@ -97,4 +97,8 @@
   .stock-number{
     height: 50px;
   }
+
+  .btn-yellow{
+    margin: 15px 15px;
+  }
 }
