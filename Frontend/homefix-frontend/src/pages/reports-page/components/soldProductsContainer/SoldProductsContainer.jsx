@@ -8,60 +8,24 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 import './SoldProductsContainer.css'
+import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 const SoldProductsContainer = () => {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip)
+	const [labels, setLabels] = useState([])
 
-	// const salesChartData = useSelector(state => state.salesChartData)
-	// const token = useSelector(state => state.token)
+	const monthSales = useSelector(state => state.monthSales)
+	const sortedMonthSalesCopy = [...monthSales].sort(
+		(a, b) => a.cantidad - b.cantidad
+	)
 
-	// const dispatch = useDispatch()
-
-	// useEffect(() => {
-	// 	salesChartService.getData(token).then(data => {
-	// 		dispatch(setSalesChartData(data))
-	// 	})
-	// }, [dispatch, token])
-
-	// const monthsArray = salesChartData.map(object => object.mes - 1)
-	// const labels = useMonthNames(monthsArray)
-
-	const testTableData = [
-		{
-			id: 1,
-			product: 'Destornillador cruz',
-			price: '3690',
-			quantity: 9,
-		},
-		{
-			id: 2,
-			product: 'Lampara colgante',
-			price: '40990',
-			quantity: 15,
-		},
-		{
-			id: 3,
-			product: 'Lampara pie',
-			price: '30000',
-			quantity: 11,
-		},
-		{
-			id: 4,
-			product: 'Martillo carpintero',
-			price: '5990',
-			quantity: 5,
-		},
-		{
-			id: 5,
-			product: 'Puerta con ventanas',
-			price: '176000',
-			quantity: 5,
-		},
-	]
-
-	const labels = testTableData
-		.sort((a, b) => a.quantity - b.quantity)
-		.map(d => d.product)
+	useEffect(() => {
+		setLabels(() => {
+			return sortedMonthSalesCopy.map(d => d.nombre)
+		})
+		// eslint-disable-next-line
+	}, [monthSales])
 
 	const options = {
 		responsive: true,
@@ -79,9 +43,10 @@ const SoldProductsContainer = () => {
 		datasets: [
 			{
 				label: 'Ventas',
-				data: labels.map((v, i) => {
-					return testTableData[i].quantity
-				}),
+				data:
+					labels.length > 0 &&
+					sortedMonthSalesCopy.length > 0 &&
+					labels.map((v, i) => sortedMonthSalesCopy[i].cantidad),
 			},
 		],
 	}

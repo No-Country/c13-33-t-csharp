@@ -31,7 +31,7 @@
 
 .dropdown-menu {
 	width: 157px;
-	height: 98px;
+	height: 49px;
 	border-width: 0;
 	padding: 0;
 	border-radius: 8px;
@@ -48,12 +48,8 @@
 	background-color: #FBAE43;
 }
 
-#profile-link {
-	border-radius: 8px 8px 0 0;
-}
-
 #close-link {
-	border-radius: 0 0 8px 8px;
+	border-radius: 8px;
 }
 
 @media (max-width:900px) {
