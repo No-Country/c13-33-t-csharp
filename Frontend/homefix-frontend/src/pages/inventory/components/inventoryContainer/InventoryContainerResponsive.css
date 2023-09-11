@@ -36,11 +36,14 @@
 @media screen and (max-width: 767px) {
   .inventory-layout {
     display: inline-block;
-    width: 110%;
+    width: 180%;
     max-width: 100vw;
     font-size: 12px;
     margin: 0;
     padding: 0;
+    padding: 30px 10px 0;
+    overflow: auto;
+    padding-bottom: 50px;
   }
 
   .addProduct-button {
