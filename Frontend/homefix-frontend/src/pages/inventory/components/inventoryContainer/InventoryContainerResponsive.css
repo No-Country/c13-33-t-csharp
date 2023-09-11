@@ -85,4 +85,16 @@
     display: inline-block;
     max-width: 315px;
   }
+
+  .button-stock-minus{
+    height: 50px;
+  }
+
+ .button-stock-plus{
+    height: 50px;
+  }
+
+  .stock-number{
+    height: 50px;
+  }
 }

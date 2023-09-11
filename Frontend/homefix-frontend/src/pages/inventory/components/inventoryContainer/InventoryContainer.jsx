@@ -13,14 +13,16 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
 import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
+import trashImg from "../../../../assets/image/trashIcon.png";
 const { format } = require("date-fns");
 
-export default function InventoryContainer() {
+export default function InventoryContainer({newProductAdded}) {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
 
   const [detailShow, setDetailShow] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const [rotateAnimation, setRotateAnimation] = useState(180);
   const [editor, setEditor] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
@@ -42,6 +44,17 @@ export default function InventoryContainer() {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
+
+  const handleDeleteProduct = async (productId) => {
+      await dispatch(deleteProduct(productId, token));
+      setIsDeleted(true);
+    };
+
+  useEffect(() => {
+    if (isDeleted || newProductAdded) {
+      window.location.reload();
+    }
+  }, [isDeleted, newProductAdded]);
 
   useEffect(() => {
     if (detailShow) {
@@ -168,7 +181,7 @@ export default function InventoryContainer() {
             ></img>
           </div>
           <input
-            className="form-control rounded-pill icon-placeholder me-2"
+            className="form-control searchForm rounded-pill icon-placeholder me-2"
             type="search"
             placeholder="Busca un producto"
             aria-label="Search"
@@ -317,7 +330,7 @@ export default function InventoryContainer() {
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#saveModal"
-                                className="btn btn-yellow product-detail-button rounded-pill"
+                                className="btn btn-yellow product-detail-button rounded-pill "
                               >
                                 Guardar
                               </button>
@@ -335,7 +348,7 @@ export default function InventoryContainer() {
                             {editor ? (
                               <button
                                 type="button"
-                                className="product-detail-button btn btn-outline-dark mx-auto rounded-pill"
+                                className="product-detail-button btn btn-outline-dark mx-auto rounded-pill mb-5"
                                 onClick={() => setEditor(false)}
                               >
                                 Cancelar
@@ -345,15 +358,20 @@ export default function InventoryContainer() {
                             )}
                             {editor ? (
                               <button
+                                title="Eliminar"
                                 type="button"
-                                className="btn btn-delete mx-auto rounded-pill"
+                                className="button-reset mx-auto"
                                 data-bs-toggle="modal"
                                 data-bs-target="#deleteModal"
                                 onClick={() =>
                                   setProductIdForDelete(product.id)
                                 }
                               >
-                                Eliminar
+                                <img
+                                  className="btn-delete "
+                                  src={trashImg}
+                                  alt="Trash Icon"
+                                />
                               </button>
                             ) : (
                               <></>
@@ -464,7 +482,7 @@ export default function InventoryContainer() {
                               <input
                                 name="costo"
                                 className="editable-input"
-								value={inputValues.costo}
+                                value={inputValues.costo}
                                 placeholder={`$${product.costo}`}
                                 onChange={handleInputChange}
                               />
@@ -490,7 +508,7 @@ export default function InventoryContainer() {
                               <input
                                 name="precio"
                                 className="editable-input"
-								value={inputValues.costo * 1.2}
+                                value={inputValues.costo * 1.2}
                                 placeholder={`$${product.precio}`}
                                 onChange={handleInputChange}
                               />
@@ -501,7 +519,7 @@ export default function InventoryContainer() {
                             )}
                           </div>
                           <div className="product-category-container">
-                            <p className="product-detail-title ">
+                            <p className="product-detail-title mt-3">
                               Categoría &gt; subcategoría
                             </p>
                             <div className="product-detail-information">
@@ -662,9 +680,9 @@ export default function InventoryContainer() {
                 type="button"
                 className="btn btn-dark"
                 data-bs-dismiss="modal"
-                onClick={() =>
-                  dispatch(deleteProduct(productIdForDelete, token))
-                }
+                onClick={() => {
+                  handleDeleteProduct(productIdForDelete, token);
+                }}
               >
                 Sí, eliminar producto
               </button>

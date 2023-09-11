@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import "./AddProductContainer.css";
 import arrowDown from "../../../../assets/image/arrowVector.png";
-import cameraIcon from "../../../../assets/image/camera-solid.png";
-import imageIcon from "../../../../assets/image/bi_image.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../../../services/createProduct";
 import noProductImage from "../../../../assets/image/noProduct-image.png";
 import "./AddProductContainerResponsive.css";
 
-export default function AddProductContainer() {
+export default function AddProductContainer(setNewProductAdded) {
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
   const [categorySelect, setCategorySelect] = useState([]);

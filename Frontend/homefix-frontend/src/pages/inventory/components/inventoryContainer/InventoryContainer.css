@@ -435,14 +435,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .btn-delete {
-	background-color: #f14b4b;
-	color: #e2e2e2;
-	width: 80%;
-}
-
-.btn-delete:hover {
-	background-color: #f14b4b;
-	color: #e2e2e2;
+	width: 60px;
 }
 
 .ros-information {
