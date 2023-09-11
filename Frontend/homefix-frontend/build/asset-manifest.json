@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.02cf7218.css",
-    "main.js": "/static/js/main.84131fa7.js",
+    "main.js": "/static/js/main.160c5470.js",
     "static/js/787.1317ba65.chunk.js": "/static/js/787.1317ba65.chunk.js",
     "static/media/IMG_INICIOSESION.jpg": "/static/media/IMG_INICIOSESION.910178ffcf214dc2bb73.jpg",
     "static/media/LOGO-HomeFix.png": "/static/media/LOGO-HomeFix.6e988c6868e0638a0dc5.png",
@@ -19,11 +19,11 @@
     "static/media/Rectangle 153 mobile.svg": "/static/media/Rectangle 153 mobile.ca1a5ba32a62b26c078c.svg",
     "static/media/Rectangle 153.svg": "/static/media/Rectangle 153.f592f6db4122dc685121.svg",
     "main.02cf7218.css.map": "/static/css/main.02cf7218.css.map",
-    "main.84131fa7.js.map": "/static/js/main.84131fa7.js.map",
+    "main.160c5470.js.map": "/static/js/main.160c5470.js.map",
     "787.1317ba65.chunk.js.map": "/static/js/787.1317ba65.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02cf7218.css",
-    "static/js/main.84131fa7.js"
+    "static/js/main.160c5470.js"
   ]
 }
