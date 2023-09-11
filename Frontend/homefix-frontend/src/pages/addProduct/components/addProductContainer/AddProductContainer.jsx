@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './AddProductContainer.css'
 import arrowDown from '../../../../assets/image/arrowVector.png'
-import cameraIcon from '../../../../assets/image/camera-solid.png'
-import imageIcon from '../../../../assets/image/bi_image.png'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { createProduct } from '../../../../services/createProduct'
+import noProductImage from '../../../../assets/image/noProduct-image.png'
+// import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
 import './AddProductContainerResponsive.css'
 
-export default function AddProductContainer() {
+export default function AddProductContainer(setNewProductAdded) {
 	const token = useSelector(state => state.token)
 	const dispatch = useDispatch()
 	const [categorySelect, setCategorySelect] = useState([])
@@ -140,30 +140,31 @@ export default function AddProductContainer() {
 				</div>
 				<div className="addProduct-info-img">
 					{changeImage ? (
-						<div className="addProduct-image-circle imgProduct-container">
+						<div className="addProduct-image-circle circular-image-container imgProduct-container">
 							<img
-								className="img-circle"
+								className="circular-image"
 								src={changeImage}
 								alt="Imagen del producto"
+								style={{ maxWidth: '200px', maxHeight: '200px' }}
 							/>
 						</div>
 					) : (
-						<div className="addProduct-image-circle rounded-circle">
-							<div className="pictureIcon">
-								<img src={imageIcon} alt="Icono de imagen" />
-							</div>
-							<div className="addProduct-semiCirlce-wrapper">
-								<label>
-									<input
-										name="imagen"
-										type="file"
-										accept="image/*"
-										hidden
-										onChange={handleImageChange}
-									/>
-									<img src={cameraIcon} alt="Icono de cámara" />
-								</label>
-							</div>
+						<div className="addProduct-image-circle">
+							<label className="circular-image-container">
+								<img
+									className="circular-image"
+									src={noProductImage}
+									alt=""
+									style={{ maxWidth: '200px', maxHeight: '200px' }}
+								/>
+								<input
+									name="imagen"
+									type="file"
+									accept="image/*"
+									hidden
+									onChange={handleImageChange}
+								/>
+							</label>
 						</div>
 					)}
 				</div>
@@ -202,10 +203,10 @@ export default function AddProductContainer() {
 						</button>
 						<ul className="dropdown-menu">
 							{allBrandsData.map((brand, i) => (
-								<li key={i}>
+								<li className="  z-index-3 bg-white" key={i}>
 									<button
 										value={brand}
-										className="dropdown-item  z-index-3 bg-white"
+										className="dropdown-item  z-index-correction bg-white"
 										onClick={e => selectBrand(e, brand)}
 									>
 										{brand.nombre}
@@ -237,18 +238,26 @@ export default function AddProductContainer() {
 								alt="arrow down"
 							/>
 						</button>
-						<ul className="dropdown-menu ">
-							{allCategoriesData.map((category, i) => (
-								<li key={i}>
-									<button
-										value={category}
-										className="dropdown-item z-index-3 bg-white"
-										onClick={e => selectCategory(e, category)}
-									>
-										{category.categoria}
-									</button>
-								</li>
-							))}
+						<ul className="dropdown-menu">
+							{allCategoriesData.map((category, i) => {
+								const categoryExists = allCategoriesData
+									.slice(0, i)
+									.some(item => item.categoria === category.categoria)
+								if (!categoryExists) {
+									return (
+										<li key={i}>
+											<button
+												value={category.categoria}
+												className="dropdown-item bg-white addProduct-info-category"
+												onClick={e => selectCategory(e, category)}
+											>
+												{category.categoria}
+											</button>
+										</li>
+									)
+								}
+								return null
+							})}
 						</ul>
 					</div>
 				</div>
