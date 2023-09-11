@@ -24,8 +24,8 @@ const App = () => {
 			const user = JSON.parse(JSONloggedUser)
 			dispatch(setUser(user))
 			dispatch(setToken(`bearer ${user.token}`))
+			setLoading(false)
 		}
-		setLoading(false)
 		// eslint-disable-next-line
 	}, [])
 
