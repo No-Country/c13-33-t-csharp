@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
 import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
-import { updateMonthSales } from "../../../../reducers/monthSalesReducer";
 import trashImg from "../../../../assets/image/trashIcon.png";
 const { format } = require("date-fns");
 
@@ -21,7 +20,6 @@ export default function InventoryContainer({ newProductAdded }) {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
-  const consultedMonth = useSelector((state) => state.consultedMonth);
 
   const monthSales = useSelector((state) => state.monthSales);
 
@@ -50,11 +48,6 @@ export default function InventoryContainer({ newProductAdded }) {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
-
-  useEffect(() => {
-    dispatch(updateMonthSales(token, consultedMonth + 1));
-    // eslint-disable-next-line
-  }, [consultedMonth]);
 
   const handleDeleteProduct = async (productId) => {
     await dispatch(deleteProduct(productId, token));

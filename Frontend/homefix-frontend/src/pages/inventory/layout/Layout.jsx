@@ -21,6 +21,7 @@ export default function Layout() {
 			dispatch(initializeAllBrandsData(token))
 			dispatch(initializeAllCategoriesData(token))
 			setFetchData(false)
+			
 		}
 		if (allProductsData.length > 0) {
 			setLoading(false)
