@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://homefix.fly.dev/api/ventas'
+const baseUrl = 'https://homefix.fly.dev/api/resumen/articulosporfecha'
 
 const getMonthSales = async (token, id) => {
 	const config = {
@@ -11,7 +11,8 @@ const getMonthSales = async (token, id) => {
 	let response = {}
 
 	try {
-		response = await axios.get(`${baseUrl}/${id}`, config)
+		response = await axios.get(`${baseUrl}?month=${id}&year=2023`, config)
+		console.log(response.data)
 	} catch (error) {
 		console.log(error.message)
 	}

@@ -1,6 +1,6 @@
 import './CostsRow.css'
 
-const CostsRow = ({ product, cost, revenue, slide }) => {
+const CostsRow = ({ product, price, revenue, slide }) => {
 	return (
 		<tr className="costsrow-table-row">
 			<td
@@ -15,7 +15,7 @@ const CostsRow = ({ product, cost, revenue, slide }) => {
 					slide === '1' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + cost}
+				{'$' + Math.round(price / (revenue * 0.06))}
 			</td>
 			<td
 				className={
@@ -29,14 +29,14 @@ const CostsRow = ({ product, cost, revenue, slide }) => {
 					slide === '2' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + (cost * revenue) / 100}
+				{'$' + Math.round((price * revenue) / (100 + revenue))}
 			</td>
 			<td
 				className={
 					slide === '3' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + (cost * (revenue + 100)) / 100}
+				{'$' + price}
 			</td>
 		</tr>
 	)
