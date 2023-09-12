@@ -257,6 +257,7 @@ export default function AddProductContainer(setNewProductAdded) {
                 placeholder={brandSelect.nombre}
                 value={inputValues.marca}
                 onChange={handleInputChange}
+				disabled
               />
               <img
                 className="dropdown-arrow"
@@ -294,6 +295,7 @@ export default function AddProductContainer(setNewProductAdded) {
                 placeholder={categorySelect.categoria}
                 value={inputValues.categoria}
                 onChange={handleInputChange}
+				disabled
               />
               <img
                 className="dropdown-arrow"
