@@ -13,13 +13,18 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
 import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
+import { updateMonthSales } from "../../../../reducers/monthSalesReducer";
 import trashImg from "../../../../assets/image/trashIcon.png";
+import closeToastButton from "../../../../assets/image/closeButton.png";
+import closeToastButtonGreen from "../../../../assets/image/closeGreen.png";
+import checkGreen from "../../../../assets/image/checkGreen.png";
 const { format } = require("date-fns");
 
 export default function InventoryContainer({ newProductAdded }) {
   const allProductsData = useSelector((state) => state.allProductsData);
   const allBrandsData = useSelector((state) => state.allBrandsData);
   const allCategoriesData = useSelector((state) => state.allCategoriesData);
+  const consultedMonth = useSelector((state) => state.consultedMonth);
 
   const monthSales = useSelector((state) => state.monthSales);
 
@@ -27,6 +32,7 @@ export default function InventoryContainer({ newProductAdded }) {
 
   const [detailShow, setDetailShow] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const [rotateAnimation, setRotateAnimation] = useState(180);
   const [editor, setEditor] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
@@ -49,16 +55,31 @@ export default function InventoryContainer({ newProductAdded }) {
 
   const token = useSelector((state) => state.token);
 
+  useEffect(() => {
+    dispatch(updateMonthSales(token, consultedMonth + 1));
+    // eslint-disable-next-line
+  }, [consultedMonth]);
+
   const handleDeleteProduct = async (productId) => {
     await dispatch(deleteProduct(productId, token));
     setIsDeleted(true);
   };
 
   useEffect(() => {
-    if (isDeleted || newProductAdded) {
-      window.location.reload();
+    if (isEdited) {
+      setTimeout(() => {
+        setIsEdited(false);
+      }, 1000);
     }
-  }, [isDeleted, newProductAdded]);
+  }, [isEdited]);
+
+  useEffect(() => {
+    if (isDeleted) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  }, [isDeleted]);
 
   useEffect(() => {
     if (detailShow) {
@@ -169,13 +190,61 @@ export default function InventoryContainer({ newProductAdded }) {
     <>
       <div className="inventory-title-search-container pb-3">
         <h3>Inventario</h3>
-        <button
-          onClick={() => navigate("/add-product")}
-          type="button"
-          className="btn btn-outline-dark rounded-pill addProduct-button"
-        >
-          Añadir Producto
-        </button>
+        {isDeleted ? (
+          <div className="searchBox">
+            <div className="delete-alert">
+              <div className="toast-pointer-delete">
+                <br />
+              </div>
+              <img className="trashIconAlert" src={trashIcon} alt="" />
+              <p className="text-center my-auto">Se ha eliminado el producto</p>
+              <button
+                onClick={() => setIsDeleted(false)}
+                type="button"
+                className="mx-3 button-reset"
+                aria-label="Close"
+              >
+                <img
+                  className="w-75"
+                  src={closeToastButton}
+                  alt="Close Button"
+                />
+              </button>
+            </div>
+          </div>
+        ) : isEdited ? (
+          <div className="searchBox">
+            <div className="update-alert">
+              <div className="toast-pointer-update">
+                <br />
+              </div>
+              <img className="checkIconAlert" src={checkGreen} alt="" />
+              <p className="text-center my-auto">
+                Los cambios han sido guardados con éxito
+              </p>
+              <button
+                onClick={() => setIsEdited(false)}
+                type="button"
+                className="mx-3 button-reset"
+                aria-label="Close"
+              >
+                <img
+                  className="w-75"
+                  src={closeToastButtonGreen}
+                  alt="Close Button"
+                />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => navigate("/add-product")}
+            type="button"
+            className="btn btn-outline-dark rounded-pill addProduct-button"
+          >
+            Añadir Producto
+          </button>
+        )}
         <form className="d-flex searchbox" role="search">
           <div className="searchIconBox">
             <img
@@ -513,18 +582,13 @@ export default function InventoryContainer({ newProductAdded }) {
                           <div className="product-sold-container">
                             <p className="product-detail-title">Vendidos</p>
                             <p className="product-detail-information">
-                              {monthSales.map((sale) => {
-                                const productSale = monthSales.find(
-                                  (article) => article.articuloId === product.id
-                                );
-                                return (
-                                  <div key={product.id}>
-                                    {productSale && (
-                                      <p>{productSale.cantidad}</p>
-                                    )}
-                                  </div>
-                                );
-                              })}
+                            {monthSales.some(
+                          (article) => article.articuloId === product.id
+                        )
+                          ? monthSales.find(
+                              (article) => article.articuloId === product.id
+                            ).cantidad
+                          : "0"}
                             </p>
                           </div>
                           <div className="product-price-container">
@@ -767,7 +831,10 @@ export default function InventoryContainer({ newProductAdded }) {
                 type="button"
                 className="btn btn-dark"
                 data-bs-dismiss="modal"
-                onClick={(e) => handleSubmit(e)}
+                onClick={(e) => {
+                  handleSubmit(e);
+                  setIsEdited(true);
+                }}
               >
                 Sí, confirmo
               </button>

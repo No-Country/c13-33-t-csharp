@@ -1,10 +1,3 @@
-export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
-
-export const createProductSuccess = (newProduct) => ({
-  type: CREATE_PRODUCT_SUCCESS,
-  payload: newProduct,
-});
-
 const initialState = {
     products: [],
   };

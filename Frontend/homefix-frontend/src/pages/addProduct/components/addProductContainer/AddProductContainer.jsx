@@ -4,7 +4,6 @@ import arrowDown from "../../../../assets/image/arrowVector.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../../../services/createProduct";
-import { createBrand } from "../../../../services/createBrand";
 import noProductImage from "../../../../assets/image/noProduct-image.png";
 import "./AddProductContainerResponsive.css";
 
@@ -105,7 +104,6 @@ export default function AddProductContainer(setNewProductAdded) {
     formData.append("updatedAt", formattedDate);
     formData.append("usuarioUltimaModificacion", user.userName);
     dispatch(createProduct(formData, token));
-    navigate("/inventory");
   };
 
   return (
