@@ -101,4 +101,21 @@
   .btn-yellow{
     margin: 15px 15px;
   }
+
+  .update-alert{
+    width: 250px;
+    height: auto;
+    margin-top: 30px;
+  }
+  .toast-pointer-update{
+    height: 80px;
+  }
+  .delete-alert{
+    width: 250px;
+    height: auto;
+    margin-top: 30px;
+  }
+  .toast-pointer-delete{
+    height: 80px;
+  }
 }

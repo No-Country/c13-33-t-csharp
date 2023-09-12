@@ -288,3 +288,13 @@
 	position: relative;
 	z-index: 1
   }
+
+  .text-toast{
+	font-size: 14px;
+	width: 600px;
+  }
+
+  .closeRed{
+	width: 20px;
+  }
+

@@ -27,6 +27,7 @@ export default function InventoryContainer({ newProductAdded }) {
   const consultedMonth = useSelector((state) => state.consultedMonth);
 
   const monthSales = useSelector((state) => state.monthSales);
+  
 
   console.log(monthSales);
 
@@ -197,7 +198,7 @@ export default function InventoryContainer({ newProductAdded }) {
                 <br />
               </div>
               <img className="trashIconAlert" src={trashIcon} alt="" />
-              <p className="text-center my-auto">Se ha eliminado el producto</p>
+              <p className="text-center my-auto text-toast">Se ha eliminado el producto</p>
               <button
                 onClick={() => setIsDeleted(false)}
                 type="button"
@@ -205,7 +206,7 @@ export default function InventoryContainer({ newProductAdded }) {
                 aria-label="Close"
               >
                 <img
-                  className="w-75"
+                  className="closeRed"
                   src={closeToastButton}
                   alt="Close Button"
                 />
@@ -218,8 +219,8 @@ export default function InventoryContainer({ newProductAdded }) {
               <div className="toast-pointer-update">
                 <br />
               </div>
-              <img className="checkIconAlert" src={checkGreen} alt="" />
-              <p className="text-center my-auto">
+              <img className="checkIconAlert mx-3" src={checkGreen} alt="" />
+              <p className="text-center my-auto text-toast">
                 Los cambios han sido guardados con éxito
               </p>
               <button
@@ -229,7 +230,7 @@ export default function InventoryContainer({ newProductAdded }) {
                 aria-label="Close"
               >
                 <img
-                  className="w-75"
+                  className="closeRed"
                   src={closeToastButtonGreen}
                   alt="Close Button"
                 />
