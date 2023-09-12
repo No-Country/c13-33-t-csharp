@@ -18,7 +18,7 @@ export default function AddProductContainer(setNewProductAdded) {
   const [stock, setStock] = useState(0);
   const [productImage, setProductImage] = useState(null);
   const [changeImage, setChangeImage] = useState();
-  const [isProductSaved, setIsProductSaved] = useState(null);
+  const [isProductSaved, setIsProductSaved] = useState(false);
   const { format } = require("date-fns");
   const [inputValues, setInputValues] = useState({
     id: "",
@@ -110,18 +110,16 @@ export default function AddProductContainer(setNewProductAdded) {
     console.log(formData);
     try {
       if (formData) {
-        const response = await dispatch(createProduct(formData, token));
-        if (response.status === 201) {
-          setIsProductSaved(true);
-          setTimeout(() => {
-            setIsProductSaved(false);
-          }, 2000);
-        }
+        await dispatch(createProduct(formData, token));
+		setIsProductSaved(true);
+        setTimeout(() => {
+          setIsProductSaved(false);
+        }, 2000);
       }
     } catch (error) {
-        setIsProductSaved(null);
+      setIsProductSaved(null);
       setTimeout(() => {
-		setIsProductSaved(false);
+        setIsProductSaved(false);
       }, 2000);
     }
   };
@@ -130,7 +128,7 @@ export default function AddProductContainer(setNewProductAdded) {
     <form className="form-container" onSubmit={handleSubmit}>
       <div className="add-product-title-container">
         <div className="add-product-title">
-          <h2 className="text-center">Inventario - Añadir Producto</h2>
+          <h2 className="text-center">Inventario &gt; Añadir Producto</h2>
         </div>
         <div className="add-product-saveButton">
           {isProductSaved ? (
@@ -159,25 +157,27 @@ export default function AddProductContainer(setNewProductAdded) {
             </div>
           ) : isProductSaved === null ? (
             <div className="searchBox">
-            <div className="delete-alert">
-              <div className="toast-pointer-delete">
-                <br />
+              <div className="delete-alert">
+                <div className="toast-pointer-delete">
+                  <br />
+                </div>
+                <p className="text-center mx-3 my-auto text-toast">
+                  Error al guardar el producto
+                </p>
+                <button
+                  onClick={() => setIsProductSaved(false)}
+                  type="button"
+                  className="mx-3 button-reset"
+                  aria-label="Close"
+                >
+                  <img
+                    className="closeRed"
+                    src={closeToastButton}
+                    alt="Close Button"
+                  />
+                </button>
               </div>
-              <p className="text-center mx-3 my-auto text-toast">Error al guardar el producto</p>
-              <button
-                onClick={() => setIsProductSaved(false)}
-                type="button"
-                className="mx-3 button-reset"
-                aria-label="Close"
-              >
-                <img
-                  className="closeRed"
-                  src={closeToastButton}
-                  alt="Close Button"
-                />
-              </button>
             </div>
-          </div>
           ) : (
             <>
               <button
@@ -189,10 +189,6 @@ export default function AddProductContainer(setNewProductAdded) {
               </button>
               <button
                 type="submit"
-                onClick={() => {
-                  // navigate("/inventory");
-                  console.log(inputValues);
-                }}
                 className="btn btn-dark rounded-pill"
               >
                 Guardar
