@@ -18,15 +18,13 @@ public class ArticulosController : BaseController
     private readonly IMapper _mapper;
     private readonly ImageService _imageService;
     private readonly IUnitOfWork _uow;
-    private readonly HomeFixDbContext _context;
 
     public ArticulosController(IMapper mapper,
-        ImageService imageService, IUnitOfWork uow, HomeFixDbContext context)
+        ImageService imageService, IUnitOfWork uow)
     {
         _mapper = mapper;
         _imageService = imageService;
         _uow = uow;
-        _context = context;
     }
 
     /// <summary>
@@ -37,19 +35,7 @@ public class ArticulosController : BaseController
     public async Task<List<ArticuloDto>> GetArticulos()
     {
         var articulos = await _uow.ArticulosRepository.GetAllArticulos();
-        var articulosDto = _mapper.Map<List<ArticuloDto>>(articulos);
-        foreach (var articulo in articulosDto)
-        {
-            var totalVendidos = 0;
-            var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == articulo.Id)
-                .Select( x=> x.Cantidad).ToListAsync();
-        
-            movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
-
-            articulo.Vendidos = totalVendidos;
-        }
-
-        return articulosDto;
+        return articulos;
     }
 
     /// <summary>
@@ -61,20 +47,7 @@ public class ArticulosController : BaseController
     public async Task<ActionResult<ArticuloDto>> GetArticulo(int id)
     {
         var articulo = await _uow.ArticulosRepository.FindProjectedArticuloByIdAsync(id);
-       
-     
 
-        if (articulo == null)
-        {
-            return NotFound();
-        }
-        var totalVendidos = 0;
-        var movimientosDetallesVendidos = await _context.MovimientosDetalle.Where(x => x.ArticuloId == id)
-            .Select( x=> x.Cantidad).ToListAsync();
-        
-        movimientosDetallesVendidos.ForEach(x => totalVendidos += x);
-
-        articulo.Vendidos = totalVendidos;
         return articulo;
     }
 
