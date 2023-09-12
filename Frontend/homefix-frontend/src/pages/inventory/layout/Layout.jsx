@@ -6,7 +6,8 @@ import InventoryContainer from '../components/inventoryContainer/InventoryContai
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeAllProductsData } from '../../../reducers/allProductsDataReducer'
 import { initializeAllBrandsData } from '../../../reducers/allBrandsDataReducer'
-import { initializeAllCategoriesData } from '../../../reducers/allCategoriesReducer'
+import { initializeAllCategoriesData } from '../../../reducers/allCategoriesReducer';
+
 
 export default function Layout() {
 	const dispatch = useDispatch()
@@ -21,6 +22,7 @@ export default function Layout() {
 			dispatch(initializeAllBrandsData(token))
 			dispatch(initializeAllCategoriesData(token))
 			setFetchData(false)
+			
 		}
 		if (allProductsData.length > 0) {
 			setLoading(false)

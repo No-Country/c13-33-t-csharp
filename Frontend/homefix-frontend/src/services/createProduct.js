@@ -11,7 +11,7 @@ export const createProduct = (productData, token) => async (dispatch) => {
     if (response.status === 201) {
       const newProduct = response.data;
       dispatch({ type: "CREATE_PRODUCT", payload: newProduct });
-	  console.log("producto creado");
+      window.location.href = "/inventory";
     } else {
       console.error("Error al crear el producto:", response.data);
     }
