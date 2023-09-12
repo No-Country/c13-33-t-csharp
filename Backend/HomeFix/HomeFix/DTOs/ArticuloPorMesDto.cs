@@ -9,4 +9,5 @@ public class ArticuloPorMesDto
     public int cantidad { get; set; }
     public double total { get; set; }
     public double precio_unitario { get; set; }
+    public string imagen { get; set; }
 }

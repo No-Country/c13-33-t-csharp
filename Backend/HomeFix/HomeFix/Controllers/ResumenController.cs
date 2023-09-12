@@ -43,6 +43,7 @@ namespace HomeFix.Controllers
                 var nombreArticulo = "";
                 var precioUnitario = 0.0;
                 var articuloId = 0;
+                var imagen = "";
                 
                 foreach (var item in articulo)
                 {
@@ -50,6 +51,7 @@ namespace HomeFix.Controllers
                     nombreArticulo = item.Articulo.Nombre;
                     articuloId = item.ArticuloId;
                     precioUnitario = item.PrecioUnitario;
+                    imagen = item.Articulo.Imagen;
                 }
                 
                 var articuloPorMes = new ArticuloPorMesDto
@@ -60,7 +62,8 @@ namespace HomeFix.Controllers
                     anio = year,
                     total = cant * precioUnitario,
                     precio_unitario = precioUnitario,
-                    ArticuloId = articuloId
+                    ArticuloId = articuloId,
+                    imagen = imagen
                 };
                 articulosPorMes.Add(articuloPorMes);
             }
