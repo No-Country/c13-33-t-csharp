@@ -1,0 +1,21 @@
+.inventory-layout {
+	height: 100vh;
+	max-height: 100vh;
+	background-color: #f8f8f8;
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-auto-rows: 1fr;
+	grid-template-columns: 0.1fr 0.5fr 0.1fr repeat(2, 1fr) 0.1fr;
+	grid-template-rows: 0.3fr 0.1fr 0.2fr 1fr 1.5fr 0.2fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		"headerBar-container headerBar-container headerBar-container headerBar-container headerBar-container headerBar-container"
+		". . . . . ."
+		". navBar-container . inventory-title-search-container inventory-title-search-container ."
+		". navBar-container . inventory-table-container inventory-table-container ."
+		". navBar-container . inventory-table-container inventory-table-container ."
+		". . . . . .";
+	padding: 40px 60px 0;
+	overflow: auto;
+	padding-bottom: 50px;
+}

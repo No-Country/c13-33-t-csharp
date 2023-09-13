@@ -1,0 +1,94 @@
+.offcanvas-menu {
+	display: none;
+}
+
+.navBar-container {
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	grid-area: navBar-container;
+	border-radius: 25px;
+}
+
+.button-reset {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+
+.button-menu-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button {
+	width: 149px;
+	background-color: white;
+	border: none;
+	padding: 13px 0 13px 21px;
+	text-decoration: none;
+	text-align: start;
+	color: #000;
+	font-family: Roboto;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	border-radius: 16px;
+	margin: 6px 0;
+}
+
+.button img {
+	margin-right: 9px;
+	width: 24px;
+}
+
+.button:hover {
+	background-color: #FBAE43;
+}
+
+.button:focus {
+	background-color: #FBAE43;
+}
+
+.actual-page {
+	background-color: #FBAE43;
+}
+
+h2 {
+	margin-left: 30px;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+@media (max-width: 900px) {
+	.navBar-container {
+		display: none;
+	}
+
+	.offcanvas-menu {
+		display: inline-block;
+		position: absolute;
+		text-align: center;
+		height: 40px;
+		left: 2rem;
+	}
+
+	.hamburger-button {
+		outline: none;
+		border: none;
+		background-color: transparent;
+		height: 100%;
+	}
+
+	.hamburger-button img {
+		width: 24px;
+	}
+
+	.offcanvas hr {
+		width: 80%;
+		margin: 0 auto;
+	}
+}

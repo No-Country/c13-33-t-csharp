@@ -20,7 +20,8 @@ namespace HomeFix.Model
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Costo { get; set; }
-
+        
+        
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
@@ -30,15 +31,13 @@ namespace HomeFix.Model
         [Column(TypeName = "decimal(18,2)")] public decimal Alto { get; set; }
 
         [Column(TypeName = "decimal(18,2)")] public decimal Ancho { get; set; }
-
+        
         public bool Activo { get; set; } = true;
 
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
+        
 
-        // public int SubcategoriaId { get; set; }
-        //
-        // public Categoria Subcategoria { get; set; }
         public int MarcaId { get; set; }
         public Marca Marca { get; set; }
 

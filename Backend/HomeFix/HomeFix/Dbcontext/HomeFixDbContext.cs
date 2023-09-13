@@ -30,6 +30,15 @@ public class HomeFixDbContext : IdentityDbContext<Usuario, Rol, int>
                     Id = 2, Name = "Administrador", NormalizedName = "ADMINISTRADOR", Descripcion = "Administrador"
                 }
             );
+        // modelBuilder.Entity<Subcategorias>(x=> x.HasKey(c=> new {c.CategoriaId, c.SubcategoriaId}));
+        // modelBuilder.Entity<Subcategorias>()
+        //     .HasMany(c => c.Categoria)
+        //     .WithOne(s => s.Subcategoria);
+        // modelBuilder.Entity<Subcategorias>()
+        //     .HasOne(c => c.Subcategoria)
+        //     .WithMany(s => s.);
+
+        
 
 
         modelBuilder.Entity<Articulo>().Property(b => b.Id).HasIdentityOptions(startValue: 10);
@@ -62,4 +71,6 @@ public class HomeFixDbContext : IdentityDbContext<Usuario, Rol, int>
     public DbSet<Movimiento> Movimientos { get; set; }
     public DbSet<MovimientoDetalle> MovimientosDetalle { get; set; }
     public DbSet<Articulo> Articulo { get; set; }
+    
 }
+

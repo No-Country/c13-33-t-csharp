@@ -21,6 +21,7 @@ namespace HomeFix.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+<<<<<<< HEAD
 
             modelBuilder.Entity("HomeFix.DTOs.ArticuloMasVendidoDto", b =>
                 {
@@ -100,6 +101,8 @@ namespace HomeFix.Migrations
 
                     b.ToView("ventasultimos6meses", (string)null);
                 });
+=======
+>>>>>>> dev
 
             modelBuilder.Entity("HomeFix.Model.Articulo", b =>
                 {
@@ -108,10 +111,13 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+<<<<<<< HEAD
                     NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 10L, null, null, null, null, null);
 
                     b.Property<bool>("Activo")
                         .HasColumnType("boolean");
+=======
+>>>>>>> dev
 
                     b.Property<decimal>("Alto")
                         .HasColumnType("decimal(18,2)");
@@ -135,10 +141,13 @@ namespace HomeFix.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
+<<<<<<< HEAD
 
                     b.Property<string>("Imagen")
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
+=======
+>>>>>>> dev
 
                     b.Property<int>("MarcaId")
                         .HasColumnType("integer");
@@ -154,6 +163,7 @@ namespace HomeFix.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+<<<<<<< HEAD
                     b.Property<string>("PublicId")
                         .HasColumnType("text");
 
@@ -170,6 +180,13 @@ namespace HomeFix.Migrations
                     b.HasIndex("MarcaId");
 
                     b.HasIndex("UsuarioUltimaModificacionId");
+=======
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("MarcaId");
+>>>>>>> dev
 
                     b.ToTable("Articulo");
                 });
@@ -181,19 +198,32 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+<<<<<<< HEAD
                     NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 10L, null, null, null, null, null);
 
                     b.Property<int?>("CategoriaPadreId")
                         .HasColumnType("integer");
+=======
+>>>>>>> dev
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+<<<<<<< HEAD
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaPadreId");
+=======
+
+                    b.Property<int?>("SubcategoriaId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubcategoriaId");
+>>>>>>> dev
 
                     b.ToTable("Categorias");
                 });
@@ -225,7 +255,10 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+<<<<<<< HEAD
                     NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 10L, null, null, null, null, null);
+=======
+>>>>>>> dev
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -244,7 +277,10 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+<<<<<<< HEAD
                     NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 10L, null, null, null, null, null);
+=======
+>>>>>>> dev
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
@@ -272,9 +308,14 @@ namespace HomeFix.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+<<<<<<< HEAD
                     NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 200L, null, null, null, null, null);
 
                     b.Property<int>("ArticuloId")
+=======
+
+                    b.Property<int?>("ArticuloId")
+>>>>>>> dev
                         .HasColumnType("integer");
 
                     b.Property<int>("Cantidad")
@@ -286,6 +327,12 @@ namespace HomeFix.Migrations
                     b.Property<float>("PrecioUnitario")
                         .HasColumnType("real");
 
+<<<<<<< HEAD
+=======
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("integer");
+
+>>>>>>> dev
                     b.HasKey("Id");
 
                     b.HasIndex("ArticuloId");
@@ -344,6 +391,29 @@ namespace HomeFix.Migrations
                         });
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("HomeFix.Model.Subcategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subcategorias");
+                });
+
+>>>>>>> dev
             modelBuilder.Entity("HomeFix.Model.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -540,15 +610,26 @@ namespace HomeFix.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+<<<<<<< HEAD
                     b.HasOne("HomeFix.Model.Usuario", "UsuarioUltimaModificacion")
                         .WithMany("Articulos")
                         .HasForeignKey("UsuarioUltimaModificacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+=======
+                    b.Navigation("Categoria");
+>>>>>>> dev
 
                     b.Navigation("Categoria");
 
                     b.Navigation("Marca");
+                });
+
+            modelBuilder.Entity("HomeFix.Model.Categoria", b =>
+                {
+                    b.HasOne("HomeFix.Model.Subcategoria", "Subcategoria")
+                        .WithMany("Categoria")
+                        .HasForeignKey("SubcategoriaId");
 
                     b.Navigation("UsuarioUltimaModificacion");
                 });
@@ -643,6 +724,14 @@ namespace HomeFix.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("HomeFix.Model.Articulo", b =>
+                {
+                    b.Navigation("Imagenes");
+                });
+
+>>>>>>> dev
             modelBuilder.Entity("HomeFix.Model.Marca", b =>
                 {
                     b.Navigation("Articulos");
@@ -650,7 +739,11 @@ namespace HomeFix.Migrations
 
             modelBuilder.Entity("HomeFix.Model.Movimiento", b =>
                 {
+<<<<<<< HEAD
                     b.Navigation("MovimientoDetalles");
+=======
+                    b.Navigation("Categoria");
+>>>>>>> dev
                 });
 
             modelBuilder.Entity("HomeFix.Model.Usuario", b =>

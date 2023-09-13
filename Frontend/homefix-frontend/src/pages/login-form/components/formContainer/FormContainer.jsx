@@ -8,16 +8,21 @@ import { setUser } from '../../../../reducers/userReducer'
 import { setMessage } from '../../../../reducers/messageReducer'
 import showPasswordIcon from '../../../../assets/image/contraseña_mostrar.png'
 import hidePasswordIcon from '../../../../assets/image/contraseña_ocultar.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function FormContainer() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	const navigate = useNavigate()
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(setMessage(null))
+		window.localStorage.clear()
+		dispatch(setUser(null))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -39,6 +44,7 @@ export default function FormContainer() {
 			dispatch(setToken(`bearer ${user.token}`))
 			window.localStorage.setItem('loggedHomefixUser', JSON.stringify(user))
 			dispatch(setUser(user))
+			navigate('/')
 		} catch (error) {
 			dispatch(
 				setMessage('El correo electrónico y/o contraseña no son correctas')
@@ -53,13 +59,13 @@ export default function FormContainer() {
 	return (
 		<div className="login_formContainer">
 			<form className="login_form" onSubmit={handleSubmit}>
-				<div className="mb-3">
-					<label htmlFor="email" className="form-label">
+				<div className="login_form-labelInput">
+					<label htmlFor="email" className="login_form-label form-label">
 						Correo electrónico
 					</label>
 					<input
 						type="email"
-						className="form-control formInput pt-3"
+						className="form-control formInput"
 						id="email"
 						placeholder="Ingresa tu correo electrónico"
 						name="email"
@@ -68,14 +74,14 @@ export default function FormContainer() {
 						autoComplete="on"
 					/>
 				</div>
-				<div className="mb-3">
+				<div>
 					<label htmlFor="password" className="form-label">
 						Contraseña
 					</label>
 					<div className="input-group">
 						<input
 							type={showPassword ? 'text' : 'password'}
-							className="form-control formInput formInputPassword pt-3"
+							className="form-control formInput formInputPassword"
 							id="password"
 							placeholder="Ingresa tu contraseña"
 							name="password"
@@ -83,7 +89,7 @@ export default function FormContainer() {
 							onChange={({ target }) => setPassword(target.value)}
 						/>
 						<button
-							className="showPasswordImage-button border border-opacity-50 px-2"
+							className="showPasswordImage-button border border-opacity-50  px-2"
 							type="button"
 							id="button-addon2"
 							onClick={passwordHandler}

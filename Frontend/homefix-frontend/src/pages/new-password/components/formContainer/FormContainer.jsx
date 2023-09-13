@@ -64,18 +64,18 @@ export default function FormContainer() {
 	}
 
 	return (
-		<div className="newPassword_formContianer">
+		<div className="newPassword_formContainer">
 			<form className="newPassword_form" onSubmit={handleSubmit}>
-				<div className="mb-3">
+				<div className="newPassword-password-container">
 					<label htmlFor="password" className="form-label">
-						Contraseña
+						Nueva contraseña
 					</label>
 					<div className="input-group">
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword pt-3"
 							id="password"
-							placeholder="Ingresa tu contraseña"
+							placeholder="Ingresa la nueva contraseña"
 							name="password"
 							value={password}
 							onChange={({ target }) => setPassword(target.value)}
@@ -94,16 +94,16 @@ export default function FormContainer() {
 						</button>
 					</div>
 				</div>
-				<div className="mb-3">
+				<div className="newPassword-repassword-container">
 					<label htmlFor="password" className="form-label">
-						Ingresá nuevamente tu contraseña
+						Repite la nueva contraseña
 					</label>
 					<div className="input-group">
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword pt-3"
 							id="newPassword"
-							placeholder="Ingresa tu contraseña"
+							placeholder="Repite la nueva contraseña"
 							name="newPassword"
 							value={newPassword}
 							onChange={({ target }) => setNewPassword(target.value)}
@@ -123,10 +123,7 @@ export default function FormContainer() {
 					</div>
 				</div>
 				<div className="newPassword_buttonContainer">
-					<button
-						type="submit"
-						className="btn btn-dark submitButton newPassword_buttonPosition pt-2"
-					>
+					<button type="submit" className="btn btn-dark submitButton">
 						Enviar
 					</button>
 				</div>

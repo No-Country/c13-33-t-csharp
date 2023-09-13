@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.975d0dec.css",
+    "main.js": "/static/js/main.fff62f38.js",
+    "static/js/787.1317ba65.chunk.js": "/static/js/787.1317ba65.chunk.js",
+    "static/media/sinImagen.png": "/static/media/sinImagen.7ce782667cf64a39f542.png",
+    "static/media/IMG_INICIOSESION.jpg": "/static/media/IMG_INICIOSESION.910178ffcf214dc2bb73.jpg",
+    "static/media/LOGO-HomeFix.png": "/static/media/LOGO-HomeFix.6e988c6868e0638a0dc5.png",
+    "static/media/HomeFix-navbar-logo.png": "/static/media/HomeFix-navbar-logo.e267d62a2fc86b78d3a0.png",
+    "static/media/fluent_crown-20-filled.svg": "/static/media/fluent_crown-20-filled.b19933bc4be308093836ae50b0dd64a6.svg",
+    "index.html": "/index.html",
+    "static/media/quest-icon.svg": "/static/media/quest-icon.65257a7542a9cea2f9182bed661942d4.svg",
+    "static/media/solar_box-bold.svg": "/static/media/solar_box-bold.82681d4b6a67f75693a3427890f85f67.svg",
+    "static/media/gg_loadbar-doc.svg": "/static/media/gg_loadbar-doc.06ca016c6ed5e3e9087d7a289144921a.svg",
+    "static/media/toRight_button.svg": "/static/media/toRight_button.c23e9a956bbab039d9003b92aff5acfe.svg",
+    "static/media/toLeft_button.svg": "/static/media/toLeft_button.790e5a9190160fa59f01638500b888b8.svg",
+    "static/media/akar-icons_statistic-up.svg": "/static/media/akar-icons_statistic-up.b2d5f5ade21f382f24b9cb5fc1988198.svg",
+    "static/media/icons8-menú.svg": "/static/media/icons8-menú.4ed65ba15934031c7dbb280687f88634.svg",
+    "static/media/Rectangle 153 mobile.svg": "/static/media/Rectangle 153 mobile.ca1a5ba32a62b26c078c.svg",
+    "static/media/Rectangle 153.svg": "/static/media/Rectangle 153.f592f6db4122dc685121.svg",
+    "main.975d0dec.css.map": "/static/css/main.975d0dec.css.map",
+    "main.fff62f38.js.map": "/static/js/main.fff62f38.js.map",
+    "787.1317ba65.chunk.js.map": "/static/js/787.1317ba65.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.975d0dec.css",
+    "static/js/main.fff62f38.js"
+  ]
+}
