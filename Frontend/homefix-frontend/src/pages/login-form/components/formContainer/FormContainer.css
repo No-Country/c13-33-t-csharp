@@ -1,24 +1,34 @@
 .login_formContainer {
 	display: flex;
-	height: 0.65fr;
+	height: 100%;
 }
 
 .login_form {
 	width: 100%;
+	height: 100%;
 }
 
 .form-label {
 	font-size: 1rem;
-	margin-bottom: 0.7rem;
+	margin-bottom: 0.69rem;
 }
 
 .formInput {
-	padding: 1rem 1.8rem;
+	padding: 0 1.8rem;
 	border: 0;
 	border-radius: 15px;
 	background-color: rgba(251, 174, 67, 0.6) !important;
-	height: 3.5rem;
-	margin-bottom: 2rem;
+	height: 3.375rem;
+	margin-bottom: 1.94rem;
+}
+
+.formInput:focus {
+	border: none !important;
+}
+
+.formInput-error {
+	border: 1.5px solid #F14B4B;
+	border-radius: 1rem;
 }
 
 #password {
@@ -30,15 +40,19 @@
 }
 
 .showPasswordImage {
-	width: 25px;
+	height: 1.5rem;
+	width: 1.5rem;
 	background-color: transparent;
 }
 
-.showPasswordImage-button {
-	outline: none !important;
+#button-addon2 {
+	outline: none;
 	background-color: rgba(251, 174, 67, 0.6);
-	border-radius: 15px;
+	border-radius: 0 1rem 1rem 0;
 	border: 0px;
+	height: 3.375rem;
+	border: none !important;
+	margin-left: 0;
 }
 
 .linkToPassReset {
@@ -48,6 +62,7 @@
 	color: #222222;
 	opacity: 60%;
 	font-size: 0.875rem;
+	margin-top: 0.5rem;
 }
 
 .linkToPassReset:hover {
@@ -79,8 +94,8 @@
 }
 
 .button-login {
-	margin-top: 2.3rem !important;
-	height: 3.5rem !important;
+	margin-top: 2.31rem !important;
+	height: 3.375rem !important;
 }
 
 @media screen and (max-width: 920px) {
@@ -89,13 +104,52 @@
 	.formInput,
 	.linkToPassReset {
 		font-size: 0.75rem;
+		height: 0.875rem;
+	}
+
+	.login_form-labelInput {
+		margin-top: 3.3rem;
+	}
+
+	.form-label {
+		margin-bottom: 0.56rem;
+	}
+
+	.formInput {
+		height: 2.3rem;
+		margin-bottom: 2.19rem;
+	}
+
+	.input-group {
+		height: 2.5rem !important;
+	}
+
+	/* .formInputPassword {
+		height: 2.5rem !important;
+	} */
+
+	.showPasswordImage {
+		height: 1.5rem;
+		width: 1.5rem;
+	}
+
+	.showPasswordImage-button {
+		height: 2.3rem !important;
+	}
+
+	.linkToPassReset {
+		margin-top: 0.37rem;
+	}
+
+	.button-login {
+		height: 2.5rem !important;
 	}
 
 	.login_buttonContainer button {
 		font-size: 0.75rem;
 	}
 
-	.login_form-labelInput {
-		margin-top: 3.3rem;
+	.button-login {
+		margin-top: 3.31rem !important;
 	}
 }
