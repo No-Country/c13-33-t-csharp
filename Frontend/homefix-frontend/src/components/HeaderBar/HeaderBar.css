@@ -29,7 +29,7 @@
 	color: #FBAE43;
 }
 
-.dropdown-menu {
+.header-profile-button .dropdown-menu {
 	width: 157px;
 	height: 49px;
 	border-width: 0;
@@ -37,7 +37,7 @@
 	border-radius: 8px;
 }
 
-.dropdown-item {
+.header-profile-button .dropdown-item {
 	display: flex;
 	height: 49px;
 	text-align: start;
