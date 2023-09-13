@@ -16,6 +16,7 @@ import allBrandsDataReducer from './reducers/allBrandsDataReducer'
 import allCategoriesReducer from './reducers/allCategoriesReducer'
 import deleteProductReducer from './reducers/deleteProductReducer'
 import updateProductReducer from './reducers/updateProductReducer'
+import createSaleReducer from './reducers/createSaleReducer'
 
 const store = configureStore({
 	reducer: {
@@ -29,6 +30,7 @@ const store = configureStore({
 		consultedMonth: consultedMonthReducer,
 		deleteProduct: deleteProductReducer,
 		updateProduct: updateProductReducer,
+		createSale: createSaleReducer
 	},
 })
 

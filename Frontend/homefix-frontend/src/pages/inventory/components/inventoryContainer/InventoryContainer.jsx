@@ -14,6 +14,7 @@ import { deleteProduct } from "../../../../services/deleteProduct";
 import { updateProduct } from "../../../../services/updateProduct";
 import { updateAllProductsData } from "../../../../reducers/allProductsDataReducer";
 import { updateMonthSales } from "../../../../reducers/monthSalesReducer";
+import { createSale } from "../../../../services/createSale";
 import trashImg from "../../../../assets/image/trashIcon.png";
 import closeToastButton from "../../../../assets/image/closeButton.png";
 import closeToastButtonGreen from "../../../../assets/image/closeGreen.png";
@@ -27,10 +28,11 @@ export default function InventoryContainer({ newProductAdded }) {
   const consultedMonth = useSelector((state) => state.consultedMonth);
 
   const monthSales = useSelector((state) => state.monthSales);
-  
 
   console.log(monthSales);
-
+  const [stockChangeAmount, setStockChangeAmount] = useState(0);
+  const [incDecStock, setIncDecStock] = useState(0);
+  const [newQuantity, setNewQuantity] = useState(null);
   const [detailShow, setDetailShow] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
@@ -59,7 +61,7 @@ export default function InventoryContainer({ newProductAdded }) {
   useEffect(() => {
     dispatch(updateMonthSales(token, consultedMonth + 1));
     // eslint-disable-next-line
-  }, [consultedMonth]);
+  }, [consultedMonth, monthSales]);
 
   const handleDeleteProduct = async (productId) => {
     await dispatch(deleteProduct(productId, token));
@@ -140,15 +142,11 @@ export default function InventoryContainer({ newProductAdded }) {
       descripcion: inputValues.descripcion,
       costo: inputValues.costo,
       precio: inputValues.precio,
-      cantidad: newQuantity ? newQuantity : product.cantidad,
+      cantidad: newQuantity !== null ? newQuantity : product.cantidad,
       updatedAt: formattedDate,
     };
-
     setEditedProduct(newProduct);
   };
-
-  const [incDecStock, setIncDecStock] = useState(0);
-  const [newQuantity, setNewQuantity] = useState(null);
 
   const increaseProductQuantity = (productId) => {
     setIncDecStock((prevIncDecStock) => {
@@ -166,6 +164,8 @@ export default function InventoryContainer({ newProductAdded }) {
       const updatedButtonMinus = prevIncDecStock - 1;
       setNewQuantity(() => {
         const productToUpdate = allProducts.filter((p) => p.id === productId);
+        const changeAmount = updatedButtonMinus;
+        setStockChangeAmount(changeAmount);
         return productToUpdate[0].cantidad + updatedButtonMinus;
       });
       return updatedButtonMinus;
@@ -182,9 +182,20 @@ export default function InventoryContainer({ newProductAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const movements = {
+      movimientoDetalles: [
+        {
+          cantidad: Math.abs(stockChangeAmount),
+          precioUnitario: editedProduct.precio,
+          articuloId: editedProduct.id,
+        },
+      ],
+    };
+    createSale(movements, token);
     const updatedProduct = await updateProduct(editedProduct, token);
     dispatch(updateAllProductsData(updatedProduct));
-    navigate("/inventory");
+    setIncDecStock(0);
+    setStockChangeAmount(0)
   };
 
   return (
@@ -198,7 +209,9 @@ export default function InventoryContainer({ newProductAdded }) {
                 <br />
               </div>
               <img className="trashIconAlert" src={trashIcon} alt="" />
-              <p className="text-center my-auto text-toast">Se ha eliminado el producto</p>
+              <p className="text-center my-auto text-toast">
+                Se ha eliminado el producto
+              </p>
               <button
                 onClick={() => setIsDeleted(false)}
                 type="button"
@@ -431,7 +444,11 @@ export default function InventoryContainer({ newProductAdded }) {
                               <button
                                 type="button"
                                 className="product-detail-button btn btn-outline-dark mx-auto rounded-pill mb-5"
-                                onClick={() => setEditor(false)}
+                                onClick={() => {
+                                  setEditor(false);
+                                  setIncDecStock(0);
+                                  setStockChangeAmount(0)
+                                }}
                               >
                                 Cancelar
                               </button>
@@ -508,7 +525,7 @@ export default function InventoryContainer({ newProductAdded }) {
                                 onChange={handleInputChange}
                               />
                             ) : (
-                              <p className="product-detail-information">
+                              <p className="product-detail-information w-75">
                                 {product.descripcion}
                               </p>
                             )}
@@ -583,13 +600,25 @@ export default function InventoryContainer({ newProductAdded }) {
                           <div className="product-sold-container">
                             <p className="product-detail-title">Vendidos</p>
                             <p className="product-detail-information">
-                            {monthSales.some(
-                          (article) => article.articuloId === product.id
-                        )
-                          ? monthSales.find(
-                              (article) => article.articuloId === product.id
-                            ).cantidad
-                          : "0"}
+                              {editor
+                                ? monthSales.some(
+                                    (article) =>
+                                      article.articuloId === product.id
+                                  )
+                                  ? monthSales.find(
+                                      (article) =>
+                                        article.articuloId === product.id
+                                    ).cantidad - stockChangeAmount
+                                  : 0
+                                : monthSales.some(
+                                    (article) =>
+                                      article.articuloId === product.id
+                                  )
+                                ? monthSales.find(
+                                    (article) =>
+                                      article.articuloId === product.id
+                                  ).cantidad
+                                : 0}
                             </p>
                           </div>
                           <div className="product-price-container">

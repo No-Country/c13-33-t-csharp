@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using AutoMapper.Configuration.Annotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NpgsqlTypes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,9 @@ namespace HomeFix.Model
 
         [Required]
         [Column(TypeName = "decimal(18,2)")] 
-        public decimal PrecioTotal { get; set; } 
+        public decimal PrecioTotal { get; set; }
+        
+        public List<MovimientoDetalle> MovimientoDetalles { get; set; } = new List<MovimientoDetalle>();
         
         public Usuario Usuario { get; set; }
     }
