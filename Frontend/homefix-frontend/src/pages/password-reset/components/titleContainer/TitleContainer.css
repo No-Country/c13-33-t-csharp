@@ -10,18 +10,28 @@
 }
 
 .passwordReset_notification-container {
-	position: absolute;
-	top: 7rem;
+	height: 1.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+
+}
+
+.passwordReset_notification-container p {
+	font-size: 0.8rem;
 }
 
 @media screen and (max-width: 920px) {
+	.passwordReset_titleContainer {
+		justify-content: center;
+	}
+
 	.passwordReset_titleContainer h2 {
 		font-size: 1rem;
-		margin: 1rem 0;
 	}
 
 	.passwordReset_notification-container {
-		top: 8rem;
+		position: absolute;
+		top: 3.5rem;
 		left: 2rem;
 		font-size: 0.75rem;
 	}

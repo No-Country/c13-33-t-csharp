@@ -1,12 +1,16 @@
 .passwordReset_formContainer {
 	display: flex;
-	height: 100%;
+	height: 69.5vh;
 	width: 100%;
+	align-items: center;
 }
 
 .passwordReset_form {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	width: 100%;
+	justify-content: center;
 }
 
 .passwordReset_form .form-label {
@@ -15,37 +19,42 @@
 }
 
 .passwordReset_form .formInput {
-	height: 3.5rem;
+	height: 3.375rem;
 	font-size: 1rem;
 	padding: 1rem 1.8rem;
-	margin-bottom: 12rem;
+	margin-bottom: 23vh;
 }
 
 .passwordReset_buttonContainer button {
-	height: 3.5rem;
+	height: 3.375rem;
 	width: 100%;
 	border-radius: 1rem;
 	margin-bottom: 1.75rem;
 }
 
 @media screen and (max-width: 920px) {
+	.passwordReset_formContainer {
+		height: 36vh;
+	}
 
 	.passwordReset_form .form-label,
 	.passwordReset_form .formInput,
 	.passwordReset_form .submitButton,
 	.passwordReset_buttonContainer .submitButton {
+		height: 2.5rem;
 		font-size: 0.75rem;
 	}
 
 	.passwordReset_form {
+		justify-content: flex-start;
 		margin-top: 2rem;
 	}
 
 	.passwordReset_form .formInput {
-		margin-bottom: 5rem;
+		margin-bottom: 10.6vh;
 	}
 
-	.passwordReset_buttonContainer button {
+	.passwordReset_buttonContainer .submitButton {
 		margin-bottom: 1rem;
 	}
 
