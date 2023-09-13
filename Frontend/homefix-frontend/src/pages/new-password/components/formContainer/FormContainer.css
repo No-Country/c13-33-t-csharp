@@ -1,12 +1,16 @@
 .newPassword_formContainer {
 	display: flex;
-	height: 100%;
+	height: 69.5vh;
 	width: 100%;
+	align-items: center;
 }
 
 .newPassword_form {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	width: 100%;
+	justify-content: center;
 }
 
 .newPassword_form .form-label {
@@ -15,49 +19,74 @@
 }
 
 .newPassword_form .formInput {
-	height: 3.5rem;
+	height: 3.375rem;
 	font-size: 1rem;
 	padding: 1rem 1.8rem;
-	margin-bottom: 12rem;
+	margin-bottom: 23vh;
 }
 
 .newPassword_buttonContainer button {
-	height: 3.5rem;
+	height: 3.375rem;
 	width: 100%;
 	border-radius: 1rem;
+	margin-bottom: 1.75rem;
 }
 
-.showPasswordImage-button {
-	height: 3.5rem;
+.newPassword_form .showPasswordImage-button {
+	height: 3.375rem;
 }
 
 .newPassword-password-container {
 	margin-bottom: 2rem;
 }
 
+.newPassword_form #button-addon1 {
+	border: 0 !important;
+	border-radius: 0 1rem 1rem 0;
+	background-color: #fece93;
+	margin-left: 0;
+}
+
 @media screen and (max-width:920px) {
 
-	.newPassword_form .form-label,
-	.newPassword_form .formInput {
+	.newPassword_formContainer {
+		height: 36vh;
+	}
+
+	.newPassword_form .formInput,
+	.newPassword_form .submitButton,
+	.newPassword_buttonContainer .submitButton {
+		height: 2.5rem;
 		font-size: 0.75rem;
 	}
 
-	.newPassword_buttonContainer button {
+	.newPassword_form .form-label {
+		margin: 0 0 0.56rem;
 		font-size: 0.75rem;
 	}
 
 	.newPassword-password-container {
-		margin-top: 1.8rem;
 		margin-bottom: 1.6rem;
-	}
-
-	.input-group {
-		height: 3.5rem;
 	}
 
 	.newPassword-repassword-container {
 		margin-bottom: 2.3rem;
 	}
 
-	.newPassword_buttonContainer button {}
+	.newPassword_form {
+		justify-content: flex-start;
+		margin-top: 2rem;
+	}
+
+	.newPassword_form .formInput {
+		margin-bottom: 10.6vh;
+	}
+
+	.newPassword_buttonContainer .submitButton {
+		margin-bottom: 1rem;
+	}
+
+	.newPassword_form .showPasswordImage-button {
+		height: 2.5rem !important;
+	}
 }

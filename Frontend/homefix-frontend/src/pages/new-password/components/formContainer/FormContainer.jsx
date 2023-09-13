@@ -44,18 +44,14 @@ export default function FormContainer() {
 		try {
 			const response = await resetService.reset(credentials)
 			console.log(response)
-			dispatch(
-				setMessage(
-					'Contraseña restablecida con éxito, re-dirigiendo a Inicio de Sesión'
-				)
-			)
+			dispatch(setMessage('Contraseña restablecida con éxito'))
 			setPassword('')
 			setNewPassword('')
 			setTimeout(() => {
 				navigate('/login-form')
-			}, 2000)
+			}, 3000)
 		} catch (error) {
-			dispatch(setMessage('Hubo un problema al restablecer la contraseña'))
+			dispatch(setMessage('No se pudo restablecer la contraseña'))
 		}
 	}
 
@@ -89,7 +85,7 @@ export default function FormContainer() {
 							<img
 								className="showPasswordImage "
 								src={showPassword ? showPasswordIcon : hidePasswordIcon}
-								alt=""
+								alt="show hide icon"
 							/>
 						</button>
 					</div>
@@ -117,7 +113,7 @@ export default function FormContainer() {
 							<img
 								className="showPasswordImage "
 								src={showPassword ? showPasswordIcon : hidePasswordIcon}
-								alt=""
+								alt="show hide icon"
 							/>
 						</button>
 					</div>
