@@ -9,7 +9,6 @@ namespace HomeFix.Model
         [MaxLength(50)]
         public string Nombre { get; set; }
 
-
         public List<Articulo> Articulos { get; set; }
     }
 }

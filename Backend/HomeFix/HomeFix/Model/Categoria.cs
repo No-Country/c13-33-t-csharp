@@ -8,9 +8,14 @@ namespace HomeFix.Model
         [Required]
         [MaxLength(50)]
         public string Nombre { get; set; }
-        [MaxLength(500)]
-        public string Icono { get; set; }
-        public List<Subcategoria> Subcategorias { get; set; }
+  
+<<<<<<< HEAD
+        public int? CategoriaPadreId { get; set; }
+        public Categoria CategoriaPadre { get; set; }
+=======
+        public Subcategoria? Subcategoria { get; set; }
+        public int? SubcategoriaId { get; set; }
+>>>>>>> dev
         
     }
 }

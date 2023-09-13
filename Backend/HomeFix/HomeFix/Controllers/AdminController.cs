@@ -8,20 +8,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeFix.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] 
-public class AdminController : ControllerBase
+
+public class AdminController : BaseController
 {
     private readonly UserManager<Usuario> _userManager;
+    private readonly ImageService _imageService;
 
-    public AdminController(UserManager<Usuario> userManager)
+    public AdminController(UserManager<Usuario> userManager, ImageService imageService)
     {
         _userManager = userManager;
+        _imageService = imageService;
     }
     
-    [Authorize(Roles = "Admin")]
+    /// <summary>
+    /// Registra un usuario en la API. Requiere token de autorizacion y el rol administrador
+    /// </summary>
+    /// <param name="registroDto">Datos del usuario que se va a registrar</param>
+    /// <returns>Confirmacion de registro</returns>
+    
+    [Authorize(Roles = "Administrador")]
     [HttpPost("register")]
-    public async Task<IActionResult> Registro(RegistroDto registroDto)
+    public async Task<IActionResult> Registro([FromForm]RegistroDto registroDto)
     {
         
         if (await _userManager.Users.AnyAsync(usuario => usuario.UserName == registroDto.UserName))
@@ -34,13 +41,14 @@ public class AdminController : ControllerBase
             return BadRequest("Email en uso");
         }
 
+        var imageResult =  await _imageService.AddImage(registroDto.Imagen);
         var usuario = new Usuario
         {
             UserName = registroDto.UserName,
             Nombre = registroDto.Nombre,
             Apellido = registroDto.Apellido,
             Email = registroDto.Email,
-            ImagenPerfil = registroDto.ImagenPerfil
+            ImagenPerfil = imageResult.SecureUrl.ToString()
         };
         var result = await _userManager.CreateAsync(usuario, registroDto.Password);
         
@@ -49,7 +57,7 @@ public class AdminController : ControllerBase
             return BadRequest("Problema en el registro");
         }
 
-        var roleResult = await _userManager.AddToRoleAsync(usuario, "Member");
+        var roleResult = await _userManager.AddToRoleAsync(usuario,  registroDto.Rol);
 
         if (!roleResult.Succeeded)
         {
@@ -60,8 +68,13 @@ public class AdminController : ControllerBase
 
     }
     
-    //Devuelve los roles del usuario que es pasado por query.
-    [Authorize(Roles = "Admin")]
+    /// <summary>
+    /// Devuelve los roles del usuario que es pasado por query.
+    /// </summary>
+    /// <param name="username">Nombre del usuario cuyos roles se van a retornar</param>
+    /// <returns>Roles del usuario ingresado</returns>
+    
+    [Authorize(Roles = "Administrador")]
     [HttpGet("user-roles/{username}")]
     public async Task<ActionResult> GetUserRoles(string username)
     {
@@ -80,7 +93,7 @@ public class AdminController : ControllerBase
     //No tener en cuenta, proximo eliminacion/cambiar
     //Setea diversos roles. Ej de la url: /set-role/Usuario?roles=Member,Admin Para agregar esos dos roles al usuario
     [HttpPost("set-roles/{username}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> AsignRoles(string username, [FromQuery] string roles)
     {
         if (string.IsNullOrEmpty(roles))
@@ -106,9 +119,15 @@ public class AdminController : ControllerBase
         return Ok(await _userManager.GetRolesAsync(user));
     }
     
-    //Quita todos los roles al usuario.
+
+    /// <summary>
+    /// Elimina todos los roles del usuario
+    /// </summary>
+    /// <param name="editRoleDto">DTO del usuario y el rol que se va a eliminar</param>
+    /// <returns>Confirmacion de eliminacion de roles</returns>
+    
     [HttpPost("remove-roles")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> RemoveRole(RolUpdateDto editRoleDto)
     {
         var user = await _userManager.FindByNameAsync(editRoleDto.UserName);

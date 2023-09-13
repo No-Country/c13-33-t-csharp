@@ -1,4 +1,7 @@
-﻿using HomeFix.Model;
+﻿using System.Security.Claims;
+using HomeFix.Interfaces;
+using HomeFix.Model;
+using HomeFix.Services;
 using HomeFix.Services.FileStorage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -7,39 +10,44 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomeFix.Controllers;
 
 
-[ApiController]
-[Route("api/[controller]")]
-public class FileStorageController : ControllerBase
-{
-    private readonly IFileStorageService _fileStorageService;
-    private readonly IConfiguration configuration;
-    private readonly UserManager<Usuario> _userManager;
 
-    public FileStorageController(IFileStorageService fileStorageService, IConfiguration configuration, UserManager<Usuario> userManager)
+public class FileStorageController : BaseController
+{
+    
+    private readonly ImageService _imageService;
+    private readonly IUnitOfWork _uow;
+
+    public FileStorageController(ImageService imageService, IUnitOfWork uow)
     {
-        _fileStorageService = fileStorageService;
-        this.configuration = configuration;
-        _userManager = userManager;
+        _imageService = imageService;
+        _uow = uow;
     }
 
     //[Authorize(Roles = "Admin")]
-    [AllowAnonymous]
+    [Authorize]
     [HttpPost]
 
-    public async Task<IActionResult> Index(IFormFile imagen, int ubicacion, string filenName)
+    public async Task<IActionResult> Index(IFormFile imagen)
     {
+        var usuario = await _uow.CuentaRepository.FindUserByEmail(User.FindFirstValue(ClaimTypes.Email));
         if(imagen is null)
         {
             return BadRequest("No se ha seleccionado ninguna imagen");
             
         }
-        var result = await _fileStorageService.UploadFile(imagen, ubicacion, filenName);
+        var result =  await _imageService.AddImage(imagen);
+        
 
-        if (string.IsNullOrEmpty(result))
+        if (result.Error != null) 
         {
             return BadRequest("No se ha podido subir la imagen");
         }
-        return Ok(result);
+        
+        usuario.ImagenPerfil = result.SecureUrl.ToString();
+        
+        if (await _uow.Complete()) return Ok(result);
+        
+        return BadRequest(new ProblemDetails {Title = "Problema guardando la imagen"});
     }
 
 
