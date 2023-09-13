@@ -479,5 +479,6 @@ $RECYCLE.BIN/
 
 **/bin/*
 **/obj/*
-
+**/.idea/**
+**/.vs/**
 

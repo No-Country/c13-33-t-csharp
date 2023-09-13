@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './FormContainer.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import recoveryService from '../../../../services/recovery'
 import { setMessage } from '../../../../reducers/messageReducer'
 import ButtonContainer from '../buttonContainer/ButtonContainer'
 
 export default function FormContainer() {
 	const [email, setEmail] = useState('')
+
+	const message = useSelector(state => state.message)
 
 	const dispatch = useDispatch()
 
@@ -45,7 +47,11 @@ export default function FormContainer() {
 						</label>
 						<input
 							type="email"
-							className="form-control formInput"
+							className={
+								message
+									? 'form-control formInput formInput-error'
+									: 'form-control formInput'
+							}
 							id="email"
 							placeholder="Ingresa tu correo electrónico"
 							name="email"

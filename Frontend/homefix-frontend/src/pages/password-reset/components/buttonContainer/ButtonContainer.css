@@ -3,6 +3,12 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 3.5rem;
+	height: 3.375rem;
 	border-radius: 1rem;
+}
+
+@media screen and (max-width:920px) {
+	.passwordReset_submit_buttonContainer .submitButton {
+		height: 2.5rem;
+	}
 }

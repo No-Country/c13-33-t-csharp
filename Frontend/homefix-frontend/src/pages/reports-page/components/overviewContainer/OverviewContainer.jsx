@@ -25,7 +25,7 @@ const OverviewContainer = () => {
 			<div className="reports-overview-dataBox-container">
 				<DataBox
 					title={'Total de ventas'}
-					number={totalSales}
+					number={Math.round(totalSales)}
 					numberFormat={'$'}
 				/>
 				<DataBox

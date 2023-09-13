@@ -1,8 +1,8 @@
 .login_titleContainer {
 	display: flex;
 	margin: 0;
-	align-items: center;
-	height: 0.15fr;
+	align-items: flex-end;
+	height: 4.13rem;
 }
 
 .login_titleContainer h2 {
@@ -11,15 +11,21 @@
 }
 
 .login-notification-container {
-	position: absolute;
-	top: 14rem;
+	margin: 0.44rem 0 1.88rem;
+	height: 1.2rem;
+}
+
+.login-notification-container p {
+	font-size: 1rem;
+	margin: 0;
 }
 
 @media screen and (max-width:920px) {
 	.login_titleContainer {
 		justify-content: center;
 		padding: 1rem 0;
-		border-bottom: rgba(0, 0, 0, 0.60) solid;
+		border-bottom: 1px rgba(0, 0, 0, 0.60) solid;
+		height: 3.12rem;
 	}
 
 	.login_titleContainer h2 {
@@ -27,7 +33,13 @@
 	}
 
 	.login-notification-container {
+		position: absolute;
+		height: 0.875rem;
 		top: 9rem;
+		margin: 0;
+	}
+
+	.login-notification-container p {
 		font-size: 0.75rem;
 	}
 }

@@ -25,7 +25,7 @@ const SalesContainer = () => {
 								<SalesRow
 									key={article.articuloId}
 									product={article.nombre}
-									price={article.precio_unitario}
+									price={Math.round(article.precio_unitario)}
 									quantity={article.cantidad}
 									slide="0"
 								/>
@@ -74,7 +74,7 @@ const SalesContainer = () => {
 										<SalesRow
 											key={article.articuloId}
 											product={article.nombre}
-											price={article.precio_unitario}
+											price={Math.round(article.precio_unitario)}
 											quantity={article.cantidad}
 											slide="1"
 										/>
@@ -97,7 +97,7 @@ const SalesContainer = () => {
 										<SalesRow
 											key={article.articuloId}
 											product={article.nombre}
-											price={article.precio_unitario}
+											price={Math.round(article.precio_unitario)}
 											quantity={article.cantidad}
 											slide="2"
 										/>

@@ -22,6 +22,7 @@
 	width: 13.1875rem;
 	height: 13.1875rem;
 	border-radius: 50%;
+	background-color: white;
 }
 
 .reports-best-selling-crown-container {
@@ -34,6 +35,7 @@
 	left: 9.625rem;
 	display: flex;
 	justify-content: center;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .reports-best-selling-crown-image {
@@ -103,6 +105,7 @@
 		margin-left: 1.69rem;
 		padding: 0.5rem 0 0.63rem;
 		margin-left: 1.7rem;
+		border-right: #FBAE43 0.7rem solid;
 	}
 
 	.reports-best-selling-title {
@@ -120,6 +123,10 @@
 	.reports-best-selling-product-quantity {
 		background-image: url('../../../../assets/image/Rectangle\ 153\ mobile.svg');
 	}
+}
 
-
+@media screen and (max-width: 350px) {
+	* {
+		font-size: 14px;
+	}
 }
