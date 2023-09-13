@@ -12,18 +12,19 @@
 }
 
 .login-main-container {
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 	padding: 0 7.5rem;
 	display: grid;
 	grid-auto-columns: 1fr;
 	grid-auto-rows: 1fr;
 	grid-template-columns: 1fr;
-	grid-template-rows: 0.20fr 0.15fr 0.65fr;
+	grid-template-rows: 0.20fr 0.08fr 0.07fr 0.65fr;
 	gap: 0;
 	grid-template-areas:
 		"login_logoContainer"
 		"login_titleContainer"
+		"login-notification-container"
 		"login_formContainer";
 }
 
@@ -31,13 +32,14 @@
 	.login_layout {
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
 	}
 
 	.login-main-container {
+		display: flex;
+		flex-direction: column;
 		position: relative;
-		height: 50vh;
-		transform: translateY(50%);
+		height: 74vh;
+		transform: translateY(12.19rem);
 		padding: 0 2rem;
 		background-color: white;
 		border-radius: 1.875rem 1.875rem 0 0;

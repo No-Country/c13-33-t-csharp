@@ -1,13 +1,15 @@
 .passwordReset_titleLogoContainer {
 	display: flex;
-	height: 100%;
+	height: 22vh;
 	width: 100%;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: space-between;
 }
 
 @media screen and (max-width: 920px) {
 	.passwordReset_titleLogoContainer {
+		height: 3.12rem;
+		align-items: center;
 		justify-content: center;
 		border-bottom: #00000099 1px solid;
 	}

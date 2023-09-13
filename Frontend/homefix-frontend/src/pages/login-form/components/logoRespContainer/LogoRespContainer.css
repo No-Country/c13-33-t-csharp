@@ -6,7 +6,11 @@
 	.login_logo-resp-container {
 		display: flex;
 		justify-content: flex-end;
-		height: 2.5rem;
-		margin-top: 2.5rem;
+		align-items: flex-end;
+		height: 4.835rem;
+	}
+
+	.login_logo-resp-container img {
+		height: 2.4375rem;
 	}
 }

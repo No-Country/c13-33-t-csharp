@@ -26,7 +26,7 @@ const CostsContainer = () => {
 								<CostsRow
 									key={d.articuloId}
 									product={d.nombre}
-									price={d.precio_unitario}
+									price={Math.round(d.precio_unitario)}
 									revenue={20}
 								/>
 							)
@@ -80,7 +80,7 @@ const CostsContainer = () => {
 										<CostsRow
 											key={d.articuloId}
 											product={d.nombre}
-											price={d.precio_unitario}
+											price={Math.round(d.precio_unitario)}
 											revenue={20}
 											slide="1"
 										/>
@@ -103,7 +103,7 @@ const CostsContainer = () => {
 										<CostsRow
 											key={d.articuloId}
 											product={d.nombre}
-											price={d.precio_unitario}
+											price={Math.round(d.precio_unitario)}
 											revenue={20}
 											slide="2"
 										/>
@@ -125,7 +125,7 @@ const CostsContainer = () => {
 										<CostsRow
 											key={d.articuloId}
 											product={d.nombre}
-											price={d.precio_unitario}
+											price={Math.round(d.precio_unitario)}
 											revenue={20}
 											slide="3"
 										/>

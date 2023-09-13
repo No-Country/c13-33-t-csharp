@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './FormContainer.css'
 import { Link } from 'react-router-dom'
 import loginService from '../../../../services/login'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setToken } from '../../../../reducers/tokenReducer'
 import { setUser } from '../../../../reducers/userReducer'
 import { setMessage } from '../../../../reducers/messageReducer'
@@ -14,6 +14,8 @@ export default function FormContainer() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	const message = useSelector(state => state.message)
 
 	const navigate = useNavigate()
 
@@ -65,7 +67,11 @@ export default function FormContainer() {
 					</label>
 					<input
 						type="email"
-						className="form-control formInput"
+						className={
+							message
+								? 'form-control formInput formInput-error'
+								: 'form-control formInput'
+						}
 						id="email"
 						placeholder="Ingresa tu correo electrónico"
 						name="email"
@@ -78,7 +84,9 @@ export default function FormContainer() {
 					<label htmlFor="password" className="form-label">
 						Contraseña
 					</label>
-					<div className="input-group">
+					<div
+						className={message ? 'input-group formInput-error' : 'input-group'}
+					>
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword"
@@ -89,13 +97,13 @@ export default function FormContainer() {
 							onChange={({ target }) => setPassword(target.value)}
 						/>
 						<button
-							className="showPasswordImage-button border border-opacity-50  px-2"
+							className="showPasswordImage-button border border-opacity-50 px-2"
 							type="button"
 							id="button-addon2"
 							onClick={passwordHandler}
 						>
 							<img
-								className="showPasswordImage "
+								className="showPasswordImage"
 								src={showPassword ? showPasswordIcon : hidePasswordIcon}
 								alt=""
 							/>

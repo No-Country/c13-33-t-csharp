@@ -10,8 +10,8 @@
 	.login_imageContainer {
 		position: absolute;
 		z-index: -1;
-		top: 0px;
-		background-size: 100%;
+		top: 0;
+		background-size: cover;
 		background-repeat: no-repeat;
 		width: 100vw;
 		height: 50%;
