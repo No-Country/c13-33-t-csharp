@@ -126,7 +126,7 @@ export default function AddProductContainer(setNewProductAdded) {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <div className="add-product-title-container">
+      <div className="add-product-title-container pb-4">
         <div className="add-product-title">
           <h2 className="text-center">Inventario &gt; Añadir Producto</h2>
         </div>
@@ -436,7 +436,7 @@ export default function AddProductContainer(setNewProductAdded) {
               name="precio"
               className="addProduct-editable-input"
               placeholder="$"
-              value={inputValues.costo * 1.2}
+			  value={inputValues.costo * 1.2 || ""}
               onChange={handleInputChange}
             />
           </div>

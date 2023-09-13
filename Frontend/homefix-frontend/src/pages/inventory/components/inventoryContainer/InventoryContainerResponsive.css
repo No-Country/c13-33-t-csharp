@@ -56,7 +56,7 @@
   .searchbox{
     display: flex;
     width: 100%;
-    max-width: 350px;;
+    max-width: 350px;
     margin: 0;
     padding: 0;
   }
@@ -118,4 +118,8 @@
   .toast-pointer-delete{
     height: 80px;
   }
+
+  .imgAlertContainer img{
+    display: none;
+    }
 }
