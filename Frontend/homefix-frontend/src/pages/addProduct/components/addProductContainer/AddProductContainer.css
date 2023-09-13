@@ -131,7 +131,7 @@
 
 .add-product-char-container {
 	width: 100%;
-	height: 100%;
+	height: 110%;
 	background-color: #ffffff;
 	grid-area: add-product-char-container;
 	border-radius: 25px;
@@ -208,9 +208,10 @@
 
 .add-product-price-container {
 	width: 100%;
-	height: 100%;
+	height: 120%;
 	background-color: #ffffff;
 	grid-area: add-product-price-container;
+	border-radius: 25px;
 }
 
 .addProduct-price-title {
@@ -260,6 +261,7 @@
 
 
   .messure{
+	height: 50px;
 	display: flex;
 	flex-direction: row;
   }
