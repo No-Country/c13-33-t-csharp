@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const createBrand = (brandData, token) => async (dispatch) => {
-    console.log(brandData);
   try {
     const response = await axios.post('https://homefix.fly.dev/api/marca', brandData, {
       headers: {
