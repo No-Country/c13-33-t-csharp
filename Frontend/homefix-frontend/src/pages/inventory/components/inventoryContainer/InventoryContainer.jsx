@@ -47,6 +47,7 @@ export default function InventoryContainer({ newProductAdded }) {
   const [editedProduct, setEditedProduct] = useState({});
   const [lowQuantityAlert, setLowQuantityAlert] = useState(false);
   const [lowQuantityProducts, setLowQuantityProducts] = useState([]);
+  const [activeTd, setActiveTd] = useState(null);
   const [inputValues, setInputValues] = useState({
     id: "",
     nombre: "",
@@ -60,16 +61,16 @@ export default function InventoryContainer({ newProductAdded }) {
 
   const token = useSelector((state) => state.token);
 
+  const handleTdClick = (id) => {
+    setActiveTd((prevActiveTd) => (prevActiveTd === id ? null : id));
+  };
+
   useEffect(() => {
-    // Filtra los productos con cantidad igual o menor a 3
     const lowQuantityProductsData = allProductsData.filter(
       (product) => product.cantidad <= 3
     );
 
-    // Almacena los productos con cantidad baja en el estado
     setLowQuantityProducts(lowQuantityProductsData);
-
-    // Verifica la longitud de lowQuantityProductsData para establecer lowQuantityAlert
     if (lowQuantityProductsData.length > 0) {
       setLowQuantityAlert(true);
       setLowQuantityProducts(
@@ -379,7 +380,7 @@ export default function InventoryContainer({ newProductAdded }) {
                   <td id="QuantityAlert" className="qtyAlert" colSpan="9">
                     <div className="alertContainer">
                       <div className="imgAlertContainer">
-                      <img src={stockAlert} alt="Quantity Alert" />
+                        <img src={stockAlert} alt="Quantity Alert" />
                       </div>
                       <p className="text-start text-white">
                         ¡Atención! Quedan pocas unidades en stock de los
@@ -432,8 +433,15 @@ export default function InventoryContainer({ newProductAdded }) {
                           : "0"}
                       </td>
                       <td>{product.cantidad}</td>
-                      <td>
-                        <motion.div animate={rotateAnimation}>
+                      <td
+                        data-id={product.id}
+                        onClick={() => handleTdClick(product.id)}
+                      >
+                        <motion.div
+                          animate={
+                            activeTd === product.id ? rotateAnimation : {}
+                          }
+                        >
                           <img
                             className="detailArrow"
                             src={arrowDown}
