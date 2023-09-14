@@ -15,7 +15,7 @@ const SalesRow = ({ product, price, quantity, slide }) => {
 					slide === '1' || slide === '0' ? 'salesrow-show' : 'salesrow-hide'
 				}
 			>
-				{'$' + price}
+				{'$' + new Intl.NumberFormat().format(price)}
 			</td>
 			<td
 				className={
@@ -29,7 +29,7 @@ const SalesRow = ({ product, price, quantity, slide }) => {
 					slide === '2' || slide === '0' ? 'salesrow-show' : 'salesrow-hide'
 				}
 			>
-				{'$' + price * quantity}
+				{'$' + new Intl.NumberFormat().format(price * quantity)}
 			</td>
 		</tr>
 	)
