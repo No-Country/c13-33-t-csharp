@@ -47,6 +47,7 @@ export default function InventoryContainer({ newProductAdded }) {
   const [editedProduct, setEditedProduct] = useState({});
   const [lowQuantityAlert, setLowQuantityAlert] = useState(false);
   const [lowQuantityProducts, setLowQuantityProducts] = useState([]);
+  const [activeTd, setActiveTd] = useState(null);
   const [inputValues, setInputValues] = useState({
     id: "",
     nombre: "",
@@ -59,6 +60,10 @@ export default function InventoryContainer({ newProductAdded }) {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
+
+  const handleTdClick = (id) => {
+    setActiveTd((prevActiveTd) => (prevActiveTd === id ? null : id));
+  };
 
   useEffect(() => {
     // Filtra los productos con cantidad igual o menor a 3
@@ -432,8 +437,8 @@ export default function InventoryContainer({ newProductAdded }) {
                           : "0"}
                       </td>
                       <td>{product.cantidad}</td>
-                      <td>
-                        <motion.div animate={rotateAnimation}>
+                      <td data-id={product.id} onClick={() => handleTdClick(product.id)}>
+                        <motion.div animate={activeTd === product.id ? rotateAnimation : {}}>
                           <img
                             className="detailArrow"
                             src={arrowDown}
