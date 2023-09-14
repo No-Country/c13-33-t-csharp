@@ -110,11 +110,11 @@ export default function AddProductContainer(setNewProductAdded) {
     console.log(formData);
     try {
       if (formData) {
+        setIsProductSaved(true);
         await dispatch(createProduct(formData, token));
-		setIsProductSaved(true);
         setTimeout(() => {
           setIsProductSaved(false);
-        }, 2000);
+        }, 3000);
       }
     } catch (error) {
       setIsProductSaved(null);
@@ -187,10 +187,7 @@ export default function AddProductContainer(setNewProductAdded) {
               >
                 Cancelar
               </button>
-              <button
-                type="submit"
-                className="btn btn-dark rounded-pill"
-              >
+              <button type="submit" className="btn btn-dark rounded-pill">
                 Guardar
               </button>
             </>
@@ -257,7 +254,7 @@ export default function AddProductContainer(setNewProductAdded) {
                 placeholder={brandSelect.nombre}
                 value={inputValues.marca}
                 onChange={handleInputChange}
-				disabled
+                disabled
               />
               <img
                 className="dropdown-arrow"
@@ -295,7 +292,7 @@ export default function AddProductContainer(setNewProductAdded) {
                 placeholder={categorySelect.categoria}
                 value={inputValues.categoria}
                 onChange={handleInputChange}
-				disabled
+                disabled
               />
               <img
                 className="dropdown-arrow"
@@ -410,16 +407,19 @@ export default function AddProductContainer(setNewProductAdded) {
         <div className="addProduct-price-title">
           <h2>Precio del Producto</h2>
         </div>
-        <div className="addProduct-price-input">
+        <div className="addProduct-price-input px-4">
           <div>
             <p>Costo</p>
+            <div>
+              <span>$</span>
             <input
               name="costo"
               className="addProduct-editable-input"
-              placeholder="$"
+              placeholder="0"
               value={inputValues.costo}
               onChange={handleInputChange}
             />
+            </div>
           </div>
           <div>
             <p>Margen de Ganancia</p>
@@ -430,15 +430,18 @@ export default function AddProductContainer(setNewProductAdded) {
               value="20"
             />
           </div>
-          <div>
+          <div className="mx-3">
             <p>Precio</p>
+              <div>
+                <span>$</span>
             <input
               name="precio"
               className="addProduct-editable-input"
-              placeholder="$"
-			  value={inputValues.costo * 1.2 || ""}
+              placeholder="0"
+              value={(inputValues.costo * 1.2 || "").toLocaleString()}
               onChange={handleInputChange}
             />
+            </div>
           </div>
         </div>
       </div>
