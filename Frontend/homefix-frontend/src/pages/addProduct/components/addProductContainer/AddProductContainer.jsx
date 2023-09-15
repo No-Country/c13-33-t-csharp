@@ -264,7 +264,7 @@ export default function AddProductContainer(setNewProductAdded) {
             </button>
             <ul className="dropdown-menu">
               {allBrandsData.map((brand, i) => (
-                <li className="  z-index-3 bg-white" key={i}>
+                <li className="brand-selection  z-index-3 bg-white" key={i}>
                   <button
                     value={brand}
                     className="dropdown-item  z-index-correction bg-white"
@@ -307,7 +307,7 @@ export default function AddProductContainer(setNewProductAdded) {
                   .some((item) => item.categoria === category.categoria);
                 if (!categoryExists) {
                   return (
-                    <li key={i}>
+                    <li key={i} className="category-selection">
                       <button
                         value={category.categoria}
                         className="dropdown-item bg-white addProduct-info-category"
@@ -427,7 +427,7 @@ export default function AddProductContainer(setNewProductAdded) {
               name="margen"
               className="addProduct-editable-input-yellow rounded-pill"
               placeholder="20%"
-              value="20"
+              value="20%"
             />
           </div>
           <div className="mx-3">

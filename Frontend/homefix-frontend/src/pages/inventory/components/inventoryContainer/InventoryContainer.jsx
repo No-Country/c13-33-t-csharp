@@ -631,7 +631,7 @@ export default function InventoryContainer({ newProductAdded }) {
                             <p className="product-detail-title">Costo</p>
                             {editor ? (
                               <div className="inputBox">
-                                <span>$</span>
+                                <span className="span-currency">$</span>
                                 <input
                                   className="editable-input"
                                   name="costo"
@@ -680,7 +680,7 @@ export default function InventoryContainer({ newProductAdded }) {
                             <p className="product-detail-title">Precio</p>
                             {editor ? (
                               <div className="inputBox">
-                                <span>$</span>
+                                <span className="span-currency">$</span>
                                 <input
                                   name="precio"
                                   className="editable-input"

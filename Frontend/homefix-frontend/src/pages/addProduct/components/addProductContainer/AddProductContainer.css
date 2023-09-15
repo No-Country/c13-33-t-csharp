@@ -290,12 +290,24 @@
 	border-radius: 50%;
   }
 
-  z-index-correction{
+  .z-index-correction{
 	z-index: 10;
   }
   .addProduct-info-category{
 	position: relative;
-	z-index: 1
+	z-index: 200
+  }
+
+  .dropdown-item:hover{
+	background-color: #fbae43;
+  }
+
+  .category-selection button:hover{
+	background-color: #fbae43 !important;
+  }
+
+  .brand-selection button:hover{
+	background-color: #fbae43 !important;
   }
 
   .text-toast{
