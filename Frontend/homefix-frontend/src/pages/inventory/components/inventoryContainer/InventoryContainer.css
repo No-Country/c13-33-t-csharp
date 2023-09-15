@@ -656,3 +656,9 @@ td {
 .dropDownButton:hover {
   background-color: #fbae43;
 }
+
+
+.span-currency{
+  padding-top: 1px;
+  width: 10px;
+}
