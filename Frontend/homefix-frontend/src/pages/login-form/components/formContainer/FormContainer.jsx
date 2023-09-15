@@ -69,8 +69,8 @@ export default function FormContainer() {
 						type="email"
 						className={
 							message
-								? 'form-control formInput formInput-error'
-								: 'form-control formInput'
+								? 'form-control login-formInput formInput formInput-error'
+								: 'form-control login-formInput formInput'
 						}
 						id="email"
 						placeholder="Ingresa tu correo electrónico"
@@ -81,15 +81,22 @@ export default function FormContainer() {
 					/>
 				</div>
 				<div>
-					<label htmlFor="password" className="form-label">
+					<label htmlFor="password" className="login_form-label form-label">
 						Contraseña
 					</label>
 					<div
-						className={message ? 'input-group formInput-error' : 'input-group'}
+						className={
+							message
+								? 'input-group login-input-group formInput-error'
+								: 'input-group login-input-group'
+						}
+						id="login-input-group"
 					>
 						<input
 							type={showPassword ? 'text' : 'password'}
-							className="form-control formInput formInputPassword"
+							className={
+								'form-control login-formInput formInput formInputPassword'
+							}
 							id="password"
 							placeholder="Ingresa tu contraseña"
 							name="password"

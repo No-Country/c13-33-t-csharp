@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './FormContainer.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import resetService from '../../../../services/reset'
 import { setMessage } from '../../../../reducers/messageReducer'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -16,6 +16,7 @@ export default function FormContainer() {
 	const email = searchParams.get('email')
 	const tokenFromUrl = searchParams.get('token')
 	const token = tokenFromUrl.replace(/ /g, '+')
+	const message = useSelector(state => state.message)
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -63,10 +64,15 @@ export default function FormContainer() {
 		<div className="newPassword_formContainer">
 			<form className="newPassword_form" onSubmit={handleSubmit}>
 				<div className="newPassword-password-container">
-					<label htmlFor="password" className="form-label">
+					<label
+						htmlFor="password"
+						className="form-label newPassword-form-label"
+					>
 						Nueva contraseña
 					</label>
-					<div className="input-group">
+					<div
+						className={message ? 'input-group formInput-error' : 'input-group'}
+					>
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword pt-3"
@@ -91,10 +97,19 @@ export default function FormContainer() {
 					</div>
 				</div>
 				<div className="newPassword-repassword-container">
-					<label htmlFor="password" className="form-label">
+					<label
+						htmlFor="password"
+						className="form-label newPassword-form-label"
+					>
 						Repite la nueva contraseña
 					</label>
-					<div className="input-group">
+					<div
+						className={
+							message
+								? 'repass-input-group input-group formInput-error'
+								: 'repass-input-group input-group'
+						}
+					>
 						<input
 							type={showPassword ? 'text' : 'password'}
 							className="form-control formInput formInputPassword pt-3"

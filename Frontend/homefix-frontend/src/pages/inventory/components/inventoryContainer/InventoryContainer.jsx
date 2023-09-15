@@ -41,8 +41,8 @@ export default function InventoryContainer({ newProductAdded }) {
   const [allProducts, setAllProducts] = useState([]);
   const [filterSelected, setFilterSelected] = useState("Producto");
   const [searchProduct, setSearchProduct] = useState("");
-  const [categorySelect, setCategorySelect] = useState([]);
-  const [brandSelect, setBrandSelect] = useState([]);
+  const [categorySelect, setCategorySelect] = useState();
+  const [brandSelect, setBrandSelect] = useState();
   const [productIdForDelete, setProductIdForDelete] = useState();
   const [editedProduct, setEditedProduct] = useState({});
   const [lowQuantityAlert, setLowQuantityAlert] = useState(false);
@@ -95,7 +95,7 @@ export default function InventoryContainer({ newProductAdded }) {
     if (isEdited) {
       setTimeout(() => {
         setIsEdited(false);
-      }, 1000);
+      }, 2500);
     }
   }, [isEdited]);
 
@@ -103,7 +103,7 @@ export default function InventoryContainer({ newProductAdded }) {
     if (isDeleted) {
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
+      }, 2500);
     }
   }, [isDeleted]);
 
@@ -221,6 +221,8 @@ export default function InventoryContainer({ newProductAdded }) {
     setStockChangeAmount(0);
   };
 
+  console.log(allProducts);
+
   return (
     <>
       <div className="inventory-title-search-container pb-3">
@@ -318,29 +320,29 @@ export default function InventoryContainer({ newProductAdded }) {
                   alt="arrow down"
                 />
               </button>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu ">
                 <li>
                   <button
-                    className="button-reset mx-1"
+                    className="button-reset dropDownButton text-start"
                     onClick={() => setFilterSelected("ID")}
                   >
-                    Por ID
+                    ID
                   </button>
                 </li>
                 <li>
                   <button
-                    className="button-reset mx-1"
+                    className="button-reset dropDownButton text-start"
                     onClick={() => setFilterSelected("Categoria")}
                   >
-                    Por Categorías
+                    Categorías
                   </button>
                 </li>
                 <li>
                   <button
-                    className="button-reset mx-1"
+                    className="button-reset dropDownButton text-start"
                     onClick={() => setFilterSelected("Producto")}
                   >
-                    Por Producto
+                    Producto
                   </button>
                 </li>
               </ul>
@@ -376,20 +378,23 @@ export default function InventoryContainer({ newProductAdded }) {
             </thead>
             <tbody>
               {lowQuantityAlert && (
-                <tr className="bg-danger lowQtyAlert">
-                  <td id="QuantityAlert" className="qtyAlert" colSpan="9">
-                    <div className="alertContainer">
-                      <div className="imgAlertContainer">
-                        <img src={stockAlert} alt="Quantity Alert" />
+                <>
+                  <br></br>
+                  <tr className="bg-danger lowQtyAlert">
+                    <td id="QuantityAlert" className="qtyAlert" colSpan="9">
+                      <div className="alertContainer">
+                        <div className="imgAlertContainer">
+                          <img src={stockAlert} alt="Quantity Alert" />
+                        </div>
+                        <p className="text-start text-white mx-auto mt-3">
+                          ¡Atención! Quedan pocas unidades en stock de los
+                          productos {lowQuantityProducts}. Por favor, realiza
+                          reposición.
+                        </p>
                       </div>
-                      <p className="text-start text-white">
-                        ¡Atención! Quedan pocas unidades en stock de los
-                        productos {lowQuantityProducts}. Por favor, realiza
-                        reposicións.
-                      </p>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                </>
               )}
               {allProducts
                 .filter((products) =>
@@ -494,6 +499,7 @@ export default function InventoryContainer({ newProductAdded }) {
                                   setEditor(false);
                                   setIncDecStock(0);
                                   setStockChangeAmount(0);
+                                  setBrandSelect();
                                 }}
                               >
                                 Cancelar
@@ -576,7 +582,7 @@ export default function InventoryContainer({ newProductAdded }) {
                               </p>
                             )}
                           </div>
-                          <div className="product-brand-container">
+                          <div className="product-brand-container px-4">
                             <p className="product-detail-title">Marca</p>
                             {editor ? (
                               <div className="dropdown">
@@ -588,7 +594,7 @@ export default function InventoryContainer({ newProductAdded }) {
                                 >
                                   {brandSelect
                                     ? brandSelect.nombre
-                                    : product.marca}
+                                    : product.marca || "Seleccione una marca"}
                                   <img
                                     className="dropdown-arrow"
                                     src={arrowDown}
@@ -615,25 +621,28 @@ export default function InventoryContainer({ newProductAdded }) {
                               </p>
                             )}
                           </div>
-                          <div className="product-weight-container">
+                          <div className="product-weight-container  px-4">
                             <p className="product-detail-title">Peso</p>
                             <p className="product-detail-information">
                               {product.peso}
                             </p>
                           </div>
-                          <div className="product-cost-container">
+                          <div className="product-cost-container  px-4">
                             <p className="product-detail-title">Costo</p>
                             {editor ? (
-                              <input
-                                name="costo"
-                                className="editable-input"
-                                value={inputValues.costo}
-                                placeholder={`$${product.costo}`}
-                                onChange={handleInputChange}
-                              />
+                              <div className="inputBox">
+                                <span>$</span>
+                                <input
+                                  className="editable-input"
+                                  name="costo"
+                                  value={inputValues.costo.toLocaleString()}
+                                  placeholder={product.costo.toLocaleString()}
+                                  onChange={handleInputChange}
+                                />
+                              </div>
                             ) : (
                               <p className="product-detail-information">
-                                ${product.costo}
+                                ${product.costo.toLocaleString()}
                               </p>
                             )}
                           </div>
@@ -670,26 +679,31 @@ export default function InventoryContainer({ newProductAdded }) {
                           <div className="product-price-container">
                             <p className="product-detail-title">Precio</p>
                             {editor ? (
-                              <input
-                                name="precio"
-                                className="editable-input"
-                                value={inputValues.costo * 1.2}
-                                placeholder={`$${product.precio}`}
-                                onChange={handleInputChange}
-                              />
+                              <div className="inputBox">
+                                <span>$</span>
+                                <input
+                                  name="precio"
+                                  className="editable-input"
+                                  value={(
+                                    inputValues.costo * 1.2
+                                  ).toLocaleString()}
+                                  placeholder={`$${product.precio}`}
+                                  onChange={handleInputChange}
+                                />
+                              </div>
                             ) : (
                               <p className="product-detail-information">
-                                ${product.precio}
+                                ${product.precio.toLocaleString()}
                               </p>
                             )}
                           </div>
                           <div className="product-category-container">
-                            <p className="product-detail-title mt-3">
+                            <p className="product-detail-title  pt-3">
                               Categoría &gt; subcategoría
                             </p>
                             <div className="product-detail-information">
                               {editor ? (
-                                <div className="dropdown">
+                                <div className="dropdown pt-1">
                                   <button
                                     className="button-reset btn-filter btn-outline-dark"
                                     type="button"
@@ -698,7 +712,7 @@ export default function InventoryContainer({ newProductAdded }) {
                                   >
                                     {categorySelect
                                       ? categorySelect.categoria
-                                      : product.categoria}
+                                      : product.categoria || "Seleccione una categoria"}
                                     <img
                                       className="dropdown-arrow"
                                       src={arrowDown}

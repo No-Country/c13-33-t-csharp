@@ -13,15 +13,22 @@
 	justify-content: center;
 }
 
-.newPassword_form .form-label {
+.newPassword_form .newPassword-form-label {
 	font-size: 1rem;
 	margin-bottom: 0.7rem;
 }
 
-.newPassword_form .formInput {
+.newPassword_form .formInputPassword {
 	height: 3.375rem;
 	font-size: 1rem;
 	padding: 1rem 1.8rem;
+	/* margin-bottom: 23vh; */
+	background-color: #FDD6A0;
+	border-radius: 1rem;
+	border: transparent;
+}
+
+.repass-input-group {
 	margin-bottom: 23vh;
 }
 
@@ -40,10 +47,11 @@
 	margin-bottom: 2rem;
 }
 
-.newPassword_form #button-addon1 {
+.newPassword_form .showPasswordImage-button,
+.newPassword_form #button-addon2 {
 	border: 0 !important;
 	border-radius: 0 1rem 1rem 0;
-	background-color: #fece93;
+	background-color: #FDD6A0;
 	margin-left: 0;
 }
 
@@ -53,14 +61,14 @@
 		height: 36vh;
 	}
 
-	.newPassword_form .formInput,
+	.newPassword_form .formInputPassword,
 	.newPassword_form .submitButton,
 	.newPassword_buttonContainer .submitButton {
 		height: 2.5rem;
 		font-size: 0.75rem;
 	}
 
-	.newPassword_form .form-label {
+	.newPassword_form .newPassword-form-label {
 		margin: 0 0 0.56rem;
 		font-size: 0.75rem;
 	}
@@ -78,7 +86,7 @@
 		margin-top: 2rem;
 	}
 
-	.newPassword_form .formInput {
+	.repass-input-group {
 		margin-bottom: 10.6vh;
 	}
 
