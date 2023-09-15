@@ -8,35 +8,26 @@
 	height: 100%;
 }
 
-.form-label {
+.login_form-label {
 	font-size: 1rem;
 	margin-bottom: 0.69rem;
 }
 
-.formInput {
+.login-formInput {
 	padding: 0 1.8rem;
 	border: 0;
-	border-radius: 15px;
+	border-radius: 1rem;
 	background-color: rgba(251, 174, 67, 0.6) !important;
 	height: 3.375rem;
 	margin-bottom: 1.94rem;
 }
 
-.formInput:focus {
+.login-formInput:focus {
 	border: none !important;
-}
-
-.formInput-error {
-	border: 1.5px solid #F14B4B;
-	border-radius: 1rem;
 }
 
 #password {
 	margin: 0;
-}
-
-.formInput::placeholder {
-	transform: translateX(-20px);
 }
 
 .showPasswordImage {
@@ -49,7 +40,7 @@
 	outline: none;
 	background-color: rgba(251, 174, 67, 0.6);
 	border-radius: 0 1rem 1rem 0;
-	border: 0px;
+	border: 0;
 	height: 3.375rem;
 	border: none !important;
 	margin-left: 0;
@@ -90,7 +81,7 @@
 .login_buttonPosition button {
 	margin-top: 50px;
 	width: 100%;
-	border-radius: 15px;
+	border-radius: 1rem;
 }
 
 .button-login {
@@ -98,10 +89,15 @@
 	height: 3.375rem !important;
 }
 
+.formInput-error {
+	border: 1.5px solid #F14B4B;
+	border-radius: 1rem;
+}
+
 @media screen and (max-width: 920px) {
 
-	.form-label,
-	.formInput,
+	.login_form-label,
+	.login-formInput,
 	.linkToPassReset {
 		font-size: 0.75rem;
 		height: 0.875rem;
@@ -111,17 +107,17 @@
 		margin-top: 3.3rem;
 	}
 
-	.form-label {
+	.login_form-label {
 		margin-bottom: 0.56rem;
 	}
 
-	.formInput {
+	.login-formInput {
 		height: 2.3rem;
 		margin-bottom: 2.19rem;
 	}
 
-	.input-group {
-		height: 2.5rem !important;
+	.input-group #login-input-group {
+		height: 2.3rem;
 	}
 
 	.showPasswordImage {
