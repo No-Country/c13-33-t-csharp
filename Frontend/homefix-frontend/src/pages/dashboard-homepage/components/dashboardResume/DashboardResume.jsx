@@ -30,7 +30,9 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{!totalSales ? 'NoData' : '$' + Math.round(totalSales)}
+						{!totalSales
+							? 'NoData'
+							: '$' + new Intl.NumberFormat().format(Math.round(totalSales))}
 					</h3>
 				</div>
 			</div>
@@ -41,7 +43,10 @@ export default function DashboardResume() {
 				</div>
 				<div className="box-number">
 					<h3 className="text-white">
-						{!totalSales ? 'NoData' : '$' + Math.round(totalSales / 1.2)}
+						{!totalSales
+							? 'NoData'
+							: '$' +
+							  new Intl.NumberFormat().format(Math.round(totalSales / 1.2))}
 					</h3>
 				</div>
 			</div>

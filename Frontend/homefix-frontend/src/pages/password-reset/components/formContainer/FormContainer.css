@@ -13,16 +13,18 @@
 	justify-content: center;
 }
 
-.passwordReset_form .form-label {
+.passwordReset_form .passwordReset-form-label {
 	font-size: 1rem;
 	margin-bottom: 0.7rem;
 }
 
-.passwordReset_form .formInput {
+.passwordReset_form .passwordReset-formInput {
 	height: 3.375rem;
 	font-size: 1rem;
 	padding: 1rem 1.8rem;
 	margin-bottom: 23vh;
+	background-color: #FDD6A0;
+	border-radius: 1rem;
 }
 
 .passwordReset_buttonContainer button {
@@ -37,12 +39,17 @@
 		height: 36vh;
 	}
 
-	.passwordReset_form .form-label,
-	.passwordReset_form .formInput,
+	.passwordReset_form .passwordReset-formInput,
 	.passwordReset_form .submitButton,
 	.passwordReset_buttonContainer .submitButton {
 		height: 2.5rem;
 		font-size: 0.75rem;
+	}
+
+	.passwordReset_form .passwordReset-form-label {
+		height: 1.2rem;
+		font-size: 0.75rem;
+		margin-bottom: 0.56rem;
 	}
 
 	.passwordReset_form {
@@ -50,7 +57,7 @@
 		margin-top: 2rem;
 	}
 
-	.passwordReset_form .formInput {
+	.passwordReset_form .passwordReset-formInput {
 		margin-bottom: 10.6vh;
 	}
 

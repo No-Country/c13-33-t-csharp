@@ -15,7 +15,8 @@ const CostsRow = ({ product, price, revenue, slide }) => {
 					slide === '1' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + Math.round(price / (revenue * 0.06))}
+				{'$' +
+					new Intl.NumberFormat().format(Math.round(price / (revenue * 0.06)))}
 			</td>
 			<td
 				className={
@@ -29,14 +30,17 @@ const CostsRow = ({ product, price, revenue, slide }) => {
 					slide === '2' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + Math.round((price * revenue) / (100 + revenue))}
+				{'$' +
+					new Intl.NumberFormat().format(
+						Math.round((price * revenue) / (100 + revenue))
+					)}
 			</td>
 			<td
 				className={
 					slide === '3' || slide === '0' ? 'costsrow-show' : 'costsrow-hide'
 				}
 			>
-				{'$' + price}
+				{'$' + new Intl.NumberFormat().format(price)}
 			</td>
 		</tr>
 	)

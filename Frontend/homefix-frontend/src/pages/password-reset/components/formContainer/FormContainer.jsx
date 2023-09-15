@@ -42,15 +42,18 @@ export default function FormContainer() {
 			<div className="passwordReset_formContainer">
 				<form className="passwordReset_form" onSubmit={handlePasswordReset}>
 					<div className="passwordReset_labelInput-container">
-						<label htmlFor="email" className="form-label">
+						<label
+							htmlFor="email"
+							className="form-label passwordReset-form-label"
+						>
 							Correo electrónico
 						</label>
 						<input
 							type="email"
 							className={
 								message
-									? 'form-control formInput formInput-error'
-									: 'form-control formInput'
+									? 'form-control formInput passwordReset-formInput formInput-error'
+									: 'form-control formInput passwordReset-formInput'
 							}
 							id="email"
 							placeholder="Ingresa tu correo electrónico"
